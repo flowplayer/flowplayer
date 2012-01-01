@@ -18,16 +18,26 @@
    <!-- include flowplayer -->
    <script src="../dist/flowplayer.js"></script>
 
+   <script>
+   $(function() {
+      flowplayer().bind("ready", function(e, api) {
+
+         // here the player is fully loaded and the API is ready to be used
+         console.dir(api);
+
+      });
+   })
+   </script>
 </head>
 
 <body>
 
    <!-- the player -->
-   <div class="flowplayer -color-light -is-splash" -data-engine="flash" data-debug="true"
+   <div class="flowplayer -color-light -is-splash" -data-engine="flash" -data-debug="true"
       data-rtmp="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st/"
       data-swf=".../dist/flowplayer.swf" data-ratio=".417">
 
-      <video -autoplay -preload="none">
+      <video poster="http://flowplayer.org/media/img/buy/hero.png">
          <source type="video/flash" src="mp4:bauhaus/624x260.mp4"/>
          <source type="video/mp4"   src="http://stream.flowplayer.org/bauhaus/624x260.mp4"/>
          <source type="video/webm"  src="http://stream.flowplayer.org/bauhaus/624x260.webm"/>

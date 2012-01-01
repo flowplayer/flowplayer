@@ -119,37 +119,43 @@
          opacity 1
 
    .fp-help
-      box-sizing border-box
       absolute 0 -9999em
       z-index 100
-      padding 5% 10%
       background-color rgba(#3, .9)
       width 100%
       height 100%
       opacity 0
       transition opacity .2s
+      text-align center
 
       .is-help&
          left 0
          opacity 1
 
+      .fp-help-section
+         margin 3%
+
       p
          color #e
          margin .5em 0
-         font-size 20px
-         line-height 1
-         float left
-         width 50%
+         font-size 14px
+         line-height 1.5
+         display inline-block
+         margin 1% 2%
 
       em
-         background #0
-         border-radius .2em
-         margin-right .2em
-         padding .1em .3em
-
+         background #e
+         border-radius .3em
+         margin-right .4em
+         padding .3em .6em
+         color #3
 
       .fp-close
          display block
+
+      @media (max-width: 600px)
+         p
+            font-size 9px
 
    .fp-subtitle
       position absolute
@@ -192,4 +198,5 @@
 
       @media (-webkit-min-device-pixel-ratio: 2)
          background-image 'url(%s@x2.png)' % unquote(img)
+
 
