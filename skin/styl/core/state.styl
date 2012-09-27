@@ -1,0 +1,105 @@
+
+.{root}
+
+   &.is-splash
+      cursor pointer
+
+      .fp-controls, .fp-fullscreen, .fp-unload, .fp-time, .fp-embed
+         display none
+
+   &.is-loading
+      .fp-waiting
+         display block
+
+      .fp-controls, .fp-time
+         display none
+
+      .fp-ui
+         background-position -9999em
+
+   &.is-seeking
+      .fp-waiting
+         display block
+
+   &.is-fullscreen
+      position fixed !important
+      top 0 !important
+      left 0 !important
+      border 0 !important
+      margin 0 !important
+      width 100% !important
+      height 100% !important
+      z-index 99999 !important
+      box-shadow 0 !important
+      background-image none !important
+      background-color #3
+
+   &.is-error
+      border 2px solid #900
+      background-color #f !important
+
+      h2
+         font-weight bold
+         font-size large
+         margin-top 10%
+
+      .fp-message
+         display block
+
+      object, video, .fp-controls
+         display none
+
+   &.is-ready.is-muted
+      .fp-mute
+         opacity 0.5
+
+
+   // mouseout
+   &.is-mouseout
+      .fp-controls
+         height 0
+         transition height fade_speed fade_delay
+
+      .fp-timeline
+         transition all fade_speed fade_delay
+         top 0
+
+      .fp-fullscreen, .fp-unload, .fp-elapsed, .fp-remaining, .fp-duration, .fp-embed, .fp-logo, .fp-volume
+         opacity 0
+         transition opacity fade_speed fade_delay
+
+
+   // mouseover / fixed-controls
+   &.is-ready.is-mouseover, &.fixed-controls
+      .fp-controls
+         height controls_height
+
+      .fp-fullscreen, .fp-unload, .fp-time, .fp-embed, .fp-logo, .fp-volume
+         opacity 1
+
+      .fp-timeline
+         top spacing
+         height timeline_height
+         margin 0 (right_margin + time_width + spacing) 0 (spacing + time_width + spacing)
+
+         .aside-time&
+            margin 0 right_margin 0 spacing
+
+   &.fixed-controls
+      .fp-volume
+         display block
+
+      .fp-controls
+         bottom -(controls_height)
+
+         .is-fullscreen&
+            bottom 0
+
+      .fp-time em
+         bottom -(controls_height - spacing)
+         opacity 1 !important
+
+   &.is-disabled
+      .fp-progress
+         background-color #9
+

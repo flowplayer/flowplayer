@@ -1,0 +1,71 @@
+
+<head>
+
+   <!-- player skin -->
+   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css" />
+
+   <style>
+   body { font: 12px "Lucida Grande",sans-serif; text-align:center;}
+   .flowplayer { width: 50%; background: #333;}
+
+   .roll {
+      position:absolute;
+      top: 50px;
+      left: 50px;
+      font-size: 50px;
+      z-index: 3;
+      color: #fff;
+      display: none;
+   }
+
+   .cue0 #roll1, .cue1 #roll2, .cue2 #roll5, .cue3 #roll9 {
+      display: block;
+   }
+
+
+   .fp-cuepoint {
+      display: inline-block;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      -webkit-border-radius: 4px;
+      background-color: #ccc;
+      margin-left: -5px;
+      top: 40px;
+   }
+
+   .is-mouseover .fp-cuepoint {
+      /*top: 4px*/
+   }
+
+   </style>
+
+   <!-- jquery -->
+   <script src="../deps/jquery.min.js"></script>
+
+   <!-- flowplayer -->
+   <script src="../dist/flowplayer.js?1"></script>
+
+</head>
+
+<body>
+
+   <div id="player" class="aside-controls">
+      <video  src="movie/black/470x250.webm"></video>
+      <div class="roll" id="roll1">ROLL #1</div>
+      <div class="roll" id="roll2">ROLL #2</div>
+      <div class="roll" id="roll5">ROLL #5</div>
+      <div class="roll" id="roll9">ROLL #9</div>
+   </div>
+
+
+   <script>
+   $(function() {
+      $("#player").flowplayer({cuepoints: [1, 2, {time: 5}, 9, -2], generate_cuepoints: 1})
+      .bind("cuepoint", function(e, api, cuepoint) {
+         console.info(e.type, cuepoint.time);
+      });
+   });
+   </script>
+
+</body>

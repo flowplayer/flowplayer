@@ -1,0 +1,110 @@
+<!doctype html>
+
+<head>
+
+   <title>Flowplayer skin builder</title>
+
+   <script src="../deps/jquery.min.js"></script>
+   <script src="simulate.js"></script>
+
+   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css" />
+
+   <style>
+   body {
+      font: 12px "Lucida Grande", sans-serif;
+      text-align: center;
+   }
+
+   .flowplayer {
+      margin-top: 5%;
+      width: 70%;
+   }
+
+   .fp-engine {
+      background-color: #016682;
+   }
+
+   .color-light .fp-engine {
+      background-color: #f9f9f9;
+   }
+   </style>
+
+
+
+   <!-- simulate Flowplayer -->
+   <script>
+
+   </script>
+
+</head>
+
+
+<body>
+
+   <!-- player root
+   <div class="flowplayer -fixed-controls -is-loading is-ready -is-mouseover -is-splash -is-paused color-light -no-background -aside-time -fixed-controls">
+-->
+
+   <div class="flowplayer -is-loading is-ready is-paused is-mouseout">
+
+      <!-- http://ansciath.tumblr.com/post/7347495869/css-aspect-ratio -->
+      <div class="fp-ratio" style="padding-top:41.7%"></div>
+
+      <!-- video or object tag -->
+      <div class="fp-engine"></div>
+
+      <div class="fp-ui">
+
+         <!-- progress indicator -->
+         <div class="fp-waiting"><em></em><em></em><em></em></div>
+
+         <!-- actions -->
+         <a class="fp-fullscreen"></a>
+         <a class="fp-unload"></a>
+
+         <div class="fp-controls">
+
+            <div class="fp-timeline">
+               <div class="fp-buffer" style="width: 70%;"></div>
+               <div class="fp-progress" style="width: 35%;"><em></em></div>
+            </div>
+
+            <div class="fp-volume">
+               <a class="fp-mute"></a>
+               <div class="fp-volumeslider">
+                  <div class="fp-volumelevel" style="width: 50%;"><em></em></div>
+               </div>
+            </div>
+
+         </div>
+
+         <div class="fp-time">
+            <em class="fp-elapsed">00:12</em>
+            <em class="fp-remaining">-00:44</em>
+            <em class="fp-duration">01:44</em>
+         </div>
+
+         <!-- message -->
+         <div class="fp-message">
+            <h2>Invalid URL</h2>
+            <p>http://invalid.url/com/my-video.mp4</p>
+         </div>
+
+         <!-- embed -->
+         <a class="fp-embed" title="Copy to your site"></a>
+
+         <div class="fp-embed-code">
+            <label>Paste this HTML code to your site.</label>
+            <textarea>&lt;script src="http://cdn.flowplayer.org/5.0.0/embed.js"&gt;lt;/script&gt;</textarea>
+         </div>
+
+         <!-- logo on embedded players (commercial version) -->
+         <a class="fp-logo">
+            <img src="http://mydomain.com/my-logo.png"/>
+         </a>
+
+      </div>
+
+   </div>
+
+</body>

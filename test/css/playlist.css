@@ -1,0 +1,35 @@
+
+.is-splash {
+   background-image: url(http://localhost:8080/media/img/demos/playlist/bakers.jpg);
+}
+
+.fp-playlist {
+   position: absolute;
+   bottom: -100px;
+}
+
+.fp-playlist a {
+   display: block;
+   width: 80px;
+   height: 70px;
+   background-color: #789;
+   float:left;
+   margin: 15px;
+}
+
+.is-active {
+   box-shadow: 0 0 10px blue;
+}
+
+.is-paused .is-active {
+   box-shadow: 0 0 10px green;
+}
+
+.fp-next, .fp-prev {
+   position: absolute;
+   bottom: -120px;
+}
+
+.fp-next {
+   right: 0;
+}

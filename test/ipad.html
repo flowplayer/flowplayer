@@ -1,0 +1,53 @@
+<!doctype html>
+
+<head>
+
+   <!-- player skin -->
+   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css" />
+
+   <!-- site specific styling -->
+   <style>
+   body {
+      font: 12px "Myriad Pro", "Lucida Grande", sans-serif;
+      text-align: center;
+      padding-top: 5%;
+   }
+   .flowplayer {
+      width: 70%;
+      background: url(init/camera.jpg);
+   }
+   </style>
+
+   <!-- flowplayer depends on jQuery 1.4+ -->
+   <script src="../deps/jquery.min.js"></script>
+
+   <!-- include flowplayer -->
+   <script src="../dist/flowplayer.js"></script>
+
+</head>
+
+<body>
+
+   <div class="flowplayer is-closeable is-splash -no-toggle" data-debug="true" data-ratio=".417">
+      <video>
+         <source type="video/webm" src="http://stream.flowplayer.org/playful/624x260.webm"/>
+         <source type="video/mp4" src="http://stream.flowplayer.org/playful/624x260.mp4"/>
+         <source type="video/ogv" src="http://stream.flowplayer.org/playful/624x260.ogv"/>
+      </video>
+   </div>
+
+   <div id="info"></div>
+
+
+   <script>
+   console = {
+      info: function() {
+         $("#info").append("<p>" + [].slice.call(arguments).join() + "</p>");
+      }
+   };
+
+   console.log = console.info;
+   </script>
+
+
+</body>

@@ -1,0 +1,65 @@
+
+spacing           = 10px
+volume_height     = 8px
+timeline_height   = 10px
+full_time_width   = 100px
+
+@import "core/index"
+
+.{root}
+
+   .fp-controls
+      gradient rgba(#5, .5) rgba(#1, .8)
+
+   &.fixed-controls .fp-controls
+      gradient #5 #1
+
+   .fp-timeline
+      bg #6
+
+   .fp-buffer
+      bg #e
+
+   .fp-progress
+      gradient lighten(#4da5d8, 15) #4da5d8
+
+   .fp-volumelevel
+      bg #f
+
+   .fp-volumeslider
+      bg #5
+
+   // border
+   .fp-timeline, .fp-volumeslider
+      border 1px inset
+      border-color #3 #6
+
+   // radius
+   .fp-timeline, .fp-buffer, .fp-progress, .fp-volumeslider, .fp-volumelevel
+      border-radius 10px
+
+   // light
+   &.color-light
+      .fp-controls
+         gradient rgba(#e, .5) rgba(#c, .8)
+
+      .fp-timeline, .fp-volumeslider
+         border-color #e #c
+
+      .fp-timeline, .fp-volumeslider
+         bg #c
+         font-size 10px
+
+   &.color-alt
+      .fp-controls
+         gradient #8 #3
+
+      .fp-progress
+         gradient #9 #1
+
+      .fp-timeline, .fp-volumeslider
+         bg #1
+
+   &.color-alt2
+      .fp-progress
+         gradient #900 #500

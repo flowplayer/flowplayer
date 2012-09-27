@@ -1,0 +1,67 @@
+<!doctype html>
+
+<head>
+
+   <!-- site specific styling -->
+   <style>
+   body { font: 12px "Lucida Grande",sans-serif; }
+   h3 { text-align: center; margin: 30px 0 -40px 0;}
+   .flowplayer { width: 620px; height: 350px; margin: 50px auto; background-color: #789; }
+   </style>
+
+   <!-- player skin -->
+   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css" />
+
+   <!-- flowplayer depends jquery -->
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+   <!-- include flowplayer -->
+   <script src="../dist/flowplayer.js"></script>
+
+</head>
+
+<body>
+
+   <h3>HTML5</h3>
+
+   <div class="flowplayer is-splash is-closeable">
+      <video src="http://d32wqyuo10o653.cloudfront.net/1001_web.mp4" preload="none"></video>
+   </div>
+
+
+   <h3>HTML5, long video</h3>
+
+   <div class="flowplayer is-splash is-closeable">
+      <video src="http://d32wqyuo10o653.cloudfront.net/buffalo_soldiers.mp4" preload="none"></video>
+   </div>
+
+   <h3>Flash</h3>
+
+   <div class="flowplayer is-splash" data-engine="flash" data-swf="../dist/flowplayer.swf">
+      <video src="http://d32wqyuo10o653.cloudfront.net/1001_web.mp4" preload="none"></video>
+   </div>
+
+   <h3>Flash / RTMP</h3>
+
+   <!-- works nicely with long video -->
+   <div class="flowplayer is-splash"
+      data-engine="flash"
+      data-swf="../dist/flowplayer.swf"
+      data-rtmp="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st">
+
+      <video preload="none">
+         <source type="rtmp/mp4" src="buffalo_soldiers.mp4"></source>
+         <source type="rtmp/mp4" src="1001_web.mp4"></source>
+      </video>
+   </div>
+
+   <h3>Flash, long video</h3>
+
+   <div class="flowplayer is-splash"
+      data-engine="flash"
+      data-swf="../dist/flowplayer.swf">
+      <video src="http://d32wqyuo10o653.cloudfront.net/Extremists.m4v" preload="none"></video>
+   </div>
+
+
+</body>
