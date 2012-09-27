@@ -1,0 +1,6 @@
+dist
+test/movie
+.DS_Store
+*.ipr
+*.iws
+*.iml

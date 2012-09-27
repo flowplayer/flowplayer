@@ -1,0 +1,62 @@
+
+spacing           = 12px
+img               = 'img/playful_white.png'
+img_dark          = 'img/playful_black.png'
+mute_width        = 38px
+mute_height       = 20px
+volume_height     = 11px
+full_time_width   = 110px
+timeline_height   = volume_height
+
+@import "core/index"
+
+.{root}
+
+   // default colors
+   .fp-controls
+      gradient #5 #1
+
+   .fp-timeline, .fp-volumeslider
+      gradient #0 #7
+
+   .fp-buffer
+      bg rgba(#f, 0.5)
+
+   .fp-progress, .fp-volumelevel
+      gradient lighten(green, 10) green
+
+   .fp-mute
+      block mute_width mute_height
+      bg 0 -78px
+
+      .is-muted&
+         bg 0 -108px
+         opacity .85 !important
+
+   // border
+   .fp-timeline, .fp-volumeslider
+      border 1px inset
+      border-color #3 #6
+
+
+   // radius
+   .fp-timeline, .fp-progress, .fp-buffer, .fp-volumeslider, .fp-volumelevel
+      border-radius 7px
+
+   // light
+   &.color-light
+
+      .fp-controls
+         gradient #e #a
+
+      .fp-timeline, .fp-volumeslider
+         border-color #e #c
+
+
+   &.color-alt
+      .fp-progress, .fp-volumelevel
+         gradient #f #9
+
+   &.color-alt2
+      .fp-progress, .fp-volumelevel
+         gradient #c00 #900
