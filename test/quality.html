@@ -1,0 +1,53 @@
+<head>
+
+   <link rel="stylesheet" type="text/css" href="../dist/skin/functional.css" />
+
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+   <script src="../dist/flowplayer.js"></script>
+
+   <style>
+   body { font: 12px "Lucida Grande",sans-serif; }
+   .flowplayer { width: 620px; height: 350px; background-color: #444; margin: 50px auto;  }
+   .video-quality { position: absolute; top: -20px; right: 10px;}
+   .video-quality a { margin: 0 10px;}
+   .video-quality .active { font-weight: bold;}
+   </style>
+
+   <script>
+   $(function() {
+      $(".player").flowplayer({ rtmp: 'rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st' });
+   });
+   </script>
+</head>
+
+<body>
+
+   <!--
+   <div class="player">
+      <video autoplay>
+         <source type="video/mp4" data-quality="lo" src="http://pseudo01.hddn.com/vod/demo.flowplayervod/bbb-400.mp4"></source>
+         <source type="video/mp4" data-quality="med" src="http://pseudo01.hddn.com/vod/demo.flowplayervod/bbb-800.mp4"></source>
+         <source type="video/mp4" data-quality="hi" src="http://pseudo01.hddn.com/vod/demo.flowplayervod/bbb-1600.mp4"></source>
+      </video>
+   </div>
+   -->
+
+   <div class="player">
+      <video autoplay>
+         <source type="rtmp/mp4" data-quality="lo" src="bbb-400.mp4"></source>
+         <source type="rtmp/mp4" data-quality="med" src="bbb-800.mp4"></source>
+         <source type="rtmp/mp4" data-quality="hi" src="bbb-1600.mp4"></source>
+      </video>
+   </div>
+
+   <!-- platform shortcut
+   <div class="player" data-qualities="lo,med,hi">
+      <video>
+         <source type="video/mp4"  src="http://video.flowplayer.org/bbb.med.mp4"></source>
+         <source type="video/ogg"  src="http://video.flowplayer.org/bbb.med.ogg"></source>
+         <source type="video/webm" src="http://video.flowplayer.org/bbb.med.webm"></source>
+      </video>
+   </div>
+   -->
+
+</body>

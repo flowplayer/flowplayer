@@ -1,0 +1,61 @@
+
+@import "core/index"
+
+.{root}
+
+   // default colors
+   controls = #3
+
+   .fp-controls
+      bg controls
+      bg rgba(controls, .6)
+
+   &.fixed-controls .fp-controls
+      bg controls
+
+   .fp-timeline
+      bg #6
+
+   .fp-buffer
+      bg #e
+
+   .fp-progress
+      bg #00a7c8
+
+   .fp-volumeslider
+      bg #0
+
+   .fp-volumelevel
+      bg #f
+
+
+   // dark
+   &.color-light
+      controls_dark = #f
+
+      .fp-controls
+         bg rgba(controls_dark, .6)
+
+      &.fixed-controls .fp-controls
+         bg controls_dark
+
+      .fp-volumeslider
+         bg #d
+
+      .fp-volumelevel
+         bg #2
+
+   // alt
+   &.color-alt
+      .fp-progress
+         bg #f
+
+      .fp-buffer
+         bg #9
+
+   // alt2
+   &.color-alt2
+      .fp-progress
+         bg #900
+
+

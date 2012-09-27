@@ -1,0 +1,56 @@
+<!doctype html>
+
+<head>
+
+   <!-- player skin -->
+   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css" />
+
+   <!-- site specific styling -->
+   <style>
+   body { font: 12px "Myriad Pro", "Lucida Grande", sans-serif; text-align: center; padding-top: 5%; }
+   .flowplayer { width: 70%; background-color: #000; }
+   </style>
+
+   <!-- flowplayer depends on jQuery 1.4+ (for now) -->
+   <script src="../deps/jquery.min.js"></script>
+
+   <!-- include flowplayer -->
+   <script src="../dist/flowplayer.js"></script>
+
+   <script>
+   $(function() {
+      $("#str").click(function() {
+         flowplayer().play("movie/functional/624x260.mp4");
+      });
+
+      $("#arr").click(function() {
+         flowplayer().play([
+            {  mp4: "movie/functional/624x260.mp4" },
+            { webm: "movie/functional/624x260.webm" },
+            {  ogv: "movie/functional/624x260.ogv" }
+
+         ], function(event, api, video) {
+            console.info("playing", video.src);
+         });
+      });
+   });
+   </script>
+</head>
+
+<body>
+
+   <!-- the player -->
+   <div class="flowplayer" -data-engine="flash" data-swf="../dist/flowplayer.swf" data-ratio=".417">
+      <video>
+         <source type="video/webm" src="movie/bauhaus/624x260.webm"/>
+         <source type="video/mp4" src="movie/bauhaus/624x260.mp4"/>
+         <source type="video/ogv" src="movie/bauhaus/624x260.ogv"/>
+      </video>
+   </div>
+
+   <p>
+      <button id="str">play(str)</button>
+      <button id="arr">play(arr)</button>
+   </p>
+
+</body>

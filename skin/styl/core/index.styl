@@ -1,0 +1,44 @@
+
+root              ?= flowplayer
+font_size         ?= 12px
+// aspect_ratio      ?= (9 / 16) * 100%
+
+// editable
+spacing           ?= 5px
+timeline_height   ?= 10px
+progress_height   ?= 3px
+volume_width      ?= 90px
+volume_height     ?= 5px
+time_width        ?= 35px
+full_time_width   ?= 90px
+play_radius       ?= 86px
+
+img               ?= 'img/white.png'
+img_dark          ?= 'img/black.png'
+img_play          ?= 'img/play_white.png'
+img_play_dark     ?= 'img/play_black.png'
+fade_speed        ?= .15s
+fade_delay        ?= .3s
+
+
+// calculated
+mute_width        ?= 15px
+mute_height       ?= mute_width
+controls_height   ?= spacing + timeline_height + spacing
+right_margin      ?= spacing + volume_width + mute_width + spacing
+
+
+@keyframes pulse
+   0%
+     opacity 0
+   100%
+     opacity 1
+
+@import "css3"
+@import "player"
+@import "buttons"
+@import "timeline"
+@import "volume"
+@import "time"
+@import "state"
+@import "embed"

@@ -1,0 +1,34 @@
+<head>
+
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+   <script src="../dist/flowplayer.js"></script>
+   <script src="http://www.google-analytics.com/ga.js"></script>
+
+   <link rel="stylesheet" type="text/css" href="../dist/skin/playful.css" />
+
+   <style>
+   body { font: 12px "Lucida Grande",sans-serif; }
+   .flowplayer { width: 620px; height: 350px; background-color: #444; margin: 50px auto;  }
+   </style>
+
+   <script>
+   $(function() {
+      $(".player").flowplayer({
+         key: '$36526105822393146894',
+         analytics: 'UA-19863497-1',
+         logo: 'http://flowplayer.org/img/logo.png'
+      });
+
+   });
+   </script>
+</head>
+
+<body>
+
+   <div class="player" title="The black video"
+       data-engine="flash" data-swf="../dist/flowplayer.swf">
+      <video src="http://stream.flowplayer.org/black/470x250.mp4"></video>
+   </div>
+
+   <button>joo</button>
+</body>

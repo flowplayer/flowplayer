@@ -1,0 +1,52 @@
+
+.{root}
+
+   // play button = separate centered image
+   .fp-ui
+
+      .is-splash&, .is-paused&
+         background url(img_play) center no-repeat
+         background-size 12%
+
+         .color-light&
+            background-image url(img_play_dark)
+
+      .is-fullscreen&
+         background-size auto
+
+      .is-seeking&, .is-loading&
+         background-image none
+
+   .fp-logo
+      absolute auto spacing
+      bottom spacing * 5
+      cursor pointer
+      display none
+      z-index 100
+
+      img
+         width 100%
+
+      .is-embedded&
+         display block
+
+
+   .fp-fullscreen, .fp-unload
+      absolute spacing auto
+      right spacing
+      block 18px 19px
+      bg 0 -197px
+      cursor pointer
+
+      .is-fullscreen&
+         bg 0 -218px
+
+   .fp-unload
+      bg 5px -178px
+      display none
+
+   &.is-ready.is-closeable
+      .fp-unload
+         display block
+      .fp-fullscreen
+         display none
