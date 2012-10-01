@@ -21,15 +21,23 @@
 
 <body>
 
+<!--
+<video controls>
+   <source src="http://stream.flowplayer.org/bauhaus/624x260.webm" type="video/webm"/>
+   <track src="subtitles-en.vtt" label="English subtitles" kind="subtitles" srclang="en" default=""></track>
+</video>
+-->
+
    <!-- the player -->
    <div class="flowplayer is-splash" -data-engine="flash" data-debug="true"
       -data-rtmp="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st"
       -data-swf="../dist/flowplayer.swf" data-ratio=".417">
 
-      <video>
+      <video controls>
          <source type="video/webm" src="http://stream.flowplayer.org/bauhaus/624x260.webm"/>
          <source type="video/mp4" src="http://stream.flowplayer.org/bauhaus/624x260.mp4"/>
          <source type="video/ogv" src="http://stream.flowplayer.org/bauhaus/624x260.ogv"/>
+         <!-- track src="subtitles-en.vtt" default/ -->
       </video>
 
    </div>

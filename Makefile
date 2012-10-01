@@ -41,6 +41,7 @@ raw:
 			lib/ext/fullscreen.js\
 			lib/ext/playlist.js\
 			lib/ext/cuepoint.js\
+			lib/ext/subtitle.js\
 			lib/ext/analytics.js\
 			lib/ext/ipad.js\
 			lib/ext/android.js\
