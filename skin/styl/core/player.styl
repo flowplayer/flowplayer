@@ -37,9 +37,7 @@
 
 
    .fp-engine, .fp-ui, .fp-message
-      position absolute
-      top 0
-      left 0
+      absolute 0 0
       width 100%
       height 100%
       cursor pointer
@@ -59,7 +57,7 @@
          font-size 95%
 
    // background image
-   .fp-fullscreen, .fp-unload, .fp-mute, .fp-embed
+   .fp-fullscreen, .fp-unload, .fp-mute, .fp-embed, .fp-close
       background-image url(img)
 
       .color-light&
@@ -126,3 +124,35 @@
       &.fp-hilite
          opacity 1
 
+   .fp-help
+      box-sizing border-box
+      absolute 0 -9999em
+      z-index 100
+      padding 5% 10%
+      background-color rgba(#3, .9)
+      width 100%
+      height 100%
+      opacity 0
+      transition opacity .2s
+
+      .fp-show-help&
+         left 0
+         opacity 1
+
+      p
+         color #e
+         margin .5em 0
+         font-size 20px
+         line-height 1
+         float left
+         width 50%
+
+      em
+         background #0
+         border-radius .2em
+         margin-right .2em
+         padding .1em .3em
+
+
+      .fp-close
+         display block
