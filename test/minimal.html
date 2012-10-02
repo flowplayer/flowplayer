@@ -12,13 +12,12 @@
    .cue0 .fp-subtitle p { color: red;}
    </style>
 
-
    <!-- flowplayer depends on jQuery 1.4+ (for now) -->
    <script src="../deps/jquery.min.js"></script>
-   <script> $.noConflict(); </script>
 
    <!-- include flowplayer -->
    <script src="../dist/flowplayer.js"></script>
+   <script>flowplayer.conf = { engine: "flash" }</script>
 
 </head>
 
@@ -34,7 +33,7 @@
    <!-- the player -->
    <div class="flowplayer -is-splash" -data-engine="flash" -data-debug="true"
       -data-rtmp="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st"
-      data-swf="../dist/flowplayer.swf" data-ratio=".417">
+      -data-swf="../dist/flowplayer.swf" data-ratio=".417">
 
       <video controls>
          <source type="video/webm" src="http://stream.flowplayer.org/bauhaus/624x260.webm"/>
