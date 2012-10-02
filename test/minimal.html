@@ -17,18 +17,10 @@
 
    <!-- include flowplayer -->
    <script src="../dist/flowplayer.js"></script>
-   <script>flowplayer.conf = { engine: "flash" }</script>
 
 </head>
 
 <body>
-
-<!--
-<video controls>
-   <source src="http://stream.flowplayer.org/bauhaus/624x260.webm" type="video/webm"/>
-   <track src="subtitles-en.vtt" label="English subtitles" kind="subtitles" srclang="en" default=""></track>
-</video>
--->
 
    <!-- the player -->
    <div class="flowplayer -is-splash" -data-engine="flash" -data-debug="true"
@@ -39,7 +31,6 @@
          <source type="video/webm" src="http://stream.flowplayer.org/bauhaus/624x260.webm"/>
          <source type="video/mp4" src="http://stream.flowplayer.org/bauhaus/624x260.mp4"/>
          <source type="video/ogv" src="http://stream.flowplayer.org/bauhaus/624x260.ogv"/>
-         <track src="subtitles-en.vtt" default/>
       </video>
 
    </div>
