@@ -12,6 +12,13 @@
    .flowplayer.is-loading { border: 1px solid #000; }
    </style>
 
+   <script>
+      $(function() {
+         flowplayer().bind("cuepoint", function(e, api, cue) {
+            console.info(api.video.src, cue.time, +new Date);
+         });
+      })
+   </script>
 </head>
 
 <body>
@@ -31,8 +38,8 @@
       </video>
 
       <div class="fp-playlist">
-         <a href="movie/night1/640x360.mp4"></a>
-         <a href="movie/night3/640x360.mp4"></a>
+         <a href="movie/night1/640x360.mp4" data-cuepoints="[0.3, 0.9]"></a>
+         <a href="movie/night3/640x360.mp4" data-cuepoints="[1, 1.5]"></a>
          <a href="movie/night5/640x360.mp4"></a>
          <a href="movie/night6/640x360.mp4"></a>
       </div>
