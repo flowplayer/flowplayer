@@ -56,13 +56,6 @@
          color #6
          font-size 95%
 
-   // background image
-   .fp-fullscreen, .fp-unload, .fp-mute, .fp-embed, .fp-close
-      background-image url(img)
-
-      .color-light&
-         background-image url(img_dark)
-
    .fp-controls
       position absolute
       bottom 0
@@ -181,3 +174,19 @@
       &.fp-active
          left 0
          opacity 1
+
+
+   // background image
+   .fp-fullscreen, .fp-unload, .fp-mute, .fp-embed, .fp-close
+      background-image 'url(%s.png)' % unquote(img)
+      background-size 37px 300px
+
+      .color-light&
+         background-image 'url(%s.png)' % unquote(img_dark)
+
+         @media (-webkit-min-device-pixel-ratio: 2)
+            background-image 'url(%s@x2.png)' % unquote(img_dark)
+
+      @media (-webkit-min-device-pixel-ratio: 2)
+         background-image 'url(%s@x2.png)' % unquote(img)
+
