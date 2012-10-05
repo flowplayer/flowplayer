@@ -43,6 +43,7 @@ raw:
 			lib/ext/cuepoint.js\
 			lib/ext/analytics.js\
 			lib/ext/ipad.js\
+			lib/ext/android.js\
 			lib/ext/embed.js | $(SET_VERSION) | sed "s/@EMBED/$(EMBED)/" | sed "s/@CDN/$(CDN)/" | sed "s/@CDN_PATH/$(CDN_PATH)/" >> $(JS)
 
 	@ echo	"}();" >> $(JS)
