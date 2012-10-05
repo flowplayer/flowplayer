@@ -78,6 +78,7 @@ package {
       private var conn:NetConnection;
       private var stream:NetStream;
       private var video:Video;
+      private var logo:Logo;
 
 
       /* constructor */
@@ -107,7 +108,7 @@ package {
          timer.start();
 
          // http://flowplayer.org/GPL-license/#term-7
-         var logo:Logo = new Logo();
+         logo = new Logo();
 
          // size
          logo.width = 50;
@@ -118,7 +119,6 @@ package {
          logo.y = stage.stageHeight - logo.height - 40;
 
          addChild(logo);
-         setTimeout(function():void { if (logo.parent) removeChild(logo); }, 8000);
 
       }
 
@@ -314,6 +314,10 @@ package {
 
                            // RTMP & poster image
                            if (!conf.autoplay && conf.rtmp) setTimeout(stream.pause, 100);
+
+                           // remove GPL logo
+                           setTimeout(function():void { if (logo.parent) removeChild(logo); }, 8000);
+
                            ready = true;
                         }
                      }
