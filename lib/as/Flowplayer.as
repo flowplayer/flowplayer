@@ -284,7 +284,7 @@ package {
 
          conn.addEventListener(NetStatusEvent.NET_STATUS, function (e:NetStatusEvent):void {
 
-            fire("debug.conn", e.info.code);
+            // fire("debug.conn", e.info.code);
 
             switch (e.info.code) {
 
@@ -372,6 +372,10 @@ package {
 
                   });
 
+                  break;
+
+               case "NetConnection.Connect.Failed":
+                  fire(Flowplayer.ERROR, { code: 9, url: conf.rtmp });
                   break;
 
                case "NetConnection.Connect.Closed":
