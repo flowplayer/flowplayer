@@ -3,7 +3,7 @@
 <head>
 
    <!-- player skin -->
-   <link rel="stylesheet" type="text/css" href="../dist/skin/playful.css" />
+   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css" />
 
    <!-- site specific styling -->
    <style>
@@ -23,14 +23,15 @@
 <body>
 
    <!-- the player -->
-   <div class="flowplayer -color-light -is-splash" -data-engine="flash" -data-debug="true"
-      data-rtmp="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st"
+   <div class="flowplayer -color-light -is-splash" data-engine="flash" data-debug="true"
+      data-rtmp="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st/"
       data-swf="../dist/flowplayer.swf" data-ratio=".417">
 
       <video -autoplay -preload="none">
-         <source type="video/webm" src="http://stream.flowplayer.org/bauhaus/624x260.webm"/>
-         <source type="video/mp4" src="http://stream.flowplayer.org/bauhaus/624x260.mp4"/>
-         <source type="video/ogv" src="http://stream.flowplayer.org/bauhaus/624x260.ogv"/>
+         <source type="video/flash" src="mp4:bauhaus/624x260.mp4"/>
+         <source type="video/mp4"   src="http://stream.flowplayer.org/bauhaus/624x260.mp4"/>
+         <source type="video/webm"  src="http://stream.flowplayer.org/bauhaus/624x260.webm"/>
+         <source type="video/ogv"   src="http://stream.flowplayer.org/bauhaus/624x260.ogv"/>
       </video>
 
    </div>
