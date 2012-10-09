@@ -127,6 +127,7 @@ package {
       // switch url
       public function play(url:String):void {
          if (ready) {
+            conf.autoplay = true; // always begin playback
             if (conf.rtmp) conn.connect(conf.rtmp);
             stream.play(url);
             conf.url = url;
