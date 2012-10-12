@@ -231,39 +231,19 @@ package {
 
          img.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e:Event):void {
 
-            // scale(img);
             img.name = "poster";
             addChild(img);
 
             // center
             img.x = int((stage.stageWidth / 2) - (img.width / 2));
             img.y = int((stage.stageHeight / 2) - (img.height / 2));
+
          });
 
          img.load(new URLRequest(conf.poster));
 
       }
 
-      /*
-      private function scale(obj:Object):void {
-
-         var w:int = stage.stageWidth;
-         var h:int = stage.stageHeight;
-         var xRatio:Number = w / obj.width;
-         var useXRatio:Boolean = xRatio * h <= h;
-
-         // scale
-         obj.width = useXRatio ? w : fit(w, obj.width, h / obj.height);
-         obj.height = useXRatio ? fit(h, obj.height, xRatio) : h;
-
-         // fire("to", { w: obj.width, h: obj.height });
-      }
-
-      private function fit(max:int, orig:int, factor:Number):int {
-         var result:int = Math.ceil(factor * orig);
-         return result > max ? max : result;
-      }
-      */
 
 
       private function initVideo():void {
