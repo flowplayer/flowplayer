@@ -112,13 +112,14 @@ package {
 
          // size
          logo.width = 50;
-         logo.height = 15;
 
-         //position
+         // position
          logo.x = 12;
-         logo.y = stage.stageHeight - logo.height - 40;
-
+         logo.y = stage.stageHeight - logo.height - 18;
          addChild(logo);
+
+         // retain proportions
+         logo.scaleY = logo.scaleX;
 
       }
 
@@ -316,7 +317,6 @@ package {
                            // RTMP & poster image
                            if (!conf.autoplay && conf.rtmp) setTimeout(stream.pause, 100);
 
-                           // remove GPL logo
                            setTimeout(function():void { if (logo.parent) removeChild(logo); }, 8000);
 
                            ready = true;
