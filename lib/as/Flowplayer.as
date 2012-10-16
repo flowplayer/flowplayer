@@ -128,6 +128,8 @@ package {
       // switch url
       public function play(url:String):void {
          if (ready) {
+            url = unescape(url);
+
             conf.autoplay = true; // always begin playback
             if (conf.rtmp) conn.connect(conf.rtmp);
             stream.play(url);
@@ -250,6 +252,8 @@ package {
          video = new Video();
          video.smoothing = true;
          this.addChild(video);
+
+         conf.url = unescape(conf.url);
 
          if (conf.poster) video.visible = false;
 
