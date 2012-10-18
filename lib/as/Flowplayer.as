@@ -255,6 +255,9 @@ package {
 
          conf.url = unescape(conf.url);
 
+         if (conf.debug) fire("debug.url", conf.url);
+
+
          if (conf.poster) video.visible = false;
 
          stage.scaleMode = StageScaleMode.EXACT_FIT;
@@ -270,7 +273,7 @@ package {
 
          conn.addEventListener(NetStatusEvent.NET_STATUS, function (e:NetStatusEvent):void {
 
-            // fire("debug.conn", e.info.code);
+            if (conf.debug) fire("debug.conn", e.info);
 
             switch (e.info.code) {
 
@@ -311,7 +314,7 @@ package {
                   // listen for playback events
                   stream.addEventListener(NetStatusEvent.NET_STATUS, function (e:NetStatusEvent):void {
 
-                     // fire("debug.stream", e.info.code);
+                     if (conf.debug) fire("debug.stream", e.info.code);
 
                      switch (e.info.code) {
 
