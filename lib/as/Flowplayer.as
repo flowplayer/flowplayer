@@ -257,7 +257,6 @@ package {
 
          if (conf.debug) fire("debug.url", conf.url);
 
-
          if (conf.poster) video.visible = false;
 
          stage.scaleMode = StageScaleMode.EXACT_FIT;
