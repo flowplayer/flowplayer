@@ -30,7 +30,7 @@ raw:
 	# raw player
 	@ mkdir	-p $(DIST)
 	@ cat LICENSE.js | $(SET_VERSION) | $(SET_DATE) > $(JS)
-	@ echo	"!function() { " >> $(JS)
+	@ echo	"!function($$) { " >> $(JS)
 
 	@ cat	lib/flowplayer.js\
 			lib/engine/*.js\
@@ -41,12 +41,13 @@ raw:
 			lib/ext/fullscreen.js\
 			lib/ext/playlist.js\
 			lib/ext/cuepoint.js\
+			lib/ext/subtitle.js\
 			lib/ext/analytics.js\
 			lib/ext/ipad.js\
 			lib/ext/android.js\
 			lib/ext/embed.js | $(SET_VERSION) | sed "s/@EMBED/$(EMBED)/" | sed "s/@CDN/$(CDN)/" | sed "s/@CDN_PATH/$(CDN_PATH)/" >> $(JS)
 
-	@ echo	"}();" >> $(JS)
+	@ echo	"}(jQuery);" >> $(JS)
 
 
 min: raw

@@ -37,9 +37,7 @@
 
 
    .fp-engine, .fp-ui, .fp-message
-      position absolute
-      top 0
-      left 0
+      absolute 0 0
       width 100%
       height 100%
       cursor pointer
@@ -49,6 +47,7 @@
       display none
       text-align center
       padding-top 5%
+      cursor default
 
       h2
          font-size 120%
@@ -57,13 +56,6 @@
       p
          color #6
          font-size 95%
-
-   // background image
-   .fp-fullscreen, .fp-unload, .fp-mute, .fp-embed
-      background-image url(img)
-
-      .color-light&
-         background-image url(img_dark)
 
    .fp-controls
       position absolute
@@ -111,5 +103,105 @@
       p
          color #c
          font-weight bold
+
+   .fp-speed
+      font-size 30px
+      background-color #3
+      background-color rgba(#3, .8)
+      color #e
+      margin 0 auto
+      text-align center
+      width 120px
+      padding .1em 0 0
+      opacity 0
+      transition opacity .5s
+
+      &.fp-hilite
+         opacity 1
+
+   .fp-help
+      absolute 0 -9999em
+      z-index 100
+      background-color #3
+      background-color rgba(#3, .9)
+      width 100%
+      height 100%
+      opacity 0
+      transition opacity .2s
+      text-align center
+
+      .is-help&
+         left 0
+         opacity 1
+
+      .fp-help-section
+         margin 3%
+
+      .fp-help-basics
+         margin-top 6%
+
+      p
+         color #e
+         margin .5em 0
+         font-size 14px
+         line-height 1.5
+         display inline-block
+         margin 1% 2%
+
+      em
+         background #e
+         border-radius .3em
+         margin-right .4em
+         padding .3em .6em
+         color #3
+
+      .fp-close
+         display block
+
+      @media (max-width: 600px)
+         p
+            font-size 9px
+
+   .fp-subtitle
+      position absolute
+      bottom 40px
+      left -99999em
+      z-index 10
+      text-align center
+      width 100%
+      opacity 0
+      transition opacity .3s
+
+      p
+         display inline
+         background-color #3
+         background-color rgba(#3, 0.9)
+         color #e
+         padding .1em .4em
+         font-size 16px
+         line-height 1.6
+
+         &:after
+            content ''
+            clear both
+
+      &.fp-active
+         left 0
+         opacity 1
+
+
+   // background image
+   .fp-fullscreen, .fp-unload, .fp-mute, .fp-embed, .fp-close
+      background-image 'url(%s.png)' % unquote(img)
+      background-size 37px 300px
+
+      .color-light&
+         background-image 'url(%s.png)' % unquote(img_dark)
+
+         @media (-webkit-min-device-pixel-ratio: 2)
+            background-image 'url(%s@x2.png)' % unquote(img_dark)
+
+      @media (-webkit-min-device-pixel-ratio: 2)
+         background-image 'url(%s@x2.png)' % unquote(img)
 
 

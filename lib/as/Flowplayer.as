@@ -78,6 +78,7 @@ package {
       private var conn:NetConnection;
       private var stream:NetStream;
       private var video:Video;
+      private var logo:Logo;
 
 
       /* constructor */
@@ -107,18 +108,18 @@ package {
          timer.start();
 
          // http://flowplayer.org/GPL-license/#term-7
-         var logo:Logo = new Logo();
+         logo = new Logo();
 
          // size
          logo.width = 50;
-         logo.height = 15;
 
-         //position
+         // position
          logo.x = 12;
-         logo.y = stage.stageHeight - logo.height - 40;
-
+         logo.y = stage.stageHeight - logo.height - 18;
          addChild(logo);
-         setTimeout(function():void { if (logo.parent) removeChild(logo); }, 8000);
+
+         // retain proportions
+         logo.scaleY = logo.scaleX;
 
       }
 
@@ -127,6 +128,9 @@ package {
       // switch url
       public function play(url:String):void {
          if (ready) {
+            url = unescape(url);
+
+            conf.autoplay = true; // always begin playback
             if (conf.rtmp) conn.connect(conf.rtmp);
             stream.play(url);
             conf.url = url;
@@ -229,45 +233,29 @@ package {
 
          img.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e:Event):void {
 
-            // scale(img);
             img.name = "poster";
             addChild(img);
 
             // center
             img.x = int((stage.stageWidth / 2) - (img.width / 2));
             img.y = int((stage.stageHeight / 2) - (img.height / 2));
+
          });
 
          img.load(new URLRequest(conf.poster));
 
       }
 
-      /*
-      private function scale(obj:Object):void {
-
-         var w:int = stage.stageWidth;
-         var h:int = stage.stageHeight;
-         var xRatio:Number = w / obj.width;
-         var useXRatio:Boolean = xRatio * h <= h;
-
-         // scale
-         obj.width = useXRatio ? w : fit(w, obj.width, h / obj.height);
-         obj.height = useXRatio ? fit(h, obj.height, xRatio) : h;
-
-         // fire("to", { w: obj.width, h: obj.height });
-      }
-
-      private function fit(max:int, orig:int, factor:Number):int {
-         var result:int = Math.ceil(factor * orig);
-         return result > max ? max : result;
-      }
-      */
 
 
       private function initVideo():void {
          video = new Video();
          video.smoothing = true;
          this.addChild(video);
+
+         conf.url = unescape(conf.url);
+
+         if (conf.debug) fire("debug.url", conf.url);
 
          if (conf.poster) video.visible = false;
 
@@ -284,7 +272,7 @@ package {
 
          conn.addEventListener(NetStatusEvent.NET_STATUS, function (e:NetStatusEvent):void {
 
-            fire("debug.conn", e.info.code);
+            if (conf.debug) fire("debug.conn", e.info);
 
             switch (e.info.code) {
 
@@ -314,6 +302,9 @@ package {
 
                            // RTMP & poster image
                            if (!conf.autoplay && conf.rtmp) setTimeout(stream.pause, 100);
+
+                           setTimeout(function():void { if (logo.parent) removeChild(logo); }, 8000);
+
                            ready = true;
                         }
                      }
@@ -322,7 +313,7 @@ package {
                   // listen for playback events
                   stream.addEventListener(NetStatusEvent.NET_STATUS, function (e:NetStatusEvent):void {
 
-                     // fire("debug.stream", e.info.code);
+                     if (conf.debug) fire("debug.stream", e.info.code);
 
                      switch (e.info.code) {
 
@@ -368,6 +359,10 @@ package {
 
                   });
 
+                  break;
+
+               case "NetConnection.Connect.Failed":
+                  fire(Flowplayer.ERROR, { code: 9, url: conf.rtmp });
                   break;
 
                case "NetConnection.Connect.Closed":
