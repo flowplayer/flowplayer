@@ -39,6 +39,12 @@ $(function() {
          root.toggleClass("is-muted");
       });
 
+      $(document).bind("keydown.fp", function(e) {
+         if (e.shiftKey && e.which == 191) {
+            root.toggleClass("is-help");
+         }
+      });
+
    });
 
 

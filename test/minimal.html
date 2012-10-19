@@ -7,8 +7,8 @@
 
    <!-- site specific styling -->
    <style>
-   body { font: 12px "Myriad Pro", "Lucida Grande", sans-serif; text-align: center; padding-top: 5%; }
-   .flowplayer { width: 70%; background-color: #ccc; }
+   body { font: 12px "Myriad Pro", "Lucida Grande", sans-serif; text-align: center; padding-top: 1%; }
+   .flowplayer { width: 70%; background-color: #039; }
    </style>
 
    <!-- flowplayer depends on jQuery 1.4+ (for now) -->
@@ -22,14 +22,18 @@
 <body>
 
    <!-- the player -->
-   <div class="flowplayer -is-splash" -data-engine="flash" data-debug="true"
+   <div class="flowplayer"
+      -data-debug="true"
+      data-engine="flash"
       -data-rtmp="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st"
-      -data-swf="../dist/flowplayer.swf" data-ratio=".417">
+      data-swf="../dist/flowplayer.swf"
+      data-native_ipad_fullscreen="false"
+      data-ratio=".417">
 
-      <video poster="">
-         <source type="video/webm" src="http://stream.flowplayer.org/bauhaus/624x260.webm"/>
-         <source type="video/mp4" src="http://stream.flowplayer.org/bauhaus/624x260.mp4"/>
-         <source type="video/ogv" src="http://stream.flowplayer.org/bauhaus/624x260.ogv"/>
+      <video -preload="none" -poster="http://flowplayer.org/media/img/buy/hero.png">
+         <source type="vieo/flash"  src="http://cdn.http.pri.streamotor.com/1/2/video-sd.mp4?Expires=1350310145&Key-Pair-Id=APKAJUAT6SMTUDSHTR3Q&Signature=fQ2bVVTZDdtoaFscWhdU5NjMOH41cnR0GgoA2YkQYiW3P2MgjuBn0-COh4lVCR~EIpc8tp3-eKzhQH-zH051E8toVdqQxNq0STlympGgnYHHAbnyenhEb0foXGLFIQpCnbLUJbMmKr8OW2VNLPQcTaHwNiJNmmVB0bv7g7~NsIo_"/>
+         <source type="video/webm"  src="http://stream.flowplayer.org/bauhaus/624x260.webm"/>
+         <source type="video/mp4"   src="http://stream.flowplayer.org/bauhaus/624x260.mp4"/>
       </video>
 
    </div>

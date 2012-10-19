@@ -5,11 +5,19 @@
    .fp-ui
 
       .is-splash&, .is-paused&
-         background url(img_play) center no-repeat
+         background 'url(%s.png) center no-repeat' % unquote(img_play)
          background-size 12%
 
+         @media (-webkit-min-device-pixel-ratio: 2)
+            background 'url(%s@x2.png) center no-repeat' % unquote(img_play)
+            background-size 12%
+
          .color-light&
-            background-image url(img_play_dark)
+            background-image 'url(%s.png)' % unquote(img_play_dark)
+
+         @media (-webkit-min-device-pixel-ratio: 2)
+            .color-light&
+               background-image 'url(%s@x2.png)' % unquote(img_play_dark)
 
       .is-fullscreen&
          background-size auto
@@ -31,7 +39,7 @@
          display block
 
 
-   .fp-fullscreen, .fp-unload
+   .fp-fullscreen, .fp-unload, .fp-close
       absolute spacing auto
       right spacing
       block 18px 19px
@@ -41,7 +49,7 @@
       .is-fullscreen&
          bg 0 -218px
 
-   .fp-unload
+   .fp-unload, .fp-close
       bg 5px -178px
       display none
 

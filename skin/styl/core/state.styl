@@ -35,8 +35,8 @@
       background-color #3
 
    &.is-error
-      border 2px solid #900
-      background-color #f !important
+      border 1px solid #90
+      background #fd !important
 
       h2
          font-weight bold
@@ -46,7 +46,7 @@
       .fp-message
          display block
 
-      object, video, .fp-controls
+      object, video, .fp-controls, .fp-time, .fp-subtitle
          display none
 
    &.is-ready.is-muted
@@ -61,7 +61,7 @@
          transition height fade_speed fade_delay
 
       .fp-timeline
-         transition all fade_speed fade_delay
+         transition height fade_speed fade_delay, top fade_speed fade_delay, margin fade_speed fade_delay
          top 0
 
       .fp-fullscreen, .fp-unload, .fp-elapsed, .fp-remaining, .fp-duration, .fp-embed, .fp-logo, .fp-volume
@@ -74,7 +74,7 @@
       .fp-controls
          height controls_height
 
-      .fp-fullscreen, .fp-unload, .fp-time, .fp-embed, .fp-logo, .fp-volume
+      .fp-fullscreen, .fp-unload, .fp-elapsed, .fp-remaining, .fp-duration, .fp-embed, .fp-logo, .fp-volume
          opacity 1
 
       .fp-timeline
@@ -82,8 +82,11 @@
          height timeline_height
          margin 0 (right_margin + time_width + spacing) 0 (spacing + time_width + spacing)
 
-         .aside-time&
+         .aside-time&, .no-time&
             margin 0 right_margin 0 spacing
+
+         .no-volume&
+            margin-right mute_width + spacing * 2
 
    &.fixed-controls
       .fp-volume

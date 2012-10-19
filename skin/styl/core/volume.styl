@@ -6,12 +6,14 @@
       top (controls_height / 2) - (volume_height / 2)
       right spacing
 
+
    .fp-mute
-      block mute_width
+      width mute_width
+      height mute_height
       float left
       relative - (mute_height / 2) + (volume_height / 2)
       cursor pointer
-      bg 0 -99px
+      bg -2px -99px
 
 
    .fp-volumeslider
@@ -20,5 +22,11 @@
       cursor col-resize
       float left
 
+
    .fp-volumelevel
       height 100%
+
+   &.no-volume
+      .fp-volumeslider
+         display none
+
