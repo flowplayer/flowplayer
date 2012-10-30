@@ -158,7 +158,7 @@ package {
       public function resume():void {
          if (ready) {
             if (finished) { seek(0); }
-            if (paused) stream.resume();
+            stream.resume();
             togglePoster(false);
 
             // connection closed
@@ -343,7 +343,7 @@ package {
                         case "NetStream.Play.Stop":
                            finished = true;
                            if (conf.loop) stream.seek(0);
-                           else fire(Flowplayer.FINISH, null);
+                           else { fire(Flowplayer.FINISH, null); stream.pause(); }
                            break;
 
                         case "NetStream.Buffer.Full":
