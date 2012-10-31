@@ -156,7 +156,7 @@ package {
       }
 
       public function resume():void {
-         if (ready) {
+         if (ready && paused) {
             if (finished) { seek(0); }
             stream.resume();
             togglePoster(false);
@@ -232,7 +232,6 @@ package {
          img.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, error);
 
          img.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e:Event):void {
-
             img.name = "poster";
             addChild(img);
 
@@ -287,12 +286,18 @@ package {
                   stream.client = {
                      onMetaData:function (info:Object):void {
 
+                        // use a real object
+                        var meta:Object = { seekpoints: [] };
+                        for (var key:String in info) { meta[key] = info[key]; }
+                        if (conf.debug) fire("debug.metadata", meta);
+
                         var clip:Object = {
-                           seekable:!!conf.rtmp,
-                           bytes:stream.bytesTotal,
-                           duration:info.duration,
-                           height:info.height,
-                           width:info.width
+                           seekable: !!conf.rtmp,
+                           bytes: stream.bytesTotal,
+                           duration: meta.duration,
+                           height: meta.height,
+                           width: meta.width,
+                           seekpoints: meta.seekpoints
                         };
 
                         if (!ready) {
@@ -326,7 +331,7 @@ package {
                               if (conf.autoplay) {
                                  paused = false;
 
-                                 // poster
+                              // poster
                               } else {
                                  stream.seek(0);
                                  stream.pause();
@@ -335,6 +340,7 @@ package {
                            break;
 
                         case "NetStream.Seek.Notify":
+                           fire("foo.time", stream.time)
                            finished = false;
                            timeupdate(true);
                            fire(Flowplayer.SEEK, seekTo);
@@ -394,7 +400,7 @@ package {
             // http://www.brooksandrus.com/blog/2008/11/05/3-years-later-netstream-still-sucks/
             if (e === true) {
                fire(STATUS, { time: seekTo, buffer: buffer });
-               setTimeout(function():void { seekTo = 0; }, 1000);
+               setTimeout(function():void { seekTo = 0; }, 100);
 
             } else if (!(paused || finished || seekTo) || delta > 0) {
                fire(STATUS, { time: stream.time, buffer: buffer });
