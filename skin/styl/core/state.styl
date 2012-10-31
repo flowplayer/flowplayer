@@ -1,11 +1,14 @@
 
 .{root}
 
-   &.is-splash
+   &.is-splash, &.is-poster
       cursor pointer
 
       .fp-controls, .fp-fullscreen, .fp-unload, .fp-time, .fp-embed
-         display none
+         display none !important
+
+   &.is-poster .fp-engine
+      opacity 0
 
    &.is-loading
       .fp-waiting

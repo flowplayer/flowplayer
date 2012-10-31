@@ -54,12 +54,11 @@ package {
       private static const VOLUME:String     = "volume";
       private static const FINISH:String     = "finish";
       private static const UNLOAD:String     = "unload";
-      private static const STOP:String       = "stop";
       private static const ERROR:String      = "error";
 
       // external interface
       private static const INTERFACE:Array
-         = new Array(PLAY, PAUSE, RESUME, SEEK, VOLUME, STOP, UNLOAD);
+         = new Array(PLAY, PAUSE, RESUME, SEEK, VOLUME, UNLOAD);
 
       // flashvars
       private var conf:Object;
@@ -138,15 +137,6 @@ package {
          }
       }
 
-      public function stop():void {
-         if (ready) {
-            seek(0);
-            pause();
-            togglePoster(true);
-         }
-      }
-
-
       public function pause():void {
          if (ready && !paused) {
             stream.pause();
@@ -159,7 +149,6 @@ package {
          if (ready && paused) {
             if (finished) { seek(0); }
             stream.resume();
-            togglePoster(false);
 
             // connection closed
             if (!stream.time) {
@@ -206,46 +195,10 @@ package {
       /************* Private API ***********/
 
 
-      private function togglePoster(flag:Boolean):void {
-         var poster:DisplayObject = getChildByName("poster");
-
-         if (poster) {
-            poster.visible = flag;
-            video.visible = !flag;
-         }
-      }
-
       // setup video stream
       private function init(): void {
-         if (conf.poster) loadPoster();
          initVideo();
       }
-
-      private function loadPoster():void {
-         var img:Loader = new Loader();
-
-         var error:Function = function(e:Event):void {
-            fire(Flowplayer.ERROR, { code:4, url:conf.poster });
-         };
-
-         img.contentLoaderInfo.addEventListener(SecurityErrorEvent.SECURITY_ERROR, error);
-         img.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, error);
-
-         img.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e:Event):void {
-            img.name = "poster";
-            addChild(img);
-
-            // center
-            img.x = int((stage.stageWidth / 2) - (img.width / 2));
-            img.y = int((stage.stageHeight / 2) - (img.height / 2));
-
-         });
-
-         img.load(new URLRequest(conf.poster));
-
-      }
-
-
 
       private function initVideo():void {
          video = new Video();
@@ -255,8 +208,6 @@ package {
          conf.url = unescape(conf.url);
 
          if (conf.debug) fire("debug.url", conf.url);
-
-         if (conf.poster) video.visible = false;
 
          stage.scaleMode = StageScaleMode.EXACT_FIT;
          video.width = stage.stageWidth;
@@ -305,7 +256,7 @@ package {
                            fire(Flowplayer.READY, clip);
                            if (conf.autoplay) fire(Flowplayer.RESUME, null);
 
-                           // RTMP & poster image
+                           // stop at first frame
                            if (!conf.autoplay && conf.rtmp) setTimeout(stream.pause, 100);
 
                            setTimeout(function():void { if (logo.parent) removeChild(logo); }, 8000);
@@ -331,7 +282,7 @@ package {
                               if (conf.autoplay) {
                                  paused = false;
 
-                              // poster
+                              // stop at first frame
                               } else {
                                  stream.seek(0);
                                  stream.pause();
@@ -340,7 +291,6 @@ package {
                            break;
 
                         case "NetStream.Seek.Notify":
-                           fire("foo.time", stream.time)
                            finished = false;
                            timeupdate(true);
                            fire(Flowplayer.SEEK, seekTo);
