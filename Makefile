@@ -33,6 +33,7 @@ raw:
 	@ echo	"!function($$) { " >> $(JS)
 
 	@ cat	lib/flowplayer.js\
+			lib/ext/support.js\
 			lib/engine/*.js\
 			lib/ext/video.js\
 			lib/ext/slider.js\
@@ -47,7 +48,7 @@ raw:
 			lib/ext/android.js\
 			lib/ext/embed.js | $(SET_VERSION) | sed "s/@EMBED/$(EMBED)/" | sed "s/@CDN/$(CDN)/" | sed "s/@CDN_PATH/$(CDN_PATH)/" >> $(JS)
 
-	@ echo	"}(jQuery);" >> $(JS)
+	@ echo "}(jQuery);" >> $(JS)
 
 
 min: raw
