@@ -128,12 +128,11 @@ package {
       public function play(url:String):void {
          if (ready) {
             url = unescape(url);
-
             conf.autoplay = true; // always begin playback
             if (conf.rtmp) conn.connect(conf.rtmp);
             stream.play(url);
             conf.url = url;
-            ready = false;
+            paused = ready = false;
          }
       }
 
@@ -248,7 +247,8 @@ package {
                            duration: meta.duration,
                            height: meta.height,
                            width: meta.width,
-                           seekpoints: meta.seekpoints
+                           seekpoints: meta.seekpoints,
+                           src: conf.url
                         };
 
                         if (!ready) {
@@ -306,7 +306,7 @@ package {
                            fire(Flowplayer.BUFFERED, null);
                            break;
 
-                        case "NetStream.Play.StreamNotFound":
+                        case "NetStream.Play.StreamNotFound": case "NetStream.Play.Failed":
                            finished = true;
                            fire(Flowplayer.ERROR, { code:4 });
                            break;

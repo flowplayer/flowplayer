@@ -35,7 +35,7 @@ raw:
 	@ cat	lib/flowplayer.js\
 			lib/ext/support.js\
 			lib/engine/*.js\
-			lib/ext/video.js\
+			lib/ext/resolve.js\
 			lib/ext/slider.js\
 			lib/ext/ui.js\
 			lib/ext/keyboard.js\
