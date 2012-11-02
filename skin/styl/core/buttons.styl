@@ -46,9 +46,6 @@
       bg 0 -197px
       cursor pointer
 
-      .is-fullscreen&
-         bg 0 -218px
-
    .fp-unload, .fp-close
       bg 5px -178px
       display none
@@ -58,3 +55,12 @@
          display block
       .fp-fullscreen
          display none
+
+   &.is-fullscreen
+      .fp-fullscreen
+         bg 0 -218px
+         display block !important
+
+      .fp-unload, .fp-close
+         display none !important
+
