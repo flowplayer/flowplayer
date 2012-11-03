@@ -56,24 +56,8 @@
       .fp-mute
          opacity 0.5
 
-
-   // mouseout
-   &.is-mouseout
-      .fp-controls
-         height 0
-         transition height fade_speed fade_delay
-
-      .fp-timeline
-         transition height fade_speed fade_delay, top fade_speed fade_delay, margin fade_speed fade_delay
-         top 0
-
-      .fp-fullscreen, .fp-unload, .fp-elapsed, .fp-remaining, .fp-duration, .fp-embed, .fp-logo, .fp-volume
-         opacity 0
-         transition opacity fade_speed fade_delay
-
-
    // mouseover / fixed-controls
-   &.is-ready.is-mouseover, &.fixed-controls
+   &.is-mouseover, &.fixed-controls
       .fp-controls
          height controls_height
 
@@ -85,11 +69,34 @@
          height timeline_height
          margin 0 (right_margin + time_width + spacing) 0 (spacing + time_width + spacing)
 
+         .no-volume&
+            margin-right mute_width + spacing * 2
+
+         .no-mute&
+            margin-right time_width + spacing * 2
+
          .aside-time&, .no-time&
             margin 0 right_margin 0 spacing
 
-         .no-volume&
-            margin-right mute_width + spacing * 2
+         .aside-time.no-mute&
+            margin-right spacing
+
+   // mouseout
+   &.is-mouseout
+      .fp-controls
+         height 0
+         transition height fade_speed fade_delay
+
+      .fp-timeline
+         transition height fade_speed fade_delay, top fade_speed fade_delay, margin fade_speed fade_delay
+         margin 0 !important
+         top 0
+
+      .fp-fullscreen, .fp-unload, .fp-elapsed, .fp-remaining, .fp-duration, .fp-embed, .fp-logo, .fp-volume
+         opacity 0
+         transition opacity fade_speed fade_delay
+
+
 
    &.fixed-controls
       .fp-volume
