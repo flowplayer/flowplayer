@@ -172,7 +172,7 @@ package {
       public function volume(level:Number):void {
          if (ready && volumeLevel != level) {
             if (level > 1) level = 1;
-            if (level < 0) level = 0;
+            else if (level < 0) level = 0;
 
             stream.soundTransform = new SoundTransform(level);
             volumeLevel = level;
@@ -229,6 +229,7 @@ package {
 
                   // start streaming
                   stream = new NetStream(conn);
+
                   video.attachNetStream(stream);
                   stream.play(conf.url);
 
