@@ -8,7 +8,7 @@
          display none !important
 
    &.is-poster .fp-engine
-      opacity 0
+      top -9999em
 
    &.is-loading
       .fp-waiting
@@ -56,6 +56,21 @@
       .fp-mute
          opacity 0.5
 
+
+   // mouseout
+   &.is-mouseout
+      .fp-controls
+         height 0
+         transition height fade_speed fade_delay
+
+      .fp-timeline
+         transition height fade_speed fade_delay, top fade_speed fade_delay, margin fade_speed fade_delay
+         top 0
+
+      .fp-fullscreen, .fp-unload, .fp-elapsed, .fp-remaining, .fp-duration, .fp-embed, .fp-logo, .fp-volume
+         opacity 0
+         transition opacity fade_speed fade_delay
+
    // mouseover / fixed-controls
    &.is-mouseover, &.fixed-controls
       .fp-controls
@@ -81,20 +96,6 @@
          .aside-time.no-mute&
             margin-right spacing
 
-   // mouseout
-   &.is-mouseout
-      .fp-controls
-         height 0
-         transition height fade_speed fade_delay
-
-      .fp-timeline
-         transition height fade_speed fade_delay, top fade_speed fade_delay, margin fade_speed fade_delay
-         margin 0 !important
-         top 0
-
-      .fp-fullscreen, .fp-unload, .fp-elapsed, .fp-remaining, .fp-duration, .fp-embed, .fp-logo, .fp-volume
-         opacity 0
-         transition opacity fade_speed fade_delay
 
 
 
