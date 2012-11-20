@@ -249,7 +249,8 @@ package {
                            height: meta.height,
                            width: meta.width,
                            seekpoints: meta.seekpoints,
-                           src: conf.url
+                           src: conf.url,
+                           url: conf.url
                         };
 
                         if (!ready) {
