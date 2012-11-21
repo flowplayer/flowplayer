@@ -81,7 +81,7 @@ flash:
 	@ cd $(DIST) && $(FLASH_COMPILE) -output flowplayer.swf Flowplayer.as && rm Flowplayer.as logo.*
 
 
-zip: min concat skins flash
+zip: concat min skins flash
 	@ cp index.html $(DIST)
 	@ cp LICENSE.md $(DIST)
 	@ rm -f $(DIST)/flowplayer.zip
