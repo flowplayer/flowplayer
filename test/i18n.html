@@ -1,0 +1,49 @@
+
+<!doctype html>
+
+<head>
+
+   <!-- player skin -->
+   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css" />
+
+   <!-- site specific styling -->
+   <style>
+   body {
+      font: 12px "Myriad Pro", "Lucida Grande", sans-serif;
+      text-align: center;
+      padding-top: 1%;
+   }
+   .flowplayer { width: 70%; background-color: #039; }
+   </style>
+
+   <!-- flowplayer depends on jQuery 1.7.1+ (for now) -->
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+   <!-- include flowplayer -->
+   <script src="../dist/flowplayer.js"></script>
+
+</head>
+
+<body>
+
+   <!-- the player -->
+   <div class="-is-splash flowplayer"
+      data-lang="fr"
+      data-debug="true"
+      data-engine="flash"
+      data-swf="../dist/flowplayer.swf"
+      -data-fullscreen="false"
+      -data-muted="true"
+      -data-rtmp="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st"
+      data-ratio=".417">
+
+      <video poster="init/camera.jpg" preload="none">
+         <source type="video/mp4"   src="http://stream.flowplayer.org/bauhaus/624x260.mp4"/>
+         <source type="video/webm"  src="http://stream.flowplayer.org/bauhaus/624x260.webm"/>
+         <source type="video/ogg"   src="http://stream.flowplayer.org/bauhaus/624x260.ogv"/>
+      </video>
+
+   </div>
+
+</body>
+
