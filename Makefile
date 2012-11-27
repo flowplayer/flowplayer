@@ -76,9 +76,9 @@ playful: skin
 
 flash:
 	# compile flash
-	@ $(SET_VERSION) lib/as/Flowplayer.as > $(DIST)/Flowplayer.as
+	@ cp lib/as/* $(DIST)
 	@ cp lib/logo/logo.swc $(DIST)
-	@ cd $(DIST) && $(FLASH_COMPILE) -output flowplayer.swf Flowplayer.as && rm Flowplayer.as logo.*
+	@ cd $(DIST) && $(FLASH_COMPILE) -output flowplayer.swf -default-frame-rate 24 Flowplayer.as && rm *.as logo.*
 
 
 zip: concat min skins flash

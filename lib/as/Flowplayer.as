@@ -4,9 +4,6 @@
    Copyright (c) 2008-2012 Flowplayer Ltd
    http://flowplayer.org
 
-   Licensed under MIT and GPL 2+
-   http://www.opensource.org/licenses
-
    Author: Tero Piirainen
 
    -----
@@ -24,37 +21,33 @@
 */
 package {
 
-   import flash.display.DisplayObject;
-   import flash.display.Loader;
-   import flash.display.LoaderInfo;
-   import flash.display.Sprite;
-   import flash.display.StageScaleMode;
+import flash.display.Sprite;
+import flash.display.StageAlign;
+import flash.display.StageScaleMode;
+import flash.events.*;
+import flash.external.ExternalInterface;
+import flash.media.SoundTransform;
+import flash.media.Video;
+import flash.net.NetConnection;
+import flash.net.NetStream;
+import flash.system.Security;
+import flash.utils.Timer;
+import flash.utils.setTimeout;
 
-   import flash.events.*;
-   import flash.external.ExternalInterface;
-   import flash.media.SoundTransform;
-   import flash.media.Video;
-   import flash.net.NetConnection;
-   import flash.net.NetStream;
-   import flash.net.URLRequest;
-   import flash.system.Security;
-   import flash.utils.Timer;
-   import flash.utils.setTimeout;
-
-   public class Flowplayer extends Sprite {
+public class Flowplayer extends Sprite {
 
       // events
-      private static const PLAY:String       = "play";
-      private static const READY:String      = "ready";
-      private static const PAUSE:String      = "pause";
-      private static const RESUME:String     = "resume";
-      private static const SEEK:String       = "seek";
-      private static const STATUS:String     = "status";
-      private static const BUFFERED:String   = "buffered";
-      private static const VOLUME:String     = "volume";
-      private static const FINISH:String     = "finish";
-      private static const UNLOAD:String     = "unload";
-      private static const ERROR:String      = "error";
+      public static const PLAY:String       = "play";
+      public static const READY:String      = "ready";
+      public static const PAUSE:String      = "pause";
+      public static const RESUME:String     = "resume";
+      public static const SEEK:String       = "seek";
+      public static const STATUS:String     = "status";
+      public static const BUFFERED:String   = "buffered";
+      public static const VOLUME:String     = "volume";
+      public static const FINISH:String     = "finish";
+      public static const UNLOAD:String     = "unload";
+      public static const ERROR:String      = "error";
 
       // external interface
       private static const INTERFACE:Array
@@ -71,18 +64,20 @@ package {
 
       // clip hack properties
       private var seekTo:Number;
-      private var clipUrl:String;
 
       // video stream
       private var conn:NetConnection;
       private var stream:NetStream;
       private var video:Video;
-      private var logo:Logo;
+      private var currentClip:Object;
 
+      private var ui:UI;
 
       /* constructor */
       public function Flowplayer() {
          Security.allowDomain("*");
+         stage.align = StageAlign.TOP_LEFT;
+         stage.scaleMode = StageScaleMode.NO_SCALE;
 
          conf = this.loaderInfo.parameters;
          init();
@@ -105,21 +100,6 @@ package {
          var timer:Timer = new Timer(250);
          timer.addEventListener("timer", timeupdate);
          timer.start();
-
-         // http://flowplayer.org/GPL-license/#term-7
-         logo = new Logo();
-
-         // size
-         logo.width = 50;
-
-         // position
-         logo.x = 12;
-         logo.y = stage.stageHeight - logo.height - 18;
-         addChild(logo);
-
-         // retain proportions
-         logo.scaleY = logo.scaleX;
-
       }
 
       /************ Public API ************/
@@ -193,6 +173,9 @@ package {
 
       /************* Private API ***********/
 
+      internal function get clip():Object {
+         return currentClip;
+      }
 
       // setup video stream
       private function init(): void {
@@ -203,12 +186,13 @@ package {
          video = new Video();
          video.smoothing = true;
          this.addChild(video);
+         ui = new UI(this);
 
          conf.url = unescape(conf.url);
 
          if (conf.debug) fire("debug.url", conf.url);
 
-         stage.scaleMode = StageScaleMode.EXACT_FIT;
+//         stage.scaleMode = StageScaleMode.EXACT_FIT;
          video.width = stage.stageWidth;
          video.height = stage.stageHeight;
 
@@ -242,7 +226,7 @@ package {
                         for (var key:String in info) { meta[key] = info[key]; }
                         if (conf.debug) fire("debug.metadata", meta);
 
-                        var clip:Object = {
+                        currentClip = {
                            seekable: !!conf.rtmp,
                            bytes: stream.bytesTotal,
                            duration: meta.duration,
@@ -255,13 +239,13 @@ package {
 
                         if (!ready) {
 
-                           fire(Flowplayer.READY, clip);
+                           fire(Flowplayer.READY, currentClip);
                            if (conf.autoplay) fire(Flowplayer.RESUME, null);
 
                            // stop at first frame
                            if (!conf.autoplay && conf.rtmp) setTimeout(stream.pause, 100);
 
-                           setTimeout(function():void { if (logo.parent) removeChild(logo); }, 8000);
+//                           setTimeout(function():void { ui.hideLogo(); }, 8000);
 
                            ready = true;
                         }
@@ -339,7 +323,9 @@ package {
          conn.connect(conf.rtmp);
       }
 
-
+      internal function get status():Object {
+         return { time: stream.time,  buffer: stream.bytesLoaded, duration: clip ? clip.duration : 0 };
+      }
 
       private function timeupdate(e:Object):void {
          if (ready) {
@@ -364,8 +350,8 @@ package {
          if (conf.callback) {
             ExternalInterface.call(conf.callback, type, data);
          }
+         dispatchEvent(new Event(type));
       }
 
    }
-
 }
