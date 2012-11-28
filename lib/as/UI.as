@@ -1,9 +1,11 @@
 package {
 import flash.display.Graphics;
 import flash.events.Event;
+import flash.events.FullScreenEvent;
 
 public class UI {
 
+   private var fullescreen:FullscreenToggle;
    private var logo:Logo;
    private var controlbar:Controlbar;
    private var player:Flowplayer;
@@ -16,6 +18,9 @@ public class UI {
       player.addChild(logo);
       controlbar = new Controlbar(player);
       player.addChild(controlbar);
+
+      fullescreen = new FullscreenToggle(player);
+      player.addChild(fullescreen);
 
       arrange();
       player.stage.addEventListener(Event.RESIZE, arrange);
@@ -30,6 +35,8 @@ public class UI {
       logo.scaleY = logo.scaleX;
       logo.y = player.stage.stageHeight - logo.height - CONTROLS_HEIGHT - 5;
       controlbar.y = player.stage.stageHeight - CONTROLS_HEIGHT;
+      fullescreen.x = player.stage.stageWidth - fullescreen.width;
+      fullescreen.y = 5;
    }
 
    public static function drawRect(graphics:Graphics, color:Number, alpha:Number, width:int, height:int):void {

@@ -177,6 +177,10 @@ public class Flowplayer extends Sprite {
          return currentClip;
       }
 
+      internal function get videoDisp():Video {
+         return video;
+      }
+
       // setup video stream
       private function init(): void {
          initVideo();

@@ -24,8 +24,7 @@ public class Timeline extends Sprite {
    private var buffer:Sprite;
    private var dragTimer:Timer;
    private var prevDragPos:Number;
-//   private var mouseOver:Boolean;
-//   private var mouseDown:Boolean;
+   private var myWidth:Number;
 
    public function Timeline(player:Flowplayer) {
       this.player = player;
@@ -45,6 +44,7 @@ public class Timeline extends Sprite {
 
    public function arrange(width:int, height:int):void {
       Console.log("Timeline.arrange: " + width + "x" + height);
+      myWidth = width;
       graphics.clear();
       progress.graphics.clear();
       buffer.graphics.clear();
@@ -80,15 +80,19 @@ public class Timeline extends Sprite {
       if (player.status.time > 0) {
          addChild(progress);
       }
-
 //      Console.log("buffer = " + player.status.buffer + ", duration " + duration);
-      resize(buffer, Math.min(width, player.status.buffer / duration * width));
-      resize(progress, Math.min(width, player.status.time / duration * width));
+      resize(buffer, Math.min(width, (player.status.buffer / duration) * width));
+      resize(progress, Math.min(width, (player.status.time / duration) * width));
    }
 
    private function resize(obj:Sprite, width:Number, duration:int = 50): void {
       var tween:Tween = new Tween(obj, "width", None.easeOut, obj.width, width, duration/1000, true);
       tween.start();
+   }
+
+   // for some reason the superclass width does not reset when coming back from fullscreen
+   override public function get width():Number {
+      return myWidth;
    }
 }
 }
