@@ -20,16 +20,8 @@ public class Time extends Sprite {
    private var field:TextField;
 
    public function Time() {
-      field = new TextField();
-      field.blendMode = BlendMode.LAYER;
-      var format:TextFormat = new TextFormat();
-      format.font = "Lucida Grande, Lucida Sans Unicode, Bitstream Vera, Verdana, Arial, _sans, _serif";
-      field.antiAliasType = AntiAliasType.ADVANCED;
-      format.size = 12;
-      format.color = 0xffffff;
-      field.defaultTextFormat = format;
+      field = UI.createText();
       addChild(field);
-      field.autoSize = TextFieldAutoSize.LEFT;
       this.value = 0;
    }
 

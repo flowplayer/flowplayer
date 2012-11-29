@@ -192,6 +192,11 @@ public class Flowplayer extends Sprite {
          }
       }
 
+      // TODO: implement this.
+      internal function get embedCode():String {
+         return "<code></code>";
+      }
+
       // setup video stream
       private function init(): void {
          initVideo();
