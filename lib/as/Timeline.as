@@ -51,6 +51,8 @@ public class Timeline extends Sprite {
       UI.drawRect(graphics, 0x666666, 1, width, height);
       UI.drawRect(progress.graphics, 0x00a7c8, 1, 1, height);
       UI.drawRect(buffer.graphics, 0xeeeeee, 1, 1, height);
+      scaleX = 1;
+      scaleY = 1;
    }
 
    private function dragging(event:Event):void {

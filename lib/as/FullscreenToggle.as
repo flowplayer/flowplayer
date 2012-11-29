@@ -57,8 +57,7 @@ public class FullscreenToggle extends Sprite {
       video.height = height;
 
       // center the video in stage
-      video.x = stage.stageWidth / 2 - video.width / 2;
-      video.y = stage.stageHeight / 2 - video.height / 2;
+      UI.center(video,  stage);
    }
 
    private function onFullScreen(event:FullScreenEvent):void {

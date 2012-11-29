@@ -78,9 +78,11 @@ public class UI {
    }
 
    public static function center(widget:DisplayObject, container:DisplayObject, onlyX:Boolean = false):void {
-      widget.x = container.width/2 - widget.width/2;
+      var prop:String = container is Stage ? "stageWidth" : "width";
+      widget.x = container[prop]/2 - widget.width/2;
       if (onlyX) return;
-      widget.y = container.height/2 - widget.height/2;
+      prop = container is Stage ? "stageHeight" : "height";
+      widget.y = container[prop]/2 - widget.height/2;
    }
 
    public static function createText(color:Number = 0xffffff, size:int = 12):TextField {
