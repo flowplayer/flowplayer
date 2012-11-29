@@ -82,19 +82,19 @@ public class Flowplayer extends Sprite {
          conf = this.loaderInfo.parameters;
          init();
 
+         // IE needs mouse / keyboard events
+         stage.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void {
+            Console.log("click");
+            fire("click", null);
+         });
+         stage.addEventListener(KeyboardEvent.KEY_DOWN, function(e:KeyboardEvent):void {
+            fire("keydown", e.keyCode);
+         });
+
          // The API
          for (var i:Number = 0; i < INTERFACE.length; i++) {
             ExternalInterface.addCallback("__" + INTERFACE[i], this[INTERFACE[i]]);
          }
-
-         // IE needs mouse / keyboard events
-         stage.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void {
-            fire("click", null);
-         });
-
-         stage.addEventListener(KeyboardEvent.KEY_DOWN, function(e:KeyboardEvent):void {
-            fire("keydown", e.keyCode);
-         });
 
          // timeupdate event
          var timer:Timer = new Timer(250);
@@ -181,6 +181,17 @@ public class Flowplayer extends Sprite {
          return video;
       }
 
+      internal function togglePlay():void {
+         Console.log("togglePlay() paused? " + paused + ", ready? " + ready);
+         if (paused) {
+            resume();
+         } else if (ready) {
+            pause();
+         } else {
+            play(conf.url);
+         }
+      }
+
       // setup video stream
       private function init(): void {
          initVideo();
@@ -189,7 +200,8 @@ public class Flowplayer extends Sprite {
       private function initVideo():void {
          video = new Video();
          video.smoothing = true;
-         this.addChild(video);
+         addChild(video);
+
          ui = new UI(this);
 
          conf.url = unescape(conf.url);

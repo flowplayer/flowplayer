@@ -1,15 +1,19 @@
 package {
+import flash.display.DisplayObject;
+import flash.display.DisplayObject;
 import flash.display.Graphics;
+import flash.display.Stage;
 import flash.events.Event;
-import flash.events.FullScreenEvent;
+import flash.events.MouseEvent;
 
 public class UI {
+   private const CONTROLS_HEIGHT:int = 20;
+   private var player:Flowplayer;
 
    private var fullescreen:FullscreenToggle;
    private var logo:Logo;
    private var controlbar:Controlbar;
-   private var player:Flowplayer;
-   private const CONTROLS_HEIGHT:int = 20;
+   private var play:Play;
 
    public function UI(player:Flowplayer) {
       this.player = player;
@@ -22,8 +26,16 @@ public class UI {
       fullescreen = new FullscreenToggle(player);
       player.addChild(fullescreen);
 
+      play = new Play();
+
       arrange();
+
       player.stage.addEventListener(Event.RESIZE, arrange);
+      player.stage.addEventListener(MouseEvent.CLICK, onClick);
+
+      var addPlay:Function = function (e:Event):void { player.addChild(play); };
+      player.addEventListener(Flowplayer.PAUSE, addPlay);
+      player.addEventListener(Flowplayer.FINISH, addPlay);
 
       Console.log("UI initialized");
    }
@@ -37,6 +49,7 @@ public class UI {
       controlbar.y = player.stage.stageHeight - CONTROLS_HEIGHT;
       fullescreen.x = player.stage.stageWidth - fullescreen.width;
       fullescreen.y = 5;
+      center(play, player.stage);
    }
 
    public static function drawRect(graphics:Graphics, color:Number, alpha:Number, width:int, height:int):void {
@@ -45,6 +58,24 @@ public class UI {
          graphics.drawRect(0, 0, width, height);
          graphics.endFill();
    }
+
+   public static function center(widget:DisplayObject, container:DisplayObject, onlyX:Boolean = false):void {
+      widget.x = container.width/2 - widget.width/2;
+      if (onlyX) return;
+      widget.y = container.height/2 - widget.height/2;
+   }
+
+   private function onClick(event:MouseEvent):void {
+      // do not toggle if clicked on controlbar
+      if (! (event.target is Stage || event.target is Play)) return;
+
+      if (event.target == controlbar) return;
+      if (play.parent) {
+         player.removeChild(play);
+      }
+      player.togglePlay();
+   }
+
 }
 
 }
