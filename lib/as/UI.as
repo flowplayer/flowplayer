@@ -28,12 +28,18 @@ public class UI extends Sprite {
    private var play:Play;
    private var embed:Embed;
    private var embedCode:EmbedCode;
+   private var conf:Object;
 
    public function UI(player:Flowplayer) {
       this.player = player;
+      this.conf = player.config;
       player.addChild(this);
-      contextMenu = createMenu();
 
+      controlbar = new Controlbar(player);
+      player.addChild(controlbar);
+      play = new Play();
+
+      contextMenu = createMenu();
       logo = new Logo();
       // logo needs a solid hit area for mouse clicks
       var hitArea:Sprite = new Sprite();
@@ -46,24 +52,22 @@ public class UI extends Sprite {
       player.addChild(hitArea);
       player.addChild(logo);
 
-      controlbar = new Controlbar(player);
-      player.addChild(controlbar);
+      if (conf.fullscreen) {
+         fullescreen = new FullscreenToggle(player);
+         player.addChild(fullescreen);
+      }
 
-      fullescreen = new FullscreenToggle(player);
-      player.addChild(fullescreen);
-
-      play = new Play();
-
-      embed = new Embed();
-      player.addChild(embed);
-      embedCode = new EmbedCode(player);
+      if (conf.embed) {
+         embed = new Embed();
+         player.addChild(embed);
+         embedCode = new EmbedCode(player);
+         embed.addEventListener(MouseEvent.CLICK, toggleEmbed);
+      }
 
       arrange();
 
       player.stage.addEventListener(Event.RESIZE, arrange);
       player.stage.addEventListener(MouseEvent.CLICK, onClick);
-
-      embed.addEventListener(MouseEvent.CLICK, toggleEmbed);
 
       var addPlay:Function = function (e:Event):void { player.addChild(play); };
       player.addEventListener(Flowplayer.PAUSE, addPlay);
@@ -75,19 +79,25 @@ public class UI extends Sprite {
       UI.drawRect(graphics, 0, 0, player.stage.stageWidth, player.stage.stageHeight);
 
       controlbar.arrange(player.stage.stageWidth, CONTROLS_HEIGHT);
+      controlbar.y = player.stage.stageHeight - CONTROLS_HEIGHT;
+
       logo.width = 100;
       logo.x = 12;
       logo.scaleY = logo.scaleX;
       logo.y = player.stage.stageHeight - logo.height - CONTROLS_HEIGHT - 5;
       logo.hitArea.x = logo.x;
       logo.hitArea.y = logo.y;
-      controlbar.y = player.stage.stageHeight - CONTROLS_HEIGHT;
-      fullescreen.x = player.stage.stageWidth - fullescreen.width;
-      fullescreen.y = 5;
-      embed.x = embed.y = 5;
-      embedCode.x = embed.x + embed.width - 3;
-      embedCode.y = 7;
-      embedCode.arrange(Math.min(417, player.stage.stageWidth - embedCode.x - 5)); // embed code stretches to the right edge of stage minus 5px
+
+      if (fullescreen) {
+         fullescreen.x = player.stage.stageWidth - fullescreen.width;
+         fullescreen.y = 5;
+      }
+      if (embed) {
+         embed.x = embed.y = 5;
+         embedCode.x = embed.x + embed.width - 3;
+         embedCode.y = 7;
+         embedCode.arrange(Math.min(417, player.stage.stageWidth - embedCode.x - 5)); // embed code stretches to the right edge of stage minus 5px
+      }
       center(play, player.stage);
    }
 
@@ -126,7 +136,7 @@ public class UI extends Sprite {
    private function createMenu():ContextMenu {
       var menu:ContextMenu = new ContextMenu();
       menu.hideBuiltInItems();
-      addItem(menu, new ContextMenuItem("About Flowplayer 5...", false, true), function(event:ContextMenuEvent):void {
+      addItem(menu, new ContextMenuItem("About Flowplayer " + conf.version + "...", false, true), function(event:ContextMenuEvent):void {
          navigateToURL(new URLRequest("http://flowplayer.org"), "_self");
       });
       var date:Date = new Date();

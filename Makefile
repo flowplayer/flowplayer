@@ -77,6 +77,7 @@ playful: skin
 flash:
 	# compile flash
 	@ cp lib/as/* $(DIST)
+	@ $(SET_VERSION) lib/as/Flowplayer.as > $(DIST)/Flowplayer.as
 	@ cp lib/logo/logo.swc $(DIST)
 	@ cp skin/flash/icons.swc $(DIST)
 	@ cd $(DIST) && $(FLASH_COMPILE) -output flowplayer.swf -default-frame-rate 24 Flowplayer.as && rm *.as logo.*

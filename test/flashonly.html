@@ -6,8 +6,13 @@
     <script src="../lib/engine/embed.js"></script>
 
     <script>
+//        ../../player-commercial/dist/flowplayer.swf
         $(function() {
-            var objectTag = embed('../dist/flowplayer.swf', { url: 'http://stream.flowplayer.org/bauhaus/624x260.mp4', autoplay: true });
+            var objectTag = embed('../../player-commercial/dist/flowplayer.swf',
+                    { url: 'http://stream.flowplayer.org/bauhaus/624x260.mp4',
+                        autoplay: true
+                    }
+            );
 
             objectTag.prependTo($("#player"));
             objectTag.css({ width: '90%', height: '80%' })

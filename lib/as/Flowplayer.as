@@ -4,7 +4,7 @@
    Copyright (c) 2008-2012 Flowplayer Ltd
    http://flowplayer.org
 
-   Author: Tero Piirainen
+   Authors: Tero Piirainen, Anssi Piirainen
 
    -----
 
@@ -13,7 +13,7 @@
    http://flowplayer.org/GPL-license/#term-7
 
    Commercial versions are available
-      * part of the upgrade cycle
+      * be part of the upgrade cycle
       * support the player development
       * no Flowplayer trademark
 
@@ -79,7 +79,20 @@ public class Flowplayer extends Sprite {
          stage.align = StageAlign.TOP_LEFT;
          stage.scaleMode = StageScaleMode.NO_SCALE;
 
-         conf = this.loaderInfo.parameters;
+         conf = { fullscreen: true, embed: true }; // defaults
+         var params:Object = this.loaderInfo.parameters;
+         // convert booleans passed in as strings
+         for (var prop:String in params) {
+            if (params[prop] == 'false') {
+               conf[prop] = false;
+            } else if (params[prop] == 'true') {
+               conf[prop] = true;
+            } else {
+               conf[prop] = params[prop];
+            }
+         }
+         conf.version = '@VERSION';
+
          init();
 
          // IE needs mouse / keyboard events
@@ -193,6 +206,10 @@ public class Flowplayer extends Sprite {
       // TODO: implement this.
       internal function get embedCode():String {
          return "<code></code>";
+      }
+
+      internal function get config():Object {
+         return conf;
       }
 
       // setup video stream
