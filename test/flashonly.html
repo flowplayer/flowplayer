@@ -8,9 +8,10 @@
     <script>
 //        ../../player-commercial/dist/flowplayer.swf
         $(function() {
-            var objectTag = embed('../../player-commercial/dist/flowplayer.swf',
+            var objectTag = embed('../dist/flowplayer.swf',
                     { url: 'http://stream.flowplayer.org/bauhaus/624x260.mp4',
-                        autoplay: true
+                        autoplay: true,
+                        flashUi: true
                     }
             );
 

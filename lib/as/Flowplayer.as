@@ -198,8 +198,6 @@ public class Flowplayer extends Sprite {
             resume();
          } else if (ready) {
             pause();
-         } else {
-            play(conf.url);
          }
       }
 
@@ -222,7 +220,9 @@ public class Flowplayer extends Sprite {
          video.smoothing = true;
          addChild(video);
 
-         ui = new UI(this);
+         if (conf.flashUi) {
+            ui = new UI(this);
+         }
 
          conf.url = unescape(conf.url);
 

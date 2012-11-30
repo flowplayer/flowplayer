@@ -36,8 +36,11 @@ public class UI extends Sprite {
       player.addChild(this);
 
       controlbar = new Controlbar(player);
-      player.addChild(controlbar);
+      addChild(controlbar);
       play = new Play();
+      if (! conf.autoplay) {
+         addChild(play);
+      }
 
       contextMenu = createMenu();
       logo = new Logo();
@@ -49,17 +52,17 @@ public class UI extends Sprite {
       logo.hitArea = hitArea;
       logo.buttonMode = true;
       logo.addEventListener(MouseEvent.CLICK, function (e:Event):void { navigateToURL(new URLRequest("http://flowplayer.org"), "_self"); } );
-      player.addChild(hitArea);
-      player.addChild(logo);
+      addChild(hitArea);
+      addChild(logo);
 
       if (conf.fullscreen) {
          fullescreen = new FullscreenToggle(player);
-         player.addChild(fullescreen);
+         addChild(fullescreen);
       }
 
       if (conf.embed) {
          embed = new Embed();
-         player.addChild(embed);
+         addChild(embed);
          embedCode = new EmbedCode(player);
          embed.addEventListener(MouseEvent.CLICK, toggleEmbed);
       }
@@ -69,7 +72,7 @@ public class UI extends Sprite {
       player.stage.addEventListener(Event.RESIZE, arrange);
       player.stage.addEventListener(MouseEvent.CLICK, onClick);
 
-      var addPlay:Function = function (e:Event):void { player.addChild(play); };
+      var addPlay:Function = function (e:Event):void { addChild(play); };
       player.addEventListener(Flowplayer.PAUSE, addPlay);
       player.addEventListener(Flowplayer.FINISH, addPlay);
    }
@@ -160,17 +163,21 @@ public class UI extends Sprite {
 
       if (event.target == controlbar) return;
       if (play.parent) {
-         player.removeChild(play);
+         removeChild(play);
       }
-      player.togglePlay();
+      if (! conf.autoplay) {
+         player.play(conf.url);
+      } else {
+         player.togglePlay();
+      }
    }
 
    private function toggleEmbed(event:MouseEvent):void {
       if (embedCode && embedCode.parent) {
-         player.removeChild(embedCode);
+         removeChild(embedCode);
       } else {
          System.setClipboard(player.embedCode);
-         player.addChild(embedCode);
+         addChild(embedCode);
       }
    }
 

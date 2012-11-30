@@ -101,6 +101,7 @@ public class Controlbar extends Sprite {
    }
 
    private function animations(func:String):void {
+      if (! tweens) return;
       tweens.forEach(function (tween:Tween,  i:int,  arr:Array):void {
          tween[func]();
       });
