@@ -18,18 +18,20 @@ import flash.events.MouseEvent;
 import flash.utils.Timer;
 
 public class Controlbar extends Sprite {
-   private var player:Flowplayer;
+   private const TIMELINE_HEIGHT:int = 10;
 
    // child widgets
    private var elapsed:Time;
    private var duration:Time;
    private var timeline:Timeline;
-   private const TIMELINE_HEIGHT:int = 10;
+   private var mute:MuteToggle;
+
+   private var player:Flowplayer;
    private var mouseOutTimer:Timer;
+   private var inactiveTimer:Timer;
    private var origHeight:int;
    private var origWidth:int;
    private var tweens:Array;
-   private var inactiveTimer:Timer;
 
    public function Controlbar(player:Flowplayer) {
       this.player = player;
@@ -40,6 +42,9 @@ public class Controlbar extends Sprite {
 
       timeline = new Timeline(player);
       addChild(timeline);
+
+      mute = new MuteToggle(player);
+      addChild(mute);
 
       player.addEventListener(Flowplayer.STATUS, onStatus);
       player.addEventListener(Flowplayer.READY, onReady);
@@ -67,8 +72,10 @@ public class Controlbar extends Sprite {
       timeline.x = elapsed.width;
 
       elapsed.x = 1;
-      duration.x = width - duration.width;
-      timeline.arrange(width - elapsed.width - duration.width, height - TIMELINE_HEIGHT);
+
+      mute.x = width - mute.width - 2;
+      duration.x = mute.x - duration.width;
+      timeline.arrange(width - elapsed.width - duration.width - mute.width - 2, height - TIMELINE_HEIGHT);
    }
 
    private function onStatus(event:Event):void {
@@ -89,6 +96,7 @@ public class Controlbar extends Sprite {
       }
       removeChild(elapsed);
       removeChild(duration);
+      removeChild(mute);
       var animDuration:Number = 0.1;
       tweens = [
          new Tween(timeline, "height", None.easeOut, timeline.height, 3, animDuration, true),
@@ -114,6 +122,7 @@ public class Controlbar extends Sprite {
       }
       addChild(elapsed);
       addChild(duration);
+      addChild(mute);
       arrange(origWidth, origHeight);
    }
 

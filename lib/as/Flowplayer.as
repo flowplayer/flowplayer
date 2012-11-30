@@ -60,7 +60,7 @@ public class Flowplayer extends Sprite {
       private var finished:Boolean;
       private var paused:Boolean;
       private var ready:Boolean;
-      private var volumeLevel:Number;
+      private var currentVolume:Number;
 
       // clip hack properties
       private var seekTo:Number;
@@ -162,12 +162,12 @@ public class Flowplayer extends Sprite {
       }
 
       public function volume(level:Number):void {
-         if (ready && volumeLevel != level) {
+         if (ready && currentVolume != level) {
             if (level > 1) level = 1;
             else if (level < 0) level = 0;
 
             stream.soundTransform = new SoundTransform(level);
-            volumeLevel = level;
+            currentVolume = level;
             fire(VOLUME, level);
          }
       }
@@ -182,8 +182,7 @@ public class Flowplayer extends Sprite {
          }
       }
 
-
-      /************* Private API ***********/
+      /************* Flash internal API ***********/
 
       internal function get clip():Object {
          return currentClip;
@@ -209,6 +208,12 @@ public class Flowplayer extends Sprite {
       internal function get config():Object {
          return conf;
       }
+
+      internal function get volumeLevel():Number  {
+         return stream.soundTransform.volume;
+      }
+
+      /************* Private API ***********/
 
       // setup video stream
       private function init(): void {

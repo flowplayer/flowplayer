@@ -27,7 +27,7 @@ public class Time extends Sprite {
 
    public function set value(newVal:int):void {
       field.text = format(newVal);
-      field.x = width/2 - field.textWidth/2;
+      field.x = 3;
    }
 
    private function zeropad(val:int):String {
@@ -51,7 +51,7 @@ public class Time extends Sprite {
    }
 
    override public function get width():Number {
-      return field.textWidth + 15;
+      return field.textWidth + 10;
    }
 }
 }
