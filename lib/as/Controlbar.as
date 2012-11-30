@@ -85,7 +85,6 @@ public class Controlbar extends Sprite {
          return;
       }
       if (tweens && tweens[0].isPlaying) {
-         Console.log("tweens are playing");
          return;
       }
       removeChild(elapsed);
@@ -118,7 +117,6 @@ public class Controlbar extends Sprite {
    }
 
    private function onMouseMove(event:MouseEvent):void {
-      Console.log("onMouseMove");
       maximize();
       animations("stop");
       mouseOutTimer.stop();
@@ -127,7 +125,6 @@ public class Controlbar extends Sprite {
    }
 
    private function onMouseOut(event:Event):void {
-      Console.log("onMouseOut, starting timer");
       mouseOutTimer.start();
    }
 }

@@ -3,16 +3,22 @@ import flash.display.BlendMode;
 import flash.display.DisplayObject;
 import flash.display.DisplayObject;
 import flash.display.Graphics;
+import flash.display.Sprite;
 import flash.display.Stage;
+import flash.events.ContextMenuEvent;
 import flash.events.Event;
 import flash.events.MouseEvent;
+import flash.net.URLRequest;
+import flash.net.navigateToURL;
 import flash.system.System;
 import flash.text.AntiAliasType;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
 import flash.text.TextFormat;
+import flash.ui.ContextMenu;
+import flash.ui.ContextMenuItem;
 
-public class UI {
+public class UI extends Sprite {
    private const CONTROLS_HEIGHT:int = 20;
    private var player:Flowplayer;
 
@@ -25,9 +31,21 @@ public class UI {
 
    public function UI(player:Flowplayer) {
       this.player = player;
+      player.addChild(this);
+      contextMenu = createMenu();
 
       logo = new Logo();
+      // logo needs a solid hit area for mouse clicks
+      var hitArea:Sprite = new Sprite();
+      hitArea = new Sprite();
+      hitArea.visible = hitArea.mouseEnabled = false;
+      UI.drawRect(hitArea.graphics, 0, 1, logo.width, logo.height);
+      logo.hitArea = hitArea;
+      logo.buttonMode = true;
+      logo.addEventListener(MouseEvent.CLICK, function (e:Event):void { navigateToURL(new URLRequest("http://flowplayer.org"), "_self"); } );
+      player.addChild(hitArea);
       player.addChild(logo);
+
       controlbar = new Controlbar(player);
       player.addChild(controlbar);
 
@@ -50,16 +68,19 @@ public class UI {
       var addPlay:Function = function (e:Event):void { player.addChild(play); };
       player.addEventListener(Flowplayer.PAUSE, addPlay);
       player.addEventListener(Flowplayer.FINISH, addPlay);
-
-      Console.log("UI initialized");
    }
 
    private function arrange(e:Event = null):void {
+      // fill this UI layer with transparent color to receive mouse events properly
+      UI.drawRect(graphics, 0, 0, player.stage.stageWidth, player.stage.stageHeight);
+
       controlbar.arrange(player.stage.stageWidth, CONTROLS_HEIGHT);
       logo.width = 100;
       logo.x = 12;
       logo.scaleY = logo.scaleX;
       logo.y = player.stage.stageHeight - logo.height - CONTROLS_HEIGHT - 5;
+      logo.hitArea.x = logo.x;
+      logo.hitArea.y = logo.y;
       controlbar.y = player.stage.stageHeight - CONTROLS_HEIGHT;
       fullescreen.x = player.stage.stageWidth - fullescreen.width;
       fullescreen.y = 5;
@@ -71,7 +92,6 @@ public class UI {
    }
 
    public static function drawRect(graphics:Graphics, color:Number, alpha:Number, width:int, height:int):void {
-         Console.log("drawing rectangle of " + width + "x" + height);
          graphics.beginFill(color, alpha);
          graphics.drawRect(0, 0, width, height);
          graphics.endFill();
@@ -98,9 +118,35 @@ public class UI {
       return field;
    }
 
+   private function buildMenu(menu:ContextMenu):ContextMenu {
+
+      return menu;
+   }
+
+   private function createMenu():ContextMenu {
+      var menu:ContextMenu = new ContextMenu();
+      menu.hideBuiltInItems();
+      addItem(menu, new ContextMenuItem("About Flowplayer 5...", false, true), function(event:ContextMenuEvent):void {
+         navigateToURL(new URLRequest("http://flowplayer.org"), "_self");
+      });
+      var date:Date = new Date();
+      addItem(menu, new ContextMenuItem("Copyright " + date.fullYear + " Flowplayer Oy", true, false));
+      addItem(menu, new ContextMenuItem("GPL based license...", false, true), function(event:ContextMenuEvent):void {
+         navigateToURL(new URLRequest("http://flowplayer.org/license/"), "_self");
+      });
+      return menu;
+   }
+
+   private function addItem(menu:ContextMenu, item:ContextMenuItem, selectHandler:Function = null):void {
+      menu.customItems.push(item);
+      if (selectHandler != null) {
+         item.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, selectHandler);
+      }
+   }
+
    private function onClick(event:MouseEvent):void {
       // do not toggle if clicked on controlbar
-      if (! (event.target is Stage || event.target is Play)) return;
+      if (! (event.target is UI || event.target is Play)) return;
 
       if (event.target == controlbar) return;
       if (play.parent) {

@@ -84,7 +84,6 @@ public class Flowplayer extends Sprite {
 
          // IE needs mouse / keyboard events
          stage.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void {
-            Console.log("click");
             fire("click", null);
          });
          stage.addEventListener(KeyboardEvent.KEY_DOWN, function(e:KeyboardEvent):void {
@@ -182,7 +181,6 @@ public class Flowplayer extends Sprite {
       }
 
       internal function togglePlay():void {
-         Console.log("togglePlay() paused? " + paused + ", ready? " + ready);
          if (paused) {
             resume();
          } else if (ready) {

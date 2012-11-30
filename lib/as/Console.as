@@ -12,7 +12,7 @@ package {
 import flash.external.ExternalInterface;
 
 public class Console {
-   public static function log(message:String):void {
+   public static function _log(message:String):void {
       if(ExternalInterface.available) {
          ExternalInterface.call('console.log', message);
       }

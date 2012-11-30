@@ -43,7 +43,6 @@ public class Timeline extends Sprite {
    }
 
    public function arrange(width:int, height:int):void {
-      Console.log("Timeline.arrange: " + width + "x" + height);
       myWidth = width;
       graphics.clear();
       progress.graphics.clear();
