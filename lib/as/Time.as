@@ -9,12 +9,8 @@
  *    Additional Term, see http://flowplayer.org/license_gpl.html
  */
 package {
-import flash.display.BlendMode;
 import flash.display.Sprite;
-import flash.text.AntiAliasType;
 import flash.text.TextField;
-import flash.text.TextFieldAutoSize;
-import flash.text.TextFormat;
 
 public class Time extends Sprite {
    private var field:TextField;

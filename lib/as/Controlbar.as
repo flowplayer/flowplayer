@@ -73,9 +73,9 @@ public class Controlbar extends Sprite {
 
       elapsed.x = 1;
 
-      mute.x = width - mute.width - 2;
+      mute.x = width - mute.width;
       duration.x = mute.x - duration.width;
-      timeline.arrange(width - elapsed.width - duration.width - mute.width - 2, height - TIMELINE_HEIGHT);
+      timeline.arrange(width - elapsed.width - duration.width - mute.width, height - TIMELINE_HEIGHT);
    }
 
    private function onStatus(event:Event):void {

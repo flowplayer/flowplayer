@@ -1,7 +1,6 @@
 package {
 import flash.display.Sprite;
 import flash.display.StageDisplayState;
-import flash.events.Event;
 import flash.events.FullScreenEvent;
 import flash.events.MouseEvent;
 import flash.media.Video;

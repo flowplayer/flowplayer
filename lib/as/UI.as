@@ -1,7 +1,6 @@
 package {
 import flash.display.BlendMode;
 import flash.display.DisplayObject;
-import flash.display.DisplayObject;
 import flash.display.Graphics;
 import flash.display.Sprite;
 import flash.display.Stage;
