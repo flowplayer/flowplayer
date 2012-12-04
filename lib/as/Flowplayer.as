@@ -4,9 +4,6 @@
    Copyright (c) 2008-2012 Flowplayer Ltd
    http://flowplayer.org
 
-   Licensed under MIT and GPL 2+
-   http://www.opensource.org/licenses
-
    Author: Tero Piirainen
 
    -----
@@ -24,24 +21,20 @@
 */
 package {
 
-   import flash.display.DisplayObject;
-   import flash.display.Loader;
-   import flash.display.LoaderInfo;
-   import flash.display.Sprite;
-   import flash.display.StageScaleMode;
+import flash.display.Sprite;
+import flash.display.StageAlign;
+import flash.display.StageScaleMode;
+import flash.events.*;
+import flash.external.ExternalInterface;
+import flash.media.SoundTransform;
+import flash.media.Video;
+import flash.net.NetConnection;
+import flash.net.NetStream;
+import flash.system.Security;
+import flash.utils.Timer;
+import flash.utils.setTimeout;
 
-   import flash.events.*;
-   import flash.external.ExternalInterface;
-   import flash.media.SoundTransform;
-   import flash.media.Video;
-   import flash.net.NetConnection;
-   import flash.net.NetStream;
-   import flash.net.URLRequest;
-   import flash.system.Security;
-   import flash.utils.Timer;
-   import flash.utils.setTimeout;
-
-   public class Flowplayer extends Sprite {
+public class Flowplayer extends Sprite {
 
       // events
       private static const PLAY:String       = "play";
@@ -83,6 +76,8 @@ package {
       /* constructor */
       public function Flowplayer() {
          Security.allowDomain("*");
+         stage.scaleMode = StageScaleMode.NO_SCALE;
+         stage.align = StageAlign.TOP_LEFT;
 
          conf = this.loaderInfo.parameters;
          init();
@@ -101,25 +96,12 @@ package {
             fire("keydown", e.keyCode);
          });
 
+         stage.addEventListener(Event.RESIZE, arrange);
+
          // timeupdate event
          var timer:Timer = new Timer(250);
          timer.addEventListener("timer", timeupdate);
          timer.start();
-
-         // http://flowplayer.org/GPL-license/#term-7
-         logo = new Logo();
-
-         // size
-         logo.width = 50;
-
-         // position
-         logo.x = 12;
-         logo.y = stage.stageHeight - logo.height - 18;
-         addChild(logo);
-
-         // retain proportions
-         logo.scaleY = logo.scaleX;
-
       }
 
       /************ Public API ************/
@@ -203,14 +185,13 @@ package {
          video = new Video();
          video.smoothing = true;
          this.addChild(video);
+         logo = new Logo();
+         addChild(logo);
+         arrange();
 
          conf.url = unescape(conf.url);
 
          if (conf.debug) fire("debug.url", conf.url);
-
-         stage.scaleMode = StageScaleMode.EXACT_FIT;
-         video.width = stage.stageWidth;
-         video.height = stage.stageHeight;
 
          conn = new NetConnection();
 
@@ -363,6 +344,13 @@ package {
             ExternalInterface.call(conf.callback, type, data);
          }
       }
+
+      private function arrange(e:Event = null):void {
+         logo.x = 12;
+         logo.y = stage.stageHeight - 50;
+         video.width = stage.stageWidth;
+         video.height = stage.stageHeight;
+      };
 
    }
 
