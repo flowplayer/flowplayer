@@ -261,8 +261,6 @@ package {
                            // stop at first frame
                            if (!conf.autoplay && conf.rtmp) setTimeout(stream.pause, 100);
 
-                           setTimeout(function():void { if (logo.parent) removeChild(logo); }, 8000);
-
                            ready = true;
                         }
                      }
