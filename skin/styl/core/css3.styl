@@ -35,11 +35,11 @@ gradient(from = #f9, to = #d, args...)
    background-image -moz-linear-gradient(from, to) args
    background-image -webkit-gradient(linear, 0 0, 0 100%, from(from), to(to)) args
 
-radial-gradient(from = #f9, to = #d, size = 50%)
-   background-color from
-   background -moz-radial-gradient(center, from, to) no-repeat to
-   background -webkit-gradient(radial, size size, 0, size size, 500, from(from), to(to)) no-repeat to
-
+radial-gradient(from = rgba(#0, 0.5), to = rgba(#0, 0.8))
+   background-color to
+   background -webkit-radial-gradient(50% 50%, ellipse closest-corner, from 1%, to 100%)
+   background -moz-radial-gradient(50% 50%, ellipse closest-corner, from 1%, to 100%)
+   background -ms-radial-gradient(50% 50%, ellipse closest-corner, from 1%, to 100%)
 
 opacity(n)
    opacity: n

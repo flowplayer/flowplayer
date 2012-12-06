@@ -4,7 +4,7 @@
 <head>
 
    <!-- player skin -->
-   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css" />
+   <link rel="stylesheet" type="text/css" href="../dist/skin/functional.css" />
 
    <!-- site specific styling -->
    <style>
@@ -17,7 +17,7 @@
    </style>
 
    <!-- flowplayer depends on jQuery 1.7.1+ (for now) -->
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
    <!-- include flowplayer -->
    <script src="../dist/flowplayer.js"></script>
@@ -27,17 +27,13 @@
 <body>
 
    <!-- the player -->
-   <div class="-is-splash flowplayer -fixed-controls"
-      data-debug="true"
-      data-tooltip="false"
-      data-engine="flash"
+   <div class="flowplayer"
+      -data-engine="flash"
       data-swf="../dist/flowplayer.swf"
-      -data-fullscreen="false"
-      -data-muted="true"
-      -data-rtmp="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st"
+      data-rtmp="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st"
       data-ratio=".417">
 
-      <video poster="init/camera.jpg" preload="none">
+      <video preload="none">
          <source type="video/mp4"   src="http://stream.flowplayer.org/bauhaus/624x260.mp4"/>
          <source type="video/webm"  src="http://stream.flowplayer.org/bauhaus/624x260.webm"/>
          <source type="video/ogg"   src="http://stream.flowplayer.org/bauhaus/624x260.ogv"/>
