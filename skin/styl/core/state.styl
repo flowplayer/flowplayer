@@ -95,10 +95,11 @@
 
          .aside-time.no-mute&
             margin-right spacing
-      .fp-timeline.show-hour
-         margin 0 (right_margin + hour_time_width + spacing) 0 (spacing + hour_time_width + spacing)
-         .no-mute&
-            margin-right hour_time_width + spacing * 2
+      &.is-long
+         .fp-timeline
+            margin 0 (right_margin + hour_time_width + spacing) 0 (spacing + hour_time_width + spacing)
+            .no-mute&
+               margin-right hour_time_width + spacing * 2
 
 
 
