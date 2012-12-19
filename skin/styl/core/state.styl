@@ -95,6 +95,11 @@
 
          .aside-time.no-mute&
             margin-right spacing
+      &.is-long
+         .fp-timeline
+            margin 0 (right_margin + hour_time_width + spacing) 0 (spacing + hour_time_width + spacing)
+            .no-mute&
+               margin-right hour_time_width + spacing * 2
 
 
 
@@ -112,6 +117,9 @@
       .fp-time em
          bottom -(controls_height - spacing)
          opacity 1 !important
+
+         .is-fullscreen&
+            bottom spacing
 
    &.is-disabled
       .fp-progress
