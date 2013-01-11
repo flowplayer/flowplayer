@@ -45,7 +45,12 @@ $(function() {
          }
       });
 
+      $(".fp-close", root).click(function() {
+         root.removeClass("is-help");
+      });
+
    });
 
-
 });
+
+
