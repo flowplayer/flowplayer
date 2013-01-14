@@ -9,19 +9,16 @@ full_time_width   = 100px
 .{root}
 
    .fp-controls
-      gradient rgba(#5, .5) rgba(#1, .8)
-
-   &.fixed-controls .fp-controls
-      gradient #5 #1
+      background-color #1
 
    .fp-timeline
-      bg #6
+      bg #5
 
    .fp-buffer
       bg #e
 
    .fp-progress
-      gradient lighten(#4da5d8, 15) #4da5d8
+      background-color #4da5d8
 
    .fp-volumelevel
       bg #f
@@ -32,7 +29,11 @@ full_time_width   = 100px
    // border
    .fp-timeline, .fp-volumeslider
       border 1px inset
-      border-color #3 #6
+      border-color rgba(#0, 0.2) rgba(#1, 0.05)
+
+   // gradient
+   .fp-controls, .fp-progress
+      gradient rgba(#f, 0.4) rgba(#f, 0.01)
 
    // radius
    .fp-timeline, .fp-buffer, .fp-progress, .fp-volumeslider, .fp-volumelevel
@@ -41,7 +42,8 @@ full_time_width   = 100px
    // light
    &.color-light
       .fp-controls
-         gradient rgba(#e, .5) rgba(#c, .8)
+         background-color #e
+         gradient rgba(#0, 0.01) rgba(#0, 0.3)
 
       .fp-timeline, .fp-volumeslider
          border-color #e #c
@@ -51,9 +53,6 @@ full_time_width   = 100px
          font-size 10px
 
    &.color-alt
-      .fp-controls
-         gradient #8 #3
-
       .fp-progress
          gradient #9 #1
 
@@ -62,4 +61,4 @@ full_time_width   = 100px
 
    &.color-alt2
       .fp-progress
-         gradient #900 #500
+         background-color #900

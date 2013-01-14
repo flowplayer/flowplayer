@@ -6,8 +6,10 @@ $(function() {
    // mouseover
    $(".flowplayer").each(function() {
 
-      var root = $(this).addClass("is-mouseout").bind("mouseenter mouseleave", function(e) {
-         if (!root.is(".no-hover")) {
+      var root = $(this).bind("mouseenter mouseleave", function(e) {
+         if (root.is(".no-hover")) {
+            root.addClass("is-mouseover").removeClass("is-mouseout");
+         } else {
             var over = e.type == "mouseenter";
             root.toggleClass("is-mouseover", over).toggleClass("is-mouseout", !over);
          }

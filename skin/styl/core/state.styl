@@ -64,13 +64,18 @@
          height 0
          transition height fade_speed fade_delay
 
-      .fp-timeline
-         transition height fade_speed fade_delay, top fade_speed fade_delay, margin fade_speed fade_delay
+      .fp-timeline, .fp-progress, .fp-buffer
+         margin 0 !important
+         transition all fade_speed fade_delay
+         height 4px
          top 0
+         border-radius 0
+
 
       .fp-fullscreen, .fp-unload, .fp-elapsed, .fp-remaining, .fp-duration, .fp-embed, .fp-logo, .fp-volume
          opacity 0
          transition opacity fade_speed fade_delay
+
 
    // mouseover / fixed-controls
    &.is-mouseover, &.fixed-controls
@@ -79,30 +84,6 @@
 
       .fp-fullscreen, .fp-unload, .fp-elapsed, .fp-remaining, .fp-duration, .fp-embed, .fp-logo, .fp-volume
          opacity 1
-
-      .fp-timeline
-         top spacing
-         height timeline_height
-         margin 0 (right_margin + time_width + spacing) 0 (spacing + time_width + spacing)
-
-         .no-volume&
-            margin-right mute_width + spacing * 2
-
-         .no-mute&
-            margin-right time_width + spacing * 2
-
-         .aside-time&, .no-time&
-            margin 0 right_margin 0 spacing
-
-         .aside-time.no-mute&
-            margin-right spacing
-      &.is-long
-         .fp-timeline
-            margin 0 (right_margin + hour_time_width + spacing) 0 (spacing + hour_time_width + spacing)
-            .no-mute&
-               margin-right hour_time_width + spacing * 2
-
-
 
 
    &.fixed-controls

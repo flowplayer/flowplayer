@@ -27,10 +27,9 @@
 
       .no-time&
          display none
-   &.is-long
-      .fp-time
-         em
-            width hour_time_width
+
+      .is-long& em
+         width hour_time_width
 
    .fp-elapsed
       left spacing
@@ -38,6 +37,9 @@
    .fp-remaining, .fp-duration
       right right_margin
       color #b
+
+      .no-volume&
+         right mute_width + spacing * 2
 
       .no-mute&
          right spacing
@@ -58,13 +60,14 @@
    &.aside-time .fp-time
       absolute spacing spacing
       bottom auto !important
-      width 200px
+      width full_time_width
 
       strong, em
          position static
 
       .fp-elapsed
          margin-right spacing
+
 
 
 
