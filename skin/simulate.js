@@ -23,7 +23,7 @@ $(function() {
 
       // click
       $(".fp-ui", root).click(function(e) {
-         if ($(e.target).is(".fp-ui")) root.toggleClass("is-paused is-playing");
+         if ($(e.target).is(".fp-ui, .fp-play")) root.toggleClass("is-paused is-playing");
       });
 
       // fullscreen
