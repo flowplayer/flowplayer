@@ -7,7 +7,7 @@ $(function() {
    $(".flowplayer").each(function() {
 
       var root = $(this).bind("mouseenter mouseleave", function(e) {
-         if (root.is(".no-hover")) {
+         if (root.is(".no-toggle")) {
             root.addClass("is-mouseover").removeClass("is-mouseout");
          } else {
             var over = e.type == "mouseenter";
