@@ -15,6 +15,19 @@
       .no-mute&
          margin-right time_width + spacing * 2
 
+      .play-button&
+         margin-left play_width + time_width + spacing
+
+      .is-long&
+         margin 0 (right_margin + hour_time_width + spacing) 0 (spacing + hour_time_width + spacing)
+         .no-volume&
+            margin-right hour_time_width + mute_width + spacing * 3
+         .no-mute&
+            margin-right hour_time_width + spacing * 2
+         .play-button&
+            margin-left play_width + hour_time_width + spacing
+
+      // following apply to both normal and is-long
       .aside-time&, .no-time&
          margin 0 right_margin 0 spacing
 
@@ -24,17 +37,8 @@
       .aside-time.no-mute&, .no-time.no-mute&
          margin-right spacing
 
-      .play-button&
-         margin-left play_width + time_width + spacing
-
       .play-button.no-time&, .play-button.aside-time&
          margin-left play_width
-
-      .is-long&
-         margin 0 (right_margin + hour_time_width + spacing) 0 (spacing + hour_time_width + spacing)
-         .no-mute&
-            margin-right hour_time_width + spacing * 2
-
 
    .fp-buffer, .fp-progress
       absolute 0 auto
