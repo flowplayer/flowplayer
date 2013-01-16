@@ -32,7 +32,8 @@ raw:
 	@ cat LICENSE.js | $(SET_VERSION) | $(SET_DATE) > $(JS)
 	@ echo	"!function($$) { " >> $(JS)
 
-	@ cat	lib/flowplayer.js\
+	@ cat	deps/jquery.browser.js\
+			lib/flowplayer.js\
 			lib/ext/support.js\
 			lib/engine/*.js\
 			lib/ext/resolve.js\
