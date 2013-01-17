@@ -7,7 +7,7 @@
    <script src="../deps/jquery.min.js"></script>
    <script src="simulate.js"></script>
 
-   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css" />
+   <link rel="stylesheet" type="text/css" href="../dist/skin/functional.css" />
 
    <style>
    body {
@@ -45,7 +45,7 @@
    <div class="flowplayer -fixed-controls -is-loading is-ready -is-mouseover -is-splash -is-paused color-light -no-background -aside-time -fixed-controls">
 -->
 
-   <div class="flowplayer -is-loading is-ready is-paused is-mouseover -aside-time no-volume no-mute">
+   <div class="flowplayer is-ready is-paused is-mouseover no-toggle -aside-time -no-time -no-mute no-volume play-button">
 
       <!-- http://ansciath.tumblr.com/post/7347495869/css-aspect-ratio -->
       <div class="fp-ratio" style="padding-top:41.7%"></div>
@@ -63,6 +63,8 @@
          <a class="fp-unload"></a>
 
          <div class="fp-controls">
+
+            <a class="fp-play"></a>
 
             <div class="fp-timeline">
                <div class="fp-buffer" style="width: 70%;"></div>
@@ -98,10 +100,11 @@
             <textarea>&lt;script src="http://cdn.flowplayer.org/5.0.0/embed.js"&gt;lt;/script&gt;</textarea>
          </div>
 
-         <!-- logo on embedded players (commercial version) -->
+         <!-- logo on embedded players (commercial version)
          <a class="fp-logo">
             <img src="http://flowplayer.org/media/img/mylogo.png"/>
          </a>
+         -->
 
       </div>
 

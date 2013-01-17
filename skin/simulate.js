@@ -6,8 +6,10 @@ $(function() {
    // mouseover
    $(".flowplayer").each(function() {
 
-      var root = $(this).addClass("is-mouseout").bind("mouseenter mouseleave", function(e) {
-         if (!root.is(".no-hover")) {
+      var root = $(this).bind("mouseenter mouseleave", function(e) {
+         if (root.is(".no-toggle")) {
+            root.addClass("is-mouseover").removeClass("is-mouseout");
+         } else {
             var over = e.type == "mouseenter";
             root.toggleClass("is-mouseover", over).toggleClass("is-mouseout", !over);
          }
@@ -21,7 +23,7 @@ $(function() {
 
       // click
       $(".fp-ui", root).click(function(e) {
-         if ($(e.target).is(".fp-ui")) root.toggleClass("is-paused is-playing");
+         if ($(e.target).is(".fp-ui, .fp-play")) root.toggleClass("is-paused is-playing");
       });
 
       // fullscreen
@@ -45,7 +47,12 @@ $(function() {
          }
       });
 
+      $(".fp-close", root).click(function() {
+         root.removeClass("is-help");
+      });
+
    });
 
-
 });
+
+
