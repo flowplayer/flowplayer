@@ -4,7 +4,7 @@
 <head>
 
    <!-- player skin -->
-   <link rel="stylesheet" type="text/css" href="../dist/skin/functional.css" />
+   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css?f" />
 
    <!-- site specific styling -->
    <style>
@@ -13,14 +13,14 @@
       text-align: center;
       padding-top: 1%;
    }
-   .flowplayer { width: 70%; background-color: #039; }
+   .flowplayer { width: 70%; }
    </style>
 
    <!-- flowplayer depends on jQuery 1.7.1+ (for now) -->
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
    <!-- include flowplayer -->
-   <script src="../dist/flowplayer.js"></script>
+   <script src="../dist/flowplayer.js?i"></script>
 
 </head>
 
@@ -33,7 +33,7 @@
       data-rtmp="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st"
       data-ratio=".417">
 
-      <video autoplay -preload="none">
+      <video -autoplay -preload="none">
          <source type="video/mp4"   src="http://stream.flowplayer.org/bauhaus/624x260.mp4"/>
          <source type="video/webm"  src="http://stream.flowplayer.org/bauhaus/624x260.webm"/>
          <source type="video/ogg"   src="http://stream.flowplayer.org/bauhaus/624x260.ogv"/>
