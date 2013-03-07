@@ -248,6 +248,7 @@ public class Flowplayer extends Sprite {
                   };
 
                   // listen for playback events
+                  var finishedLoading:Boolean = false;
                   stream.addEventListener(NetStatusEvent.NET_STATUS, function (e:NetStatusEvent):void {
 
                      if (conf.debug) fire("debug.stream", e.info.code);
@@ -278,10 +279,15 @@ public class Flowplayer extends Sprite {
                            break;
 
                         case "NetStream.Play.Stop":
-                           finished = true;
-                           if (conf.loop) stream.seek(0);
-                           else { fire(Flowplayer.FINISH, null); stream.pause(); paused = true; }
-                           break;
+                          finishedLoading = true;
+                          break;
+
+                        case "NetStream.Buffer.Empty":
+                          if(!finishedLoading) break;
+                            finished = true;
+                            if (conf.loop) stream.seek(0);
+                            else { fire(Flowplayer.FINISH, null); stream.pause(); paused = true; }
+                          break;
 
                         case "NetStream.Buffer.Full":
                            fire(Flowplayer.BUFFERED, null);
