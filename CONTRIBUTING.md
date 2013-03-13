@@ -1,4 +1,3 @@
-
 ## Reporting issues
 
 Before you [report an issue](/flowplayer/flowplayer/issues/) please make sure to
@@ -15,6 +14,8 @@ We like
 - Bug fixes and features that originate from an [issue](/flowplayer/flowplayer/issues/)
 - Commits that are [tagged](https://github.com/blog/831-issues-2-0-the-next-generation) with issues
 - Smaller commits rather than large ones
+
+All pull requests should be done against the `dev` branch!
 
 Never do commits to the `master` branch!
 
