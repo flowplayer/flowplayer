@@ -23,6 +23,11 @@
    .fp-progress
       bg #00a7c8
 
+   &.is-touch .fp-progress
+      transition: width 0.25s ease-in-out
+   &.is-touch .fp-timeline.is-dragging .fp-progress
+      transition: width 0s ease-in-out
+
    &.is-touch.is-mouseover .fp-progress:after, &.is-touch.is-mouseover .fp-progress:before
       content ''
       display block
