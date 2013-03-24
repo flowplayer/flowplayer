@@ -24,9 +24,10 @@
       bg #00a7c8
 
    &.is-touch .fp-progress
-      transition: width 0.2s linear
+      transition width 0.2s linear
    &.is-touch .fp-timeline.is-dragging .fp-progress
-      transition: width 0s linear
+      transition width 0s linear
+      transition border 10s linear
 
    &.is-touch.is-mouseover .fp-progress:after, &.is-touch.is-mouseover .fp-progress:before
       content ''
@@ -47,8 +48,16 @@
       width 10px
       margin-top -5px
       margin-right -15px
-      border: 5px solid rgba(#fff, 0.65)
+      border 5px solid rgba(#fff, 0.65)
       box-shadow 1px 0px 4px rgba(#000, 0.5)
+
+   &.is-touch.is-mouseover .fp-timeline.is-dragging .fp-progress:after
+      border 10px solid #fff
+      margin-right -20px
+      margin-top -10px
+      border-radius 20px
+      transition inherit
+
 
    .fp-volumeslider
       bg #0
