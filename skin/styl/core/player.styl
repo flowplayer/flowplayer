@@ -2,7 +2,6 @@
 .{root}
    position relative
    width 100%
-   text-align left
 
    // mobile friendly background images
    background-size contain
@@ -138,6 +137,7 @@
 
       .fp-help-section
          margin 3%
+         direction ltr
 
       .fp-help-basics
          margin-top 6%
@@ -201,13 +201,25 @@
       background-image 'url(%s.png)' % unquote(img)
       background-size 37px 300px
 
+      .is-rtl&
+         background-image 'url(%s.png)' % unquote(img_rtl)
+
       .color-light&
          background-image 'url(%s.png)' % unquote(img_dark)
+
+         .is-rtl&
+            background-image 'url(%s.png)' % unquote(img_dark_rtl)
 
          @media (-webkit-min-device-pixel-ratio: 2)
             background-image 'url(%s@x2.png)' % unquote(img_dark)
 
+            .is-rtl&
+               background-image 'url(%s@x2.png)' % unquote(img_dark_rtl)
+
       @media (-webkit-min-device-pixel-ratio: 2)
          background-image 'url(%s@x2.png)' % unquote(img)
+
+         .is-rtl&
+            background-image 'url(%s@x2.png)' % unquote(img_rtl)
 
 
