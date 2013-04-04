@@ -306,9 +306,11 @@ public class Flowplayer extends Sprite {
 
                               // stop at first frame
                               } else {
-                                 stream.seek(0);
-                                 stream.pause();
-                                 volume(1);
+                                 setTimeout(function ():void {
+                                    stream.seek(0);
+                                    stream.pause();
+                                    volume(1);
+                                 }, 100);
                               }
                            }
                            break;
