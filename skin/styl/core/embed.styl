@@ -5,6 +5,11 @@
       block 25px 20px
       bg 3px -237px
 
+      .is-rtl&
+         bg 22px -237px
+         left auto
+         right spacing
+
    .fp-embed-code
       position absolute
       display none
@@ -25,6 +30,16 @@
          left -10px
          border 5px solid transparent
          border-right-color #3
+
+      .is-rtl&
+         left auto
+         right 40px
+
+         &:before
+            left auto
+            right -10px
+            border-right-color transparent
+            border-left-color #3
 
       textarea
          width 400px
@@ -53,8 +68,16 @@
       .fp-embed
          left full_time_width
 
+         .is-rtl&
+            left auto
+            right full_time_width
+
       .fp-embed-code
          left full_time_width + 30px
+
+         .is-rtl&
+            left auto
+            right full_time_width + 30px
 
       &.is-embedding .fp-time
          opacity 1
@@ -62,5 +85,13 @@
    &.is-long.aside-time .fp-embed
       left hour_time_width * 2
 
+      .is-rtl&
+         left auto
+         right hour_time_width * 2
+
    &.no-time .fp-embed
       left spacing !important
+
+      .is-rtl&
+         left auto
+         right spacing !important

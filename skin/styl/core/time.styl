@@ -36,6 +36,13 @@
       .play-button&
          left play_width
 
+      .is-rtl&
+         left auto
+         right spacing
+
+         .play-button&
+            right play_width
+
    .fp-remaining, .fp-duration
       right right_margin
       color #e
@@ -45,6 +52,16 @@
 
       .no-mute&
          right spacing
+
+      .is-rtl&
+         right auto
+         left right_margin
+
+         .no-volume&
+            left mute_width + spacing * 2
+
+         .no-mute&
+            left spacing
 
    .fp-remaining
       display none
@@ -69,6 +86,10 @@
 
       .fp-elapsed
          margin-right spacing
+
+         .is-rtl&
+            margin-right auto
+            margin-left spacing
 
    &.is-long.aside-time .fp-time
       width hour_time_width * 2
