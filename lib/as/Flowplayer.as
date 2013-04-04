@@ -115,6 +115,7 @@ public class Flowplayer extends Sprite {
             stream.play(url);
             conf.url = url;
             paused = ready = false;
+            video.visible = true;
          }
       }
 
@@ -141,6 +142,7 @@ public class Flowplayer extends Sprite {
 
             fire(RESUME, null);
             paused = false;
+            video.visible = true;
          }
       }
 
@@ -240,7 +242,10 @@ public class Flowplayer extends Sprite {
                            if (conf.autoplay) fire(Flowplayer.RESUME, null);
 
                            // stop at first frame
-                           if (!conf.autoplay && conf.rtmp) setTimeout(stream.pause, 100);
+                           if (!conf.autoplay && conf.rtmp) setTimeout(function ():void {
+                              stream.pause();
+                              video.visible = false;
+                           }, 100);
 
                            ready = true;
                         }
@@ -267,6 +272,7 @@ public class Flowplayer extends Sprite {
                               } else {
                                  stream.seek(0);
                                  stream.pause();
+                                 video.visible = false;
                               }
                            }
                            break;
@@ -290,6 +296,10 @@ public class Flowplayer extends Sprite {
                         case "NetStream.Play.StreamNotFound": case "NetStream.Play.Failed":
                            finished = true;
                            fire(Flowplayer.ERROR, { code:4 });
+                           break;
+
+                        case "NetStream.Seek.InvalidTime ":
+                           resume();
                            break;
 
                      }
