@@ -322,7 +322,7 @@ public class Flowplayer extends Sprite {
                         case "NetStream.Play.Stop":
                            finished = true;
                            if (conf.loop) stream.seek(0);
-                           else { fire(Flowplayer.FINISH, null); stream.pause(); paused = true; }
+                           else { fire(Flowplayer.FINISH, null); paused = true; }
                            break;
 
                         case "NetStream.Buffer.Full":
