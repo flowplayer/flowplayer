@@ -73,6 +73,8 @@ public class Flowplayer extends Sprite {
       private var video:Video;
       private var logo:Logo;
 
+      private var timer:Timer;
+
 
       /* constructor */
       public function Flowplayer() {
@@ -100,9 +102,8 @@ public class Flowplayer extends Sprite {
          stage.addEventListener(Event.RESIZE, arrange);
 
          // timeupdate event
-         var timer:Timer = new Timer(250);
+         timer = new Timer(250);
          timer.addEventListener("timer", timeupdate);
-         timer.start();
       }
 
       /************ Public API ************/
@@ -116,6 +117,7 @@ public class Flowplayer extends Sprite {
             stream.play(url);
             conf.url = url;
             paused = ready = false;
+            timer.start();
          }
       }
 
@@ -150,8 +152,8 @@ public class Flowplayer extends Sprite {
                conf.autoplay = true;
                ready = true;
             }
-
          }
+         timer.start();
       }
 
       public function seek(seconds:Number):void {
@@ -212,6 +214,10 @@ public class Flowplayer extends Sprite {
 
          paused = !conf.autoplay;
          preloadComplete = conf.preload != "none";
+
+         if (conf.autoplay && preloadComplete) {
+            timer.start();
+         }
 
          conn.addEventListener(NetStatusEvent.NET_STATUS, function (e:NetStatusEvent):void {
 
