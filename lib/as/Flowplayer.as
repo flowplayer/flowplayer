@@ -57,6 +57,7 @@ public class Flowplayer extends Sprite {
       private var conf:Object;
 
       // state
+      private var preloadComplete:Boolean;
       private var finished:Boolean;
       private var paused:Boolean;
       private var ready:Boolean;
@@ -71,6 +72,8 @@ public class Flowplayer extends Sprite {
       private var stream:NetStream;
       private var video:Video;
       private var logo:Logo;
+
+      private var timer:Timer;
 
 
       /* constructor */
@@ -99,9 +102,8 @@ public class Flowplayer extends Sprite {
          stage.addEventListener(Event.RESIZE, arrange);
 
          // timeupdate event
-         var timer:Timer = new Timer(250);
+         timer = new Timer(250);
          timer.addEventListener("timer", timeupdate);
-         timer.start();
       }
 
       /************ Public API ************/
@@ -115,6 +117,7 @@ public class Flowplayer extends Sprite {
             stream.play(url);
             conf.url = url;
             paused = ready = false;
+            timer.start();
          }
       }
 
@@ -127,9 +130,20 @@ public class Flowplayer extends Sprite {
       }
 
       public function resume():void {
-         if (ready && paused) {
+         if (!ready) return;
+         if (preloadComplete && !paused) return;
+
+         if (conf.debug) fire("debug-resume", { ready: ready,  preloadComplete: preloadComplete });
+
+         if (!preloadComplete) {
+            conf.autoplay = true;
+            paused = false;
+            stream.play(conf.url);
+         } else {
             if (finished) { seek(0); }
             stream.resume();
+            paused = false;
+            fire(RESUME, null);
 
             // connection closed
             if (!stream.time) {
@@ -138,10 +152,8 @@ public class Flowplayer extends Sprite {
                conf.autoplay = true;
                ready = true;
             }
-
-            fire(RESUME, null);
-            paused = false;
          }
+         timer.start();
       }
 
       public function seek(seconds:Number):void {
@@ -151,14 +163,16 @@ public class Flowplayer extends Sprite {
          }
       }
 
-      public function volume(level:Number):void {
-         if (ready && volumeLevel != level) {
+      public function volume(level:Number, storeValue:Boolean = true):void {
+         if (stream && volumeLevel != level) {
             if (level > 1) level = 1;
             else if (level < 0) level = 0;
 
             stream.soundTransform = new SoundTransform(level);
-            volumeLevel = level;
-            fire(VOLUME, level);
+            if (storeValue) {
+               volumeLevel = level;
+               fire(VOLUME, level);
+            }
          }
       }
 
@@ -199,6 +213,11 @@ public class Flowplayer extends Sprite {
          conn.client = { onBWDone:function ():void {} };
 
          paused = !conf.autoplay;
+         preloadComplete = conf.preload != "none";
+
+         if (conf.autoplay && preloadComplete) {
+            timer.start();
+         }
 
          conn.addEventListener(NetStatusEvent.NET_STATUS, function (e:NetStatusEvent):void {
 
@@ -207,12 +226,28 @@ public class Flowplayer extends Sprite {
             switch (e.info.code) {
 
                case "NetConnection.Connect.Success":
-
-                  // start streaming
                   stream = new NetStream(conn);
-
                   video.attachNetStream(stream);
-                  stream.play(conf.url);
+
+                  // set volume to zero so that we don't hear anything if stopping on first frame
+                  if (!conf.autoplay) {
+                     volume(0, false);
+                  }
+
+                  fire("debug-preloadComplete = " + preloadComplete, null);
+                  // start streaming
+                  if (preloadComplete) {
+                     stream.play(conf.url);
+                  } else {
+                     ready = true;
+                     fire(Flowplayer.READY, {
+                        seekable: !!conf.rtmp,
+                        bytes: stream.bytesTotal,
+                        src: conf.url,
+                        url: conf.url
+                     });
+                     fire(Flowplayer.PAUSE, null);
+                  }
 
                   // metadata
                   stream.client = {
@@ -240,9 +275,15 @@ public class Flowplayer extends Sprite {
                            if (conf.autoplay) fire(Flowplayer.RESUME, null);
 
                            // stop at first frame
-                           if (!conf.autoplay && conf.rtmp) setTimeout(stream.pause, 100);
+                           if (!conf.autoplay && conf.rtmp) setTimeout(function ():void { stream.pause(); volume(1); }, 100);
 
                            ready = true;
+                        }
+
+                        if (!preloadComplete) {
+                           fire(Flowplayer.READY, clip);
+                           fire(Flowplayer.RESUME, null);
+                           preloadComplete = true;
                         }
                      }
                   };
@@ -267,6 +308,7 @@ public class Flowplayer extends Sprite {
                               } else {
                                  stream.seek(0);
                                  stream.pause();
+                                 volume(1);
                               }
                            }
                            break;

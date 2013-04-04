@@ -13,6 +13,7 @@
       var b = $.browser = {},
          ua = navigator.userAgent.toLowerCase(),
          match = /(chrome)[ \/]([\w.]+)/.exec(ua) ||
+         /(safari)[ \/]([\w.]+)/.exec(ua) ||
          /(webkit)[ \/]([\w.]+)/.exec(ua) ||
          /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua) ||
          /(msie) ([\w.]+)/.exec(ua) ||

@@ -1,7 +1,9 @@
 
 spacing           = 12px
 img               = 'img/playful_white'
+img_rtl           = 'img/playful_white_rtl'
 img_dark          = 'img/playful_black'
+img_dark_rtl      = 'img/playful_black_rtl'
 mute_width        = 38px
 mute_height       = 20px
 volume_height     = 11px
@@ -34,6 +36,9 @@ timeline_height   = volume_height
       block mute_width mute_height
       bg 0 -79px
 
+      .is-rtl&
+         bg 0 -79px
+
       .is-muted&
          bg 0 -109px
          opacity .85 !important
@@ -41,8 +46,14 @@ timeline_height   = volume_height
    .fp-play
       bg 9px -20px
 
+      .is-rtl&
+         bg 18px -20px
+
       .is-paused&
          bg 9px 11px
+
+         .is-rtl&
+            bg 18px 11px
 
    // border
    .fp-timeline, .fp-volumeslider
