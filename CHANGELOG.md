@@ -31,3 +31,4 @@ Fixes
  * Make sure load-event can be canceled via event.preventDefault()
  * Source urls can now contain query strings (signed AWS URLS etc)
  * Cuepoints are now cleaned for playlist items
+ * Relative video source urls now work also in IE7
