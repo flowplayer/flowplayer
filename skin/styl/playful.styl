@@ -28,6 +28,9 @@ timeline_height   = volume_height
    .fp-progress
       background-color green
 
+   &.is-touch.is-mouseover .fp-progress:before
+      background-color green
+
    .fp-volumelevel
       bg #f
 
@@ -82,7 +85,13 @@ timeline_height   = volume_height
       .fp-progress, .fp-volumelevel
          background-color #1
 
+      &.is-touch.is-mouseover .fp-progress:before
+         background-color #1
+
    &.color-alt2
       .fp-progress, .fp-volumelevel
+         background-color #900
+
+      &.is-touch.is-mouseover .fp-progress:before
          background-color #900
 
