@@ -11,6 +11,7 @@ Enhancements
  * Support for Firefox on Android
  * Support [native fullscreen](http://www.w3.org/TR/fullscreen/)
  * Opt-in for Apple Airplay
+ * Touch-optimized control bar for touch enabled devices
 
 Fixes
 -----
@@ -32,3 +33,8 @@ Fixes
  * Source urls can now contain query strings (signed AWS URLS etc)
  * Cuepoints are now cleaned for playlist items
  * Relative video source urls now work also in IE7
+ * Re-introduce support for Android 2.x
+ * `is_last` and `index` properties are now correctly reported for playlist items
+ * `finish` event isn't triggered twice anymore
+ * don't set last volume to zero when muting (allow un-muting)
+ * Check for correct support property when showing error of unsupported video format
