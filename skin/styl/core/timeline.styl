@@ -88,8 +88,7 @@
       transition width 0.2s linear
 
    &.is-touch .fp-timeline.is-dragging .fp-progress
-      transition width 0s linear
-      transition border 10s linear
+      transition margin 0.1s linear, border 0.1s linear
 
    &.is-touch.is-mouseover .fp-progress:after, &.is-touch.is-mouseover .fp-progress:before
       content ''
@@ -99,6 +98,14 @@
       margin-top 0px
       margin-right -5px
       border-radius 10px
+   &.is-touch.is-rtl.is-mouseover .fp-progress:after, &.is-touch.is-rtl.is-mouseover .fp-progress:before
+      float left
+      margin-left -5px
+      margin-right 0px
+
+   &.is-touch.is-rtl.is-mouseover .fp-progress:after
+      margin-right 0px
+      margin-left -15px
 
    &.is-touch.is-mouseover .fp-progress:before
       width 10px
@@ -118,4 +125,9 @@
       margin-top -10px
       border-radius 20px
       transition inherit
+
+   &.is-touch.is-rtl.is-mouseover .fp-timeline.is-dragging .fp-progress:after
+      margin-right 0px
+      margin-left -20px
+      border 10px solid #fff
 
