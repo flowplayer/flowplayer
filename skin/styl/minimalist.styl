@@ -32,6 +32,9 @@
    .fp-play
       height 24px
 
+   &.is-touch.is-mouseover .fp-progress:before
+      bg #00a7c8
+
 
    // dark
    &.color-light
@@ -54,12 +57,17 @@
       .fp-progress
          bg #f
 
+      &.is-touch.is-mouseover .fp-progress:before
+         bg #f
+
       .fp-buffer
          bg #9
 
    // alt2
    &.color-alt2
       .fp-progress
+         bg #900
+      &.is-touch.is-mouseover .fp-progress:before
          bg #900
 
 

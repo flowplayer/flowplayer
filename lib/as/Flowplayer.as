@@ -57,6 +57,7 @@ public class Flowplayer extends Sprite {
       private var conf:Object;
 
       // state
+      private var preloadComplete:Boolean;
       private var finished:Boolean;
       private var paused:Boolean;
       private var ready:Boolean;
@@ -72,6 +73,8 @@ public class Flowplayer extends Sprite {
       private var video:Video;
       private var logo:Logo;
 
+      private var timer:Timer;
+
 
       /* constructor */
       public function Flowplayer() {
@@ -80,7 +83,6 @@ public class Flowplayer extends Sprite {
          stage.align = StageAlign.TOP_LEFT;
 
          conf = this.loaderInfo.parameters;
-         init();
 
          // The API
          for (var i:Number = 0; i < INTERFACE.length; i++) {
@@ -99,15 +101,17 @@ public class Flowplayer extends Sprite {
          stage.addEventListener(Event.RESIZE, arrange);
 
          // timeupdate event
-         var timer:Timer = new Timer(250);
+         timer = new Timer(250);
          timer.addEventListener("timer", timeupdate);
-         timer.start();
+
+         init();
       }
 
       /************ Public API ************/
 
       // switch url
       public function play(url:String):void {
+         debug("play");
          if (ready) {
             url = unescape(url);
             conf.autoplay = true; // always begin playback
@@ -115,10 +119,12 @@ public class Flowplayer extends Sprite {
             stream.play(url);
             conf.url = url;
             paused = ready = false;
+            startTimer();
          }
       }
 
       public function pause():void {
+          debug("pause()");
          if (ready && !paused) {
             stream.pause();
             fire(PAUSE, null);
@@ -127,22 +133,50 @@ public class Flowplayer extends Sprite {
       }
 
       public function resume():void {
-         if (ready && paused) {
-            if (finished) { seek(0); }
-            stream.resume();
+         debug("resume()", { ready: ready,  preloadComplete: preloadComplete, splash: conf.splash });
+         if (!ready) return;
+         if (preloadComplete && !paused) return;
 
-            // connection closed
-            if (!stream.time) {
-               conn.connect(conf.rtmp);
-               stream.play(conf.url);
-               conf.autoplay = true;
-               ready = true;
-            }
-
-            fire(RESUME, null);
-            paused = false;
+         if (!conf.autoplay) {
+             volume(1, false);
          }
+
+         try {
+             if (doPreload() && ! preloadComplete) {
+                 debug("preload == none, starting stream.play()");
+                 conf.autoplay = true;
+                 paused = false;
+                 stream.play(conf.url);
+             } else {
+                 if (finished) { seek(0); }
+                 paused = false;
+                 conf.autoplay = true;
+                 if (stream.time == 0 && !conf.rtmp) {
+                     debug("playing stream");
+                     stream.play(conf.url);
+                 } else {
+                     debug("resuming stream");
+                     stream.resume();
+                 }
+             }
+             debug("firing RESUME");
+             fire(RESUME, null);
+         } catch (e:Error) {
+             debug("resume(), error", e);
+             // net stream is invalid, because of a timeout
+             conn.connect(conf.rtmp);
+             conf.autoplay = true;
+             ready = true;
+             stream.play(conf.url);
+         }
+         startTimer();
       }
+
+    private function doPreload():Boolean {
+        var result:Boolean = !conf.splash && conf.preload == "none";
+        debug("preload enabled? " + result);
+        return result;
+    }
 
       public function seek(seconds:Number):void {
          if (ready) {
@@ -151,19 +185,24 @@ public class Flowplayer extends Sprite {
          }
       }
 
-      public function volume(level:Number):void {
-         if (ready && volumeLevel != level) {
+      public function volume(level:Number, fireEvent:Boolean = true):void {
+          debug("volume(), setting to " + level + " (was at " + volumeLevel + ")");
+          if (stream && volumeLevel != level) {
+              debug("setting volume to " + level);
             if (level > 1) level = 1;
             else if (level < 0) level = 0;
 
             stream.soundTransform = new SoundTransform(level);
             volumeLevel = level;
-            fire(VOLUME, level);
+            if (fireEvent) {
+               fire(VOLUME, level);
+            }
          }
       }
 
 
       public function unload():void {
+          debug("unload");
          if (ready) {
             pause();
             stream.close();
@@ -182,6 +221,7 @@ public class Flowplayer extends Sprite {
       }
 
       private function initVideo():void {
+         debug("initVideo()", conf);
          video = new Video();
          video.smoothing = true;
          this.addChild(video);
@@ -199,6 +239,11 @@ public class Flowplayer extends Sprite {
          conn.client = { onBWDone:function ():void {} };
 
          paused = !conf.autoplay;
+         preloadComplete = false;
+
+         if (conf.autoplay) {
+            startTimer();
+         }
 
          conn.addEventListener(NetStatusEvent.NET_STATUS, function (e:NetStatusEvent):void {
 
@@ -207,16 +252,55 @@ public class Flowplayer extends Sprite {
             switch (e.info.code) {
 
                case "NetConnection.Connect.Success":
-
-                  // start streaming
+                  debug("NetConnection.Connect.Success", { ready: ready, preloadCompete: preloadComplete, paused: paused, autoplay: conf.autoplay });
                   stream = new NetStream(conn);
-
                   video.attachNetStream(stream);
-                  stream.play(conf.url);
+
+                  // set volume to zero so that we don't hear anything if stopping on first frame
+                  if (!conf.autoplay) {
+                     volume(0, false);
+                  }
+
+                  fire("debug-preloadComplete = " + preloadComplete, null);
+                  // start streaming
+
+                   if (doPreload() && !preloadComplete) {
+                       ready = true;
+                       fire(Flowplayer.READY, {
+                           seekable: !!conf.rtmp,
+                           bytes: stream.bytesTotal,
+                           src: conf.url,
+                           url: conf.url
+                       });
+                       fire(Flowplayer.PAUSE, null);
+
+                       // we pause when metadata is received
+                   } else {
+                       debug("starting play");
+                       stream.play(conf.url);
+                       if (conf.autoplay) {
+                           startTimer();
+                       }
+                   }
 
                   // metadata
                   stream.client = {
-                     onMetaData:function (info:Object):void {
+
+                      onPlayStatus: function (info:Object):void {
+                          debug("onPlayStatus", info);
+                          if (info.code == "NetStream.Play.Complete") {
+                              finished = true;
+                              if (conf.loop) {
+                                  stream.seek(0);
+                              }  else {
+                                  paused = true;
+                                  fire(Flowplayer.FINISH, null);
+                              }
+                          }
+                      },
+
+                      onMetaData:function (info:Object):void {
+                          debug("onMetaData()", { ready: ready, preloadCompete: preloadComplete, paused: paused, autoplay: conf.autoplay });
 
                         // use a real object
                         var meta:Object = { seekpoints: [] };
@@ -235,14 +319,22 @@ public class Flowplayer extends Sprite {
                         };
 
                         if (!ready) {
+                            ready = true;
 
                            fire(Flowplayer.READY, clip);
                            if (conf.autoplay) fire(Flowplayer.RESUME, null);
 
                            // stop at first frame
-                           if (!conf.autoplay && conf.rtmp) setTimeout(stream.pause, 100);
+                            if (!conf.autoplay) {
+                                volume(1);
+                                stream.pause();
+                            }
+                        }
 
-                           ready = true;
+                        if (doPreload() && !preloadComplete) {
+                            preloadComplete = true;
+                            fire(Flowplayer.READY, clip);
+                            fire(Flowplayer.RESUME, null);
                         }
                      }
                   };
@@ -264,9 +356,6 @@ public class Flowplayer extends Sprite {
                                  paused = false;
 
                               // stop at first frame
-                              } else {
-                                 stream.seek(0);
-                                 stream.pause();
                               }
                            }
                            break;
@@ -275,12 +364,6 @@ public class Flowplayer extends Sprite {
                            finished = false;
                            timeupdate(true);
                            fire(Flowplayer.SEEK, seekTo);
-                           break;
-
-                        case "NetStream.Play.Stop":
-                           finished = true;
-                           if (conf.loop) stream.seek(0);
-                           else { fire(Flowplayer.FINISH, null); stream.pause(); paused = true; }
                            break;
 
                         case "NetStream.Buffer.Full":
@@ -318,6 +401,11 @@ public class Flowplayer extends Sprite {
          conn.connect(conf.rtmp);
       }
 
+    private function startTimer():void {
+        debug("starting progress timer");
+        timer.start();
+    }
+
 
 
       private function timeupdate(e:Object):void {
@@ -339,11 +427,18 @@ public class Flowplayer extends Sprite {
          }
       }
 
-      private function fire(type:String, data:Object):void {
+    private function debug(msg:String, data:Object = null):void {
+        if (!conf.debug) return;
+        fire("debug: " + msg, data);
+    }
+
+    private function fire(type:String, data:Object = null):void {
+        if (conf.callback) {
          if (conf.callback) {
             ExternalInterface.call(conf.callback, type, data);
          }
       }
+    }
 
       private function arrange(e:Event = null):void {
          logo.x = 12;
