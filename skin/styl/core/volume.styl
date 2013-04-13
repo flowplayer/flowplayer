@@ -6,14 +6,22 @@
       top (controls_height / 2) - (volume_height / 2)
       right spacing
 
+      .is-rtl&
+         right auto
+         left spacing
 
    .fp-mute
+      position relative
       width mute_width
       height mute_height
       float left
-      relative - (mute_height / 2) + (volume_height / 2)
+      top - (mute_height / 2) + (volume_height / 2)
       cursor pointer
       bg -2px -99px
+
+      .is-rtl&
+         float right
+         bg -25px -99px
 
       .no-mute&
          display none
@@ -23,6 +31,9 @@
       height volume_height
       cursor col-resize
       float left
+
+      .is-rtl&
+         float right
 
       .no-volume&
          display none

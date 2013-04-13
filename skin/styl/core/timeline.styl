@@ -18,6 +18,18 @@
       .play-button&
          margin-left play_width + time_width + spacing
 
+      .is-rtl&
+         margin 0 (spacing + time_width + spacing) 0 (right_margin + time_width + spacing)
+
+         .no-volume&
+            margin-left time_width + mute_width + spacing * 3
+
+         .no-mute&
+            margin-left time_width + spacing * 2
+
+         .play-button&
+            margin-right play_width + time_width + spacing
+
       .is-long&
          margin 0 (right_margin + hour_time_width + spacing) 0 (spacing + hour_time_width + spacing)
          .no-volume&
@@ -26,6 +38,15 @@
             margin-right hour_time_width + spacing * 2
          .play-button&
             margin-left play_width + hour_time_width + spacing
+
+         .is-rtl&
+            margin (spacing + hour_time_width + spacing) 0 (right_margin + hour_time_width + spacing) 0
+            .no-volume&
+               margin-left hour_time_width + mute_width + spacing * 3
+            .no-mute&
+               margin-left hour_time_width + spacing * 2
+            .play-button&
+               margin-left play_width + hour_time_width + spacing
 
       // following apply to both normal and is-long
       .aside-time&, .no-time&
@@ -40,6 +61,18 @@
       .play-button.no-time&, .play-button.aside-time&
          margin-left play_width
 
+      .is-rtl.aside-time&, .is-rtl.no-time&
+         margin 0 spacing 0 right_margin
+
+      .is-rtl.aside-time.no-volume&, .is-rtl.no-time.no-volume&
+         margin-left mute_width + spacing * 2
+
+      .is-rtl.aside-time.no-mute&, .is-rtl.no-time.no-mute&
+         margin-left spacing
+
+      .is-rtl.play-button.no-time&, .is-rtl.play-button.aside-time&
+         margin-right play_width
+
    .fp-buffer, .fp-progress
       absolute 0 auto
       height 100%
@@ -47,4 +80,51 @@
 
    .fp-buffer
       transition width .25s linear
+
+   &.is-touch .fp-timeline
+      overflow visible
+
+   &.is-touch .fp-progress
+      transition width 0.2s linear
+
+   &.is-touch .fp-timeline.is-dragging .fp-progress
+      transition right 0.1s linear, border 0.1s linear, top 0.1s linear, left 0.1s linear
+
+   &.is-touch.is-mouseover .fp-progress:after, &.is-touch.is-mouseover .fp-progress:before
+      content ''
+      display block
+      border-radius 10px
+      position absolute
+      right -5px
+   &.is-touch.is-rtl.is-mouseover .fp-progress:after, &.is-touch.is-rtl.is-mouseover .fp-progress:before
+      right auto
+      left -5px
+
+   &.is-touch.is-rtl.is-mouseover .fp-progress:after
+      left -10px
+      box-shadow -1px 0px 4px rgba(#000, 0.5)
+
+   &.is-touch.is-mouseover .fp-progress:before
+      width 10px
+      height 10px
+
+   &.is-touch.is-mouseover .fp-progress:after
+      height 10px
+      width 10px
+      top -5px
+      right -10px
+      border 5px solid rgba(#fff, 0.65)
+      box-shadow 1px 0px 4px rgba(#000, 0.5)
+
+   &.is-touch.is-mouseover .fp-timeline.is-dragging .fp-progress:after
+      border 10px solid #fff
+      border-radius 20px
+      transition inherit
+      top -10px
+      right -15px
+
+   &.is-touch.is-rtl.is-mouseover .fp-timeline.is-dragging .fp-progress:after
+      left -15px
+      right auto
+      border 10px solid #fff
 
