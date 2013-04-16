@@ -16,6 +16,9 @@
 
 ```html
 <head>
+   <!-- flowplayer depends on jQuery 1.7.1+ (for now) -->
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
    <!-- flowplayer.js -->
    <script src="flowplayer.min.js"></script>
 
