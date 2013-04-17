@@ -434,9 +434,11 @@ public class Flowplayer extends Sprite {
 
     private function fire(type:String, data:Object = null):void {
         if (conf.callback) {
-         if (conf.callback) {
-            ExternalInterface.call(conf.callback, type, data);
-         }
+            if (data) {
+                ExternalInterface.call(conf.callback, type, data);
+            } else {
+                ExternalInterface.call(conf.callback, type);
+            }
       }
     }
 
