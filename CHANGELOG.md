@@ -1,3 +1,21 @@
+Version 5.4.1
+=============
+
+Enhancements
+------------
+
+ * When embedding, make embed script, flowplayer library, flowplayer swf and skin configurable
+
+Fixes
+-----
+
+ * Fix mobile safari native_fullscreen configuration option
+ * Fix commercial embedding with flash engine
+ * Fix playlist advancing with Internet Explorer 9
+ * Fix clip choosing after playing through the playlist
+ * Fix for falling back to flash engine on Internet Explorer installation without media extensions
+ * Fix fullscreen with Chrome on Android
+
 Version 5.4
 ===========
 
