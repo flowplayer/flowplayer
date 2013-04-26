@@ -5,6 +5,7 @@ Enhancements
 ------------
 
  * When embedding, make embed script, flowplayer library, flowplayer swf and skin configurable
+ * Load all resources without protocol where possible
 
 Fixes
 -----
