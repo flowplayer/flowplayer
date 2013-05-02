@@ -82,6 +82,7 @@ public class Flowplayer extends Sprite {
          stage.scaleMode = StageScaleMode.NO_SCALE;
          stage.align = StageAlign.TOP_LEFT;
 
+         if (this.loaderInfo.url.indexOf("callback=") > 0) throw new Error("Security error");
          conf = this.loaderInfo.parameters;
 
          // The API
@@ -231,7 +232,7 @@ public class Flowplayer extends Sprite {
 
          conf.url = unescape(conf.url);
 
-         if (conf.debug) fire("debug.url", conf.url);
+         debug("debug.url", conf.url);
 
          conn = new NetConnection();
 
@@ -430,6 +431,7 @@ public class Flowplayer extends Sprite {
     private function debug(msg:String, data:Object = null):void {
         if (!conf.debug) return;
         fire("debug: " + msg, data);
+//        ExternalInterface.call("console.log", msg, data);
     }
 
     private function fire(type:String, data:Object = null):void {
