@@ -11,7 +11,7 @@ DATE=$(shell git log -1 --pretty=format:%ad --date=short)
 SET_DATE=sed "s/@DATE/${DATE}/"
 
 # paths
-DIST=dist
+DIST=./dist
 JS=$(DIST)/flowplayer.js
 SKIN=$(DIST)/skin
 

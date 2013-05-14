@@ -1,0 +1,29 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+   <html>
+      <head>
+         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+         <script src="../lib/engine/embed.js"></script>
+
+         <script>
+         //        ../../player-commercial/dist/flowplayer.swf
+         $(function() {
+            var objectTag = embed('../dist/flowplayer.swf',
+            { url: 'http://stream.flowplayer.org/bauhaus/624x260.mp4',
+            autoplay: true,
+            flashUi: true
+            }
+         );
+
+         objectTag.prependTo($("#player"));
+         objectTag.css({ width: '90%', height: '80%' })
+         });
+         </script>
+      </head>
+      <body>
+
+         <div id="player" style="background-color:orange;width:500px;height:400px" />
+
+      </body>
+   </html>

@@ -391,6 +391,14 @@ public class Flowplayer extends Sprite {
                   // fire("close", null);
                   break;
 
+               case "NetConnection.Connect.Rejected":
+                  if(e.info.ex.code == 302) {
+                     var redirectUrl:String = e.info.ex.redirect;
+                     debug("doing a redirect to " + redirectUrl);
+                     setTimeout(function (url:String):void {
+                        conn.connect(url);
+                     }, 100,redirectUrl);
+                  }
             }
 
          });
