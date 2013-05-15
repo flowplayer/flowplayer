@@ -80,7 +80,8 @@ flash:
 	# compile flash
 	@ $(SET_VERSION) lib/as/Flowplayer.as > $(DIST)/Flowplayer.as
 	@ cp lib/logo/logo.swc $(DIST)
-	@ cd $(DIST) && $(FLASH_COMPILE) -output flowplayer.swf Flowplayer.as && rm Flowplayer.as logo.*
+	@ cp lib/as/Connection.as $(DIST)
+	@ cd $(DIST) && $(FLASH_COMPILE) -output flowplayer.swf Flowplayer.as -source-path ./ && rm *.as logo.*
 
 
 zip: min concat skins flash
