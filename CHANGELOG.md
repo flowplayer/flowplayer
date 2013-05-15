@@ -1,3 +1,11 @@
+Version 5.4.2
+=============
+
+Enhancements
+------------
+
+ * Flash engine now supports [RTMP load balancing with Wowza](http://www.wowza.com/forums/showthread.php?4637-Dynamic-Load-Balancing-solution)
+
 Version 5.4.1
 =============
 
