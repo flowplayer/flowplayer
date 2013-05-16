@@ -15,9 +15,14 @@
 ## Minimal setup
 
 ```html
+<!DOCTYPE html>
+
 <head>
+   <!-- flowplayer depends on jQuery 1.7.1+ (for now) -->
+   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
    <!-- flowplayer.js -->
-   <script src="flowplayer.min.js"></script>
+   <script type="text/javascript" src="flowplayer.min.js"></script>
 
    <!-- player styling -->
    <link rel="stylesheet" type="text/css" href="flowplayer/minimalist.css">
@@ -34,8 +39,8 @@
    <!-- player 2 -->
    <div class="flowplayer">
       <video>
-         <source type="video/webm" src="my-video2.webm"></source>
-         <source type="video/mp4" src="my-video2.mp4"></source>
+         <source type="video/webm" src="my-video2.webm">
+         <source type="video/mp4" src="my-video2.mp4">
       </video>
    </div>
 
@@ -47,14 +52,14 @@
 
 ```js
 // listen to events on second player
-flowplayer(1).on("load", function() {
+flowplayer(1).bind("load", function (e, api, video) {
 
-}).on("pause", function() {
+}).bind("pause", function (e, api) {
 
 });
 
 // work with jQuery
-$(".flowplayer").bind("unload", function() {
+$(".flowplayer").bind("unload", function (e, api) {
 
 });
 ```
