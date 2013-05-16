@@ -229,7 +229,7 @@ public class Flowplayer extends Sprite {
       video.smoothing = true;
       this.addChild(video);
       logo = new Logo();
-      addChild(logo);
+      addLogo();
       arrange();
 
       conf.url = unescape(conf.url);
@@ -437,6 +437,12 @@ public class Flowplayer extends Sprite {
       video.width = stage.stageWidth;
       video.height = stage.stageHeight;
    };
+
+   private function addLogo():void {
+      var pos:int = conf.url ? conf.url.indexOf("://my.flowplayer.org") : -1;
+      if (pos == 4 || pos == 5) return;
+      addChild(logo);
+   }
 
 }
 
