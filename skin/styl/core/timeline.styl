@@ -13,6 +13,9 @@
          margin-right time_width + mute_width + spacing * 3
 
       .no-mute&
+         margin-right time_width + right_margin + spacing - mute_width
+
+      .no-mute.no-volume&
          margin-right time_width + spacing * 2
 
       .play-button&
@@ -25,7 +28,9 @@
             margin-left time_width + mute_width + spacing * 3
 
          .no-mute&
-            margin-left time_width + spacing * 2
+            margin-left time_width + right_margin + spacing - mute_width
+         .no-mute.no-volume&
+            margin-left spacing * 2 + time_width
 
          .play-button&
             margin-right play_width + time_width + spacing
