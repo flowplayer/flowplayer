@@ -297,8 +297,10 @@ public class Flowplayer extends Sprite {
                finished = true;
                if (conf.loop) {
                   stream.seek(0);
-               } else {
+               } else if (!paused) {
                   paused = true;
+                  stream.pause();
+                  fire(Flowplayer.PAUSE, null);
                   fire(Flowplayer.FINISH, null);
                }
             }
@@ -381,6 +383,15 @@ public class Flowplayer extends Sprite {
             case "NetStream.Play.Failed":
                finished = true;
                fire(Flowplayer.ERROR, { code: 4 });
+               break;
+
+            case "NetStream.Play.Stop":
+               if (!conf.rtmp && !paused) {
+                  paused = true;
+                  stream.pause();
+                  fire(Flowplayer.PAUSE, null);
+                  fire(Flowplayer.FINISH, null);
+               }
                break;
 
          }
