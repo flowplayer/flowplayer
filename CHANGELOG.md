@@ -5,6 +5,24 @@ Enhancements
 ------------
 
  * Flash engine now supports [RTMP load balancing with Wowza](http://www.wowza.com/forums/showthread.php?4637-Dynamic-Load-Balancing-solution)
+ * RTMPT support for Flash engine
+ * beforeseek event now supports defaultPreventing
+
+Fixes
+-----
+
+ * Fix #381 - XSS vulnerability in Flash fallback
+ * Fix #375 - Error when no index passed to play() method
+ * Fix #373 - native_fullscreen + playlist: duplicate controls on "done"
+ * Fix #369 - jquery 1.7.1 not sufficient for JS install
+ * Fix #383 - resolve() should not delete type
+ * Fix #367 - no-mute modifier class broken on its own
+ * Fix #387 - Volume/muting params after refreshing page
+ * Fix #353 - playlist: problem with similarly named files
+ * Fix #391 - finish + playlist: index, is_last video properties not available, is-last class always present
+ * Fix #392 - [Internet Explorer] Play button behavior
+ * Fix #356 - JavaScript playlist clip indices still depend on file naming scheme
+
 
 Version 5.4.1
 =============
