@@ -87,6 +87,7 @@ flash:
 zip: min concat skins flash
 	@ cp index.html $(DIST)
 	@ cp LICENSE.md $(DIST)
+	@ cp deps/embed.min.js $(DIST)
 	@ rm -f $(DIST)/flowplayer.zip
 	cd $(DIST) && zip -r flowplayer-$(VERSION).zip * -x \*DS_Store
 
