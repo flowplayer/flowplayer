@@ -54,7 +54,7 @@ raw:
 min: raw
 	# flowplayer.min.js
 	@ cat LICENSE.js | $(SET_VERSION) | $(SET_DATE) > $(DIST)/flowplayer.min.js
-	@ uglifyjs $(JS) >> $(DIST)/flowplayer.min.js
+	@ uglifyjs $(JS) --mangle -c >> $(DIST)/flowplayer.min.js
 	@ cat deps/branding.min.js >> $(DIST)/flowplayer.min.js
 
 # make all skins
