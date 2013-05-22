@@ -76,6 +76,6 @@ make flash
 
 ## License
 
-[GPL v3 with an ADDITIONAL TERM per GPL Section 7](/flowplayer/flowplayer/blob/master/LICENSE.md)
+[GPL v3 with an ADDITIONAL TERM per GPL Section 7](LICENSE.md)
 
 Copyright (c) 2012 Flowplayer Ltd
