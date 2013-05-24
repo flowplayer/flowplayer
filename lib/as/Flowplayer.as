@@ -337,6 +337,7 @@ public class Flowplayer extends Sprite {
                if (!conf.autoplay) {
                   volume(1);
                   stream.pause();
+                  stream.seek(0);
                }
             }
 
@@ -371,8 +372,10 @@ public class Flowplayer extends Sprite {
 
             case "NetStream.Seek.Notify":
                finished = false;
-               timeupdate(true);
-               fire(Flowplayer.SEEK, seekTo);
+               if (conf.autoplay) {
+                   timeupdate(true);
+                   fire(Flowplayer.SEEK, seekTo);
+               }
                break;
 
             case "NetStream.Buffer.Full":
