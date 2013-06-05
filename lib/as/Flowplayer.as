@@ -145,7 +145,7 @@ public class Flowplayer extends Sprite {
       }
 
       try {
-         if (doPreload() && !preloadComplete) {
+         if (preloadNone() && !preloadComplete) {
             debug("preload == none, starting stream.play()");
             conf.autoplay = true;
             paused = false;
@@ -176,9 +176,9 @@ public class Flowplayer extends Sprite {
       startTimer();
    }
 
-   private function doPreload():Boolean {
+   private function preloadNone():Boolean {
       var result:Boolean = !conf.splash && conf.preload == "none";
-      debug("preload enabled? " + result);
+      debug("preload == 'none'? " + result);
       return result;
    }
 
@@ -272,7 +272,7 @@ public class Flowplayer extends Sprite {
       fire("debug-preloadComplete = " + preloadComplete, null);
       // start streaming
 
-      if (doPreload() && !preloadComplete) {
+      if (preloadNone() && !preloadComplete) {
          ready = true;
          fire(Flowplayer.READY, {
             seekable: !!conf.rtmp,
@@ -347,7 +347,7 @@ public class Flowplayer extends Sprite {
                }
             }
 
-            if (doPreload() && !preloadComplete) {
+            if (preloadNone() && !preloadComplete) {
                preloadComplete = true;
                fire(Flowplayer.READY, clip);
                fire(Flowplayer.RESUME, null);
