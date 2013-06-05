@@ -135,7 +135,8 @@ public class Flowplayer extends Sprite {
    }
 
    public function resume():void {
-      debug("resume()", { ready: ready, preloadComplete: preloadComplete, splash: conf.splash });
+      debug("resume()");
+//      debug("resume()", { ready: ready, preloadComplete: preloadComplete, splash: conf.splash });
       if (!ready) return;
       if (preloadComplete && !paused) return;
 
@@ -247,11 +248,13 @@ public class Flowplayer extends Sprite {
    }
 
    private function connect():void {
+      debug("connect()");
       connection = new Connection(this, conf.rtmp);
       connection.connect(onConnect, onDisconnect);
    }
 
    private function onDisconnect():void {
+      debug("onDisconnect()")
       this.ready = false;
    }
 
@@ -335,9 +338,12 @@ public class Flowplayer extends Sprite {
 
                // stop at first frame
                if (!conf.autoplay) {
+                   debug("stopping on first frame");
                   volume(1);
                   stream.pause();
                   stream.seek(0);
+               } else {
+                  stream.resume();
                }
             }
 
