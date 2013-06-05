@@ -1,0 +1,59 @@
+<head>
+
+    <link rel="stylesheet" type="text/css" href="http://releases.flowplayer.org/5.4.1/commercial/skin/minimalist.css" />
+    <link rel="stylesheet" href="http://demos.flowplayer.org/media/css/playlist.css"/>
+
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+   <script src="../dist/flowplayer.js"></script>
+
+   <style>
+   body { font: 12px "Lucida Grande", sans-serif; }
+   .flowplayer { width: 480px; height: 270px; margin: auto; }
+   </style>
+
+    <script type="text/javascript">
+        flowplayer.conf = {
+            engine: 'flash',
+            swf: '../dist/flowplayer.swf',
+            debug: true
+        };
+
+        $(function () {
+            $("#player2").flowplayer({
+                rtmp: "rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st",
+                playlist: [
+                    [
+                        {webm: "http://stream.flowplayer.org/night3/640x360.webm"},
+                        {mp4: "http://stream.flowplayer.org/night3/640x360.mp4"},
+                        {ogg: "http://stream.flowplayer.org/night3/640x360.ogv"},
+                        {flash: "mp4:night3/640x360"}
+                    ],
+                    [
+                        {webm: "http://stream.flowplayer.org/night1/640x360.webm"},
+                        {mp4: "http://stream.flowplayer.org/night1/640x360.mp4"},
+                        {ogg: "http://stream.flowplayer.org/night1/640x360.ogv"},
+                        {flash: "mp4:night1/640x360"}
+                    ],
+                    [
+                        {webm: "http://stream.flowplayer.org/night5/640x360.webm"},
+                        {mp4: "http://stream.flowplayer.org/night5/640x360.mp4"},
+                        {ogg: "http://stream.flowplayer.org/night5/640x360.ogv"},
+                        {flash: "mp4:night5/640x360"}
+                    ],
+                    [
+                        {webm: "http://stream.flowplayer.org/night6/640x360.webm"},
+                        {mp4: "http://stream.flowplayer.org/night6/640x360.mp4"},
+                        {ogg: "http://stream.flowplayer.org/night6/640x360.ogv"},
+                        {flash: "mp4:night6/640x360"}
+                    ]]
+            });
+        });
+    </script>
+</head>
+
+<div id="player2">
+    <a class="fp-prev">prev</a>
+    <a class="fp-next">next</a>
+</div>
+
+</body>
