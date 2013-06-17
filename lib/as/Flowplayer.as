@@ -396,6 +396,7 @@ public class Flowplayer extends Sprite {
 
             case "NetStream.Play.Stop":
                if (!conf.rtmp && !paused) {
+                  finished = true;
                   paused = true;
                   stream.pause();
                   fire(Flowplayer.PAUSE, null);
