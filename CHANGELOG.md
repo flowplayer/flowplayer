@@ -1,3 +1,21 @@
+Version 5.4.3
+=============
+
+Enhancements
+------------
+
+ * Flowplayer now works inside iOS UIWebView component
+
+Fixes
+-----
+
+ * Fix #421 - js-playlist setup does not play through in rtmp (regression)
+ * Fix #419 - empty container js setup: needs 2 clicks to trigger replay
+ * Fix #426 - js-setup: method "map" not supported (flash? jQuery.map?)
+ * Fix #427 - js-playlist: fp-prev, fp-next no-ops
+ * Fix #424 - Subtitles and seeking
+ * Fix #369 - Fullscreen not working with jQuery 1.7.1
+
 Version 5.4.2
 =============
 
