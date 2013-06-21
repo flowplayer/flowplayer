@@ -135,7 +135,8 @@ public class Flowplayer extends Sprite {
    }
 
    public function resume():void {
-      debug("resume()", { ready: ready, preloadComplete: preloadComplete, splash: conf.splash });
+      debug("resume()");
+//      debug("resume()", { ready: ready, preloadComplete: preloadComplete, splash: conf.splash });
       if (!ready) return;
       if (preloadComplete && !paused) return;
 
@@ -144,7 +145,7 @@ public class Flowplayer extends Sprite {
       }
 
       try {
-         if (doPreload() && !preloadComplete) {
+         if (preloadNone() && !preloadComplete) {
             debug("preload == none, starting stream.play()");
             conf.autoplay = true;
             paused = false;
@@ -175,9 +176,9 @@ public class Flowplayer extends Sprite {
       startTimer();
    }
 
-   private function doPreload():Boolean {
+   private function preloadNone():Boolean {
       var result:Boolean = !conf.splash && conf.preload == "none";
-      debug("preload enabled? " + result);
+      debug("preload == 'none'? " + result);
       return result;
    }
 
@@ -247,11 +248,13 @@ public class Flowplayer extends Sprite {
    }
 
    private function connect():void {
+      debug("connect()");
       connection = new Connection(this, conf.rtmp);
       connection.connect(onConnect, onDisconnect);
    }
 
    private function onDisconnect():void {
+      debug("onDisconnect()")
       this.ready = false;
    }
 
@@ -269,7 +272,7 @@ public class Flowplayer extends Sprite {
       fire("debug-preloadComplete = " + preloadComplete, null);
       // start streaming
 
-      if (doPreload() && !preloadComplete) {
+      if (preloadNone() && !preloadComplete) {
          ready = true;
          fire(Flowplayer.READY, {
             seekable: !!conf.rtmp,
@@ -335,13 +338,16 @@ public class Flowplayer extends Sprite {
 
                // stop at first frame
                if (!conf.autoplay) {
+                   debug("stopping on first frame");
                   volume(1);
                   stream.pause();
                   stream.seek(0);
+               } else {
+                  stream.resume();
                }
             }
 
-            if (doPreload() && !preloadComplete) {
+            if (preloadNone() && !preloadComplete) {
                preloadComplete = true;
                fire(Flowplayer.READY, clip);
                fire(Flowplayer.RESUME, null);
@@ -390,6 +396,7 @@ public class Flowplayer extends Sprite {
 
             case "NetStream.Play.Stop":
                if (!conf.rtmp && !paused) {
+                  finished = true;
                   paused = true;
                   stream.pause();
                   fire(Flowplayer.PAUSE, null);
