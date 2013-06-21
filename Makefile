@@ -1,7 +1,6 @@
 
 # flash compile
-FLASH="/opt/flowplayer/flex3sdk/bin/mxmlc"
-FLASH_COMPILE=$(FLASH) -static-link-runtime-shared-libraries=true -library-path=.
+FLASH_COMPILE=$(mxmlc) -static-link-runtime-shared-libraries=true -library-path=.
 
 # version and date
 VERSION=$(shell cat VERSION)
