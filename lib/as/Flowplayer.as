@@ -302,7 +302,6 @@ public class Flowplayer extends Sprite {
                   stream.seek(0);
                } else if (!paused) {
                   paused = true;
-                  stream.pause();
                   fire(Flowplayer.PAUSE, null);
                   fire(Flowplayer.FINISH, null);
                }
@@ -342,8 +341,6 @@ public class Flowplayer extends Sprite {
                   volume(1);
                   stream.pause();
                   stream.seek(0);
-               } else {
-                  stream.resume();
                }
             }
 
