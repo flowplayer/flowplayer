@@ -5,7 +5,7 @@
 
 [website](http://flowplayer.org) | [demos](http://flowplayer.org/demos/) | [docs](http://flowplayer.org/docs/)
 
-## For Impatient
+## For the impatient
 
 1. [Download Flowplayer](http://flowplayer.org/latest)
 2. Unzip
