@@ -74,6 +74,10 @@ cd ./flowplayer # this repository
 make flash
 ```
 
+## Reporting bugs
+
+Please read the [contributing guidelines](CONTRIBUTING.md) before reporting issues or submitting patches.
+
 ## License
 
 [GPL v3 with an ADDITIONAL TERM per GPL Section 7](LICENSE.md)
