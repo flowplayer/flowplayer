@@ -1,3 +1,30 @@
+Version 5.4.4
+=============
+
+Enhancements
+------------
+
+ * Add UI support for live streaming
+
+Fixes
+-----
+
+ * Fix #486 - playlist: iOS always starts with first item
+ * Fix #481 - On Chrome for Android, "ready" event is sent before having metadata, and is sent twice.
+ * Fix #126 - flash: webkit always plays first clip in playlist on fullscreen toggle
+ * Fix #455 - flowplayer makefile does not use variable mxmlc path
+ * Fix #480 - fullscreen broken in some Chrome versions on Android
+ * Fix #476 - embed: only works with absolute urls
+ * Fix #389 - flash: fullscreen toggle restarts clip even in rtmp in some browsers
+ * Fix #466 - Do not let key 219 trigger help
+ * Fix #490 - Flash fallback doesn't work on (certain) Windows 8 / Internet Explorer 10 combinations
+ * Fix #483 - Webkit rounding issue was causing buffered event to not fire
+ * Fix #498 - Flash Buffered Event Firing Multiple Times
+ * Fix #497 - ie9 plays both rtmp and mp4 if flash engine is preferred
+ * Fix #469 - esc binding to stop() unfortunate
+ * Fix subtitles with jquery.migrate.js
+ * Fix javascript-playlist setup without .fp-next and .fp-prev elements
+
 Version 5.4.3
 =============
 
