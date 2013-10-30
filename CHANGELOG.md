@@ -18,6 +18,9 @@ Fixes
  * Fix #389 - flash: fullscreen toggle restarts clip even in rtmp in some browsers
  * Fix #466 - Do not let key 219 trigger help
  * Fix #490 - Flash fallback doesn't work on (certain) Windows 8 / Internet Explorer 10 combinations
+ * Fix #521 - flash fullscreen: screen.availHeight not reliable in WebKit
+ * Fix #548 - Libs from embed.min.js included twice
+ * Fix #549 - Multiple embeds on same page fail with jquery 1.10+
  * Fix #483 - Webkit rounding issue was causing buffered event to not fire
  * Fix #498 - Flash Buffered Event Firing Multiple Times
  * Fix #497 - ie9 plays both rtmp and mp4 if flash engine is preferred
