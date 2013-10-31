@@ -101,7 +101,6 @@ public class Flowplayer extends Sprite {
       this.addEventListener(Event.ADDED_TO_STAGE, function (e:Event):void {
          // The API
          for (var i:Number = 0; i < INTERFACE.length; i++) {
-            debug("creating callback " + INTERFACE[i] + " id == " + ExternalInterface.objectID);
             ExternalInterface.addCallback("__" + INTERFACE[i], player[INTERFACE[i]]);
          }
       });
