@@ -86,11 +86,6 @@ public class Flowplayer extends Sprite {
       if (this.loaderInfo.url.indexOf("callback=") > 0) throw new Error("Security error");
       conf = this.loaderInfo.parameters;
 
-      // The API
-      for (var i:Number = 0; i < INTERFACE.length; i++) {
-         ExternalInterface.addCallback("__" + INTERFACE[i], this[INTERFACE[i]]);
-      }
-
       // IE needs mouse / keyboard events
       stage.addEventListener(MouseEvent.CLICK, function (e:MouseEvent):void {
          fire("click", null);
@@ -101,6 +96,15 @@ public class Flowplayer extends Sprite {
       });
 
       stage.addEventListener(Event.RESIZE, arrange);
+
+      var player:Flowplayer = this;
+      this.addEventListener(Event.ADDED_TO_STAGE, function (e:Event):void {
+         // The API
+         for (var i:Number = 0; i < INTERFACE.length; i++) {
+            debug("creating callback " + INTERFACE[i] + " id == " + ExternalInterface.objectID);
+            ExternalInterface.addCallback("__" + INTERFACE[i], player[INTERFACE[i]]);
+         }
+      });
 
       // timeupdate event
       timer = new Timer(250);
