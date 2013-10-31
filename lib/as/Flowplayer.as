@@ -117,7 +117,7 @@ public class Flowplayer extends Sprite {
       if (ready) {
          url = unescape(url);
          conf.autoplay = true; // always begin playback
-//         if (conf.rtmp) conn.connect(conf.rtmp);
+         stream.close();
          stream.play(url);
          conf.url = url;
          paused = ready = false;
