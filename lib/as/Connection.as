@@ -64,6 +64,8 @@ public class Connection {
                debug("connection succeeded with " + connection.uri + ", already connected? " + connected);
 
                if (connected) {
+                  debug("already connected, closing this 2nd connection");
+                  connection.close();
                   return;
                }
 
