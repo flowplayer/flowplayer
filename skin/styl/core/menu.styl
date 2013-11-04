@@ -1,0 +1,32 @@
+.{root}
+  .fp-context-menu
+    position absolute
+    display none
+    z-index 1001
+    background-color #fff
+    padding 10px
+    border 1px solid #aaa
+    box-shadow 0px 0px 4px #888
+    width 170px
+    li
+      text-align: center;
+      padding 10px
+      color #444
+      margin 0px -10px 0px -10px
+      a
+        color #00a7c8
+        font-size 110%
+
+      &:hover:not(.copyright)
+        background-color #eee
+
+      &.copyright
+        margin 0
+        padding-left 110px
+        background-image url('img/flowplayer.png')
+        background-repeat no-repeat
+        background-size 100px 20px
+        background-position 5px 5px
+        border-bottom 1px solid #bbb
+        @media (-webkit-min-device-pixel-ratio: 2)
+          background-image url('img/flowplayer@2x.png')
