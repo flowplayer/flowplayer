@@ -1,0 +1,33 @@
+<!doctype html>
+
+<html>
+
+<head>
+   <meta charset="utf-8">
+
+   <title>Flowplayer</title>
+   
+   <!-- optimize mobile versions -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!-- Flowplayer depends on jquery -->
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+         <!-- Flowplayer library -->
+   <script src="../../dist/flowplayer.js"></script>
+   <!-- The "minimalist" skin - choose from: "minimalist.css", "functional.css", "playful.css" -->
+   <link rel="stylesheet" href="../../dist/skin/minimalist.css">
+
+   <script>
+   flowplayer.conf.swf = '../../dist/flowplayer.swf';
+   </script>
+
+</head>
+
+<body>
+
+  <div id="content">
+    {flowplayer}
+  </div> <!-- end content -->
+
+</body>
+</html>
