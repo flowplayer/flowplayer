@@ -5,10 +5,15 @@ Enhancements
 ------------
 
  * Add UI support for live streaming
+ * Add context menu for the player
+ * Allow configuring NetStream.bufferTime for flash engine (#337)
 
 Fixes
 -----
 
+ * Fix #555 - no subtitles in IE with splash setup
+ * Fix #539 - Black horizontal lines in iOS 7
+ * Fix #557 - rtmp js playlist: 2nd video does not start at beginning
  * Fix #486 - playlist: iOS always starts with first item
  * Fix #481 - On Chrome for Android, "ready" event is sent before having metadata, and is sent twice.
  * Fix #126 - flash: webkit always plays first clip in playlist on fullscreen toggle
