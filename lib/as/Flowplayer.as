@@ -83,7 +83,8 @@ public class Flowplayer extends Sprite {
       stage.scaleMode = StageScaleMode.NO_SCALE;
       stage.align = StageAlign.TOP_LEFT;
 
-      if (this.loaderInfo.url.indexOf("callback=") > 0) throw new Error("Security error");
+      var swfUrl:String = decodeURIComponent(this.loaderInfo.url);
+      if (swfUrl.indexOf("callback=") > 0) throw new Error("Security error");
       conf = this.loaderInfo.parameters;
 
       // IE needs mouse / keyboard events
