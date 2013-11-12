@@ -8,6 +8,7 @@ capabilities['os_version'] = ENV['OS_VERSION']
 capabilities['browser'] = ENV['BROWSER']
 capabilities['browser_version'] = ENV['BROWSER_VERSION']
 capabilities['browserstack.tunnel'] = true
+capabilities['browserstack.debug'] = !!ENV['debug']
 capabilities['browserName'] = ENV['BROWSER_NAME']
 capabilities['platform'] = ENV['PLATFORM']
 capabilities['device'] = ENV['DEVICE']
@@ -20,6 +21,6 @@ Before do |scenario|
   @browser.manage.timeouts.implicit_wait = 25
 end
 
-After do |scenario|
-  @browser.quit
+at_exit do
+  browser.quit
 end

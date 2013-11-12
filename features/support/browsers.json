@@ -59,5 +59,15 @@
     "browserName": "iPad",
     "platform": "MAC",
     "device": "iPad 3rd (6.0)"
+  },
+  {
+    "browserName": "android",
+    "platform": "ANDROID",
+    "device": "LG Nexus 4"
+  },
+  {
+    "browserName": "android",
+    "platform": "ANDROID",
+    "device": "Samsung Galaxy S III"
   }
 ]
