@@ -8,6 +8,9 @@ capabilities['os_version'] = ENV['OS_VERSION']
 capabilities['browser'] = ENV['BROWSER']
 capabilities['browser_version'] = ENV['BROWSER_VERSION']
 capabilities['browserstack.tunnel'] = true
+capabilities['browserName'] = ENV['BROWSER_NAME']
+capabilities['platform'] = ENV['PLATFORM']
+capabilities['device'] = ENV['DEVICE']
 
 browser = Selenium::WebDriver.for(:remote, :url => url,
                                   :desired_capabilities => capabilities)

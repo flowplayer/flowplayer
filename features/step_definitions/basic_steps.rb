@@ -23,5 +23,9 @@ Then(/^flowplayer should be visible on page$/) do
 end
 
 Then(/^the player should enter ready state$/) do
-  @browser.find_element(:css => ".is-ready")
+  if not @browser.execute_script("return window.flowplayer.support.firstframe;")
+    @browser.find_element(:css => ".is-splash.is-paused")
+  else
+    @browser.find_element(:css => ".is-ready")
+  end
 end

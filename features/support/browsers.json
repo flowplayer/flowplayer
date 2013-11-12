@@ -56,10 +56,8 @@
     "os_version": "Mountain Lion"
   },
   {
-    "browser": "Mobile Safari",
-    "browser_version": null,
-    "device": "iPad 3rd (6.0)",
-    "os": null,
-    "os_version": null
+    "browserName": "iPad",
+    "platform": "MAC",
+    "device": "iPad 3rd (6.0)"
   }
 ]
