@@ -27,10 +27,22 @@ Then(/^flowplayer should be visible on page$/) do
 end
 
 def wait_for_ready
+  sleep(1);
   if not @browser.execute_script("return window.flowplayer.support.firstframe;")
     @browser.find_element(:css => ".is-splash.is-paused")
   else
-    @browser.find_element(:css => ".is-ready")
+    sleep(3)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until { !is_element_present(:css => ".is-loading") }
+  end
+end
+
+def is_element_present(args)
+  begin
+    @browser.find_element(args)
+    return true
+  rescue Selenium::WebDriver::Error::NoSuchElementError
+    return false
   end
 end
 
@@ -44,6 +56,7 @@ When(/^i open the page and wait for player to become ready$/) do
 end
 
 When(/^I start video by clicking the player$/) do
+  sleep(3)
   @browser.find_element(:css => ".fp-ui").click
 end
 

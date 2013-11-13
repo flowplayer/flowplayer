@@ -80,6 +80,10 @@ Please read the [contributing guidelines](CONTRIBUTING.md) before reporting issu
 
 ## Running tests
 
+Our automated test suite is sponsored by [BrowserStack](http://browserstack.com). Thanks you!
+
+### Running locally
+
 Tests are run on [BrowserStack](http://browserstack.com)
 
  * Install dependencies: `bundle install`

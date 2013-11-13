@@ -18,7 +18,7 @@ browser = Selenium::WebDriver.for(:remote, :url => url,
 
 Before do |scenario|
   @browser = browser
-  @browser.manage.timeouts.implicit_wait = 25
+  @browser.manage.timeouts.implicit_wait = 5
 end
 
 at_exit do

@@ -36,13 +36,6 @@
   },
   {
     "browser": "ie",
-    "browser_version": "9.0",
-    "device": null,
-    "os": "Windows",
-    "os_version": "7"
-  },
-  {
-    "browser": "ie",
     "browser_version": "7.0",
     "device": null,
     "os": "Windows",
@@ -59,15 +52,5 @@
     "browserName": "iPad",
     "platform": "MAC",
     "device": "iPad 3rd (6.0)"
-  },
-  {
-    "browserName": "android",
-    "platform": "ANDROID",
-    "device": "LG Nexus 4"
-  },
-  {
-    "browserName": "android",
-    "platform": "ANDROID",
-    "device": "Samsung Galaxy S III"
   }
 ]

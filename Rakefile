@@ -11,26 +11,22 @@ require 'json'
 
 task :cucumber do
   current_browser = ""
-  begin
-    Parallel.map(@browsers, :in_threads => @parallel_limit) do |browser|
-        current_browser = browser
-        if @browser and browser['browser'] != @browser and browser['browserName'] != @browser
-          next
-        end
-        puts "Running with: #{browser.inspect}"
-        ENV['BROWSER'] = browser['browser']
-        ENV['BROWSER_VERSION'] = browser['browser_version']
-        ENV['BROWSER_NAME'] = browser['browserName']
-        ENV['DEVICE'] = browser['device']
-        ENV['OS'] = browser['os']
-        ENV['OS_VERSION'] = browser['os_version']
+  Parallel.map(@browsers, :in_threads => @parallel_limit) do |browser|
+      current_browser = browser
+      if @browser and browser['browser'] != @browser and browser['browserName'] != @browser
+        next
+      end
+      puts "Running with: #{browser.inspect}"
+      ENV['BROWSER'] = browser['browser']
+      ENV['BROWSER_VERSION'] = browser['browser_version']
+      ENV['BROWSER_NAME'] = browser['browserName']
+      ENV['DEVICE'] = browser['device']
+      ENV['OS'] = browser['os']
+      ENV['OS_VERSION'] = browser['os_version']
 
-        Rake::Task[:run_features].execute()
-    end
-  rescue SystemExit, Interrupt
-    puts "User stopped script!"
-    puts "Failed to run tests for #{current_browser.inspect}"
+      Rake::Task[:run_features].execute()
   end
+  
 end
 
 Cucumber::Rake::Task.new(:run_features)

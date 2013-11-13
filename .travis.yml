@@ -1,0 +1,16 @@
+language: ruby
+before_script:
+- npm install -g stylus
+- npm install -g https://s3-us-west-2.amazonaws.com/nnarhinen.flowplayer/flex-sdk-4.8.0.tgz
+- git clone https://github.com/nexussays/playerglobal.git
+- make
+- make skins
+- PLAYERGLOBAL_HOME="$(pwd)/playerglobal" make flash
+- ./features/support/setup-tunnel.bash &
+- sleep 3
+env:
+  global:
+  - nodes: 5
+  - base_url: http://nnarhinen.browserstack.com
+  - secure: ssfzv7MkAP1oLJ4hSXaDbVasobYVerslGxf4o4uKc5reeUVVp/KE9tNp0lrimsk9cn5fTFbBgfFoQ3nmn6WiUzBh2y3vks7TjOujzLQAPQHK0dDs6MTgFF23krKP1Ao0/ccHXO9ODiAEI+bwRlFXepwf2n+ZNW8EgEW7SbTra50=
+  - secure: VxdZ92Eso2Zr03e9YH6oEnOZyX3Y/U8/m8G+ko8wWf1BaX73pMCe/mTnkw4knSKggrxwYbdHYIKajFyUMWKyW3ccD9Upp5oytcIIhWsMnC1WzrTHVq/nKOEFW5nyYYlJWAM+dCzrddGY5xIlTKKqcQADLlVqrtQmajWowMofGGc=
