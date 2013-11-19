@@ -55,9 +55,13 @@ When(/^i open the page and wait for player to become ready$/) do
   wait_for_ready()
 end
 
+def click_player
+  @browser.find_element(:css => ".fp-ui").click
+end
+
 When(/^I start video by clicking the player$/) do
   sleep(3)
-  @browser.find_element(:css => ".fp-ui").click
+  click_player
 end
 
 When(/^I wait for a few seconds$/) do
@@ -67,3 +71,12 @@ end
 Then(/^the video should have been played at least over one second$/) do
   @browser.find_element(:css => ".pass-1s")
 end
+
+When(/^I pause video by clicking the player$/) do
+  click_player
+end
+
+Then(/^the player should be in paused state$/) do
+  @browser.find_element(:css => ".is-paused")
+end
+

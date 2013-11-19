@@ -1,7 +1,6 @@
-Feature: Basic setup
+Feature: Playback
 
-
-  Scenario: Normal playback
+  Background:
     Given a page with
     """html
     <div class="flowplayer" data-ratio="0.4167">
@@ -21,7 +20,18 @@ Feature: Basic setup
     });
     </script>
     """
+
+
+  Scenario: Normal playback
     When i open the page and wait for player to become ready
     And I start video by clicking the player
     And I wait for a few seconds
     Then the video should have been played at least over one second
+
+  Scenario: Pause
+    When i open the page and wait for player to become ready
+    And I start video by clicking the player
+    And I wait for a few seconds
+    And I pause video by clicking the player
+    Then the player should be in paused state
+    And the video should have been played at least over one second
