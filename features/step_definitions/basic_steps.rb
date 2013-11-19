@@ -5,6 +5,7 @@ Given(/^a page with$/) do |string|
   @filename = (0...8).map { (65 +rand(26)).chr }.join + ".html"
   @of = File.open(File.dirname(__FILE__) + "/../support/" + @filename, "wb")
   layout.sub!('{flowplayer}', string)
+  layout.sub!('{splash}', @splash.to_s)
   @of.write(layout)
   @of.close
 end
