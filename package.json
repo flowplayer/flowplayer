@@ -1,0 +1,26 @@
+{
+  "name": "flowplayer",
+  "version": "6.0.0",
+  "description": "The HTML5 video player for the web",
+  "main": "dist/flowplayer.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/flowplayer/flowplayer.git"
+  },
+  "author": "",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/flowplayer/flowplayer/issues"
+  },
+  "devDependencies": {
+    "stylus": "~0.40.3",
+    "uglify-js": "~2.4.3",
+    "browserify": "~2.35.4"
+  }
+}
