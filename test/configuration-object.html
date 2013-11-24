@@ -1,0 +1,65 @@
+
+<!doctype html>
+<html>
+<head>
+
+   <!-- player skin -->
+   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css?f" />
+
+   <!-- site specific styling -->
+   <style>
+   body {
+      font: 12px "Myriad Pro", "Lucida Grande", sans-serif;
+      text-align: center;
+      padding-top: 1%;
+   }
+   .flowplayer { width: 70%; }
+   </style>
+
+   <!-- flowplayer depends on jQuery 1.7.1+ (for now) -->
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+   <!-- include flowplayer -->
+   <script src="../dist/flowplayer.js?i"></script>
+
+</head>
+
+<body>
+
+   <!-- the player -->
+   <div class="flowplayer play-button"
+      -data-engine="flash"
+      data-swf="../dist/flowplayer.swf"
+      data-rtmp="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st"
+      data-ratio=".417">
+
+      <script type="application/json">
+      {
+        "splash": true,
+        "clip": {
+          "preload": "none",
+          "sources": [
+            {
+              "type": "video/mp4",
+              "src": "http://stream.flowplayer.org/bauhaus/624x260.mp4"
+            },
+            {
+              "type": "video/webm",
+              "src": "http://stream.flowplayer.org/bauhaus/624x260.webm"
+            }
+          ]
+        }
+      }
+      </script>
+      <noscript>
+        <video>
+           <source type="video/mp4"   src="http://stream.flowplayer.org/bauhaus/624x260.mp4"/>
+           <source type="video/webm"  src="http://stream.flowplayer.org/bauhaus/624x260.webm"/>
+           <source type="video/ogg"   src="http://stream.flowplayer.org/bauhaus/624x260.ogv"/>
+        </video>
+      </noscript>
+    </div>
+
+
+</body>
+
