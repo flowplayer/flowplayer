@@ -1,3 +1,17 @@
+Version 5.4.5
+=============
+
+Fixes
+-----
+
+ * Fix #575 - iOS 7: extremely long loading times with several players on page
+ * Fix #569 - Live Flash WebKit: hangs on fullscreen toggle
+ * Fix #559 - safari + flash: type error
+ * Fix #573 - iOS fullscreen exit shows splash
+ * Fix #591 - iframe + Chrome nitpicks about local storage
+ * Fix #594 - API Safari 6 Flash detection
+ * Fix #595 - Problems with Internet Explorer 9 on Windows 7 N-edition
+
 Version 5.4.4
 =============
 
