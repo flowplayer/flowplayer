@@ -11,6 +11,7 @@ Fixes
  * Fix #591 - iframe + Chrome nitpicks about local storage
  * Fix #594 - API Safari 6 Flash detection
  * Fix #595 - Problems with Internet Explorer 9 on Windows 7 N-edition
+ * Fix #599 - preload="none" Type Error
 
 Version 5.4.4
 =============
