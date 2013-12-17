@@ -1,3 +1,12 @@
+Version 5.4.6
+=============
+
+Fixes
+-----
+
+ * Fix #604 - Android + iPhone - no video
+ * Fix #606 - Amazon Silk - no visible video
+
 Version 5.4.5
 =============
 
