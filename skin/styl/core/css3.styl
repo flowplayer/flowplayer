@@ -30,15 +30,18 @@ animation()
 animation-delay()
   vendor('animation-delay', arguments)
 
-gradient(from = #f9, to = #d, args...)
-   background-image -moz-linear-gradient(from, to) args
-   background-image -webkit-gradient(linear, 0 0, 0 100%, from(from), to(to)) args
+gradient(start = #f9, end = #d, args...)
+  background-image -webkit-gradient(linear, left top, left bottom, from(start), to(end)) args
+  background-image -webkit-linear-gradient(top, start, end) args
+  background-image -moz-linear-gradient(top, start, end) args
+  background-image -o-linear-gradient(top, start, end) args
+  background-image linear-gradient(to bottom, start, end) args
 
-radial-gradient(from = rgba(#0, 0.5), to = rgba(#0, 0.8))
-   background-color to
-   background -webkit-radial-gradient(50% 50%, ellipse closest-corner, from 1%, to 100%)
-   background -moz-radial-gradient(50% 50%, ellipse closest-corner, from 1%, to 100%)
-   background -ms-radial-gradient(50% 50%, ellipse closest-corner, from 1%, to 100%)
+radial-gradient(start = rgba(#0, 0.5), end = rgba(#0, 0.8))
+  background-color end
+  background -webkit-radial-gradient(50% 50%, ellipse closest-corner, start 1%, end 100%)
+  background -moz-radial-gradient(50% 50%, ellipse closest-corner, start 1%, end 100%)
+  background -ms-radial-gradient(50% 50%, ellipse closest-corner, start 1%, end 100%)
 
 opacity(n)
    opacity: n
