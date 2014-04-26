@@ -1,7 +1,7 @@
 /*!
  Flowplayer : The Video Player for Web
 
- Copyright (c) 2012 - 2013 Flowplayer Ltd
+ Copyright (c) 2012 - 2014 Flowplayer Ltd
  http://flowplayer.org
 
  Authors: Tero Piirainen, Anssi Piirainen
@@ -17,7 +17,7 @@
  * support the player development
  * no Flowplayer trademark
 
- http://flowplayer.org/download/
+ http://flowplayer.org/pricing/
  */
 package {
 
@@ -69,7 +69,7 @@ public class Flowplayer extends Sprite {
    private var clipUrl:String;
 
    // video stream
-   private var connection:Connection;
+   private var connector:Connector;
    private var stream:NetStream;
    private var video:Video;
    private var logo:DisplayObject;
@@ -215,7 +215,7 @@ public class Flowplayer extends Sprite {
       if (ready) {
          pause();
          stream.close();
-         connection.close();
+         connector.close();
          fire(UNLOAD, null);
       }
    }
@@ -254,8 +254,8 @@ public class Flowplayer extends Sprite {
 
    private function connect():void {
       debug("connect()");
-      connection = new Connection(this, conf.rtmp);
-      connection.connect(onConnect, onDisconnect);
+      connector = conf.rtmpSubscribe ? new SubscribingConnector(this, conf.rtmp) : new ParallelConnector(this, conf.rtmp);
+      connector.connect(onConnect, onDisconnect);
    }
 
    private function onDisconnect():void {
