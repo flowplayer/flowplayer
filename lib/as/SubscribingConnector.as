@@ -24,12 +24,14 @@ package {
 
     public class SubscribingConnector implements Connector {
         private var connector:ParallelConnector;
-        private var url:String;
+        private var rtmpUrl:String;
         private var player:Flowplayer;
+        private var stream:String;
 
-        public function SubscribingConnector(player:Flowplayer, url:String) {
+        public function SubscribingConnector(player:Flowplayer, url:String, stream:String) {
             this.player = player;
-            this.url = url;
+            this.rtmpUrl = url;
+            this.stream = stream;
             this.connector = new ParallelConnector(player, url);
         }
 
@@ -47,8 +49,8 @@ package {
                     }
                 };
 
-                player.debug("Calling FCSubscribe");
-                conn.call("FCSubscribe", null, url);
+                player.debug("Calling FCSubscribe for stream '" + stream + "'");
+                conn.call("FCSubscribe", null, stream);
 
             }, disconnectedCallback);
         }

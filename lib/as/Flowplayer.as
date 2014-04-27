@@ -123,6 +123,7 @@ public class Flowplayer extends Sprite {
          url = unescape(url);
          conf.autoplay = true; // always begin playback
          stream.close();
+         debug("starting play of stream '" + conf.url + "'");
          stream.play(url);
          conf.url = url;
          paused = ready = false;
@@ -151,7 +152,7 @@ public class Flowplayer extends Sprite {
 
       try {
          if (preloadNone() && !preloadComplete) {
-            debug("preload == none, starting stream.play()");
+            debug("starting play of stream '" + conf.url + "'");
             conf.autoplay = true;
             paused = false;
             stream.play(conf.url);
@@ -162,7 +163,7 @@ public class Flowplayer extends Sprite {
             paused = false;
             conf.autoplay = true;
             if (stream.time == 0 && !conf.rtmp) {
-               debug("playing stream");
+               debug("starting play of stream '" + conf.url + "'");
                stream.play(conf.url);
             } else {
                debug("resuming stream");
@@ -253,8 +254,9 @@ public class Flowplayer extends Sprite {
    }
 
    private function connect():void {
-      debug("connect()");
-      connector = conf.rtmpSubscribe ? new SubscribingConnector(this, conf.rtmp) : new ParallelConnector(this, conf.rtmp);
+      debug("connect() subscribe? " + conf.subscribe + ", stream '" + conf.url + "'");
+//      connector = new SubscribingConnector(this, conf.rtmp, conf.url);
+      connector = conf.subscribe ? new SubscribingConnector(this, conf.rtmp, conf.url) : new ParallelConnector(this, conf.rtmp);
       connector.connect(onConnect, onDisconnect);
    }
 
@@ -291,7 +293,7 @@ public class Flowplayer extends Sprite {
 
          // we pause when metadata is received
       } else {
-         debug("starting play");
+         debug("starting play of stream '" + conf.url + "'");
          stream.play(conf.url);
          if (conf.autoplay) {
             startTimer();
