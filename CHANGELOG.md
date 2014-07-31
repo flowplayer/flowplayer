@@ -8,6 +8,7 @@ Enhancements
  * Added shadow to play icon to avoid dissapearing controls on light background
  * Added `data-subscribe` option for flash engine (FCSubsribe). Needed by some CDNs.
  * `preload` can now be given by config when initializing into empty container
+ * Fullscreen support for Internet Explorer 11
 
 Fixes
 -----
@@ -20,6 +21,7 @@ Fixes
  * Fix #633 - HLS embedded with wrong mime-type "video/mpegurl"
  * Fix #581 - flash: autoplay setup broken
  * Fix #622 - preload="none" causes error in Internet Explorer 11
+ * Fix #509 - live: always preload="none"
 
 Changes
 -------
