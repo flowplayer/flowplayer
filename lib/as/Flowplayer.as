@@ -269,8 +269,9 @@ public class Flowplayer extends Sprite {
       debug("Connection success", { ready: ready, preloadCompete: preloadComplete, paused: paused, autoplay: conf.autoplay });
 
       stream = new NetStream(conn);
-      debug("setting buffer time to " + (conf.bufferTime || 0.1));
-      stream.bufferTime = conf.bufferTime || 0.1;
+      var bufferTime:Number = conf.hasOwnProperty("bufferTime") ? conf.bufferTime : 0.1;
+      debug("bufferTime == " + bufferTime);
+      stream.bufferTime = bufferTime;
       video.attachNetStream(stream);
 
       // set volume to zero so that we don't hear anything if stopping on first frame
