@@ -1,7 +1,7 @@
 /*!
  Flowplayer : The Video Player for Web
 
- Copyright (c) 2012 - 2013 Flowplayer Ltd
+ Copyright (c) 2012 - 2014 Flowplayer Ltd
  http://flowplayer.org
 
  Authors: Tero Piirainen, Anssi Piirainen
@@ -17,7 +17,7 @@
  * support the player development
  * no Flowplayer trademark
 
- http://flowplayer.org/download/
+ http://flowplayer.org/pricing/
  */
 package {
 
@@ -69,7 +69,7 @@ public class Flowplayer extends Sprite {
    private var clipUrl:String;
 
    // video stream
-   private var connection:Connection;
+   private var connector:Connector;
    private var stream:NetStream;
    private var video:Video;
    private var logo:DisplayObject;
@@ -123,6 +123,7 @@ public class Flowplayer extends Sprite {
          url = unescape(url);
          conf.autoplay = true; // always begin playback
          stream.close();
+         debug("starting play of stream '" + conf.url + "'");
          stream.play(url);
          conf.url = url;
          paused = ready = false;
@@ -151,7 +152,7 @@ public class Flowplayer extends Sprite {
 
       try {
          if (preloadNone() && !preloadComplete) {
-            debug("preload == none, starting stream.play()");
+            debug("starting play of stream '" + conf.url + "'");
             conf.autoplay = true;
             paused = false;
             stream.play(conf.url);
@@ -162,7 +163,7 @@ public class Flowplayer extends Sprite {
             paused = false;
             conf.autoplay = true;
             if (stream.time == 0 && !conf.rtmp) {
-               debug("playing stream");
+               debug("starting play of stream '" + conf.url + "'");
                stream.play(conf.url);
             } else {
                debug("resuming stream");
@@ -215,7 +216,7 @@ public class Flowplayer extends Sprite {
       if (ready) {
          pause();
          stream.close();
-         connection.close();
+         connector.close();
          fire(UNLOAD, null);
       }
    }
@@ -253,9 +254,10 @@ public class Flowplayer extends Sprite {
    }
 
    private function connect():void {
-      debug("connect()");
-      connection = new Connection(this, conf.rtmp);
-      connection.connect(onConnect, onDisconnect);
+      debug("connect() subscribe? " + conf.subscribe + ", stream '" + conf.url + "'");
+//      connector = new SubscribingConnector(this, conf.rtmp, conf.url);
+      connector = conf.subscribe ? new SubscribingConnector(this, conf.rtmp, conf.url) : new ParallelConnector(this, conf.rtmp);
+      connector.connect(onConnect, onDisconnect);
    }
 
    private function onDisconnect():void {
@@ -267,8 +269,9 @@ public class Flowplayer extends Sprite {
       debug("Connection success", { ready: ready, preloadCompete: preloadComplete, paused: paused, autoplay: conf.autoplay });
 
       stream = new NetStream(conn);
-      debug("setting buffer time to " + (conf.bufferTime || 0.1));
-      stream.bufferTime = conf.bufferTime || 0.1;
+      var bufferTime:Number = conf.hasOwnProperty("bufferTime") ? conf.bufferTime : 0.1;
+      debug("bufferTime == " + bufferTime);
+      stream.bufferTime = bufferTime;
       video.attachNetStream(stream);
 
       // set volume to zero so that we don't hear anything if stopping on first frame
@@ -291,7 +294,7 @@ public class Flowplayer extends Sprite {
 
          // we pause when metadata is received
       } else {
-         debug("starting play");
+         debug("starting play of stream '" + conf.url + "'");
          stream.play(conf.url);
          if (conf.autoplay) {
             startTimer();

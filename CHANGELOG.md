@@ -1,3 +1,34 @@
+Version 5.4.7
+=============
+
+Enhancements
+------------
+
+ * Full support for HLS on Android
+ * Added shadow to play icon to avoid dissapearing controls on light background
+ * Added `data-subscribe` option for flash engine (FCSubsribe). Needed by some CDNs.
+ * `preload` can now be given by config when initializing into empty container
+ * Fullscreen support for Internet Explorer 11
+
+Fixes
+-----
+ 
+ * Fix #683 - Engine selection does not loop through all available engines
+ * Fix #677 - Subtitle: are not removed at end point if timecode contains hours
+ * Fix #648 - Local Storage bug with IOS private browsing
+ * Fix #661 - Make all video type checks case-insensitive
+ * Fix #637 - HLS: playlist or splash setup crashes desktop Safari
+ * Fix #633 - HLS embedded with wrong mime-type "video/mpegurl"
+ * Fix #581 - flash: autoplay setup broken
+ * Fix #622 - preload="none" causes error in Internet Explorer 11
+ * Fix #509 - live: always preload="none"
+
+Changes
+-------
+
+ * On Android, source order is now respected (previously mp4 was always chosen)
+
+
 Version 5.4.6
 =============
 

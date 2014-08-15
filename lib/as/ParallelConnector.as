@@ -1,7 +1,7 @@
 /*!
  Flowplayer : The Video Player for Web
 
- Copyright (c) 2012 - 2013 Flowplayer Ltd
+ Copyright (c) 2012 - 2014 Flowplayer Ltd
  http://flowplayer.org
 
  Author: Anssi Piirainen
@@ -17,7 +17,7 @@
  * support the player development
  * no Flowplayer trademark
 
- http://flowplayer.org/download/
+ http://flowplayer.org/pricing/
  */
 package {
 import flash.events.NetStatusEvent;
@@ -25,13 +25,13 @@ import flash.events.SecurityErrorEvent;
 import flash.net.NetConnection;
 import flash.utils.setTimeout;
 
-public class Connection {
+public class ParallelConnector implements Connector {
    private var player:Flowplayer;
    private var url:String;
    private var connection:NetConnection;
    private var firstAttemptFailed:Boolean;
 
-   public function Connection(player:Flowplayer, url:String) {
+   public function ParallelConnector(player:Flowplayer, url:String) {
       this.player = player;
       this.url = url;
    }

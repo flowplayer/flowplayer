@@ -17,6 +17,8 @@
                 console.log("ready received in page");
             })
         });
+
+        flowplayer.conf = { bufferTime: 0 };
     </script>
 
 </head>
@@ -24,10 +26,10 @@
 <body>
 
 <div class="flowplayer " data-engine="flash" data-swf="../../dist/flowplayer.swf?a=2"
-   data-debug="true" data-rtmp="rtmp://rtmp01.hddn.com/play">
+   data-debug="true" data-rtmp="rtmp://fml.D3A1.edgecastcdn.net/20D3A1/foo" data-subscribe="true" data-bufferTime="100">
 
     <video autoplay="true" _preload="none" poster="camera.jpg">
-        <source type="rtmp/mp4" src="mp4:vod/demo.flowplayervod/buffalo_soldiers.mp4"></source>
+        <source type="rtmp/mp4" src="test"></source>
     </video>
 
     <!--<video preload="none" src="http://stream.flowplayer.org/flowplayer.mp4" poster="camera.jpg"></video>-->
