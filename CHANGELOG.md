@@ -1,10 +1,10 @@
-Version 5.4.7
+Version 5.5.0
 =============
 
 Enhancements
 ------------
 
- * Full support for HLS on Android
+ * Full support for HLS on Android (on HLS-compatible browsers)
  * Added shadow to play icon to avoid dissapearing controls on light background
  * Added `data-subscribe` option for flash engine (FCSubsribe). Needed by some CDNs.
  * `preload` can now be given by config when initializing into empty container
