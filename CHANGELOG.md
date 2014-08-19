@@ -22,6 +22,9 @@ Fixes
  * Fix #581 - flash: autoplay setup broken
  * Fix #622 - preload="none" causes error in Internet Explorer 11
  * Fix #509 - live: always preload="none"
+ * Fix #659 - speed help text outdated - show speed only if supported?
+ * Fix #586 - Chrome + flash fullscreen bug - video is play from beginingA
+ * Fix #645 - Flash engine should allow bufferLength of zero
 
 Changes
 -------
