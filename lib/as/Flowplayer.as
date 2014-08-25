@@ -270,7 +270,7 @@ public class Flowplayer extends Sprite {
       debug("Connection success", { ready: ready, preloadCompete: preloadComplete, paused: paused, autoplay: conf.autoplay });
 
       stream = new NetStream(conn);
-      var bufferTime:Number = conf.live ? 0 : conf.hasOwnProperty("bufferTime") ? conf.bufferTime : 0.1;
+      var bufferTime:Number = conf.hasOwnProperty("bufferTime") ? conf.bufferTime : conf.live ? 0 : 0.1;
       debug("bufferTime == " + bufferTime + ", live? " + conf.live);
       stream.bufferTime = bufferTime;
       video.attachNetStream(stream);
