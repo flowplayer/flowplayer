@@ -468,7 +468,7 @@ public class Flowplayer extends Sprite {
    };
 
    private function addLogo():void {
-      var pos:int = conf.url ? conf.url.indexOf("://my.flowplayer.org") : -1;
+      var pos:int = conf.url ? conf.url.indexOf("://drive.flowplayer.org") : -1;
       if (pos == 4 || pos == 5) return;
       addChild(logo);
    }
