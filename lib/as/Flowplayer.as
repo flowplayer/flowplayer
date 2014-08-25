@@ -132,8 +132,9 @@ public class Flowplayer extends Sprite {
    }
 
    public function pause():void {
-      debug("pause()");
+      debug("pause() ready? " + ready + " paused? " + paused);
       if (ready && !paused) {
+         debug("firing pause");
          stream.pause();
          fire(PAUSE, null);
          paused = true;
@@ -269,8 +270,8 @@ public class Flowplayer extends Sprite {
       debug("Connection success", { ready: ready, preloadCompete: preloadComplete, paused: paused, autoplay: conf.autoplay });
 
       stream = new NetStream(conn);
-      var bufferTime:Number = conf.hasOwnProperty("bufferTime") ? conf.bufferTime : 0.1;
-      debug("bufferTime == " + bufferTime);
+      var bufferTime:Number = conf.live ? 0 : conf.hasOwnProperty("bufferTime") ? conf.bufferTime : 0.1;
+      debug("bufferTime == " + bufferTime + ", live? " + conf.live);
       stream.bufferTime = bufferTime;
       video.attachNetStream(stream);
 
