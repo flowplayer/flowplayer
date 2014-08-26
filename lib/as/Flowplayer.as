@@ -348,7 +348,7 @@ public class Flowplayer extends Sprite {
 
                // stop at first frame
                if (!conf.autoplay) {
-                   debug("stopping on first frame");
+                  debug("stopping on first frame");
                   volume(1);
                   stream.pause();
                   stream.seek(0);
@@ -387,8 +387,8 @@ public class Flowplayer extends Sprite {
             case "NetStream.Seek.Notify":
                finished = false;
                if (conf.autoplay) {
-                   timeupdate(true);
-                   fire(Flowplayer.SEEK, seekTo);
+                  timeupdate(true);
+                  fire(Flowplayer.SEEK, seekTo);
                }
                break;
 
@@ -468,8 +468,20 @@ public class Flowplayer extends Sprite {
    };
 
    private function addLogo():void {
-      var pos:int = conf.url ? conf.url.indexOf("://drive.flowplayer.org") : -1;
-      if (pos == 4 || pos == 5) return;
+      var url:String = (conf.rtmp) ? conf.rtmp : (conf.url) ? conf.url : '';
+      var pos:Number;
+      var whitelist:Array = [
+         'drive.flowplayer.org',
+         'drive.dev.flowplayer.org',
+         'my.flowplayer.org',
+         'rtmp.flowplayer.org'
+      ];
+
+      for each (var wl:String in whitelist) {
+         pos = url.indexOf('://' + wl)
+         if (pos == 4 || pos == 5) return; // from flowplayer Drive
+      }
+
       addChild(logo);
    }
 
