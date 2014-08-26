@@ -38,7 +38,6 @@ raw:
 	@ cat LICENSE.js | $(SET_VERSION) | $(SET_DATE) > $(JS)
 	@ browserify -s flowplayer -r ./deps/proxy/jquery.js:jquery lib/flowplayer.js | cat - lib/ext/support.js\
 			lib/engine/*.js\
-			lib/ext/resolve.js\
 			lib/ext/slider.js\
 			lib/ext/ui.js\
 			lib/ext/keyboard.js\
