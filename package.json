@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prePublish": "make clean && make skins && make min && make flash"
+    "prePublish": "make clean && make skins && make min && make flash && make",
+    "testBundle": "browserify -o dist/test-bundle.js test/main.js"
   },
   "repository": {
     "type": "git",
