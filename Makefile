@@ -36,18 +36,7 @@ raw:
 	# raw player
 	@ mkdir	-p $(DIST)
 	@ cat LICENSE.js | $(SET_VERSION) | $(SET_DATE) > $(JS)
-	@ browserify -s flowplayer -r ./deps/proxy/jquery.js:jquery lib/flowplayer.js | cat - lib/ext/support.js\
-			lib/engine/*.js\
-			lib/ext/slider.js\
-			lib/ext/ui.js\
-			lib/ext/keyboard.js\
-			lib/ext/fullscreen.js\
-			lib/ext/playlist.js\
-			lib/ext/cuepoint.js\
-			lib/ext/subtitle.js\
-			lib/ext/analytics.js\
-			lib/ext/mobile.js\
-			lib/ext/embed.js | $(SET_VERSION) | sed "s/@EMBED/$(EMBED)/" | sed "s/@CDN/$(CDN)/" | sed "s/@CDN_PATH/$(CDN_PATH)/" >> $(JS)
+	@ browserify -s flowplayer -r ./deps/proxy/jquery.js:jquery lib/index.js | $(SET_VERSION) | sed "s/@EMBED/$(EMBED)/" | sed "s/@CDN/$(CDN)/" | sed "s/@CDN_PATH/$(CDN_PATH)/" >> $(JS)
 
 
 min: raw
