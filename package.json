@@ -23,6 +23,9 @@
   "devDependencies": {
     "stylus": "~0.40.3",
     "uglify-js": "~2.4.3",
-    "browserify": "~2.35.4"
+    "browserify": "~2.35.4",
+    "extend-object": "~1.0.0",
+    "is-function": "~1.0.1",
+    "bean": "~1.0.14"
   }
 }
