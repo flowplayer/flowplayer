@@ -26,6 +26,8 @@
     "browserify": "~2.35.4",
     "extend-object": "~1.0.0",
     "is-function": "~1.0.1",
-    "bean": "~1.0.14"
+    "bean": "~1.0.14",
+    "class-list": "~0.1.1",
+    "sizzle": "~2.0.0"
   }
 }
