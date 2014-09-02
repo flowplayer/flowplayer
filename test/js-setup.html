@@ -1,0 +1,51 @@
+
+<!doctype html>
+<html>
+<head>
+
+   <!-- player skin -->
+   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css?f" />
+
+   <!-- site specific styling -->
+   <style>
+   body {
+      font: 12px "Myriad Pro", "Lucida Grande", sans-serif;
+      text-align: center;
+      padding-top: 1%;
+   }
+   .flowplayer { width: 70%; }
+   </style>
+
+   <!-- include flowplayer -->
+   <script src="../dist/flowplayer.js?i"></script>
+   </head>
+
+<body>
+
+   <!-- the player -->
+   <div id="player">
+    </div>
+
+    <script>
+    var el = document.getElementById('player');
+    flowplayer(el, {
+        splash: true,
+        clip: {
+          preload: "none",
+          sources: [
+            {
+              type: "video/webm",
+              src: "http://stream.flowplayer.org/bauhaus/624x260.webm"
+            },
+            {
+              type: "video/mp4",
+              src: "http://stream.flowplayer.org/bauhaus/624x260.mp4"
+            }
+          ]
+        }
+      });
+    </script>
+
+
+</body>
+
