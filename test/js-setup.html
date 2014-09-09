@@ -28,7 +28,7 @@
 
     <script>
     var el = document.getElementById('player');
-    flowplayer(el, {
+    var api = flowplayer(el, {
         splash: true,
         clip: {
           preload: "none",
@@ -44,6 +44,10 @@
           ]
         }
       });
+    api.on('load', function(ev, player, video) {
+        debugger;
+        ev.preventDefault();
+    });
     </script>
 
 
