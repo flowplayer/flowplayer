@@ -5,9 +5,9 @@ Feature: Playback
     """html
     <div class="flowplayer" data-ratio="0.4167">
       <video>
-        <source type="video/webm" src="http://stream.flowplayer.org/bauhaus/624x260.webm">
-        <source type="video/mp4"  src="http://stream.flowplayer.org/bauhaus/624x260.mp4">
-        <source type="video/ogg"  src="http://stream.flowplayer.org/bauhaus/624x260.ogv">
+        <source type="video/webm" src="http://stream.flowplayer.org/bauhaus.webm">
+        <source type="video/mp4"  src="http://stream.flowplayer.org/bauhaus.mp4">
+        <source type="video/ogg"  src="http://stream.flowplayer.org/bauhaus.ogv">
       </video>
     </div>
     <script>
