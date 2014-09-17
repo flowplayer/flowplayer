@@ -29,5 +29,8 @@
     "bean": "~1.0.14",
     "class-list": "~0.1.1",
     "sizzle": "~2.0.0"
+  },
+  "dependencies": {
+    "velocity-animate": "~1.0.1"
   }
 }
