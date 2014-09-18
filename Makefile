@@ -25,18 +25,21 @@ CDN=releases.flowplayer.org
 EMBED=embed.flowplayer.org
 CDN_PATH=""
 
+BRANDING=$(shell cat deps/branding.min.js)
+
 
 # http://flowplayer.org/license
 concat: raw
 	# flowplayer.js
-	@ cat deps/branding.min.js >> $(JS)
+	@ awk 'BEGIN{getline l < "deps/branding.min.js"}/var BRANDING/{gsub("var BRANDING",l)}1' $(JS) > $(JS).tmp
+	@ mv $(JS).tmp $(JS)
 
 # the raw / non-working player without branding
 raw:
 	# raw player
 	@ mkdir	-p $(DIST)
 	@ cat LICENSE.js | $(SET_VERSION) | $(SET_DATE) > $(JS)
-	@ browserify -s flowplayer -r ./deps/proxy/jquery.js:jquery lib/index.js | $(SET_VERSION) | sed "s/@EMBED/$(EMBED)/" | sed "s/@CDN/$(CDN)/" | sed "s/@CDN_PATH/$(CDN_PATH)/" >> $(JS)
+	@ browserify -s flowplayer lib/index.js | $(SET_VERSION) | sed "s/@EMBED/$(EMBED)/" | sed "s/@CDN/$(CDN)/" | sed "s/@CDN_PATH/$(CDN_PATH)/" >> $(JS)
 
 
 min: raw
