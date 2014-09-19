@@ -25,13 +25,10 @@ CDN=releases.flowplayer.org
 EMBED=embed.flowplayer.org
 CDN_PATH=""
 
-BRANDING=$(shell cat deps/branding.min.js)
-
-
 # http://flowplayer.org/license
 concat: raw
 	# flowplayer.js
-	@ awk 'BEGIN{getline l < "deps/branding.min.js"}/var BRANDING/{gsub("var BRANDING",l)}1' $(JS) > $(JS).tmp
+	@ node -e "var fs = require('fs'), js=fs.readFileSync('$(JS)', 'utf8'); process.stdout.write(js.replace('//BRANDING', fs.readFileSync('deps/branding.min.js', 'utf8')));" > $(JS).tmp
 	@ mv $(JS).tmp $(JS)
 
 # the raw / non-working player without branding
