@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mochify ./test/unit/*.js",
+    "test-watch": "mochify -w ./test/unit/*.js",
     "prePublish": "make clean && make skins && make min && make flash && make",
     "testBundle": "browserify -o dist/test-bundle.js test/main.js"
   },
@@ -28,7 +29,10 @@
     "is-function": "~1.0.1",
     "bean": "~1.0.14",
     "class-list": "~0.1.1",
-    "sizzle": "~2.0.0"
+    "sizzle": "~2.0.0",
+    "mocha": "~1.21.4",
+    "beefy": "~2.1.1",
+    "mochify": "~1.1.2"
   },
   "dependencies": {
     "velocity-animate": "~1.0.1"
