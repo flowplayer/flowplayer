@@ -87,12 +87,12 @@ describe('lib/ext/events.js', function() {
       obj.trigger('foo', ['bar', 'baz']);
     });
     it('should return the event', function() {
-      var ev = obj.trigger('foo');
+      var ev = obj.trigger('foo', null, true);
       assert(ev.type === 'foo');
     });
     it('should allow preventing default', function() {
       obj.on('foo', function(ev) { ev.preventDefault(); });
-      var ev = obj.trigger('foo');
+      var ev = obj.trigger('foo', null, true);
       assert(ev.defaultPrevented);
     });
   });
@@ -146,6 +146,18 @@ describe('lib/ext/events.js', function() {
       assert(fooCounter === 1);
       assert(barCounter === 1);
       assert(fooBCounter === 2);
+    });
+  });
+  describe('.one', function() {
+    it('should cleanup the handler after running', function() {
+      var fooCounter = 0,
+          barCounter = 0;
+      obj.one('foo', function() { fooCounter++; });
+      obj.on('foo', function() { barCounter++; });
+      obj.trigger('foo');
+      obj.trigger('foo');
+      assert(fooCounter === 1);
+      assert(barCounter === 2);
     });
   });
 });
