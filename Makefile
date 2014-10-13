@@ -7,7 +7,7 @@ ifdef MXMLC_VERSION
 else
 	FLASH="/opt/flowplayer/flex3sdk/bin/mxmlc"
 endif
-FLASH_COMPILE=$(FLASH) -static-link-runtime-shared-libraries=true -library-path=.
+FLASH_COMPILE=$(FLASH) -default-frame-rate=50 -static-link-runtime-shared-libraries=true -library-path=.
 
 # version and date
 VERSION=$(shell cat VERSION)
