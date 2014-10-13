@@ -52,7 +52,7 @@ public class Flowplayer extends Sprite {
 
    // external interface
    private static const INTERFACE:Array
-      = new Array(PLAY, PAUSE, RESUME, SEEK, VOLUME, UNLOAD);
+      = new Array(PLAY, PAUSE, RESUME, SEEK, VOLUME, UNLOAD, STATUS);
 
    // flashvars
    private var conf:Object;
@@ -73,8 +73,6 @@ public class Flowplayer extends Sprite {
    private var stream:NetStream;
    private var video:Video;
    private var logo:DisplayObject;
-
-   private var timer:Timer;
 
 
    /* constructor */
@@ -99,17 +97,11 @@ public class Flowplayer extends Sprite {
       stage.addEventListener(Event.RESIZE, arrange);
 
       var player:Flowplayer = this;
-      this.addEventListener(Event.ADDED_TO_STAGE, function (e:Event):void {
-         // The API
-         for (var i:Number = 0; i < INTERFACE.length; i++) {
-            debug("creating callback " + INTERFACE[i] + " id == " + ExternalInterface.objectID);
-            ExternalInterface.addCallback("__" + INTERFACE[i], player[INTERFACE[i]]);
-         }
-      });
-
-      // timeupdate event
-      timer = new Timer(250);
-      timer.addEventListener("timer", timeupdate);
+      // The API
+      for (var i:Number = 0; i < INTERFACE.length; i++) {
+         debug("creating callback " + INTERFACE[i] + " id == " + ExternalInterface.objectID);
+         ExternalInterface.addCallback("__" + INTERFACE[i], player[INTERFACE[i]]);
+      }
 
       init();
    }
@@ -127,7 +119,6 @@ public class Flowplayer extends Sprite {
          stream.play(url);
          conf.url = url;
          paused = ready = false;
-         startTimer();
       }
    }
 
@@ -180,7 +171,6 @@ public class Flowplayer extends Sprite {
          ready = true;
          connect();
       }
-      startTimer();
    }
 
    private function preloadNone():Boolean {
@@ -222,6 +212,11 @@ public class Flowplayer extends Sprite {
       }
    }
 
+   public function status():Object {
+      if (!ready) return null;
+      return { time: stream.time, buffer: stream.bytesLoaded };
+   }
+
 
    /************* Private API ***********/
 
@@ -246,10 +241,6 @@ public class Flowplayer extends Sprite {
 
       paused = !conf.autoplay;
       preloadComplete = false;
-
-      if (conf.autoplay) {
-         startTimer();
-      }
 
       connect();
    }
@@ -297,9 +288,6 @@ public class Flowplayer extends Sprite {
       } else {
          debug("starting play of stream '" + conf.url + "'");
          stream.play(conf.url);
-         if (conf.autoplay) {
-            startTimer();
-         }
       }
 
       // metadata
@@ -387,7 +375,7 @@ public class Flowplayer extends Sprite {
             case "NetStream.Seek.Notify":
                finished = false;
                if (conf.autoplay) {
-                  timeupdate(true);
+//                  timeupdate(true);
                   fire(Flowplayer.SEEK, seekTo);
                }
                break;
@@ -415,33 +403,6 @@ public class Flowplayer extends Sprite {
          }
 
       });
-   }
-
-   private function startTimer():void {
-      debug("starting progress timer");
-      timer.start();
-   }
-
-
-   private function timeupdate(e:Object):void {
-      if (ready) {
-         var buffer:Number = stream.bytesLoaded,
-            delta:Number = stream.bytesTotal - buffer;
-
-         // first frame & no preload
-         if (!conf.autoplay && !conf.preload && !conf.rtmp) {
-            stream.close();
-         }
-
-         // http://www.brooksandrus.com/blog/2008/11/05/3-years-later-netstream-still-sucks/
-         if (e === true) {
-            fire(STATUS, { time: seekTo, buffer: buffer });
-            setTimeout(function ():void { seekTo = 0; }, 100);
-
-         } else if (!(paused || finished || seekTo) || delta > 0) {
-            fire(STATUS, { time: stream.time, buffer: buffer });
-         }
-      }
    }
 
    internal function debug(msg:String, data:Object = null):void {
