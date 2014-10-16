@@ -22,17 +22,18 @@
     "url": "https://github.com/flowplayer/flowplayer/issues"
   },
   "devDependencies": {
-    "stylus": "~0.40.3",
-    "uglify-js": "~2.4.3",
+    "bean": "~1.0.14",
+    "beefy": "~2.1.1",
     "browserify": "~2.35.4",
+    "class-list": "~0.1.1",
     "extend-object": "~1.0.0",
     "is-function": "~1.0.1",
-    "bean": "~1.0.14",
-    "class-list": "~0.1.1",
-    "sizzle": "~2.0.0",
+    "is-object": "^1.0.1",
     "mocha": "~1.21.4",
-    "beefy": "~2.1.1",
-    "mochify": "~1.1.2"
+    "mochify": "~1.1.2",
+    "sizzle": "~2.0.0",
+    "stylus": "~0.40.3",
+    "uglify-js": "~2.4.3"
   },
   "dependencies": {
     "velocity-animate": "~1.0.1"
