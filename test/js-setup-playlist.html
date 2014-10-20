@@ -1,0 +1,76 @@
+
+<!doctype html>
+<html>
+<head>
+
+   <!-- player skin -->
+   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css?f" />
+
+   <!-- site specific styling -->
+   <style>
+   body {
+      font: 12px "Myriad Pro", "Lucida Grande", sans-serif;
+      text-align: center;
+      padding-top: 1%;
+   }
+   .flowplayer { width: 70%; }
+   </style>
+
+   <!-- include flowplayer -->
+   <script src="../dist/flowplayer.js?i"></script>
+   </head>
+
+<body>
+
+   <!-- the player -->
+   <div id="player">
+    </div>
+
+    <script>
+    var el = document.getElementById('player');
+    var api = flowplayer(el, {
+        splash: true,
+        ratio: 0.417,
+        playlist: [{
+          preload: "none",
+          sources: [
+            {
+              type: "video/webm",
+              src: "http://stream.flowplayer.org/night1.webm"
+            },
+            {
+              type: "video/mp4",
+              src: "http://stream.flowplayer.org/night1.mp4"
+            }
+          ]
+        }, {
+          preload: "none",
+          sources: [
+            {
+              type: "video/webm",
+              src: "http://stream.flowplayer.org/night3.webm"
+            },
+            {
+              type: "video/mp4",
+              src: "http://stream.flowplayer.org/night3.mp4"
+            }
+          ]
+        }, {
+          preload: "none",
+          sources: [
+            {
+              type: "video/webm",
+              src: "http://stream.flowplayer.org/night4.webm"
+            },
+            {
+              type: "video/mp4",
+              src: "http://stream.flowplayer.org/night4.mp4"
+            }
+          ]
+        }]
+      });
+    </script>
+
+
+</body>
+
