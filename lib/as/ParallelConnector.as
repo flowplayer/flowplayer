@@ -26,111 +26,111 @@ import flash.net.NetConnection;
 import flash.utils.setTimeout;
 
 public class ParallelConnector implements Connector {
-   private var player:Flowplayer;
-   private var url:String;
-   private var connection:NetConnection;
-   private var firstAttemptFailed:Boolean;
+    private var player:Flowplayer;
+    private var url:String;
+    private var connection:NetConnection;
+    private var firstAttemptFailed:Boolean;
 
-   public function ParallelConnector(player:Flowplayer, url:String) {
-      this.player = player;
-      this.url = url;
-   }
+    public function ParallelConnector(player:Flowplayer, url:String) {
+        this.player = player;
+        this.url = url;
+    }
 
-   public function connect(connectedCallback:Function, disconnectedCallback:Function):void {
-      firstAttemptFailed = false;
-      doConnect(connectedCallback, disconnectedCallback, url);
+    public function connect(connectedCallback:Function, disconnectedCallback:Function):void {
+        firstAttemptFailed = false;
+        doConnect(connectedCallback, disconnectedCallback, url);
 
-      if (url && url.indexOf("rtmp:") == 0) {
-         debug("connecting with RTMP and RTMPT");
+        if (url && url.indexOf("rtmp:") == 0) {
+            debug("connecting with RTMP and RTMPT");
 
-         // RTMPT is attempted after 250 ms
-         setTimeout(function ():void {
-            var host:String = url.substr("rtmp://".length);
-            doConnect(connectedCallback, disconnectedCallback, "rtmpt://" + host);
-         }, 250);
-      }
-   }
+            // RTMPT is attempted after 250 ms
+            setTimeout(function ():void {
+                var host:String = url.substr("rtmp://".length);
+                doConnect(connectedCallback, disconnectedCallback, "rtmpt://" + host);
+            }, 250);
+        }
+    }
 
-   private function doConnect(connectedCallback:Function, disconnectedCallback:Function, url:String):void {
-      var connection:NetConnection = new NetConnection();
-      connection.client = { onBWDone: function ():void {} };
+    private function doConnect(connectedCallback:Function, disconnectedCallback:Function, url:String):void {
+        var connection:NetConnection = new NetConnection();
+        connection.client = { onBWDone: function ():void {} };
 
-      connection.addEventListener(NetStatusEvent.NET_STATUS, function (e:NetStatusEvent):void {
-         debug("debug.conn", e.info);
+        connection.addEventListener(NetStatusEvent.NET_STATUS, function (e:NetStatusEvent):void {
+            debug("debug.conn", e.info);
 
-         switch (e.info.code) {
+            switch (e.info.code) {
 
-            case "NetConnection.Connect.Success":
-               debug("connection succeeded with " + connection.uri + ", already connected? " + connected);
+                case "NetConnection.Connect.Success":
+                    debug("connection succeeded with " + connection.uri + ", already connected? " + connected);
 
-               if (connected) {
-                  debug("already connected, closing this 2nd connection");
-                  connection.close();
-                  return;
-               }
+                    if (connected) {
+                        debug("already connected, closing this 2nd connection");
+                        connection.close();
+                        return;
+                    }
 
-               setConnection(connection);
-               connectedCallback(connection);
-               break;
+                    setConnection(connection);
+                    connectedCallback(connection);
+                    break;
 
-            case "NetConnection.Connect.Failed":
-               if (firstAttemptFailed) {
-                  fire(Flowplayer.ERROR, { code: 9, url: url});
-               }
-               firstAttemptFailed = true;
-               break;
+                case "NetConnection.Connect.Failed":
+                    if (firstAttemptFailed) {
+                        fire(Flowplayer.ERROR, { code: 9, url: url});
+                    }
+                    firstAttemptFailed = true;
+                    break;
 
-            case "NetConnection.Connect.Closed":
-               if (connection == getConnection()) {
-                  disconnectedCallback();
-               }
-               break;
+                case "NetConnection.Connect.Closed":
+                    if (connection == getConnection()) {
+                        disconnectedCallback();
+                    }
+                    break;
 
-            case "NetConnection.Connect.Rejected":
-               if (connected) return;
-               if (e.info.ex.code == 302) {
-                  var redirectUrl:String = e.info.ex.redirect;
-                  debug("doing a redirect to " + redirectUrl + ", original url " + url);
+                case "NetConnection.Connect.Rejected":
+                    if (connected) return;
+                    if (e.info.ex.code == 302) {
+                        var redirectUrl:String = e.info.ex.redirect;
+                        debug("doing a redirect to " + redirectUrl + ", original url " + url);
 
-                  setTimeout(function ():void {
-                     connection.connect(redirectUrl);
-                  }, 100);
-               }
-               break;
-         }
+                        setTimeout(function ():void {
+                            connection.connect(redirectUrl);
+                        }, 100);
+                    }
+                    break;
+            }
 
-      });
+        });
 
-      connection.addEventListener(SecurityErrorEvent.SECURITY_ERROR, function (e:SecurityError):void {
-         fire(Flowplayer.ERROR, e.message);
-      });
+        connection.addEventListener(SecurityErrorEvent.SECURITY_ERROR, function (e:SecurityError):void {
+            fire(Flowplayer.ERROR, e.message);
+        });
 
-      connection.connect(url);
-   }
+        connection.connect(url);
+    }
 
-   private function debug(msg:String, data:Object = null):void {
-      player.debug(msg, data);
-   }
+    private function debug(msg:String, data:Object = null):void {
+        player.debug(msg, data);
+    }
 
-   internal function fire(type:String, data:Object = null):void {
-      player.fire(type, data);
-   }
+    internal function fire(type:String, data:Object = null):void {
+        player.fire(type, data);
+    }
 
-   public function close():void {
-      if (!connection) return;
-      connection.close()
-   }
+    public function close():void {
+        if (!connection) return;
+        connection.close();
+    }
 
-   private function getConnection():NetConnection {
-      return this.connection;
-   }
+    private function getConnection():NetConnection {
+        return this.connection;
+    }
 
-   private function setConnection(conn:NetConnection):void {
-      this.connection = conn;
-   }
+    private function setConnection(conn:NetConnection):void {
+        this.connection = conn;
+    }
 
-   private function get connected():Boolean {
-      return connection && connection.connected;
-   }
+    public function get connected():Boolean {
+        return connection && connection.connected;
+    }
 }
 }
