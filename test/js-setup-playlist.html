@@ -32,7 +32,20 @@
     var api = flowplayer(el, {
         splash: false,
         ratio: 0.417,
+        adaptiveRatio: true,
         playlist: [{
+          preload: "none",
+          sources: [
+            {
+              type: "video/webm",
+              src: "http://stream.flowplayer.org/bauhaus/624x260.webm"
+            },
+            {
+              type: "video/mp4",
+              src: "http://stream.flowplayer.org/bauhaus/624x260.mp4"
+            }
+          ]
+        }, {
           preload: "none",
           sources: [
             {
