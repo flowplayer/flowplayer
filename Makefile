@@ -82,6 +82,9 @@ clean:
 	# cleaning
 	@ rm -rf $(DIST)
 
+deps:
+	@ npm install
+
 all: clean zip
 
 # shortcuts
@@ -89,4 +92,4 @@ as: flash
 js: concat
 
 
-.PHONY: dist skin
+.PHONY: dist skin deps
