@@ -1,4 +1,4 @@
-
+export PATH := ./node_modules/.bin/:$(PATH)
 # flash compile
 MXMLC_VERSION := $(shell mxmlc --version 2>/dev/null)
 
