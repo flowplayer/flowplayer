@@ -1,0 +1,197 @@
+
+<!doctype html>
+<html>
+<head>
+
+   <!-- player skin -->
+   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css?f" />
+   <link rel="stylesheet" href="//flowplayer.org/drive/quality-selector.css">
+  <style>
+  #content {
+    width: 980px; /* as grid and player */
+  }
+
+  .flowplayer {
+    width: 980px; /* same as grid */
+    margin: 0 0 424px 0; /* 414 + 10 margin bottom */
+    /* the following 3 directives not needed if the playlist is below the player from the start */
+    -webkit-transition: margin .8s;
+    -moz-transition: margin .8s;
+    transition: margin .8s;
+  }
+  .is-splash.flowplayer {
+    margin: 0;
+    padding: 0;
+  }
+  /* black background during quality switches and
+     work around different hls end of video handling
+     https://github.com/flowplayer/flowplayer/issues/479 */
+  .is-ready.flowplayer {
+    background-color: #000;
+    /* the following 3 directives not needed if the playlist is below the player from the start */
+    -webkit-transition: background-color 2s;
+    -moz-transition: background-color 2s;
+    transition: background-color 2s;
+  }
+
+  /* playlist as grid */
+  .flowplayer .fp-playlist {
+    background: url(//flowplayer.org/media/img/demos/playlist/grid.jpg) no-repeat;
+    padding: 0;
+    height: 414px; /* (136 + 2) * 3 */
+    position: absolute;
+    left: 0;
+    bottom: -424px; /* -414 - 10 */
+    /* the following 3 directives not needed if the playlist is below the player from the start */
+    -webkit-transition: bottom .8s;
+    -moz-transition: bottom .8s;
+    transition: bottom .8s;
+  }
+  /* in splash state playlist should be on top of the player in the z-axis
+   * to avoid that the big white play button overlays the thumbnails */
+  .is-splash.flowplayer .fp-playlist {
+    z-index: 2;
+    bottom: 68px; /* (980 / 16 * 9 - 414) / 2 */
+  }
+
+  /* the playlist item elements */
+  .flowplayer .fp-playlist a {
+    width: 239px;
+    height: 136px;
+    display: inline-block;
+  }
+  .flowplayer .fp-playlist a.is-active, .flowplayer .fp-playlist a:hover {
+    background-image: url(//cdn.711f.flowplayer.me/adhoc/skin/img/play_white.png);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  @media (-webkit-min-device-pixel-ratio: 2) {
+    .flowplayer .fp-playlist a.is-active, .flowplayer .fp-playlist a:hover {
+      background-image: url(//cdn.711f.flowplayer.me/adhoc/skin/img/play_white@x2.png);
+    }
+  }
+  .flowplayer .fp-playlist a:hover {
+    background-size: 12%;
+  }
+  .flowplayer .fp-playlist a.is-active {
+    background-size: 24%;
+  }
+
+  #item0 {
+    top: 0;
+    left: 0;
+    margin: 1px 1px 1px 0; /* leftmost */
+  }
+  #item1 {
+    top: 0;
+    left: 249px;
+    margin: 1px;
+  }
+  #item2 {
+    top: 0;
+    left: 498px;
+    margin: 1px;
+  }
+  #item3 {
+    top: 0;
+    left: 747px;
+    margin: 1px 0 1px 1px; /* rightmost */
+  }
+  #item4 {
+    top: 143px;
+    left: 0;
+    margin: 1px 1px 1px 0; /* leftmost */
+  }
+  #item5 {
+    top: 143px;
+    left: 249px;
+    margin: 1px;
+  }
+  #item6 {
+    top: 143px;
+    left: 498px;
+    margin: 1px;
+  }
+  #item7 {
+    top: 143px;
+    left: 747px;
+    margin: 1px 0 1px 1px; /* rightmost */
+  }
+  #item8 {
+    top: 286px;
+    left: 0;
+    margin: 1px 1px 1px 0; /* leftmost */
+  }
+  #item9 {
+    top: 286px;
+    left: 249px;
+    margin: 1px;
+  }
+  #item10 {
+    top: 286px;
+    left: 498px;
+    margin: 1px;
+  }
+  #item11 {
+    top: 286px;
+    left: 747px;
+    margin: 1px 0 1px 1px; /* rightmost */
+  }
+  </style>
+
+         <!-- Flowplayer library -->
+   <script src="../dist/flowplayer.js"></script>
+   <!-- the quality selector plugin -->
+   <script src="//localhost:8080/drive/quality-selector.js"></script>
+
+</head>
+
+<body>
+
+   <div id="content">
+
+      <h1>Flowplayer · Grid playlist</h1>
+
+
+<div id="player" class="is-closeable" >
+
+</div>
+</div>
+<script>
+var el = document.getElementById('player');
+flowplayer(el, {
+  ratio: 0.5625,
+  splash: true,
+  qualities: '216p,360p,720p,1080p',
+  defaultQuality: '360p',
+  clip: {
+    sources: [
+    {
+      type: 'application/x-mpegurl',
+      src:'http://stream.flowplayer.org/night1.m3u8'
+    },{
+      type: 'video/webm',
+      src:'http://stream.flowplayer.org/night1.webm'
+    },{
+      type: 'video/mp4',
+      src: 'http://stream.flowplayer.org/night1.mp4'
+    }
+    ]
+  },
+  playlist: [
+      'http://stream.flowplayer.org/night1.mp4',
+      'http://stream.flowplayer.org/night2.mp4',
+      'http://stream.flowplayer.org/night3.mp4',
+      'http://stream.flowplayer.org/night4.mp4',
+      'http://stream.flowplayer.org/night5.mp4',
+      'http://stream.flowplayer.org/night6.mp4',
+      'http://stream.flowplayer.org/night1.mp4',
+      'http://stream.flowplayer.org/night2.mp4',
+      'http://stream.flowplayer.org/night3.mp4',
+      'http://stream.flowplayer.org/night4.mp4',
+      'http://stream.flowplayer.org/night5.mp4',
+      'http://stream.flowplayer.org/night6.mp4']
+});
+</script>
+</body>
+
