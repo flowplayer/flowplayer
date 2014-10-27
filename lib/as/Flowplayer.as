@@ -68,7 +68,7 @@ public class Flowplayer extends Sprite {
 
     // video stream
     private var connector:Connector;
-    private var stream:NetStream;
+    private var netStream:NetStream;
     private var video:Video;
     private var logo:DisplayObject;
 
@@ -109,15 +109,14 @@ public class Flowplayer extends Sprite {
         // switch url
     public function play(url:String):void {
         debug("play");
-        if (ready) {
-            url = unescape(url);
-            conf.autoplay = true; // always begin playback
-            stream.close();
-            debug("starting play of stream '" + conf.url + "'");
-            stream.play(url);
-            conf.url = url;
-            paused = ready = false;
-        }
+        if (!ready)  return;
+        conf.url = url;
+
+        conf.autoplay = true;
+        netStream.close();
+        debug("starting play of stream '" + url + "'");
+        netStream.play(stream);
+        paused = ready = false;
     }
 
     public function pause():void {
@@ -132,10 +131,10 @@ public class Flowplayer extends Sprite {
 
     private function pauseOrCloseStream():void {
         if (conf.live) {
-            stream.close();
+            netStream.close();
             connector.close();
         } else {
-            stream.pause();
+            netStream.pause();
         }
     }
 
@@ -164,28 +163,28 @@ public class Flowplayer extends Sprite {
                     connector.connect(function (conn:NetConnection):void {
                         ready = true;
                         setupStream(conn);
-                        stream.play(conf.url);
+                        netStream.play(stream);
                     }, onDisconnect);
                 } else {
-                    debug("starting play of stream '" + conf.url + "'");
-                    stream.play(conf.url);
+                    debug("starting play of stream '" + stream + "'");
+                    netStream.play(stream);
                 }
 
             } else {
                 if (!ready) return;
 
                 if (preloadNone() && !preloadComplete) {
-                    debug("starting play of stream '" + conf.url + "'");
-                    stream.play(conf.url);
+                    debug("starting play of stream '" + stream + "'");
+                    netStream.play(stream);
                 } else {
                     if (finished) {
                         seek(0);
                     }
                     debug("resuming stream");
-                    stream.resume();
+                    netStream.resume();
 //                    if (stream.time == 0 && !conf.rtmp) {
-//                        debug("starting play of stream '" + conf.url + "'");
-//                        stream.play(conf.url);
+//                        debug("starting play of stream '" + stream + "'");
+//                        stream.play(stream);
 //                    } else {
 //                        debug("resuming stream");
 //                        stream.resume();
@@ -212,18 +211,18 @@ public class Flowplayer extends Sprite {
     public function seek(seconds:Number):void {
         if (ready) {
             seekTo = seconds;
-            stream.seek(seconds);
+            netStream.seek(seconds);
         }
     }
 
     public function volume(level:Number, fireEvent:Boolean = true):void {
         debug("volume(), setting to " + level + " (was at " + volumeLevel + ")");
-        if (stream && volumeLevel != level) {
+        if (netStream && volumeLevel != level) {
             debug("setting volume to " + level);
             if (level > 1) level = 1;
             else if (level < 0) level = 0;
 
-            stream.soundTransform = new SoundTransform(level);
+            netStream.soundTransform = new SoundTransform(level);
             volumeLevel = level;
             if (fireEvent) {
                 fire(VOLUME, level);
@@ -236,7 +235,7 @@ public class Flowplayer extends Sprite {
         debug("unload");
         if (ready) {
             pause();
-            stream.close();
+            netStream.close();
             connector.close();
             fire(UNLOAD, null);
         }
@@ -244,7 +243,7 @@ public class Flowplayer extends Sprite {
 
     public function status():Object {
         if (!ready) return null;
-        return { time: stream.time, buffer: stream.bytesLoaded };
+        return { time: netStream.time, buffer: netStream.bytesLoaded };
     }
 
 
@@ -259,9 +258,7 @@ public class Flowplayer extends Sprite {
         addLogo();
         arrange();
 
-        conf.url = unescape(conf.url);
-
-        debug("debug.url", conf.url);
+        debug("debug.url", stream);
 
         paused = !conf.autoplay;
         preloadComplete = false;
@@ -269,10 +266,30 @@ public class Flowplayer extends Sprite {
         connect();
     }
 
+    private function isRtmpUrl(url:String):Boolean {
+        var protocols:Array = ["rtmp","rtmpt", "rtmpe", "rtmpte", "rtmfp"];
+        var protocol:String = url.substr(0,url.indexOf("://"));
+        return protocols.indexOf(protocol) >= 0;
+    }
+
+    private function get rtmpUrls():Array {
+        var url:String = unescape(conf.url);
+        if (isRtmpUrl(url)) {
+            var lastSlashPos : Number = url.lastIndexOf("/");
+            return [url.substring(0, lastSlashPos), url.substring(lastSlashPos + 1)];
+        }
+        return [conf.rtmp, url];
+    }
+
+    private function get stream():String {
+        return rtmpUrls[1];
+    }
+
     private function connect():void {
-        debug("connect() subscribe? " + conf.subscribe + ", stream '" + conf.url + "'");
-//      connector = new SubscribingConnector(this, conf.rtmp, conf.url);
-        connector = conf.subscribe ? new SubscribingConnector(this, conf.rtmp, conf.url) : new ParallelConnector(this, conf.rtmp);
+        var urls:Array = rtmpUrls;
+        debug("connect() subscribe? " + conf.subscribe + ", urls", urls);
+//      connector = new SubscribingConnector(this, conf.rtmp, stream);
+        connector = conf.subscribe ? new SubscribingConnector(this, urls[0], urls[1]) : new ParallelConnector(this, urls[0]);
         connector.connect(onConnect, onDisconnect);
     }
 
@@ -293,8 +310,8 @@ public class Flowplayer extends Sprite {
         // start streaming
 
         if (conf.autoplay) {
-            debug("autoplay is on, starting play of stream '" + conf.url + "'");
-            stream.play(conf.url);
+            debug("autoplay is on, starting play of stream '" + stream + "'");
+            netStream.play(stream);
             return;
         }
 
@@ -302,37 +319,37 @@ public class Flowplayer extends Sprite {
             ready = true;
             fire(Flowplayer.READY, {
                 seekable: !!conf.rtmp,
-                bytes: stream.bytesTotal,
-                src: conf.url,
-                url: conf.url
+                bytes: netStream.bytesTotal,
+                src: stream,
+                url: stream
             });
             fire(Flowplayer.PAUSE, null);
 
             // we pause when metadata is received
         } else {
-            debug("preload: starting play of stream '" + conf.url + "'");
-            stream.play(conf.url);
+            debug("preload: starting play of stream '" + stream + "'");
+            netStream.play(stream);
         }
     }
 
     private function setupStream(conn:NetConnection):void {
         debug("Connection success", { ready: ready, preloadCompete: preloadComplete, paused: paused, autoplay: conf.autoplay });
 
-        stream = new NetStream(conn);
+        netStream = new NetStream(conn);
         var bufferTime:Number = conf.hasOwnProperty("bufferTime") ? conf.bufferTime : 3;
         debug("bufferTime == " + bufferTime);
-        stream.bufferTime = bufferTime;
-        video.attachNetStream(stream);
+        netStream.bufferTime = bufferTime;
+        video.attachNetStream(netStream);
 
         // metadata
-        stream.client = {
+        netStream.client = {
 
             onPlayStatus: function (info:Object):void {
                 debug("onPlayStatus", info);
                 if (info.code == "NetStream.Play.Complete") {
                     finished = true;
                     if (conf.loop) {
-                        stream.seek(0);
+                        netStream.seek(0);
                     } else if (!paused) {
                         paused = true;
                         fire(Flowplayer.PAUSE, null);
@@ -353,13 +370,13 @@ public class Flowplayer extends Sprite {
 
                 var clip:Object = {
                     seekable: !!conf.rtmp,
-                    bytes: stream.bytesTotal,
+                    bytes: netStream.bytesTotal,
                     duration: meta.duration,
                     height: meta.height,
                     width: meta.width,
                     seekpoints: meta.seekpoints,
-                    src: conf.url,
-                    url: conf.url
+                    src: stream,
+                    url: stream
                 };
 
                 if (!ready) {
@@ -373,7 +390,7 @@ public class Flowplayer extends Sprite {
                         debug("stopping on first frame");
                         volume(1);
                         pauseOrCloseStream();
-                        stream.seek(0);
+                        netStream.seek(0);
                     }
                     return;
                 }
@@ -387,7 +404,7 @@ public class Flowplayer extends Sprite {
         };
 
         // listen for playback events
-        stream.addEventListener(NetStatusEvent.NET_STATUS, function (e:NetStatusEvent):void {
+        netStream.addEventListener(NetStatusEvent.NET_STATUS, function (e:NetStatusEvent):void {
 
             if (conf.debug) fire("debug.stream", e.info.code);
 
@@ -429,7 +446,7 @@ public class Flowplayer extends Sprite {
                     if (!conf.rtmp && !paused) {
                         finished = true;
                         paused = true;
-                        stream.pause();
+                        netStream.pause();
                         fire(Flowplayer.PAUSE, null);
                         fire(Flowplayer.FINISH, null);
                     }
@@ -464,7 +481,7 @@ public class Flowplayer extends Sprite {
     };
 
     private function addLogo():void {
-        var url:String = (conf.rtmp) ? conf.rtmp : (conf.url) ? conf.url : '';
+        var url:String = (conf.rtmp) ? conf.rtmp : unescape(conf.url) ? unescape(conf.url) : '';
         var pos:Number;
         var whitelist:Array = [
             'drive.flowplayer.org',
