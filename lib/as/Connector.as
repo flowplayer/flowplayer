@@ -20,11 +20,14 @@
  http://flowplayer.org/pricing/
  */
 package {
-    public interface Connector {
+import flash.net.NetConnection;
 
-        function connect(connectedCallback:Function, disconnectedCallback:Function):void;
+public interface Connector {
 
-        function close():void;
+    function connect(connectedCallback:Function, disconnectedCallback:Function):void;
 
-    }
+    function close():void;
+
+    function get connected():Boolean;
+}
 }
