@@ -32,8 +32,6 @@ import flash.media.Video;
 import flash.net.NetConnection;
 import flash.net.NetStream;
 import flash.system.Security;
-import flash.utils.Timer;
-import flash.utils.setTimeout;
 
 public class Flowplayer extends Sprite {
 
@@ -125,26 +123,28 @@ public class Flowplayer extends Sprite {
     public function pause():void {
         debug("pause() ready? " + ready + " paused? " + paused);
         if (ready && !paused) {
-
-            if (conf.live) {
-                stream.close();
-                connector.close();
-            } else {
-                stream.pause();
-            }
-
+            pauseOrCloseStream();
             debug("firing pause");
             fire(PAUSE, null);
             paused = true;
         }
     }
 
+    private function pauseOrCloseStream():void {
+        if (conf.live) {
+            stream.close();
+            connector.close();
+        } else {
+            stream.pause();
+        }
+    }
+
     public function resume():void {
-        debug("resume()");
-//        debug("resume()", { ready: ready, preloadComplete: preloadComplete, splash: conf.splash });
+//        debug("resume()");
+        debug("resume()", { ready: ready, preloadComplete: preloadComplete, splash: conf.splash });
 
         if (preloadComplete && !paused) {
-            debug("preloadComplete? " + preloadComplete + ", paused? " + paused);
+            debug("preloadComplete? " + preloadComplete + ", paused? " + paused + ", ready= " + ready);
             return;
         }
 
@@ -167,6 +167,7 @@ public class Flowplayer extends Sprite {
                         stream.play(conf.url);
                     }, onDisconnect);
                 } else {
+                    debug("starting play of stream '" + conf.url + "'");
                     stream.play(conf.url);
                 }
 
@@ -180,13 +181,15 @@ public class Flowplayer extends Sprite {
                     if (finished) {
                         seek(0);
                     }
-                    if (stream.time == 0 && !conf.rtmp) {
-                        debug("starting play of stream '" + conf.url + "'");
-                        stream.play(conf.url);
-                    } else {
-                        debug("resuming stream");
-                        stream.resume();
-                    }
+                    debug("resuming stream");
+                    stream.resume();
+//                    if (stream.time == 0 && !conf.rtmp) {
+//                        debug("starting play of stream '" + conf.url + "'");
+//                        stream.play(conf.url);
+//                    } else {
+//                        debug("resuming stream");
+//                        stream.resume();
+//                    }
                 }
             }
             debug("firing RESUME");
@@ -290,15 +293,8 @@ public class Flowplayer extends Sprite {
         // start streaming
 
         if (conf.autoplay) {
-            debug("starting play of stream '" + conf.url + "'");
+            debug("autoplay is on, starting play of stream '" + conf.url + "'");
             stream.play(conf.url);
-
-            if (conf.live) {
-                ready = true;
-                // need to fire ready, because we might not receive metadata
-                fire(Flowplayer.READY);
-                fire(Flowplayer.RESUME);
-            }
             return;
         }
 
@@ -314,9 +310,19 @@ public class Flowplayer extends Sprite {
 
             // we pause when metadata is received
         } else {
-            debug("starting play of stream '" + conf.url + "'");
+            debug("preload: starting play of stream '" + conf.url + "'");
             stream.play(conf.url);
         }
+    }
+
+    private function setupStream(conn:NetConnection):void {
+        debug("Connection success", { ready: ready, preloadCompete: preloadComplete, paused: paused, autoplay: conf.autoplay });
+
+        stream = new NetStream(conn);
+        var bufferTime:Number = conf.hasOwnProperty("bufferTime") ? conf.bufferTime : 3;
+        debug("bufferTime == " + bufferTime);
+        stream.bufferTime = bufferTime;
+        video.attachNetStream(stream);
 
         // metadata
         stream.client = {
@@ -366,9 +372,10 @@ public class Flowplayer extends Sprite {
                     if (!conf.autoplay) {
                         debug("stopping on first frame");
                         volume(1);
-                        stream.pause();
+                        pauseOrCloseStream();
                         stream.seek(0);
                     }
+                    return;
                 }
 
                 if (preloadNone() && !preloadComplete) {
@@ -431,16 +438,6 @@ public class Flowplayer extends Sprite {
             }
 
         });
-    }
-
-    private function setupStream(conn:NetConnection):void {
-        debug("Connection success", { ready: ready, preloadCompete: preloadComplete, paused: paused, autoplay: conf.autoplay });
-
-        stream = new NetStream(conn);
-        var bufferTime:Number = conf.hasOwnProperty("bufferTime") ? conf.bufferTime : 3;
-        debug("bufferTime == " + bufferTime);
-        stream.bufferTime = bufferTime;
-        video.attachNetStream(stream);
     }
 
     internal function debug(msg:String, data:Object = null):void {
