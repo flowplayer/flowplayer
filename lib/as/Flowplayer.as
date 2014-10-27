@@ -143,7 +143,10 @@ public class Flowplayer extends Sprite {
         debug("resume()");
 //        debug("resume()", { ready: ready, preloadComplete: preloadComplete, splash: conf.splash });
 
-        if (preloadComplete && !paused) return;
+        if (preloadComplete && !paused) {
+            debug("preloadComplete? " + preloadComplete + ", paused? " + paused);
+            return;
+        }
 
         if (!conf.autoplay) {
             volume(1, false);
@@ -153,13 +156,19 @@ public class Flowplayer extends Sprite {
             conf.autoplay = true;
             paused = false;
 
-            if (conf.live && !connector.connected) {
-                debug("resuming live stream (reconnecting)");
-                connector.connect(function (conn:NetConnection):void {
-                    ready = true;
-                    setupStream(conn);
+            debug("live? " + conf.live);
+            if (conf.live) {
+
+                if (!connector.connected) {
+                    debug("resuming live stream (reconnecting)");
+                    connector.connect(function (conn:NetConnection):void {
+                        ready = true;
+                        setupStream(conn);
+                        stream.play(conf.url);
+                    }, onDisconnect);
+                } else {
                     stream.play(conf.url);
-                }, onDisconnect);
+                }
 
             } else {
                 if (!ready) return;
@@ -193,7 +202,7 @@ public class Flowplayer extends Sprite {
 
     private function preloadNone():Boolean {
         var result:Boolean = !conf.splash && conf.preload == "none";
-        debug("preload == 'none'? " + result);
+        debug("preload == 'none'? " + result + ", conf.splash == " + conf.splash + ", conf.preload == " + conf.preload);
         return result;
     }
 
@@ -238,14 +247,8 @@ public class Flowplayer extends Sprite {
 
     /************* Private API ***********/
 
-
-        // setup video stream
     private function init():void {
-        initVideo();
-    }
-
-    private function initVideo():void {
-        debug("initVideo()", conf);
+        debug("init()", conf);
         video = new Video();
         video.smoothing = true;
         this.addChild(video);
@@ -285,6 +288,19 @@ public class Flowplayer extends Sprite {
 
         fire("debug-preloadComplete = " + preloadComplete, null);
         // start streaming
+
+        if (conf.autoplay) {
+            debug("starting play of stream '" + conf.url + "'");
+            stream.play(conf.url);
+
+            if (conf.live) {
+                ready = true;
+                // need to fire ready, because we might not receive metadata
+                fire(Flowplayer.READY);
+                fire(Flowplayer.RESUME);
+            }
+            return;
+        }
 
         if (preloadNone() && !preloadComplete) {
             ready = true;
