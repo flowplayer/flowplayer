@@ -31,6 +31,7 @@
     "is-object": "^1.0.1",
     "mocha": "~1.21.4",
     "mochify": "~1.1.2",
+    "phantomjs": "^1.9.12",
     "sizzle": "~2.0.0",
     "stylus": "~0.40.3",
     "uglify-js": "~2.4.3"

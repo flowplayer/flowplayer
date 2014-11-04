@@ -14,7 +14,7 @@ Feature: Playback
     flowplayer(function(api, root) {
       api.bind('progress', function(ev, api, time) {
         if (time > 1) { //1 second
-          root.after('<div class="pass-1s">Has player over 1 second</div>');
+          $(root).after('<div class="pass-1s">Has player over 1 second</div>');
         }
       });
     });

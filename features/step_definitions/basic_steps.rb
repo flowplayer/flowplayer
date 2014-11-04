@@ -15,7 +15,9 @@ After do
 end
 
 def navigate_to_home
-  url = "#{ENV['base_url']}/features/support/#{@filename}"
+  base_url = ENV['base_url']
+  base_url = 'http://localhost:8000' unless base_url
+  url = "#{base_url}/features/support/#{@filename}"
   @browser.navigate.to url
 end
 

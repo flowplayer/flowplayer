@@ -9,6 +9,12 @@ require 'json'
 @parallel_limit = ENV["nodes"] || 1
 @parallel_limit = @parallel_limit.to_i
 
+task :local do
+  ENV['LOCAL_BROWSER'] = "true"
+
+  Rake::Task[:run_features].execute()
+end
+
 task :cucumber do
   current_browser = ""
   Parallel.map(@browsers, :in_threads => @parallel_limit) do |browser|
@@ -16,13 +22,14 @@ task :cucumber do
       if @browser and browser['browser'] != @browser and browser['browserName'] != @browser
         next
       end
-      puts "Running with: #{browser.inspect}"
+      #puts "Running with: #{browser.inspect}"
       ENV['BROWSER'] = browser['browser']
       ENV['BROWSER_VERSION'] = browser['browser_version']
       ENV['BROWSER_NAME'] = browser['browserName']
       ENV['DEVICE'] = browser['device']
       ENV['OS'] = browser['os']
       ENV['OS_VERSION'] = browser['os_version']
+      ENV['PLATFORM'] = browser['platform']
 
       Rake::Task[:run_features].execute()
 
@@ -33,7 +40,7 @@ task :cucumber do
       if @browser and browser['browser'] != @browser and browser['browserName'] != @browser
         next
       end
-      puts "Running with splash: #{browser.inspect}"
+      #puts "Running with splash: #{browser.inspect}"
       ENV['BROWSER'] = browser['browser']
       ENV['BROWSER_VERSION'] = browser['browser_version']
       ENV['BROWSER_NAME'] = browser['browserName']
@@ -41,6 +48,7 @@ task :cucumber do
       ENV['OS'] = browser['os']
       ENV['OS_VERSION'] = browser['os_version']
       ENV['splash'] = "true"
+      ENV['PLATFORM'] = browser['platform']
 
       Rake::Task[:run_features].execute()
 
@@ -48,5 +56,8 @@ task :cucumber do
   
 end
 
-Cucumber::Rake::Task.new(:run_features)
+Cucumber::Rake::Task.new(:run_features) do |t|
+  t.cucumber_opts = %w(--format progress)
+end
+
 task :default => [:cucumber]

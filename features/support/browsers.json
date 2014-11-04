@@ -15,7 +15,7 @@
   },
   {
     "browser": "safari",
-    "browser_version": "6.0",
+    "browser_version": "6.1",
     "device": null,
     "os": "OS X",
     "os_version": "Mountain Lion"
@@ -28,20 +28,6 @@
     "os_version": "8"
   },
   {
-    "browser": "ie",
-    "browser_version": "8.0",
-    "device": null,
-    "os": "Windows",
-    "os_version": "7"
-  },
-  {
-    "browser": "ie",
-    "browser_version": "7.0",
-    "device": null,
-    "os": "Windows",
-    "os_version": "XP"
-  },
-  {
     "browser": "chrome",
     "browser_version": "29.0",
     "device": null,
@@ -52,5 +38,12 @@
     "browserName": "iPad",
     "platform": "MAC",
     "device": "iPad 3rd (6.0)"
+  },
+  {
+    "browser": "ie",
+    "browser_version": "9.0",
+    "device": null,
+    "os": "Windows",
+    "os_version": "7"
   }
 ]
