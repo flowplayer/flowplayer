@@ -83,3 +83,14 @@ Then(/^the player should be in paused state$/) do
   @browser.find_element(:css => ".is-paused")
 end
 
+Then(/^"(.*?)" event should be called (\d+) time$/) do |ev_name, cnt|
+  elem = @browser.find_element(:css => ".event-#{ev_name}")
+  expect(elem.text).to eq(cnt)
+end
+
+Then(/^"(.*?)" event should be called (\d+) time unless splash setup$/) do |ev_name, cnt|
+  if @browser.execute_script("return window.flowplayer.support.firstframe && !window.flowplayer.conf.splash;")
+    elem = @browser.find_element(:css => ".event-#{ev_name}")
+    expect(elem.text).to eq(cnt)
+  end
+end

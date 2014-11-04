@@ -13,6 +13,8 @@ task :local do
   ENV['LOCAL_BROWSER'] = "true"
 
   Rake::Task[:run_features].execute()
+  ENV['splash'] = "true"
+  Rake::Task[:run_features].execute()
 end
 
 task :cucumber do
