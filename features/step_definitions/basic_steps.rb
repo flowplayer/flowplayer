@@ -58,6 +58,11 @@ When(/^i open the page and wait for player to become ready$/) do
   wait_for_ready()
 end
 
+When(/^I wait for video to play to the end$/) do
+  wait = Selenium::WebDriver::Wait.new(:timeout => 45)
+  wait.until { is_element_present(:css => ".is-finished") }
+end
+
 def click_player
   @browser.find_element(:css => ".fp-ui").click
 end
@@ -94,3 +99,10 @@ Then(/^"(.*?)" event should be called (\d+) time unless splash setup$/) do |ev_n
     expect(elem.text).to eq(cnt)
   end
 end
+
+Then(/^"(.*?)" event should be called at least (\d+) time$/) do |ev_name, cnt|
+  elem = @browser.find_element(:css => ".event-#{ev_name}")
+  expect(elem.text.to_i).to be >= 1
+end
+
+

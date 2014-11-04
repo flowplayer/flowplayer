@@ -68,3 +68,25 @@ Feature: Events
   Scenario: Ready event
     When i open the page and wait for player to become ready
     Then "ready" event should be called 1 time unless splash setup
+
+  Scenario: Load event
+    When i open the page and wait for player to become ready
+    Then "load" event should be called 1 time unless splash setup
+
+  Scenario: Resume event
+    When i open the page and wait for player to become ready
+    And I start video by clicking the player
+    Then "resume" event should be called 1 time
+    And "ready" event should be called 1 time
+    And "load" event should be called 1 time
+
+  Scenario: Progress event
+    When i open the page and wait for player to become ready
+    And I start video by clicking the player
+    And I wait for a few seconds
+    Then "progress" event should be called at least 1 time
+  Scenario: Finish event
+    When i open the page and wait for player to become ready
+    And I start video by clicking the player
+    And I wait for video to play to the end
+    Then "finish" event should be called 1 time
