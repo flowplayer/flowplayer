@@ -26,6 +26,13 @@
       .fp-waiting
          display block
 
+   &.is-playing
+      background-image none !important;
+      background-color #3;
+      &.hls-fix.is-finished
+        .fp-engine
+          position absolute
+          top -9999em
    &.is-fullscreen
       position fixed !important
       top 0 !important
