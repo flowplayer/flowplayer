@@ -48,10 +48,11 @@ public class Flowplayer extends Sprite {
     internal static const FINISH:String = "finish";
     internal static const UNLOAD:String = "unload";
     internal static const ERROR:String = "error";
+    internal static const SET:String = "set";
 
     // external interface
     private static const INTERFACE:Array
-        = new Array(PLAY, PAUSE, RESUME, SEEK, VOLUME, UNLOAD, STATUS);
+        = new Array(PLAY, PAUSE, RESUME, SEEK, VOLUME, UNLOAD, STATUS, SET);
 
     // flashvars
     private var conf:Object;
@@ -110,7 +111,7 @@ public class Flowplayer extends Sprite {
     /************ Public API ************/
 
         // switch url
-    public function play(url:String):void {
+    public function play(url:String, reconnect:Boolean = false):void {
         debug("play() " + url);
         if (!ready)  return;
         conf.url = url;
@@ -118,7 +119,11 @@ public class Flowplayer extends Sprite {
         conf.autoplay = true;
         netStream.close();
         debug("starting play of stream '" + url + "'");
-        netStream.play(stream);
+        if (reconnect) {
+          connect();
+        } else {
+          netStream.play(url);
+        }
         paused = ready = false;
         video.visible = true;
     }
@@ -201,6 +206,11 @@ public class Flowplayer extends Sprite {
             ready = true;
             connect();
         }
+    }
+
+    public function set(key:String, value:String):void {
+        debug('set: ' + key + ':' + value);
+        conf[key] = value;
     }
 
     private function preloadNone():Boolean {

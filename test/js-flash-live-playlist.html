@@ -1,0 +1,58 @@
+
+<!doctype html>
+<html>
+<head>
+
+   <!-- player skin -->
+   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css?f" />
+   <link rel="stylesheet" href="http://demos.flowplayer.org/media/css/playlist.css" />
+
+   <!-- site specific styling -->
+   <style>
+   body {
+      font: 12px "Myriad Pro", "Lucida Grande", sans-serif;
+      text-align: center;
+      padding-top: 1%;
+   }
+   .flowplayer { width: 70%; }
+   </style>
+
+   <!-- include flowplayer -->
+   <script src="../dist/flowplayer.js?i"></script>
+   </head>
+
+<body>
+
+   <!-- the player -->
+   <div id="player">
+    </div>
+
+    <script>
+    var el = document.getElementById('player');
+    var api = flowplayer(el, {
+        splash: false,
+        ratio: 0.417,
+        adaptiveRatio: true,
+        swf: '../dist/flowplayer.swf',
+        debug: true,
+        playlist: [{
+          preload: "none",
+          sources: [
+          {
+            type: "video/flash",
+            src: "http://stream.flowplayer.org/flowplayer-700.flv"
+          }]
+        }, {
+          rtmp: "rtmp://itv08.digizuite.dk/tv2b",
+          live: true,
+          sources: [{
+            type: "video/flash",
+            src: "ch1"
+        }]
+        }]
+      });
+    </script>
+
+
+</body>
+
