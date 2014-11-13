@@ -30,10 +30,12 @@ public class ParallelConnector implements Connector {
     private var url:String;
     private var connection:NetConnection;
     private var firstAttemptFailed:Boolean;
+    private var doRtmpt:Boolean;
 
-    public function ParallelConnector(player:Flowplayer, url:String) {
+    public function ParallelConnector(player:Flowplayer, url:String, doRtmpt:Boolean) {
         this.player = player;
         this.url = url;
+        this.doRtmpt = doRtmpt;
     }
 
     public function connect(connectedCallback:Function, disconnectedCallback:Function):void {
@@ -41,7 +43,9 @@ public class ParallelConnector implements Connector {
         doConnect(connectedCallback, disconnectedCallback, url);
 
         if (url && url.indexOf("rtmp:") == 0) {
-            debug("connecting with RTMP and RTMPT");
+            debug("connecting with " + (doRtmpt ? "RTMP and RTMPT" :"RTMP only"));
+
+            if (!doRtmpt) return;
 
             // RTMPT is attempted after 250 ms
             setTimeout(function ():void {

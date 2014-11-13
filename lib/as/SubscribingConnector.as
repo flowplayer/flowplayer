@@ -28,11 +28,11 @@ public class SubscribingConnector implements Connector {
     private var player:Flowplayer;
     private var stream:String;
 
-    public function SubscribingConnector(player:Flowplayer, url:String, stream:String) {
+    public function SubscribingConnector(player:Flowplayer, url:String, stream:String, doRtmpt:Boolean) {
         this.player = player;
         this.rtmpUrl = url;
         this.stream = stream;
-        this.connector = new ParallelConnector(player, url);
+        this.connector = new ParallelConnector(player, url, doRtmpt);
     }
 
 

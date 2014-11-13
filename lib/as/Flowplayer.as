@@ -83,7 +83,8 @@ public class Flowplayer extends Sprite {
 
         var swfUrl:String = decodeURIComponent(this.loaderInfo.url);
         if (swfUrl.indexOf("callback=") > 0) throw new Error("Security error");
-        conf = this.loaderInfo.parameters;
+
+        configure();
 
         // IE needs mouse / keyboard events
         stage.addEventListener(MouseEvent.CLICK, function (e:MouseEvent):void {
@@ -291,7 +292,7 @@ public class Flowplayer extends Sprite {
         var urls:Array = rtmpUrls;
         debug("connect() subscribe? " + conf.subscribe + ", urls", urls);
 //      connector = new SubscribingConnector(this, conf.rtmp, stream);
-        connector = conf.subscribe ? new SubscribingConnector(this, urls[0], urls[1]) : new ParallelConnector(this, urls[0]);
+        connector = conf.subscribe ? new SubscribingConnector(this, urls[0], urls[1], conf.rtmpt) : new ParallelConnector(this, urls[0], conf.rtmpt);
         connector.connect(onConnect, onDisconnect);
     }
 
@@ -525,6 +526,12 @@ public class Flowplayer extends Sprite {
     private function get duration():Number {
         if (!clip) return 0;
         return clip.duration;
+    }
+
+    private function configure():void {
+        conf = this.loaderInfo.parameters;
+        conf.rtmpt = conf.rtmpt == "false" ? false : (conf.rtmpt == undefined ? true : !! conf.rtmpt);
+        debug("configure()", conf);
     }
 
 }
