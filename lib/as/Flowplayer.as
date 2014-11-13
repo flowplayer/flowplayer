@@ -32,6 +32,7 @@ import flash.media.Video;
 import flash.net.NetConnection;
 import flash.net.NetStream;
 import flash.system.Security;
+import flash.utils.Timer;
 
 public class Flowplayer extends Sprite {
 
@@ -71,6 +72,7 @@ public class Flowplayer extends Sprite {
     private var netStream:NetStream;
     private var video:Video;
     private var logo:DisplayObject;
+    private var clip:Object;
 
 
     /* constructor */
@@ -347,10 +349,10 @@ public class Flowplayer extends Sprite {
             onPlayStatus: function (info:Object):void {
                 debug("onPlayStatus", info);
                 if (info.code == "NetStream.Play.Complete") {
-                    finished = true;
                     if (conf.loop) {
                         netStream.seek(0);
                     } else if (!paused) {
+                        finished = true;
                         paused = true;
                         fire(Flowplayer.PAUSE, null);
                         fire(Flowplayer.FINISH, null);
@@ -368,7 +370,7 @@ public class Flowplayer extends Sprite {
                 }
                 if (conf.debug) fire("debug.metadata", meta);
 
-                var clip:Object = {
+                clip = {
                     seekable: !!conf.rtmp,
                     bytes: netStream.bytesTotal,
                     duration: meta.duration,
@@ -443,13 +445,35 @@ public class Flowplayer extends Sprite {
                     break;
 
                 case "NetStream.Play.Stop":
-                    if (!conf.rtmp && !paused) {
-                        finished = true;
-                        paused = true;
-                        netStream.pause();
-                        fire(Flowplayer.PAUSE, null);
-                        fire(Flowplayer.FINISH, null);
-                    }
+                    var stopTracker:Timer = new Timer(100);
+                    var prevTime:Number = 0;
+
+                    stopTracker.addEventListener(TimerEvent.TIMER, function (e:TimerEvent):void {
+                        debug("checking end of clip: duration " + duration + ", time " + netStream.time + ", prevTime " + prevTime);
+                        if (duration == 0) return;
+                        if (prevTime < netStream.time) {
+                            prevTime = netStream.time;
+                            return;
+                        }
+                        if (duration - netStream.time > 3) return;
+
+                        prevTime = netStream.time;
+
+                        debug("reached end of clip");
+                        stopTracker.stop();
+
+                        if (conf.loop) {
+                            netStream.seek(0);
+                        } else if (!conf.rtmp && !paused) {
+                            finished = true;
+                            paused = true;
+                            netStream.pause();
+                            fire(Flowplayer.PAUSE, null);
+                            fire(Flowplayer.FINISH, null);
+                        }
+                    });
+                    stopTracker.start();
+
                     break;
 
             }
@@ -496,6 +520,11 @@ public class Flowplayer extends Sprite {
         }
 
         addChild(logo);
+    }
+
+    private function get duration():Number {
+        if (!clip) return 0;
+        return clip.duration;
     }
 
 }
