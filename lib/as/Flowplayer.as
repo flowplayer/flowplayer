@@ -125,15 +125,16 @@ public class Flowplayer extends Sprite {
     public function pause():void {
         debug("pause() ready? " + ready + " paused? " + paused);
         if (ready && !paused) {
-            pauseOrCloseStream();
+            pauseStream();
             debug("firing pause");
             fire(PAUSE, null);
             paused = true;
         }
     }
 
-    private function pauseOrCloseStream():void {
+    private function pauseStream():void {
         if (conf.live) {
+            debug("pauseStream(): closing live stream");
             netStream.close();
             connector.close();
         } else {
@@ -150,9 +151,9 @@ public class Flowplayer extends Sprite {
             return;
         }
 
-        if (!conf.autoplay) {
-            volume(1, false);
-        }
+//        if (!conf.autoplay) {
+//            volume(1, false);
+//        }
 
         try {
             conf.autoplay = true;
@@ -305,9 +306,9 @@ public class Flowplayer extends Sprite {
         setupStream(conn);
 
         // set volume to zero so that we don't hear anything if stopping on first frame
-        if (!conf.autoplay) {
-            volume(0, false);
-        }
+//        if (!conf.autoplay) {
+//            volume(0, false);
+//        }
 
         fire("debug-preloadComplete = " + preloadComplete, null);
         // start streaming
@@ -343,6 +344,7 @@ public class Flowplayer extends Sprite {
         debug("bufferTime == " + bufferTime);
         netStream.bufferTime = bufferTime;
         video.attachNetStream(netStream);
+        volume(volumeLevel || conf.initialVolume, false);
 
         // metadata
         netStream.client = {
@@ -386,13 +388,12 @@ public class Flowplayer extends Sprite {
                     ready = true;
 
                     fire(Flowplayer.READY, clip);
-                    if (conf.autoplay) fire(Flowplayer.RESUME, null);
 
-                    // stop at first frame
-                    if (!conf.autoplay) {
+                    if (conf.autoplay) {
+                        fire(Flowplayer.RESUME, null);
+                    } else {
                         debug("stopping on first frame");
-                        volume(1);
-                        pauseOrCloseStream();
+                        pauseStream();
                         netStream.seek(0);
                     }
                     return;
@@ -531,6 +532,7 @@ public class Flowplayer extends Sprite {
     private function configure():void {
         conf = this.loaderInfo.parameters;
         conf.rtmpt = conf.rtmpt == "false" ? false : (conf.rtmpt == undefined ? true : !! conf.rtmpt);
+        conf.live = conf.live == "false" ? false : !!conf.live;
         debug("configure()", conf);
     }
 
