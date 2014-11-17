@@ -1,0 +1,28 @@
+<head>
+
+   <link rel="stylesheet" type="text/css" href="../../dist/skin/functional.css" />
+
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+   <script src="../../dist/flowplayer.js"></script>
+
+   <style>
+   body { font: 12px "Lucida Grande", sans-serif; }
+   .flowplayer { width: 620px; height: 350px; margin: auto; }
+   </style>
+
+    <script type="text/javascript">
+        flowplayer.conf = { live: true };
+    </script>
+
+</head>
+
+<body>
+
+<div class="flowplayer" data-debug="true" data-engine="flash" data-swf="../../dist/flowplayer.swf">
+    <video autoplay preload="none" poster="camera.jpg">
+        <source type="application/x-mpegurl" src="http://itv08.digizuite.dk/tv2b/ngrp:ch1_all/playlist.m3u8">
+        <source type="video/flash" src="rtmp://itv08.digizuite.dk/tv2b/ch1">
+    </video>
+</div>
+
+</body>
