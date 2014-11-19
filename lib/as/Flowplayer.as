@@ -120,6 +120,7 @@ public class Flowplayer extends Sprite {
         debug("starting play of stream '" + url + "'");
         netStream.play(stream);
         paused = ready = false;
+        video.visible = true;
     }
 
     public function pause():void {
@@ -143,7 +144,6 @@ public class Flowplayer extends Sprite {
     }
 
     public function resume():void {
-//        debug("resume()");
         debug("resume()", { ready: ready, preloadComplete: preloadComplete, splash: conf.splash });
 
         if (preloadComplete && !paused) {
@@ -151,13 +151,10 @@ public class Flowplayer extends Sprite {
             return;
         }
 
-//        if (!conf.autoplay) {
-//            volume(1, false);
-//        }
-
         try {
             conf.autoplay = true;
             paused = false;
+            video.visible = true;
 
             debug("live? " + conf.live);
             if (conf.live) {
@@ -246,7 +243,7 @@ public class Flowplayer extends Sprite {
     }
 
     public function status():Object {
-        if (!ready) return null;
+        if (!netStream) return null;
         return { time: netStream.time, buffer: netStream.bytesLoaded };
     }
 
@@ -395,6 +392,12 @@ public class Flowplayer extends Sprite {
                         debug("stopping on first frame");
                         pauseStream();
                         netStream.seek(0);
+
+                        // hide the video if splash or poster should stay visible and not be hidden behind the first frame
+                        if (conf.splash || conf.poster) {
+                            debug("splash or poster used, hiding video");
+                            video.visible = false;
+                        }
                     }
                     return;
                 }
@@ -422,8 +425,6 @@ public class Flowplayer extends Sprite {
                     if (!conf.rtmp) {
                         if (conf.autoplay) {
                             paused = false;
-
-                            // stop at first frame
                         }
                     }
                     break;
@@ -531,8 +532,21 @@ public class Flowplayer extends Sprite {
 
     private function configure():void {
         conf = this.loaderInfo.parameters;
-        conf.rtmpt = conf.rtmpt == "false" ? false : (conf.rtmpt == undefined ? true : !! conf.rtmpt);
-        conf.live = conf.live == "false" ? false : !!conf.live;
+
+        function decode(prop:String):void {
+            if (conf[prop] == "false") {
+                conf[prop] = false;
+                return;
+            };
+            conf[prop] = !! conf[prop];
+        }
+        if (conf.rtmpt == undefined) {
+            conf.rtmpt = true;
+        }
+        decode("rtmpt");
+        decode("live");
+        decode("splash");
+        decode("debug");
         debug("configure()", conf);
     }
 
