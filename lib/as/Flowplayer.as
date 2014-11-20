@@ -210,6 +210,7 @@ public class Flowplayer extends Sprite {
     }
 
     public function seek(seconds:Number):void {
+        debug("seek() target = " + seconds + " ready?" + ready);
         if (ready) {
             seekTo = seconds;
             netStream.seek(seconds);
@@ -384,21 +385,24 @@ public class Flowplayer extends Sprite {
                 if (!ready) {
                     ready = true;
 
-                    fire(Flowplayer.READY, clip);
-
                     if (conf.autoplay) {
                         fire(Flowplayer.RESUME, null);
                     } else {
                         debug("stopping on first frame");
-                        pauseStream();
                         netStream.seek(0);
+                        pauseStream();
 
                         // hide the video if splash or poster should stay visible and not be hidden behind the first frame
                         if (conf.splash || conf.poster) {
                             debug("splash or poster used, hiding video");
                             video.visible = false;
                         }
+
+                        // make autoplay true so that first-frame pause is not done with webkit-fullscreen-toggling
+                        conf.autoplay = true;
                     }
+
+                    fire(Flowplayer.READY, clip);
                     return;
                 }
 
