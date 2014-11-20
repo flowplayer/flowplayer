@@ -20,7 +20,6 @@
  http://flowplayer.org/pricing/
  */
 package {
-import flash.net.NetConnection;
 
 public interface Connector {
 
