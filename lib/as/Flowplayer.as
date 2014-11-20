@@ -111,7 +111,7 @@ public class Flowplayer extends Sprite {
 
         // switch url
     public function play(url:String):void {
-        debug("play");
+        debug("play() " + url);
         if (!ready)  return;
         conf.url = url;
 
@@ -260,7 +260,7 @@ public class Flowplayer extends Sprite {
         addLogo();
         arrange();
 
-        debug("debug.url", stream);
+        debug("init() stream name", stream);
 
         paused = !conf.autoplay;
         preloadComplete = false;
@@ -275,6 +275,7 @@ public class Flowplayer extends Sprite {
     }
 
     private function get rtmpUrls():Array {
+        debug("conf.url = " + conf.url);
         var url:String = unescape(conf.url);
         if (isRtmpUrl(url)) {
             var lastSlashPos : Number = url.lastIndexOf("/");
@@ -285,6 +286,15 @@ public class Flowplayer extends Sprite {
 
     private function get stream():String {
         return rtmpUrls[1];
+    }
+
+    private function get completeClipUrl():String {
+        var urls:Array = rtmpUrls;
+        if (urls[0] && urls[0].indexOf("rtmp") == 0) {
+            return urls[0] + "/" + urls[1];
+        } else {
+            return urls[1];
+        }
     }
 
     private function connect():void {
@@ -378,14 +388,15 @@ public class Flowplayer extends Sprite {
                     height: meta.height,
                     width: meta.width,
                     seekpoints: meta.seekpoints,
-                    src: stream,
-                    url: stream
+                    src: completeClipUrl,
+                    url: completeClipUrl
                 };
 
                 if (!ready) {
                     ready = true;
 
                     if (conf.autoplay) {
+                        fire(Flowplayer.READY, clip);
                         fire(Flowplayer.RESUME, null);
                     } else {
                         debug("stopping on first frame");
@@ -400,9 +411,8 @@ public class Flowplayer extends Sprite {
 
                         // make autoplay true so that first-frame pause is not done with webkit-fullscreen-toggling
                         conf.autoplay = true;
+                        fire(Flowplayer.READY, clip);
                     }
-
-                    fire(Flowplayer.READY, clip);
                     return;
                 }
 
@@ -551,6 +561,7 @@ public class Flowplayer extends Sprite {
         decode("live");
         decode("splash");
         decode("debug");
+        decode("subscribe");
         debug("configure()", conf);
     }
 

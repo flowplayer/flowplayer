@@ -39,6 +39,7 @@ public class ParallelConnector implements Connector {
     }
 
     public function connect(connectedCallback:Function, disconnectedCallback:Function):void {
+        debug("ParallelConnector.connect() " + url);
         firstAttemptFailed = false;
         doConnect(connectedCallback, disconnectedCallback, url);
 
