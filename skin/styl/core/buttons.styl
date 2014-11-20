@@ -98,6 +98,22 @@
          .is-rtl&
             bg 18px 7px
 
+   .fp-subtitle-switch
+      display none
+      color #f
+      position absolute
+      bottom 3px
+      z-index 11
+      right right_margin + spacing
+      .has-subtitles&
+         display block
+      .fp-dropdown
+         z-index 12
+         display none
+         left -42.5px
+      &.dropdown-open
+         .fp-dropdown
+            display block
    &.is-ready.is-closeable
       .fp-unload
          display block

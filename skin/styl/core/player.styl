@@ -43,6 +43,8 @@
       height 100%
       cursor pointer
       z-index 1
+   .fp-ui
+      z-index 11
 
    .fp-message
       display none
@@ -167,6 +169,42 @@
       @media (max-width: 600px)
          p
             font-size 9px
+
+   .fp-dropdown
+      position absolute
+      top 5px
+      width 100px
+      background-color rgba(#3, 0.9)
+      border-radius 3px
+      padding 5px
+      box-sizing border-box
+      -moz-box-sizing border-box
+      margin 0px
+      &:before
+        content ''
+        display block
+        position absolute
+        top -5px
+        left calc(50% - 5px)
+        width 0
+        height 0
+        border-left 5px solid transparent
+        border-right 5px solid transparent
+        border-bottom 5px solid rgba(#3, 0.9)
+      li
+        padding 3px
+        color #ddd
+        &.active
+          font-weight bold
+          color #fff
+      &.fp-dropup
+        bottom 20px
+        top auto
+        &:before
+          top auto
+          bottom -5px
+          border-bottom none
+          border-top 5px solid rgba(#3, 0.9)
 
    .fp-subtitle
       position absolute
