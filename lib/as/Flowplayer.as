@@ -82,8 +82,18 @@ package {
                 debug("creating callback " + INTERFACE[i] + " id == " + ExternalInterface.objectID);
                 ExternalInterface.addCallback("__" + INTERFACE[i], player[INTERFACE[i]]);
             }
-
             init();
+
+            // setup provider from URL
+
+            // detect HLS by checking the extension of src
+            if (conf.url.indexOf(".m3u") != -1) {
+                debug("HLS stream detected!");
+                provider = new HLSStreamProvider(this, video);
+            } else {
+                provider = new NetStreamProvider(this, video);
+            }
+            provider.load(conf);
         }
 
         public function set(key : String, value : String) : void {
@@ -94,6 +104,7 @@ package {
         /************ Public API ************/
         // switch url
         public function play(url : String) : void {
+            //TODO : switch provider if needed here
             provider.play(url);
             return;
         }
@@ -141,9 +152,6 @@ package {
 
             paused = !conf.autoplay;
             preloadComplete = false;
-
-            provider = new NetStreamProvider(this, video);
-            provider.load(conf);
         }
 
         internal function debug(msg : String, data : Object = null) : void {
