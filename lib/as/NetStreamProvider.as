@@ -59,7 +59,6 @@ package {
 
         // switch url
         public function play(url : String) : void {
-            player.debug("play");
             if (!ready) return;
             conf.url = url;
 
@@ -71,7 +70,6 @@ package {
         }
 
         public function pause() : void {
-            player.debug("pause() ready? " + ready + " paused? " + paused);
             if (ready && !paused) {
                 pauseStream();
                 player.debug("firing pause");
@@ -91,9 +89,6 @@ package {
         }
 
         public function resume() : void {
-            // debug("resume()");
-            player.debug("resume()", {ready:ready, preloadComplete:preloadComplete, splash:conf.splash});
-
             if (preloadComplete && !paused) {
                 player.debug("preloadComplete? " + preloadComplete + ", paused? " + paused + ", ready= " + ready);
                 return;
@@ -166,7 +161,6 @@ package {
         }
 
         public function volume(level : Number, fireEvent : Boolean = true) : void {
-            player.debug("volume(), setting to " + level + " (was at " + volumeLevel + ")");
             if (netStream && volumeLevel != level) {
                 player.debug("setting volume to " + level);
                 if (level > 1) level = 1;
@@ -181,7 +175,6 @@ package {
         }
 
         public function unload() : void {
-            player.debug("unload");
             if (ready) {
                 pause();
                 netStream.close();
