@@ -557,6 +557,10 @@ public class Flowplayer extends Sprite {
         if (conf.rtmpt == undefined) {
             conf.rtmpt = true;
         }
+        if (conf.rtmp && conf.rtmp.indexOf("rtmp") < 0) {
+            delete conf.rtmp;
+        }
+
         decode("rtmpt");
         decode("live");
         decode("splash");

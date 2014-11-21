@@ -1,0 +1,31 @@
+<html>
+<head>
+    <link rel='stylesheet' href='../../dist/skin/functional.css' />
+</head>
+<script src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'></script>
+<script src='../../dist/flowplayer.js'></script>
+
+<body>
+
+<div data-ratio="0.75" class='fp fixed-controls' style='width:640px;height:480px;'>
+    <video>
+        <!--<source src='470x250.mp4' type='video/mp4' />-->
+        <source src='http://stream.flowplayer.org/black/470x250.mp4' type='video/mp4' />
+    </video>
+</div>
+
+
+
+</body>
+<script>
+    $(function () {
+
+        $('.fp').flowplayer({
+            engine: 'flash',
+            debug: true,
+            swf: '../../dist/flowplayer.swf'
+        });
+    });
+
+</script>
+
