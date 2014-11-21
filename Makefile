@@ -69,7 +69,8 @@ flash:
 	@ cp lib/logo/logo.swc $(DIST)
 	@ cp lib/hls/flashls.swc $(DIST)
 	@ cp lib/as/*.as $(DIST)
-	@ cd $(DIST) && $(FLASH_COMPILE) -output flowplayer.swf Flowplayer.as -source-path ./ && rm *.as *.swc
+	@ cd $(DIST) && $(FLASH_COMPILE) -define=CONFIG::HLS,false -output flowplayer.swf Flowplayer.as -source-path ./
+	@ cd $(DIST) && $(FLASH_COMPILE) -define=CONFIG::HLS,true -output flowplayerhls.swf Flowplayer.as -source-path ./ && rm *.as *.swc
 
 
 zip: min concat skins flash
