@@ -85,7 +85,6 @@ package {
             init();
 
             // setup provider from URL
-
             if (CONFIG::HLS) {
                 // detect HLS by checking the extension of src
                 if (conf.url.indexOf(".m3u") != -1) {
@@ -108,37 +107,44 @@ package {
         /************ Public API ************/
         // switch url
         public function play(url : String) : void {
+            debug("play("+url+")");
             // TODO : switch provider if needed here
             provider.play(url);
             return;
         }
 
         public function pause() : void {
+            debug("pause()");
             provider.pause();
             return;
         }
 
         public function resume() : void {
+            debug("resume()");
             provider.resume();
             return;
         }
 
         public function seek(seconds : Number) : void {
+            debug("seek("+seconds+")");
             provider.seek(seconds);
             return;
         }
 
         public function volume(level : Number, fireEvent : Boolean = true) : void {
+            debug("volume("+level+")");
             provider.volume(level, fireEvent);
             return;
         }
 
         public function unload() : void {
+            debug("unload()");
             provider.unload();
             return;
         }
 
         public function status() : Object {
+            debug("status()");
             return provider.status();
         }
 
