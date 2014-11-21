@@ -1,3 +1,30 @@
+Version 5.5.1
+=============
+
+Enhancements
+------------
+
+* The performance of the Flash engine was improved. There's less video stuttering with Firefox.
+* Improvements for HLS and live streams.
+
+Fixes
+-----
+
+* Fix #697 - Flash with http progressive download: preload="none" breaks buffer indication
+* Fix #387 - Initial volume setting was ignored with the flash engine
+* Fix #462 - Add possibility to disable the rtmpt connection attempt. Can be done by setting rtmpt: false in configuration
+* Fix #612 - Make looping work with non-rtmp clips
+* Fix #655 - Add support for complete rtmp urls
+* Fix #697 - Fix the buffer bar to work when preload="none" is set
+* Fix #701 - Make autoplay work on live RTMP streams
+* Fix #577 - Force native subtitles for certain devices
+* Fix #717 - Insert subtitle track in ready event
+* Fix #577 - Enable subtitles explicitly
+* Fix #479 - Background handling for HLS videos/streams
+* Fix #705 - Don't allow seeking in live setups
+* Fix #699 - Correctly check for video type
+
+
 Version 5.5.0
 =============
 
