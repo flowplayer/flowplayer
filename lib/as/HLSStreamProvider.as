@@ -20,6 +20,11 @@
  http://flowplayer.org/pricing/
  */
 package {
+    import flash.events.Event;
+
+    import org.mangui.hls.utils.ScaleVideo;
+
+    import flash.geom.Rectangle;
     import flash.media.SoundTransform;
 
     import org.mangui.hls.event.HLSEvent;
@@ -39,12 +44,13 @@ package {
             this.player = player;
             this.video = video;
             hls = new HLS();
-            hls.stage = video.stage;
+            hls.stage = player.stage;
+            player.stage.addEventListener(Event.RESIZE, _onStageResize);
             hls.addEventListener(HLSEvent.MANIFEST_LOADED, _manifestHandler);
+            hls.addEventListener(HLSEvent.MEDIA_TIME, _mediaTimeHandler);
             /*
             hls.addEventListener(HLSEvent.PLAYBACK_COMPLETE, _completeHandler);
             hls.addEventListener(HLSEvent.ERROR, _errorHandler);
-            hls.addEventListener(HLSEvent.MEDIA_TIME, _mediaTimeHandler);
             hls.addEventListener(HLSEvent.PLAYBACK_STATE, _stateHandler);
              */
             video.attachNetStream(hls.stream);
@@ -101,6 +107,7 @@ package {
             clip.src = clip.url = config.url;
             clip.width = event.levels[hls.startlevel].width;
             clip.height = event.levels[hls.startlevel].height;
+            _checkVideoDimension();
             player.debug("manifest received " + clip);
             player.fire(Flowplayer.READY, clip);
 
@@ -112,5 +119,39 @@ package {
                 hls.stream.pause();
             }
         };
+
+        protected function _mediaTimeHandler(event : HLSEvent) : void {
+            _checkVideoDimension();
+        };
+
+        protected function _onStageResize(event : Event) : void {
+            player.debug("player resized");
+            _resize();
+        };
+
+        private function _checkVideoDimension() : void {
+            var videoWidth : int = video.videoWidth;
+            var videoHeight : int = video.videoHeight;
+
+            if (videoWidth && videoHeight) {
+                var changed : Boolean = clip.width != videoWidth || clip.height != videoHeight;
+                if (changed) {
+                    player.debug("video dimension changed");
+                    _resize();
+                }
+            }
+        }
+
+        private function _resize() : void {
+            player.debug("video size : " + video.videoWidth + "," + video.videoHeight);
+            player.debug("player size : " + player.width + "," + player.height);
+            clip.width = video.videoWidth;
+            clip.height = video.videoHeight;
+            var rect : Rectangle = ScaleVideo.resizeRectangle(video.videoWidth, video.videoHeight, player.width, player.height);
+            video.width = rect.width;
+            video.height = rect.height;
+            video.x = rect.x;
+            video.y = rect.y;
+        }
     }
 }
