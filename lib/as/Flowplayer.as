@@ -86,10 +86,14 @@ package {
 
             // setup provider from URL
 
-            // detect HLS by checking the extension of src
-            if (conf.url.indexOf(".m3u") != -1) {
-                debug("HLS stream detected!");
-                provider = new HLSStreamProvider(this, video);
+            if (CONFIG::HLS) {
+                // detect HLS by checking the extension of src
+                if (conf.url.indexOf(".m3u") != -1) {
+                    debug("HLS stream detected!");
+                    provider = new HLSStreamProvider(this, video);
+                } else {
+                    provider = new NetStreamProvider(this, video);
+                }
             } else {
                 provider = new NetStreamProvider(this, video);
             }
@@ -104,7 +108,7 @@ package {
         /************ Public API ************/
         // switch url
         public function play(url : String) : void {
-            //TODO : switch provider if needed here
+            // TODO : switch provider if needed here
             provider.play(url);
             return;
         }
