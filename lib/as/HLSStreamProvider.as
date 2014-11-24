@@ -66,6 +66,7 @@ package {
         public function unload() : void {
             hls.dispose();
             hls = null;
+            player.fire(Flowplayer.UNLOAD, null);
         }
 
         public function play(url : String) : void {
@@ -83,6 +84,7 @@ package {
 
         public function seek(seconds : Number) : void {
             hls.stream.seek(seconds);
+            player.fire(Flowplayer.SEEK, seconds);
         }
 
         public function volume(level : Number, fireEvent : Boolean = true) : void {
