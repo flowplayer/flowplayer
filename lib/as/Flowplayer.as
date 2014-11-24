@@ -144,7 +144,7 @@ package {
         }
 
         public function status() : Object {
-            debug("status()");
+            //debug("status()");
             return provider.status();
         }
 
