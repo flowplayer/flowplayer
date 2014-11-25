@@ -360,9 +360,7 @@ public class Flowplayer extends Sprite {
             onPlayStatus: function (info:Object):void {
                 debug("onPlayStatus", info);
                 if (info.code == "NetStream.Play.Complete") {
-                    if (conf.loop) {
-                        netStream.seek(0);
-                    } else if (!paused) {
+                    if (!paused) {
                         finished = true;
                         paused = true;
                         fire(Flowplayer.PAUSE, null);
@@ -465,8 +463,10 @@ public class Flowplayer extends Sprite {
                     var stopTracker:Timer = new Timer(100);
                     var prevTime:Number = 0;
 
+                    if (stopTracker && stopTracker.running) return;
+
                     stopTracker.addEventListener(TimerEvent.TIMER, function (e:TimerEvent):void {
-                        debug("checking end of clip: duration " + duration + ", time " + netStream.time + ", prevTime " + prevTime);
+//                        debug("checking end of clip: duration " + duration + ", time " + netStream.time + ", prevTime " + prevTime);
                         if (duration == 0) return;
                         if (prevTime < netStream.time) {
                             prevTime = netStream.time;
@@ -476,12 +476,9 @@ public class Flowplayer extends Sprite {
 
                         prevTime = netStream.time;
 
-                        debug("reached end of clip");
                         stopTracker.stop();
 
-                        if (conf.loop) {
-                            netStream.seek(0);
-                        } else if (!conf.rtmp && !paused) {
+                        if (!conf.rtmp && !paused) {
                             finished = true;
                             paused = true;
                             netStream.pause();
@@ -566,6 +563,7 @@ public class Flowplayer extends Sprite {
         decode("splash");
         decode("debug");
         decode("subscribe");
+        decode("loop");
         debug("configure()", conf);
     }
 
