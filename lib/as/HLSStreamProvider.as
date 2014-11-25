@@ -21,13 +21,12 @@
  */
 package {
     import flash.events.Event;
-
-    import org.mangui.hls.utils.ScaleVideo;
-
     import flash.geom.Rectangle;
     import flash.media.SoundTransform;
 
+    import org.mangui.hls.event.HLSError;
     import org.mangui.hls.event.HLSEvent;
+    import org.mangui.hls.utils.ScaleVideo;
     import org.mangui.hls.HLS;
 
     import flash.media.Video;
@@ -49,8 +48,8 @@ package {
             hls.addEventListener(HLSEvent.MANIFEST_LOADED, _manifestHandler);
             hls.addEventListener(HLSEvent.MEDIA_TIME, _mediaTimeHandler);
             hls.addEventListener(HLSEvent.PLAYBACK_COMPLETE, _completeHandler);
-            /*
             hls.addEventListener(HLSEvent.ERROR, _errorHandler);
+            /*
             hls.addEventListener(HLSEvent.PLAYBACK_STATE, _stateHandler);
              */
             video.attachNetStream(hls.stream);
@@ -155,13 +154,19 @@ package {
             video.y = rect.y;
         }
 
-        protected function _completeHandler(event : HLSEvent) : void {
+        private function _completeHandler(event : HLSEvent) : void {
             player.debug("playback complete,fire pause and finish events");
             player.fire(Flowplayer.PAUSE, null);
             player.fire(Flowplayer.FINISH, null);
             if (config.loop) {
                 load(config);
             }
+        };
+
+        private function _errorHandler(event : HLSEvent) : void {
+            var hlsError : HLSError = event.error;
+            player.debug("error (code/msg/url):" + hlsError.code + "/" + hlsError.msg + "/" + hlsError.url);
+            player.fire(Flowplayer.ERROR, {code:4});
         };
     }
 }
