@@ -48,8 +48,8 @@ package {
             player.stage.addEventListener(Event.RESIZE, _onStageResize);
             hls.addEventListener(HLSEvent.MANIFEST_LOADED, _manifestHandler);
             hls.addEventListener(HLSEvent.MEDIA_TIME, _mediaTimeHandler);
-            /*
             hls.addEventListener(HLSEvent.PLAYBACK_COMPLETE, _completeHandler);
+            /*
             hls.addEventListener(HLSEvent.ERROR, _errorHandler);
             hls.addEventListener(HLSEvent.PLAYBACK_STATE, _stateHandler);
              */
@@ -155,5 +155,15 @@ package {
             video.x = rect.x;
             video.y = rect.y;
         }
+
+        protected function _completeHandler(event : HLSEvent) : void {
+            player.debug("playback complete");
+            player.debug("fire pause and finish events");
+            player.fire(Flowplayer.PAUSE, null);
+            player.fire(Flowplayer.FINISH, null);
+            if (config.loop) {
+                load(config);
+            }
+        };
     }
 }
