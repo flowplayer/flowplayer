@@ -5,7 +5,8 @@ MXMLC_VERSION := $(shell mxmlc --version 2>/dev/null)
 ifdef MXMLC_VERSION
 	FLASH = $(shell which mxmlc)
 else
-	FLASH="/opt/flowplayer/flex3sdk/bin/mxmlc"
+	#FLASH = "/cygdrive/c/Users/gpontavic/workdir/github/AIR_SDK/bin/mxmlc"
+	FLASH = "/cygdrive/c/Users/gpontavic/workdir/github/apache_flex_sdk/bin/mxmlc"
 endif
 FLASH_COMPILE=$(FLASH) -default-frame-rate=50 -static-link-runtime-shared-libraries=true -library-path=.
 
