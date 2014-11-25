@@ -145,11 +145,10 @@ package {
         }
 
         private function _resize() : void {
-            player.debug("video size : " + video.videoWidth + "," + video.videoHeight);
-            player.debug("player size : " + player.width + "," + player.height);
+            player.debug("video/player size : " + video.videoWidth + "," + video.videoHeight + "/" + player.stage.stageWidth + "," + player.stage.stageHeight);
             clip.width = video.videoWidth;
             clip.height = video.videoHeight;
-            var rect : Rectangle = ScaleVideo.resizeRectangle(video.videoWidth, video.videoHeight, player.width, player.height);
+            var rect : Rectangle = ScaleVideo.resizeRectangle(video.videoWidth, video.videoHeight, player.stage.stageWidth, player.stage.stageHeight);
             video.width = rect.width;
             video.height = rect.height;
             video.x = rect.x;
@@ -157,8 +156,7 @@ package {
         }
 
         protected function _completeHandler(event : HLSEvent) : void {
-            player.debug("playback complete");
-            player.debug("fire pause and finish events");
+            player.debug("playback complete,fire pause and finish events");
             player.fire(Flowplayer.PAUSE, null);
             player.fire(Flowplayer.FINISH, null);
             if (config.loop) {
