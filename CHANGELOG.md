@@ -1,3 +1,13 @@
+Version 5.5.2
+=============
+
+Fixes
+-----
+
+ * Fix #729 - 5.5.1 flash regression: playlists do not advance
+ * Fix #727 - Android (Chrome) reports currentTime as zero in live setups
+ * Fix #721 - Video not shown on Windows Phone 8.1
+
 Version 5.5.1
 =============
 
