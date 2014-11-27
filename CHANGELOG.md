@@ -1,6 +1,11 @@
 Version 5.5.2
 =============
 
+Enhancements
+------------
+
+ * Add ability to configure wmode for flash engine
+
 Fixes
 -----
 
