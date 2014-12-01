@@ -67,6 +67,7 @@ package {
             player.debug("starting play of stream '" + url + "'");
             netStream.play(stream);
             paused = ready = false;
+            video.visible = true;
         }
 
         public function pause() : void {
@@ -94,13 +95,10 @@ package {
                 return;
             }
 
-            // if (!conf.autoplay) {
-            // volume(1, false);
-            // }
-
             try {
                 conf.autoplay = true;
                 paused = false;
+                video.visible = true;
 
                 player.debug("live? " + conf.live);
                 if (conf.live) {
@@ -184,7 +182,7 @@ package {
         }
 
         public function status() : Object {
-            if (!ready) return null;
+            if (!netStream) return null;
             return {time:netStream.time, buffer:netStream.bytesLoaded};
         }
 
@@ -206,6 +204,15 @@ package {
 
         private function get stream() : String {
             return rtmpUrls[1];
+        }
+
+        private function get completeClipUrl() : String {
+            var urls : Array = rtmpUrls;
+            if (urls[0] && urls[0].indexOf("rtmp") == 0) {
+                return urls[0] + "/" + urls[1];
+            } else {
+                return urls[1];
+            }
         }
 
         private function connect() : void {
@@ -264,9 +271,7 @@ package {
             netStream.client = {onPlayStatus:function(info : Object) : void {
                 player.debug("onPlayStatus", info);
                 if (info.code == "NetStream.Play.Complete") {
-                    if (conf.loop) {
-                        netStream.seek(0);
-                    } else if (!paused) {
+                    if (!paused) {
                         finished = true;
                         paused = true;
                         player.fire(Flowplayer.PAUSE, null);
@@ -283,19 +288,27 @@ package {
                 }
                 if (conf.debug) player.fire("debug.metadata", meta);
 
-                clip = {seekable:!!conf.rtmp, bytes:netStream.bytesTotal, duration:meta.duration, height:meta.height, width:meta.width, seekpoints:meta.seekpoints, src:stream, url:stream};
+                clip = {seekable:!!conf.rtmp, bytes:netStream.bytesTotal, duration:meta.duration, height:meta.height, width:meta.width, seekpoints:meta.seekpoints, src:completeClipUrl, url:completeClipUrl};
 
                 if (!ready) {
                     ready = true;
 
-                    player.fire(Flowplayer.READY, clip);
-
                     if (conf.autoplay) {
+                        player.fire(Flowplayer.READY, clip);
                         player.fire(Flowplayer.RESUME, null);
                     } else {
                         player.debug("stopping on first frame");
-                        pauseStream();
                         netStream.seek(0);
+                        pauseStream();
+                        // hide the video if splash or poster should stay visible and not be hidden behind the first frame
+                        if (conf.splash || conf.poster) {
+                            player.debug("splash or poster used, hiding video");
+                            video.visible = false;
+                        }
+
+                        // make autoplay true so that first-frame pause is not done with webkit-fullscreen-toggling
+                        conf.autoplay = true;
+                        player.fire(Flowplayer.READY, clip);
                     }
                     return;
                 }
@@ -318,8 +331,6 @@ package {
                         if (!conf.rtmp) {
                             if (conf.autoplay) {
                                 paused = false;
-
-                                // stop at first frame
                             }
                         }
                         break;
@@ -341,8 +352,9 @@ package {
                     case "NetStream.Play.Stop":
                         var stopTracker : Timer = new Timer(100);
                         var prevTime : Number = 0;
+                        if (stopTracker && stopTracker.running) return;
                         stopTracker.addEventListener(TimerEvent.TIMER, function(e : TimerEvent) : void {
-                            player.debug("checking end of clip: duration " + duration + ", time " + netStream.time + ", prevTime " + prevTime);
+                            // player.debug("checking end of clip: duration " + duration + ", time " + netStream.time + ", prevTime " + prevTime);
                             if (duration == 0) return;
                             if (prevTime < netStream.time) {
                                 prevTime = netStream.time;
@@ -352,12 +364,9 @@ package {
 
                             prevTime = netStream.time;
 
-                            player.debug("reached end of clip");
                             stopTracker.stop();
 
-                            if (conf.loop) {
-                                netStream.seek(0);
-                            } else if (!conf.rtmp && !paused) {
+                            if (!conf.rtmp && !paused) {
                                 finished = true;
                                 paused = true;
                                 netStream.pause();

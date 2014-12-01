@@ -107,7 +107,7 @@ package {
         /************ Public API ************/
         // switch url
         public function play(url : String) : void {
-            debug("play("+url+")");
+            debug("play(" + url + ")");
             // TODO : switch provider if needed here
             provider.play(url);
             return;
@@ -126,13 +126,13 @@ package {
         }
 
         public function seek(seconds : Number) : void {
-            debug("seek("+seconds+")");
+            debug("seek(" + seconds + ")");
             provider.seek(seconds);
             return;
         }
 
         public function volume(level : Number, fireEvent : Boolean = true) : void {
-            debug("volume("+level+")");
+            debug("volume(" + level + ")");
             provider.volume(level, fireEvent);
             return;
         }
@@ -144,7 +144,7 @@ package {
         }
 
         public function status() : Object {
-            //debug("status()");
+            // debug("status()");
             return provider.status();
         }
 
@@ -203,8 +203,28 @@ package {
 
         private function configure() : void {
             conf = this.loaderInfo.parameters;
-            conf.rtmpt = conf.rtmpt == "false" ? false : (conf.rtmpt == undefined ? true : !!conf.rtmpt);
-            conf.live = conf.live == "false" ? false : !!conf.live;
+
+            function decode(prop : String) : void {
+                if (conf[prop] == "false") {
+                    conf[prop] = false;
+                    return;
+                }
+                ;
+                conf[prop] = !!conf[prop];
+            }
+            if (conf.rtmpt == undefined) {
+                conf.rtmpt = true;
+            }
+            if (conf.rtmp && conf.rtmp.indexOf("rtmp") < 0) {
+                delete conf.rtmp;
+            }
+
+            decode("rtmpt");
+            decode("live");
+            decode("splash");
+            decode("debug");
+            decode("subscribe");
+            decode("loop");
             debug("configure()", conf);
         }
     }
