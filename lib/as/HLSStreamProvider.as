@@ -27,6 +27,8 @@ package {
     import org.mangui.hls.event.HLSError;
     import org.mangui.hls.event.HLSEvent;
     import org.mangui.hls.utils.ScaleVideo;
+    import org.mangui.hls.constant.HLSSeekMode;
+    import org.mangui.hls.HLSSettings;
     import org.mangui.hls.HLS;
 
     import flash.media.Video;
@@ -44,6 +46,8 @@ package {
             this.video = video;
             hls = new HLS();
             hls.stage = player.stage;
+            /* force keyframe seek mode to avoid video glitches when seeking to a non-keyframe position */
+            HLSSettings.seekMode = HLSSeekMode.KEYFRAME_SEEK;
             player.stage.addEventListener(Event.RESIZE, _onStageResize);
             hls.addEventListener(HLSEvent.MANIFEST_LOADED, _manifestHandler);
             hls.addEventListener(HLSEvent.MEDIA_TIME, _mediaTimeHandler);
