@@ -67,6 +67,11 @@ package {
         }
 
         public function unload() : void {
+            player.stage.removeEventListener(Event.RESIZE, _onStageResize);
+            hls.removeEventListener(HLSEvent.MANIFEST_LOADED, _manifestHandler);
+            hls.removeEventListener(HLSEvent.MEDIA_TIME, _mediaTimeHandler);
+            hls.removeEventListener(HLSEvent.PLAYBACK_COMPLETE, _completeHandler);
+            hls.removeEventListener(HLSEvent.ERROR, _errorHandler);
             hls.dispose();
             hls = null;
             player.fire(Flowplayer.UNLOAD, null);
