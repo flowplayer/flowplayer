@@ -173,6 +173,7 @@ package {
         }
 
         public function unload() : void {
+            player.debug('NetStreamProvider::unload(), ready? ' + ready);
             if (ready) {
                 pause();
                 netStream.close();
