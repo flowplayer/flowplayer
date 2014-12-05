@@ -31,6 +31,10 @@
     var el = document.getElementById('player');
     var api = flowplayer(el, {
         splash: false,
+        enginePreference: ['html5', 'flash'],
+        debug: true,
+        swf: '../dist/flowplayerhls.swf',
+        swfHls: '../dist/flowplayerhls.swf',
         ratio: 0.417,
         adaptiveRatio: true,
         playlist: [{
@@ -53,26 +57,19 @@
           }]
         }, {
           preload: "none",
+          rtmp: 'rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st',
           sources: [
             {
-              type: "video/webm",
-              src: "http://stream.flowplayer.org/night1.webm"
-            },
-            {
-              type: "video/mp4",
-              src: "http://stream.flowplayer.org/night1.mp4"
+              type: "video/flash",
+              src: "mp4:night1"
             }
           ]
         }, {
           preload: "none",
           sources: [
             {
-              type: "video/webm",
-              src: "http://stream.flowplayer.org/night3.webm"
-            },
-            {
-              type: "video/mp4",
-              src: "http://stream.flowplayer.org/night3.mp4"
+              type: "application/x-mpegurl",
+              src: "http://stream.flowplayer.org/functional.m3u8"
             }
           ]
         }, {

@@ -84,19 +84,7 @@ package {
             }
             init();
 
-            // setup provider from URL
-            if (CONFIG::HLS) {
-                // detect HLS by checking the extension of src
-                if (conf.url.indexOf(".m3u") != -1) {
-                    debug("HLS stream detected!");
-                    provider = new HLSStreamProvider(this, video);
-                } else {
-                    provider = new NetStreamProvider(this, video);
-                }
-            } else {
-                provider = new NetStreamProvider(this, video);
-            }
-            provider.load(conf);
+            initProvider(); 
         }
 
         public function set(key : String, value : String) : void {
@@ -106,10 +94,14 @@ package {
 
         /************ Public API ************/
         // switch url
-        public function play(url : String) : void {
-            debug("play(" + url + ")");
-            // TODO : switch provider if needed here
-            provider.play(url);
+        public function play(url : String, reconnect : Boolean) : void {
+            debug("play(" + url + ", " + reconnect + ")");
+            if (reconnect || providerChangeNeeded(url)) {
+              conf.url = url;
+              initProvider();
+            } else {
+              provider.play(url);
+            }
             return;
         }
 
@@ -162,6 +154,31 @@ package {
 
             paused = !conf.autoplay;
             preloadComplete = false;
+        }
+
+        private function providerChangeNeeded(url: String) : Boolean {
+            if (!CONFIG::HLS) return false;
+            else {
+              return (url.indexOf(".m3u") != -1 && provider is NetStreamProvider) ||
+                  (url.indexOf('.m3u') == -1 && !(provider is NetStreamProvider));
+            }
+        }
+
+        private function initProvider() : void {
+            if (provider) provider.unload();
+            // setup provider from URL
+            if (CONFIG::HLS) {
+                // detect HLS by checking the extension of src
+                if (conf.url.indexOf(".m3u") != -1) {
+                    debug("HLS stream detected!");
+                    provider = new HLSStreamProvider(this, video);
+                } else {
+                    provider = new NetStreamProvider(this, video);
+                }
+            } else {
+                provider = new NetStreamProvider(this, video);
+            }
+            provider.load(conf);
         }
 
         internal function debug(msg : String, data : Object = null) : void {
