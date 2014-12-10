@@ -178,7 +178,7 @@ package {
                 pause();
                 netStream.close();
                 connector.close();
-                player.fire(Flowplayer.UNLOAD, null);
+                //player.fire(Flowplayer.UNLOAD, null);
             }
         }
 

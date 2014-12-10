@@ -74,7 +74,7 @@ package {
             hls.removeEventListener(HLSEvent.ERROR, _errorHandler);
             hls.dispose();
             hls = null;
-            player.fire(Flowplayer.UNLOAD, null);
+            //player.fire(Flowplayer.UNLOAD, null);
         }
 
         public function play(url : String) : void {
