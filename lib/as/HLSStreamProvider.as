@@ -78,6 +78,8 @@ package {
         }
 
         public function play(url : String) : void {
+            hls.load(url);
+            resume();
         }
 
         public function pause() : void {
