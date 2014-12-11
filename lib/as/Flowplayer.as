@@ -100,6 +100,7 @@ package {
               conf.url = url;
               initProvider();
             } else {
+              conf.url = url;
               provider.play(url);
             }
             return;
