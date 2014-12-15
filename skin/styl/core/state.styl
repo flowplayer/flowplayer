@@ -90,6 +90,19 @@
          opacity 0
          transition opacity fade_speed fade_delay
 
+      // mouseout fullscreen
+      &.is-fullscreen
+         .fp-controls
+            transition bottom fade_speed fade_delay
+
+         .fp-play, .fp-time, .fp-volume
+            opacity 0
+            transition opacity fade_speed 0
+
+         // reinstate opacity transition for aside-time
+         .aside-time&
+            .fp-time
+               transition opacity fade_speed fade_delay
 
    // mouseover / fixed-controls
    &.is-mouseover, &.fixed-controls
