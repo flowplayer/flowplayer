@@ -195,7 +195,7 @@ package {
         }
 
         private function get rtmpUrls() : Array {
-            var url : String = unescape(conf.url);
+            var url : String = conf.url;
             if (isRtmpUrl(url)) {
                 var lastSlashPos : Number = url.lastIndexOf("/");
                 return [url.substring(0, lastSlashPos), url.substring(lastSlashPos + 1)];
