@@ -96,12 +96,11 @@ package {
         // switch url
         public function play(url : String, reconnect : Boolean) : void {
             debug("play(" + url + ", " + reconnect + ")");
+            conf.url = encodeURI(url);
             if (reconnect || providerChangeNeeded(url)) {
-              conf.url = url;
               initProvider();
             } else {
-              conf.url = url;
-              provider.play(url);
+              provider.play(conf.url);
             }
             return;
         }
@@ -151,6 +150,7 @@ package {
             addLogo();
             arrange();
 
+            conf.url = encodeURI(conf.url);
             debug("debug.url", conf.url);
 
             paused = !conf.autoplay;
