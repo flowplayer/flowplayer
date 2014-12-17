@@ -105,4 +105,12 @@ Then(/^"(.*?)" event should be called at least (\d+) time$/) do |ev_name, cnt|
   expect(elem.text.to_i).to be >= 1
 end
 
+Then(/^(\d+) cuepoints should have been fired$/) do |arg1|
+  elem = @browser.find_element(:css => ".cuepoint-count")
+  expect(elem.text.to_i).to eq(arg1.to_i)
+end
 
+Then(/^no cuepoints should be missed$/) do
+  elem = @browser.find_element(:css => ".missed-cuepoints")
+  expect(elem.text).to eq("")
+end
