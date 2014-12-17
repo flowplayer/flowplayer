@@ -21,6 +21,13 @@
   "bugs": {
     "url": "https://github.com/flowplayer/flowplayer/issues"
   },
+  "jshintConfig": {
+    "browser": true,
+    "node": true,
+    "strict": true,
+    "newcap": false,
+    "multistr": true
+  },
   "devDependencies": {
     "bean": "~1.0.14",
     "beefy": "~2.1.1",
@@ -35,5 +42,8 @@
     "sizzle": "~2.0.0",
     "stylus": "~0.40.3",
     "uglify-js": "~2.4.3"
+  },
+  "dependencies": {
+    "scriptjs": "^2.5.7"
   }
 }
