@@ -101,7 +101,10 @@
             }
           ]
         }]
-      });
+    }).on('cuepoint', function(ev, api, cue) {
+      console.log('video.index', api.video.index);
+      console.log('cue', cue);
+    });
     </script>
 
 
