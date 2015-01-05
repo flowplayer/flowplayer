@@ -14,8 +14,9 @@ Feature: Cuepoints
     <script>
     var firedCuepoints = [];
     flowplayer(function(api, root) {
+      api.conf.cuepoints = [];
       for (var i = 0.3; i <= 39; i = i + 0.3) {
-        api.addCuepoint(i);
+        api.conf.cuepoints.push(i);
       }
       var cuepointCount = 0;
       api.bind('cuepoint', function(ev, api, cue) {
@@ -38,3 +39,11 @@ Feature: Cuepoints
     And I wait for video to play to the end
     Then no cuepoints should be missed
     And 130 cuepoints should have been fired
+  Scenario: Slow motion
+    When i open the page and wait for player to become ready
+    And I start video by clicking the player
+    And I enter slowmotion
+    And I wait for video to play to the end
+    Then no cuepoints should be missed
+    And 130 cuepoints should have been fired
+
