@@ -59,7 +59,7 @@ When(/^i open the page and wait for player to become ready$/) do
 end
 
 When(/^I wait for video to play to the end$/) do
-  wait = Selenium::WebDriver::Wait.new(:timeout => 45)
+  wait = Selenium::WebDriver::Wait.new(:timeout => 90)
   wait.until { is_element_present(:css => ".is-finished") }
 end
 
@@ -113,4 +113,8 @@ end
 Then(/^no cuepoints should be missed$/) do
   elem = @browser.find_element(:css => ".missed-cuepoints")
   expect(elem.text).to eq("")
+end
+
+When(/^I enter slowmotion$/) do 
+  @browser.execute_script("flowplayer(0).speed(false);")
 end
