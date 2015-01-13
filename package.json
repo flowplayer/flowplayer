@@ -44,6 +44,8 @@
     "uglify-js": "~2.4.3"
   },
   "dependencies": {
-    "scriptjs": "^2.5.7"
+    "exorcist": "^0.1.6",
+    "scriptjs": "^2.5.7",
+    "uglifyify": "^2.6.0"
   }
 }
