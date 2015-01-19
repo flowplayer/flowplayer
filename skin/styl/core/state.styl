@@ -4,7 +4,7 @@
    &.is-splash, &.is-poster
       cursor pointer
 
-      .fp-controls, .fp-fullscreen, .fp-unload, .fp-time, .fp-embed
+      .fp-controls, .fp-fullscreen, .fp-unload, .fp-time, .fp-embed, .fp-title
          display none !important
 
    &.is-poster .fp-engine
@@ -75,12 +75,14 @@
 
    // mouseout
    &.is-mouseout
-      .fp-controls
+      .fp-controls, .fp-title
          height 0
          transition height fade_speed fade_delay
          .is-fullscreen&
             height progress_height
             bottom 0
+       .fp-title
+          overflow hidden
 
       .fp-timeline
          margin 0 !important
@@ -100,7 +102,8 @@
    &.is-mouseover, &.fixed-controls
       .fp-controls
          height controls_height
-
+      .fp-title
+         height 30px
       .fp-fullscreen, .fp-unload, .fp-elapsed, .fp-remaining, .fp-duration, .fp-embed, .fp-logo, .fp-volume, .fp-play, .fp-subtitle-switch
          opacity 1
 
