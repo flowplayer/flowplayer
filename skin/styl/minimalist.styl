@@ -5,17 +5,17 @@
 .{root}
 
    // default colors
-   controls = #3
+   controls = #0
 
-   .fp-controls, .fp-title
+   .fp-controls, .fp-title, .fp-fullscreen, .fp-unload, .fp-close, .fp-embed
       bg controls
-      bg rgba(controls, .6)
+      bg rgba(controls, .7)
 
    &.fixed-controls .fp-controls
       bg controls
 
    .fp-timeline
-      bg #6
+      bg #a5
 
    .fp-buffer
       bg #e
@@ -24,17 +24,26 @@
       bg #00a7c8
 
    .fp-volumeslider
-      bg #0
+      bg #a5
 
    .fp-volumelevel
-      bg #f
+      bg #00a7c8
 
    .fp-play
-      height 24px
+      height 29px
 
    &.is-touch.is-mouseover .fp-progress:before
       bg #00a7c8
 
+   .fp-fullscreen, .fp-unload, .fp-close, .fp-embed
+     height controls_height
+     width controls_height
+     right 0
+     top 0
+     bg 7px -190px
+   .fp-embed
+     bg 6px -230px
+     right controls_height + 2
 
    // dark
    &.color-light
