@@ -259,29 +259,21 @@
 
    // background image
    .fp-fullscreen, .fp-unload, .fp-mute, .fp-embed, .fp-close, .fp-play
-      background-image 'url(%s.png)' % unquote(img)
-      background-size 37px 300px
-
-      .is-rtl&
-         background-image 'url(%s.png)' % unquote(img_rtl)
-
-      .color-light&
-         background-image 'url(%s.png)' % unquote(img_dark)
-
-         .is-rtl&
-            background-image 'url(%s.png)' % unquote(img_dark_rtl)
-
-         @media (-webkit-min-device-pixel-ratio: 2)
-            background-image 'url(%s@x2.png)' % unquote(img_dark)
-
-            .is-rtl&
-               background-image 'url(%s@x2.png)' % unquote(img_dark_rtl)
-
-      @media (-webkit-min-device-pixel-ratio: 2)
-         background-image 'url(%s@x2.png)' % unquote(img)
-
-         .is-rtl&
-            background-image 'url(%s@x2.png)' % unquote(img_rtl)
+     font-family 'fpicons'
+     color #f
+     font-size 15px
+     line-height 30px
+   .fp-fullscreen:before
+     content "\e602"
+   .fp-unload:before
+   .fp-close:before
+     content "\e600"
+   .fp-mute:before
+     content "\e606"
+   .fp-embed:before
+     content "\e603"
+   .fp-play:before
+     content "\e608"
 
    .fp-flash-disabled
       background #333

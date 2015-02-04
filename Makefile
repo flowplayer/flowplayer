@@ -50,11 +50,12 @@ min: raw
 skins:
 	# skins
 	@ mkdir -p $(SKIN)
-	@ stylus -c -o $(SKIN) skin/styl/*.styl
+	@ stylus --include-css -c -o $(SKIN) skin/styl/*.styl
 	@ sed 's/\.flowplayer/\.minimalist/g' $(SKIN)/minimalist.css >  $(SKIN)/all-skins.css
 	@ sed 's/\.flowplayer/\.functional/g' $(SKIN)/functional.css >> $(SKIN)/all-skins.css
 	@ sed 's/\.flowplayer/\.playful/g' 	$(SKIN)/playful.css >> 	 $(SKIN)/all-skins.css
 	@ cp -r skin/img $(SKIN)
+	@ cp -r skin/icons/fonts $(SKIN)
 
 
 # work on a single skin (watches changes and processes on the background)
