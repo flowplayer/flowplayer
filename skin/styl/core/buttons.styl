@@ -60,43 +60,33 @@
       absolute spacing auto
       right spacing
       block 30px 23px
-      bg 12px -197px
       cursor pointer
 
       .is-rtl&
          right auto
          left spacing
-         bg 18px -197px
 
    .fp-unload, .fp-close
-      bg 14px -175px
       display none
-
-      .is-rtl&
-         bg 14px -175px
 
    .fp-play
       display none
       width play_width
       height controls_height
-      bg 9px -24px
       position absolute
       bottom 0
       left 0
 
       .is-rtl&
-         bg 18px -24px
          left auto
          right 0
 
       .play-button&
          display block
 
-      .is-paused&
-         bg 9px 7px
-
-         .is-rtl&
-            bg 18px 7px
+      .is-playing&
+         &:before
+           content: "\e607" 
 
    .fp-subtitle-switch
       display none
@@ -122,11 +112,9 @@
 
    &.is-fullscreen
       .fp-fullscreen
-         bg 10px -217px
          display block !important
-
-         .is-rtl&
-            bg 21px -217px
+         &:before
+          content "\e601"
 
       .fp-unload, .fp-close
          display none !important

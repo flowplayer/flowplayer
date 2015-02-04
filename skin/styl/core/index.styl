@@ -15,11 +15,8 @@ subtitle_width    ?= 27px
 hour_time_width   ?= 65px
 full_time_width   ?= 85px
 play_radius       ?= 86px
+brand_width       ?= 75px
 
-img               ?= 'img/white'
-img_rtl           ?= 'img/white_rtl'
-img_dark          ?= 'img/black'
-img_dark_rtl      ?= 'img/black_rtl'
 img_play          ?= 'img/play_white'
 img_play_rtl      ?= 'img/play_white_rtl'
 img_play_dark     ?= 'img/play_black'
@@ -29,8 +26,8 @@ fade_delay        ?= .3s
 
 
 // calculated
-mute_width        ?= 10px
-mute_height       ?= 15px
+mute_width        ?= 30px
+mute_height       ?= 30px
 controls_height   ?= spacing + timeline_height + spacing
 right_margin      ?= spacing + volume_width + mute_width + spacing
 
@@ -41,6 +38,7 @@ right_margin      ?= spacing + volume_width + mute_width + spacing
    100%
      opacity 1
 
+@import "../../icons/icons.css"
 @import "css3"
 @import "player"
 @import "buttons"
