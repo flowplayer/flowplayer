@@ -62,17 +62,34 @@
    &.color-light
       controls_dark = #f
 
-      .fp-controls
-         bg rgba(controls_dark, .6)
+      .fp-controls, .fp-title, .fp-fullscreen, .fp-unload, .fp-close, .fp-embed
+        bg rgba(controls_dark, .8)
+        color #000
+        &:before
+          color #0
+      .fp-menu .fp-dropdown li
+        bg #f
+        color #0
+        &.active
+          bg #00a7c8
+          color #f
+      .fp-play, .fp-menu
+        color #0
+        &:before
+          color #0
+      .fp-brand
+        font-weight bold
+        color #5
+      .fp-time
+        font-weight bold
 
       &.fixed-controls .fp-controls
          bg controls_dark
 
-      .fp-volumeslider
-         bg #d
-
       .fp-volumelevel
-         bg #2
+        bg #00a7c8
+      .fp-timeline, .fp-volumeslider
+        bg #5
 
    // alt
    &.color-alt
