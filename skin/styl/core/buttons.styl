@@ -48,6 +48,8 @@
       height timeline_height
       width brand_width
       bottom spacing
+      .has-menu&
+        right volume_width + controls_height + spacing * 2 + menu_width
 
    .fp-logo
       absolute auto 15px
@@ -98,19 +100,20 @@
          &:before
            content: "\e607" 
 
-   .fp-subtitle-switch
+   .fp-menu
       display none
-      color #f
       position absolute
-      bottom 3px
+      bottom 0px
       z-index 11
-      right right_margin + spacing
-      .has-subtitles&
+      right spacing
+      .has-menu&
          display block
       .fp-dropdown
          z-index 12
          display none
          left -42.5px
+         line-height auto
+         width spacing + volume_width + spacing + menu_width * 2
       &.dropdown-open
          .fp-dropdown
             display block

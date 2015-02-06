@@ -192,7 +192,6 @@
       width 100px
       background-color rgba(#3, 0.9)
       border-radius 3px
-      padding 5px
       box-sizing border-box
       -moz-box-sizing border-box
       margin 0px
@@ -208,11 +207,8 @@
         border-right 5px solid transparent
         border-bottom 5px solid rgba(#3, 0.9)
       li
-        padding 3px
-        color #ddd
-        &.active
-          font-weight bold
-          color #fff
+        padding 10px
+        color #f
       &.fp-dropup
         bottom 20px
         top auto
@@ -258,12 +254,13 @@
 
 
    // background image
-   .fp-fullscreen, .fp-unload, .fp-mute, .fp-embed, .fp-close, .fp-play
-     font-family 'fpicons'
-     color #f
-     font-size 15px
-     line-height 30px
-     text-align center
+   .fp-fullscreen, .fp-unload, .fp-mute, .fp-embed, .fp-close, .fp-play, .fp-menu
+     &:before
+       font-family 'fpicons'
+       color #f
+       font-size 15px
+       text-align center
+       line-height 30px 
    .fp-fullscreen:before
      content "\e602"
    .fp-unload:before
@@ -275,6 +272,8 @@
      content "\e603"
    .fp-play:before
      content "\e608"
+   .fp-menu:before
+     content "\e604"
 
    .fp-flash-disabled
       background #333
