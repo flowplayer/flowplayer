@@ -89,7 +89,33 @@
          bottom 3px
 
       .is-mouseover&
-         bottom 0
+        bottom 0
+   .fp-controls, .fp-title, .fp-fullscreen, .fp-unload, .fp-close, .fp-embed
+      bg controls
+      bg rgba(controls, .65)
+
+   &.fixed-controls .fp-controls
+      bg controls
+
+   .fp-timeline
+      bg #a5
+
+   .fp-buffer
+      bg #e
+
+   .fp-progress
+      bg #00a7c8
+
+   .fp-volumeslider
+      bg #a5
+
+   .fp-volumelevel
+      bg #00a7c8
+
+   .fp-play
+      height 29px
+
+
 
    .fp-waiting
       display none
@@ -190,7 +216,7 @@
       position absolute
       top 5px
       width 100px
-      background-color rgba(#3, 0.9)
+      bg controls
       border-radius 3px
       box-sizing border-box
       -moz-box-sizing border-box
@@ -209,6 +235,8 @@
       li
         padding 10px
         color #f
+        &.active
+          bg #00a7c8
       &.fp-dropup
         bottom 20px
         top auto
@@ -217,7 +245,6 @@
           bottom -5px
           border-bottom none
           border-top 5px solid rgba(#3, 0.9)
-
    .fp-subtitle
       position absolute
       bottom 40px
