@@ -60,7 +60,7 @@ skins:
 
 # work on a single skin (watches changes and processes on the background)
 skin:
-	stylus -c -w -o $(SKIN) skin/styl/$(MAKECMDGOALS).styl
+	stylus --include-css -c -w -o $(SKIN) skin/styl/$(MAKECMDGOALS).styl
 
 minimalist: skin
 functional: skin

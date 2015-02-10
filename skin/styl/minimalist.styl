@@ -7,47 +7,18 @@
    // default colors
    controls = #0
 
-   .fp-controls, .fp-title, .fp-fullscreen, .fp-unload, .fp-close, .fp-embed
-      bg controls
-      bg rgba(controls, .65)
-
-   &.fixed-controls .fp-controls
-      bg controls
-
-   .fp-timeline
-      bg #a5
-
-   .fp-buffer
-      bg #e
-
-   .fp-progress
-      bg #00a7c8
-
-   .fp-volumeslider
-      bg #a5
-
-   .fp-volumelevel
-      bg #00a7c8
-
-   .fp-play
-      height 29px
-
-   &.is-touch.is-mouseover .fp-progress:before
+    &.is-touch.is-mouseover .fp-progress:before
       bg #00a7c8
 
    .fp-menu .fp-dropdown
-     bg controls
      right -(spacing)
      left auto
      bottom controls_height
      border-radius 0px
      &:before
        display none
-     li.active
-       bg #00a7c8
+
    .fp-fullscreen, .fp-unload, .fp-close, .fp-embed
-     height controls_height
-     width controls_height
      right 0
      top 0
    .fp-embed
