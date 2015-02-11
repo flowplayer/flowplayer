@@ -245,6 +245,30 @@
           bottom -5px
           border-bottom none
           border-top 5px solid rgba(#3, 0.9)
+
+   .fp-tooltip
+     background-color #0
+     color #f
+     display none
+     position absolute
+     padding 5px
+     &:before
+       content ''
+       display block
+       position absolute
+       bottom -5px
+       width 0
+       height 0
+       left calc(50% - 5px)
+       border-left 5px solid transparent
+       border-right 5px solid transparent
+       border-top 5px solid #000
+   .fp-timeline-tooltip
+     bottom spacing * 3 + 5
+   .fp-timeline:hover+.fp-timeline-tooltip
+     display block
+
+
    .fp-subtitle
       position absolute
       bottom 40px
