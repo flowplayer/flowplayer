@@ -4,6 +4,16 @@ control_border_radius = 3px
 
 @import "core/index"
 
+@keyframes functional-controls-hide
+  0%
+    opacity 0
+  100%
+    bottom 0
+    right 0
+    left 0
+    opacity 1
+
+
 .{root}
    .fp-title
      absolute spacing spacing
@@ -12,6 +22,14 @@ control_border_radius = 3px
    &.is-mouseout
      .fp-menu
        display none
+     .fp-controls
+       transition none
+       animation functional-controls-hide 1s 1
+     .fp-timeline
+       transition none
+     .fp-volume, .fp-brand, .fp-play, .fp-time
+       transition none
+       opacity 0
    &.is-mouseover .fp-controls
      bottom spacing
      left spacing + controls_height + spacing
