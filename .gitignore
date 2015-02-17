@@ -5,3 +5,4 @@ test/movie
 *.iws
 *.iml
 node_modules
+npm-debug.log
