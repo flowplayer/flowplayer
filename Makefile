@@ -41,10 +41,9 @@ raw:
 	@ rm lib/ext/support/embedcode.min.js
 
 
-min: raw
+min: concat
 	# flowplayer.min.js
 	@ uglifyjs $(JS) --comments '/flowplayer.org\/license/' --mangle -c >> $(DIST)/flowplayer.min.js
-	@ cat deps/branding.min.js >> $(DIST)/flowplayer.min.js
 
 # make all skins
 skins:
