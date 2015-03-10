@@ -27,6 +27,7 @@ package {
     import org.mangui.hls.event.HLSError;
     import org.mangui.hls.event.HLSEvent;
     import org.mangui.hls.utils.ScaleVideo;
+    import org.mangui.hls.constant.HLSPlayStates;
     import org.mangui.hls.constant.HLSSeekMode;
     import org.mangui.hls.HLSSettings;
     import org.mangui.hls.HLS;
@@ -88,8 +89,23 @@ package {
         }
 
         public function resume() : void {
-            hls.stream.resume();
-            player.fire(Flowplayer.RESUME, null);
+            switch(hls.playbackState) {
+                case HLSPlayStates.IDLE:
+                // in IDLE state, restart playback
+                    hls.stream.play(null,-1);
+                    player.fire(Flowplayer.RESUME, null);
+                    break;
+                case HLSPlayStates.PAUSED:
+                case HLSPlayStates.PAUSED_BUFFERING:
+                    hls.stream.resume();
+                    player.fire(Flowplayer.RESUME, null);
+                    break;
+                // do nothing if already in play state
+                //case HLSPlayStates.PLAYING:
+                //case HLSPlayStates.PLAYING_BUFFERING:
+                default:
+                    break;
+            }
         }
 
         public function seek(seconds : Number) : void {
