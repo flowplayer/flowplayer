@@ -7,8 +7,8 @@
       text-align center
 
       .is-rtl&
-         left auto
-         right spacing
+         right auto
+         left (spacing * 2 + controls_height)
 
    .fp-embed-code
       position absolute
@@ -34,14 +34,13 @@
          border-left-color #3
 
       .is-rtl&
-         left auto
-         right 40px
-
+         right auto
+         left controls_height*2 + 7
          &:before
-            left auto
-            right -10px
-            border-right-color transparent
-            border-left-color #3
+            right auto
+            left -10px
+            border-left-color transparent
+            border-right-color #3
 
       textarea
          width 400px

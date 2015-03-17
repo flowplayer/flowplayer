@@ -11,8 +11,8 @@ controls = #0
       bg #00a7c8
 
    .fp-menu .fp-dropdown
-     right -(spacing)
-     left auto
+     right auto
+     left -(spacing)
      bottom controls_height
      border-radius 0px
      &:before
@@ -21,8 +21,14 @@ controls = #0
    .fp-fullscreen, .fp-unload, .fp-close, .fp-embed
      right 0
      top 0
+     .is-rtl&
+       right auto
+       left 0
    .fp-embed
      right controls_height + 2
+     .is-rtl&
+       right auto
+       left controls_height + 2
    &.is-closeable.is-ready
      .fp-fullscreen
        right controls_height + 2
