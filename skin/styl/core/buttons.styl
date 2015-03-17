@@ -50,6 +50,11 @@
       bottom spacing
       .has-menu&
         right volume_width + controls_height + spacing * 2 + menu_width
+      .is-rtl&
+        right auto
+        left volume_width + controls_height + spacing * 2
+      .has-menu.is-rtl&
+        left volume_width + controls_height + spacing * 2 + menu_width
 
    .fp-logo
       absolute auto 15px
@@ -110,6 +115,9 @@
       bottom 0px
       z-index 11
       right spacing
+      .is-rtl&
+        right auto
+        left spacing
       .has-menu&
          display block
       .fp-dropdown
@@ -118,6 +126,9 @@
          left -42.5px
          line-height auto
          width spacing + volume_width + spacing + menu_width * 2
+         transform none
+         .is-rtl&
+          left -(spacing)
       &.dropdown-open
          .fp-dropdown
             display block

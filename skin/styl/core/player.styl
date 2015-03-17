@@ -73,6 +73,8 @@
      overflow hidden
      float left
      padding 0 (spacing * 2)
+     .is-rtl&
+      float right
 
    .fp-controls
       position absolute
@@ -310,6 +312,11 @@
        font-size 15px
        text-align center
        line-height 30px 
+     .is-rtl&
+       transform scale(-1,1)
+   .fp-menu
+     .is-rtl&
+      transform none
    .fp-fullscreen:before
      content "\e602"
    .fp-unload:before
