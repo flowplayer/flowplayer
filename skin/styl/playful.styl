@@ -10,50 +10,52 @@ volume_height     = 11px
 full_time_width   = 110px
 timeline_height   = volume_height
 controls = #0
-@import "core/index"
+
+@import "functional"
 
 .{root}
 
    // default colors
-   .fp-controls, .fp-title
-      background-color #1
-
-   .fp-timeline, .fp-volumeslider
-      bg #5
-      gradient rgba(#f, 0.01) rgba(#f, 0.3)
-
-   .fp-buffer
-      bg #e
-
-   .fp-progress
-      background-color green
-
-   &.is-touch.is-mouseover .fp-progress:before
-      background-color green
-
-   .fp-volumelevel
-      bg #f
-
-
+   .fp-controls, .fp-title, .fp-embed, .fp-play, .fp-fullscreen, .fp-close
+     gradient rgba(#8, 0.85) rgba(#0, 0.85)
+     color #e
+     &:before
+       color #e
+   .fp-dropdown
+     border-radius 5px
+     li:last-child
+       border-radius 0 0 5px 5px
+   .fp-menu:before
+     vertical-align 9px
+   .fp-play:before
+     vertical-align -11px
+   .fp-volumeslider
+     height 8px
+     margin-top 1px
+     margin-left 2px
+     border-radius 4px
+     .fp-volumelevel
+       border-radius 4px 0 0 4px
    .fp-mute
-      block mute_width mute_height
+     top -9.5px
+     &:before
+       content "\e60c"
+       .is-muted.is-ready&
+         content "\e60c"
+         color #ccc
+     &:after
+       content ''
+       background-color #9ebb11
+       width 6px
+       height 6px
+       display block
+       position absolute
+       border-radius 3px
+       right 2px
+       top 11px
+       .is-muted&
+         background-color #f00
 
-      .is-muted&
-         opacity .85 !important
-
-   // border
-   .fp-timeline, .fp-volumeslider
-      border 1px inset
-      border-color rgba(#0, 0.3) rgba(#1, 0.05)
-
-   // gradient
-   .fp-controls, .fp-progress
-      gradient rgba(#f, 0.3) rgba(#f, 0.01)
-
-
-   // radius
-   .fp-timeline, .fp-progress, .fp-buffer, .fp-volumeslider, .fp-volumelevel
-      border-radius 7px
 
    // light
    &.color-light
