@@ -18,17 +18,21 @@ controls = #0
    // default colors
    .fp-controls, .fp-title, .fp-embed, .fp-play, .fp-fullscreen, .fp-close
      gradient rgba(#8, 0.85) rgba(#0, 0.85)
-     color #e
+     color #e !important
      &:before
        color #e
    .fp-dropdown
      border-radius 5px
      li:last-child
        border-radius 0 0 5px 5px
-   .fp-menu:before
-     vertical-align 9px
-   .fp-play:before
-     vertical-align -11px
+   .fp-fullscreen, .fp-unload, .fp-mute, .fp-embed, .fp-close, .fp-play, .fp-menu
+     &:before
+       vertical-align -2px
+   .fp-controls .fp-menu
+     bottom 3px
+     .fp-dropdown
+       .is-mouseover&
+         bottom 36px
    .fp-volumeslider
      height 8px
      margin-top 1px
@@ -40,6 +44,7 @@ controls = #0
      top -9.5px
      &:before
        content "\e60c"
+       vertical-align 0px
        .is-muted.is-ready&
          content "\e60c"
          color #ccc
