@@ -113,11 +113,6 @@
    .fp-volumelevel
       bg #00a7c8
 
-   .fp-play
-      height 29px
-
-
-
    .fp-waiting
       display none
       margin 19% auto
@@ -307,13 +302,12 @@
 
    // background image
    .fp-fullscreen, .fp-unload, .fp-mute, .fp-embed, .fp-close, .fp-play, .fp-menu
-     &:before
-       font-family 'fpicons'
-       color #f
-       font-size 15px
-       text-align center
-       line-height 30px 
-       text-decoration none
+     font-family 'fpicons'
+     color #f !important
+     font-size 15px !important
+     text-align center !important
+     line-height 30px !important
+     text-decoration none !important
      .is-rtl&
        transform scale(-1,1)
    .fp-menu
