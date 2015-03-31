@@ -47,6 +47,11 @@
       right right_margin + spacing + brand_width
       color #e
 
+      .no-brand&
+        right right_margin
+        .has-menu&
+          right right_margin + menu_width + spacing
+
       .has-menu&
          right right_margin + menu_width + spacing + brand_width
 
@@ -61,7 +66,12 @@
 
       .is-rtl&
          right auto
-         left right_margin
+         left right_margin + spacing + brand_width
+
+         .no-brand&
+            left right_margin
+            .has-menu&
+              left right_margin + menu_width
 
          .has-menu&
             left right_margin + menu_width + spacing + brand_width
