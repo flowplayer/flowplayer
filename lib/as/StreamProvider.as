@@ -37,5 +37,7 @@ public interface StreamProvider {
     function volume(level:Number, fireEvent:Boolean = true):void;
 
     function status():Object;
+
+    function setProviderParam(key:String, value:Object):void;
   }
 }

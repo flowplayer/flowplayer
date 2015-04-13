@@ -187,6 +187,8 @@ package {
             return {time:netStream.time, buffer:netStream.bytesLoaded};
         }
 
+        public function setProviderParam(key:String, value:Object) : void { }
+
         /************* Private API ***********/
         private function isRtmpUrl(url : String) : Boolean {
             var protocols : Array = ["rtmp", "rtmpt", "rtmpe", "rtmpte", "rtmfp"];
