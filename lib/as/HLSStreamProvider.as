@@ -31,6 +31,7 @@ package {
     import org.mangui.hls.constant.HLSSeekMode;
     import org.mangui.hls.HLSSettings;
     import org.mangui.hls.HLS;
+    import org.mangui.hls.utils.Params2Settings;
 
     import flash.media.Video;
 
@@ -126,6 +127,11 @@ package {
                 pos = 0;
             }
             return {time:pos, buffer:pos + hls.bufferLength};
+        }
+
+        public function setProviderParam(key:String, value:Object) : void {
+            player.debug("HLSStreamProvider::setProviderParam: " + key + ": " + value);
+            Params2Settings.set(key, value);
         }
 
         /* private */

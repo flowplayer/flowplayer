@@ -90,6 +90,11 @@ package {
         public function set(key : String, value : String) : void {
             debug('set: ' + key + ':' + value);
             conf[key] = value;
+            if (CONFIG::HLS) {
+              if (key.indexOf("hls_") !== -1 && provider is HLSStreamProvider) {
+                provider.setProviderParam(key.substr(4), value);
+              }
+            }
         }
 
         /************ Public API ************/
@@ -173,6 +178,11 @@ package {
                 if (conf.url.indexOf(".m3u") != -1) {
                     debug("HLS stream detected!");
                     provider = new HLSStreamProvider(this, video);
+                    for (var key : String in conf) {
+                      if (key.indexOf("hls_") !== -1) {
+                        provider.setProviderParam(key.substr(4), conf[key]);
+                      }
+                    }
                 } else {
                     provider = new NetStreamProvider(this, video);
                 }
