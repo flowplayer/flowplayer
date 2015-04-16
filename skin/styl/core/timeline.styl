@@ -26,9 +26,6 @@
       .no-mute.no-volume&
          margin-right time_width + spacing * 2
 
-      .play-button&
-         margin-left play_width + time_width + spacing
-
       .is-rtl&
          margin 0 (spacing + time_width + spacing) 0 (right_margin + time_width + spacing + brand_width + spacing)
 
@@ -46,17 +43,12 @@
          .no-mute.no-volume&
             margin-left spacing * 2 + time_width
 
-         .play-button&
-            margin-right play_width + time_width + spacing
-
       .is-long&
          margin 0 (right_margin + hour_time_width + spacing + spacing + brand_width) 0 (spacing + hour_time_width + spacing)
          .no-volume&
             margin-right hour_time_width + mute_width + spacing * 3
          .no-mute&
             margin-right hour_time_width + spacing * 2
-         .play-button&
-            margin-left play_width + hour_time_width + spacing
 
          .is-rtl&
             margin (spacing + hour_time_width + spacing) 0 (right_margin + hour_time_width + spacing) 0
@@ -64,21 +56,17 @@
                margin-left hour_time_width + mute_width + spacing * 3
             .no-mute&
                margin-left hour_time_width + spacing * 2
-            .play-button&
-               margin-left play_width + hour_time_width + spacing
 
       // following apply to both normal and is-long
       .aside-time&, .no-time&
-         margin 0 right_margin 0 spacing
-
+         margin 0 right_margin + spacing * 2 + brand_width 0 spacing
+      .aside-time..no-brand&
+         margin-right right_margin
       .aside-time.no-volume&, .no-time.no-volume&
          margin-right mute_width + spacing * 2
 
       .aside-time.no-mute&, .no-time.no-mute&
          margin-right spacing
-
-      .play-button.no-time&, .play-button.aside-time&
-         margin-left play_width
 
       .is-rtl.aside-time&, .is-rtl.no-time&
          margin 0 spacing 0 right_margin
@@ -88,9 +76,6 @@
 
       .is-rtl.aside-time.no-mute&, .is-rtl.no-time.no-mute&
          margin-left spacing
-
-      .is-rtl.play-button.no-time&, .is-rtl.play-button.aside-time&
-         margin-right play_width
 
    .fp-buffer, .fp-progress
       absolute 0 auto
