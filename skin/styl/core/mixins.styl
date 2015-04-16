@@ -1,0 +1,25 @@
+play-button()
+  .fp-play
+    display block
+  .fp-elapsed
+    left play_width
+
+    .is-rtl&
+      right play_width
+
+  .fp-timeline
+    margin-left play_width + time_width + spacing
+
+    .is-rtl&
+      margin-right play_width + time_width + spacing
+
+    .is-long&
+      margin-left play_width + hour_time_width + spacing
+      .is-rtl&
+        margin-right play_width + hour_time_width + spacing
+    .no-time&
+    .aside-time&
+      margin-left play_width
+      .is-rtl&
+        margin-right play_width
+

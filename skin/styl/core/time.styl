@@ -33,15 +33,9 @@
    .fp-elapsed
       left spacing
 
-      .play-button&
-         left play_width
-
       .is-rtl&
          left auto
          right spacing
-
-         .play-button&
-            right play_width
 
    .fp-remaining, .fp-duration
       right right_margin + spacing + brand_width
@@ -99,7 +93,7 @@
 
    // top / left
    &.aside-time .fp-time
-      absolute spacing spacing
+      absolute spacing * 2 + controls_height spacing
       bottom auto !important
       width full_time_width
 
