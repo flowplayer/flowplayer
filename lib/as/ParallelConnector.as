@@ -31,26 +31,30 @@ public class ParallelConnector implements Connector {
     private var connection:NetConnection;
     private var firstAttemptFailed:Boolean;
     private var doRtmpt:Boolean;
+    private var proxyType:String;
 
-    public function ParallelConnector(player:Flowplayer, url:String, doRtmpt:Boolean) {
+    public function ParallelConnector(player:Flowplayer, url:String, doRtmpt:Boolean, proxyType:String) {
         this.player = player;
         this.url = url;
         this.doRtmpt = doRtmpt;
+        this.proxyType = proxyType;
     }
 
     public function connect(connectedCallback:Function, disconnectedCallback:Function):void {
-        debug("ParallelConnector.connect() " + url);
+        debug("ParallelConnector.connect() " + url + " proxyType " + proxyType);
         firstAttemptFailed = false;
         doConnect(connectedCallback, disconnectedCallback, url);
 
-        if (url && url.indexOf("rtmp:") == 0) {
+        if (url && url.indexOf("rtmp:") == 0 || url.indexOf("rtmps:") == 0) {
             debug("connecting with " + (doRtmpt ? "RTMP and RTMPT" :"RTMP only"));
 
             if (!doRtmpt) return;
 
             // RTMPT is attempted after 250 ms
             setTimeout(function ():void {
-                var host:String = url.substr("rtmp://".length);
+                var host:String;
+                if (url.indexOf("rtmps:") == 0) host = url.substr("rtmps://".length);
+                if (url.indexOf("rtmp:") == 0) host = url.substr("rtmp://".length);
                 doConnect(connectedCallback, disconnectedCallback, "rtmpt://" + host);
             }, 250);
         }
@@ -59,6 +63,7 @@ public class ParallelConnector implements Connector {
     private function doConnect(connectedCallback:Function, disconnectedCallback:Function, url:String):void {
         var connection:NetConnection = new NetConnection();
         connection.client = { onBWDone: function ():void {} };
+        connection.proxyType = proxyType;
 
         connection.addEventListener(NetStatusEvent.NET_STATUS, function (e:NetStatusEvent):void {
             debug("debug.conn", e.info);

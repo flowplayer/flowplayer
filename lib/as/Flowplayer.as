@@ -269,7 +269,7 @@ public class Flowplayer extends Sprite {
     }
 
     private function isRtmpUrl(url:String):Boolean {
-        var protocols:Array = ["rtmp","rtmpt", "rtmpe", "rtmpte", "rtmfp"];
+        var protocols:Array = ["rtmp","rtmpt", "rtmpe", "rtmpte", "rtmfp", "rtmps"];
         var protocol:String = url.substr(0,url.indexOf("://"));
         return protocols.indexOf(protocol) >= 0;
     }
@@ -301,7 +301,7 @@ public class Flowplayer extends Sprite {
         var urls:Array = rtmpUrls;
         debug("connect() subscribe? " + conf.subscribe + ", urls", urls);
 //      connector = new SubscribingConnector(this, conf.rtmp, stream);
-        connector = conf.subscribe ? new SubscribingConnector(this, urls[0], urls[1], conf.rtmpt) : new ParallelConnector(this, urls[0], conf.rtmpt);
+        connector = conf.subscribe ? new SubscribingConnector(this, urls[0], urls[1], conf.rtmpt, conf.proxyType) : new ParallelConnector(this, urls[0], conf.rtmpt, conf.proxyType);
         connector.connect(onConnect, onDisconnect);
     }
 
@@ -556,6 +556,9 @@ public class Flowplayer extends Sprite {
         }
         if (conf.rtmp && conf.rtmp.indexOf("rtmp") < 0) {
             delete conf.rtmp;
+        }
+        if (conf.proxyType == undefined) {
+            conf.proxyType = "none";
         }
 
         decode("rtmpt");
