@@ -3,7 +3,7 @@
 <head>
 
    <!-- player skin -->
-   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css" />
+   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css">
 
    <!-- site specific styling -->
    <style>
@@ -20,14 +20,14 @@
    <script>
    $(function() {
       $("#str").click(function() {
-         flowplayer().play("movie/functional/624x260.mp4");
+         flowplayer().play("http://stream.flowplayer.org/functional.mp4");
       });
 
       $("#arr").click(function() {
          flowplayer().play([
-            {  mp4: "movie/functional/624x260.mp4" },
-            { webm: "movie/functional/624x260.webm" },
-            {  ogv: "movie/functional/624x260.ogv" }
+            {  mp4: "http://stream.flowplayer.org/functional.mp4" },
+            { webm: "http://stream.flowplayer.org/functional.webm" },
+            {  ogv: "http://stream.flowplayer.org/functional.ogv" }
 
          ], function(event, api, video) {
             console.info("playing", video.src);
@@ -40,11 +40,11 @@
 <body>
 
    <!-- the player -->
-   <div class="flowplayer" -data-engine="flash" data-swf="../dist/flowplayer.swf" data-ratio=".417">
+   <div class="flowplayer" -data-engine="flash" data-swf="../dist/flowplayer.swf" data-ratio=".4167">
       <video>
-         <source type="video/webm" src="movie/bauhaus/624x260.webm"/>
-         <source type="video/mp4" src="movie/bauhaus/624x260.mp4"/>
-         <source type="video/ogv" src="movie/bauhaus/624x260.ogv"/>
+         <source type="video/webm" src="http://stream.flowplayer.org/bauhaus.webm">
+         <source type="video/mp4" src="http://stream.flowplayer.org/bauhaus.mp4">
+         <source type="video/ogv" src="http://stream.flowplayer.org/bauhaus.ogv">
       </video>
    </div>
 
