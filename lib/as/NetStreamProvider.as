@@ -191,7 +191,7 @@ package {
 
         /************* Private API ***********/
         private function isRtmpUrl(url : String) : Boolean {
-            var protocols : Array = ["rtmp", "rtmpt", "rtmpe", "rtmpte", "rtmfp"];
+            var protocols : Array = ["rtmp", "rtmpt", "rtmpe", "rtmpte", "rtmfp", "rtmps"];
             var protocol : String = url.substr(0, url.indexOf("://"));
             return protocols.indexOf(protocol) >= 0;
         }
@@ -222,7 +222,7 @@ package {
             var urls : Array = rtmpUrls;
             player.debug("connect() subscribe? " + conf.subscribe + ", urls", urls);
             // connector = new SubscribingConnector(this, conf.rtmp, stream);
-            connector = conf.subscribe ? new SubscribingConnector(player, urls[0], urls[1], conf.rtmpt) : new ParallelConnector(player, urls[0], conf.rtmpt);
+            connector = conf.subscribe ? new SubscribingConnector(player, urls[0], urls[1], conf.rtmpt, conf.proxyType) : new ParallelConnector(player, urls[0], conf.rtmpt, conf.proxyType);
             connector.connect(onConnect, onDisconnect);
         }
 
