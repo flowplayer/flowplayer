@@ -26,8 +26,9 @@ package {
     import flash.net.NetConnection;
     import flash.net.NetStream;
     import flash.utils.Timer;
+import flash.utils.setTimeout;
 
-    public class NetStreamProvider implements StreamProvider {
+public class NetStreamProvider implements StreamProvider {
         // flashvars
         private var conf : Object;
         // state
@@ -64,8 +65,7 @@ package {
 
             conf.autoplay = true;
             netStream.close();
-            player.debug("starting play of stream '" + url + "'");
-            netStream.play(stream);
+            netStreamPlay();
             paused = ready = false;
             video.visible = true;
         }
@@ -107,18 +107,16 @@ package {
                         connector.connect(function(conn : NetConnection) : void {
                             ready = true;
                             setupStream(conn);
-                            netStream.play(stream);
+                            netStreamPlay();
                         }, onDisconnect);
                     } else {
-                        player.debug("starting play of stream '" + stream + "'");
-                        netStream.play(stream);
+                        netStreamPlay();
                     }
                 } else {
                     if (!ready) return;
 
                     if (preloadNone() && !preloadComplete) {
-                        player.debug("starting play of stream '" + stream + "'");
-                        netStream.play(stream);
+                        netStreamPlay();
                     } else {
                         if (finished) {
                             seek(0);
@@ -243,8 +241,7 @@ package {
             // start streaming
 
             if (conf.autoplay) {
-                player.debug("autoplay is on, starting play of stream '" + stream + "'");
-                netStream.play(stream);
+                netStreamPlay();
                 return;
             }
 
@@ -255,13 +252,12 @@ package {
 
                 // we pause when metadata is received
             } else {
-                player.debug("preload: starting play of stream '" + stream + "'");
-                netStream.play(stream);
+                netStreamPlay();
             }
         }
 
         private function setupStream(conn : NetConnection) : void {
-            player.debug("Connection success", {ready:ready, preloadCompete:preloadComplete, paused:paused, autoplay:conf.autoplay});
+            player.debug("setupStream() ", {ready:ready, preloadCompete:preloadComplete, paused:paused, autoplay:conf.autoplay});
 
             netStream = new NetStream(conn);
             var bufferTime : Number = conf.hasOwnProperty("bufferTime") ? conf.bufferTime : 3;
@@ -271,61 +267,64 @@ package {
             volume(volumeLevel || conf.initialVolume as Number, false);
 
             // metadata
-            netStream.client = {onPlayStatus:function(info : Object) : void {
-                player.debug("onPlayStatus", info);
-                if (info.code == "NetStream.Play.Complete") {
-                    if (!paused) {
-                        finished = true;
-                        paused = true;
-                        player.fire(Flowplayer.PAUSE, null);
-                        player.fire(Flowplayer.FINISH, null);
+            netStream.client = {
+                onPlayStatus:function(info : Object) : void {
+                    player.debug("onPlayStatus", info);
+                    if (info.code == "NetStream.Play.Complete") {
+                        if (!paused) {
+                            finished = true;
+                            paused = true;
+                            player.fire(Flowplayer.PAUSE, null);
+                            player.fire(Flowplayer.FINISH, null);
+                        }
                     }
-                }
-            }, onMetaData:function(info : Object) : void {
-                player.debug("onMetaData()", {ready:ready, preloadCompete:preloadComplete, paused:paused, autoplay:conf.autoplay});
+                },
 
-                // use a real object
-                var meta : Object = {seekpoints:[]};
-                for (var key : String in info) {
-                    meta[key] = info[key];
-                }
-                if (conf.debug) player.fire("debug.metadata", meta);
+                onMetaData:function(info : Object) : void {
+                    player.debug("onMetaData()", {ready:ready, preloadCompete:preloadComplete, paused:paused, autoplay:conf.autoplay});
 
-                clip = {seekable:!!conf.rtmp, bytes:netStream.bytesTotal, duration:meta.duration, height:meta.height, width:meta.width, seekpoints:meta.seekpoints, src:completeClipUrl, url:completeClipUrl};
+                    // use a real object
+                    var meta : Object = {seekpoints:[]};
+                    for (var key : String in info) {
+                        meta[key] = info[key];
+                    }
+                    if (conf.debug) player.fire("debug.metadata", meta);
 
-                if (!ready) {
-                    ready = true;
+                    clip = {seekable:!!conf.rtmp, bytes:netStream.bytesTotal, duration:meta.duration, height:meta.height, width:meta.width, seekpoints:meta.seekpoints, src:completeClipUrl, url:completeClipUrl};
 
-                    if (conf.autoplay) {
+                    if (!ready) {
+                        ready = true;
+
+                        if (conf.autoplay) {
+                            player.fire(Flowplayer.READY, clip);
+                            player.fire(Flowplayer.RESUME, null);
+                        } else {
+                            player.debug("stopping on first frame");
+                            netStream.seek(0);
+                            pauseStream();
+                            // hide the video if splash or poster should stay visible and not be hidden behind the first frame
+                            if (conf.splash || conf.poster) {
+                                player.debug("splash or poster used, hiding video");
+                                video.visible = false;
+                            }
+
+                            // make autoplay true so that first-frame pause is not done with webkit-fullscreen-toggling
+                            conf.autoplay = true;
+                            player.fire(Flowplayer.READY, clip);
+                        }
+                        return;
+                    }
+
+                    if (preloadNone() && !preloadComplete) {
+                        preloadComplete = true;
                         player.fire(Flowplayer.READY, clip);
                         player.fire(Flowplayer.RESUME, null);
-                    } else {
-                        player.debug("stopping on first frame");
-                        netStream.seek(0);
-                        pauseStream();
-                        // hide the video if splash or poster should stay visible and not be hidden behind the first frame
-                        if (conf.splash || conf.poster) {
-                            player.debug("splash or poster used, hiding video");
-                            video.visible = false;
-                        }
-
-                        // make autoplay true so that first-frame pause is not done with webkit-fullscreen-toggling
-                        conf.autoplay = true;
-                        player.fire(Flowplayer.READY, clip);
                     }
-                    return;
-                }
-
-                if (preloadNone() && !preloadComplete) {
-                    preloadComplete = true;
-                    player.fire(Flowplayer.READY, clip);
-                    player.fire(Flowplayer.RESUME, null);
-                }
-            }};
+                }};
 
             // listen for playback events
             netStream.addEventListener(NetStatusEvent.NET_STATUS, function(e : NetStatusEvent) : void {
-                if (conf.debug) player.fire("debug.stream", e.info.code);
+                if (conf.debug) player.fire("NetStatusEvent: ", e.info.code);
 
                 switch (e.info.code) {
                     case "NetStream.Play.Start":
@@ -386,6 +385,15 @@ package {
         private function get duration() : Number {
             if (!clip) return 0;
             return clip.duration;
+        }
+
+        private function netStreamPlay():void {
+            player.debug("netStreamPlay() " + stream);
+            if (conf.live) {
+                netStream.play(stream, -1);
+            } else {
+                netStream.play(stream, 0, -1);
+            }
         }
     }
 }
