@@ -247,7 +247,7 @@ package {
                 delete conf.rtmp;
             }
             if (! conf.proxyType) {
-                conf.proxyType = "none";
+                conf.proxyType = "best";
             }
 
             decode("rtmpt");
