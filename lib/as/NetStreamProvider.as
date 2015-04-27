@@ -220,7 +220,7 @@ public class NetStreamProvider implements StreamProvider {
             var urls : Array = rtmpUrls;
             player.debug("connect() subscribe? " + conf.subscribe + ", urls", urls);
             // connector = new SubscribingConnector(this, conf.rtmp, stream);
-            connector = conf.subscribe ? new SubscribingConnector(player, urls[0], urls[1], conf.rtmpt, conf.proxyType) : new ParallelConnector(player, urls[0], conf.rtmpt, conf.proxyType);
+            connector = conf.subscribe ? new SubscribingConnector(player, urls[0], urls[1], conf.rtmpt, conf.proxy) : new ParallelConnector(player, urls[0], conf.rtmpt, conf.proxy);
             connector.connect(onConnect, onDisconnect);
         }
 
