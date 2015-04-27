@@ -246,9 +246,6 @@ package {
             if (conf.rtmp && conf.rtmp.indexOf("rtmp") < 0) {
                 delete conf.rtmp;
             }
-            if (! conf.proxyType) {
-                conf.proxyType = "best";
-            }
 
             decode("rtmpt");
             decode("live");
