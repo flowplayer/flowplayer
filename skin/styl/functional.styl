@@ -40,6 +40,21 @@ control_border_radius = 3px
      .fp-volume, .fp-brand, .fp-play, .fp-time
        transition none
        opacity 0
+   &.fixed-controls
+   &.fixed-controls.is-mouseover
+     .fp-elapsed
+       left spacing * 2 + controls_height
+     .fp-controls
+       bottom -(controls_height)
+       border-radius 0
+       left 0
+       right 0
+       .fp-play
+         left spacing
+       .fp-timeline
+         margin-left spacing * 3 + controls_height + time_width
+         .is-long&
+          margin-left spacing * 3 + controls_height + hour_time_width
    &.is-mouseover .fp-controls
      bottom spacing
      left spacing + controls_height + spacing
