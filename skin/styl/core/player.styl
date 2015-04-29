@@ -97,6 +97,17 @@
    .fp-controls, .fp-title, .fp-fullscreen, .fp-unload, .fp-close, .fp-embed
       bg controls
       bg rgba(controls, .65)
+      .no-background&
+        bg transparent !important
+        gradient transparent transparent !important
+        text-shadow 0 0 1px #0
+
+    .fp-play, .fp-brand
+      .no-background&
+        bg transparent !important
+        gradient transparent transparent !important
+        text-shadow 0 0 1px #0
+
 
    &.fixed-controls .fp-controls
       bg controls
