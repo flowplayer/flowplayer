@@ -84,23 +84,25 @@
 
    // top / left
    &.aside-time .fp-time
-      absolute spacing * 2 + controls_height spacing
+      absolute spacing spacing
       bottom auto !important
-      width full_time_width
+      width auto
+      bg controls
+      bg rgba(controls, .65)
+      height controls_height
+      padding 0 5px
+      border-radius control_border_radius
+      line-height controls_height
+      text-align center
+      font-size 15px
+
+      .no-background&
+        bg transparent !important
+
 
       strong, em
          position static
 
-      .fp-elapsed
-         margin-right spacing
-
-         .is-rtl&
-            margin-right auto
-            margin-left spacing
-
-   &.is-long.aside-time .fp-time
-      width hour_time_width * 2
-
-
-
+      .fp-elapsed::after
+        content ' / '
 
