@@ -1,6 +1,7 @@
 
 root              ?= flowplayer
 font_size         ?= 11px
+font_family       ?= 'myriad pro', Helvetica, Arial, sans-serif !important
 // aspect_ratio      ?= (9 / 16) * 100%
 
 // editable
@@ -29,7 +30,7 @@ fade_delay        ?= .3s
 mute_width        ?= 30px
 mute_height       ?= 30px
 controls_height   ?= spacing + timeline_height + spacing
-right_margin      ?= spacing + volume_width + mute_width + spacing
+right_margin      ?= volume_width + controls_height  - 10 + spacing * 2
 
 
 @keyframes pulse
