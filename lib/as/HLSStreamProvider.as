@@ -191,9 +191,6 @@ package {
             player.debug("playback complete,fire pause and finish events");
             player.fire(Flowplayer.PAUSE, null);
             player.fire(Flowplayer.FINISH, null);
-            if (config.loop) {
-                load(config);
-            }
         };
 
         private function _errorHandler(event : HLSEvent) : void {
