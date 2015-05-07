@@ -37,7 +37,7 @@ raw:
 	@ mkdir	-p $(DIST)
 	@ cat LICENSE.js | $(SET_VERSION) | $(SET_DATE) > $(JS)
 	@ uglifyjs lib/ext/support/embedcode.js --compress >> lib/ext/support/embedcode.min.js
-	@ browserify -s flowplayer -t brfs  --full-paths --debug lib/index.js | exorcist $(DIST)/flowplayer.js.map | $(SET_VERSION) | sed "s|@EMBED|$(EMBED)|" | sed "s/@CDN/$(CDN)/" | sed "s/@CDN_PATH/$(CDN_PATH)/" >> $(JS)
+	@ browserify -s flowplayer -t brfs lib/index.js | $(SET_VERSION) | sed "s|@EMBED|$(EMBED)|" | sed "s/@CDN/$(CDN)/" | sed "s/@CDN_PATH/$(CDN_PATH)/" >> $(JS)
 	@ rm lib/ext/support/embedcode.min.js
 
 
