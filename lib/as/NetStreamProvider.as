@@ -290,7 +290,7 @@ public class NetStreamProvider implements StreamProvider {
                     }
                     if (conf.debug) player.fire("debug.metadata", meta);
 
-                    clip = {seekable:!!conf.rtmp, bytes:netStream.bytesTotal, duration:meta.duration, height:meta.height, width:meta.width, seekpoints:meta.seekpoints, src:completeClipUrl, url:completeClipUrl};
+                    clip = {seekable:!!conf.rtmp, bytes:netStream.bytesTotal, duration:meta.duration, height:meta.height, width:meta.width, seekpoints:meta.seekpoints, src:conf.url, url:completeClipUrl};
 
                     if (!ready) {
                         ready = true;
