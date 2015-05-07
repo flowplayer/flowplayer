@@ -42,6 +42,7 @@ package {
         private var hls : HLS;
         private var config : Object;
         private var clip : Object;
+        private var pos : Number;
 
         public function HLSStreamProvider(player : Flowplayer, video : Video) {
             this.player = player;
@@ -122,7 +123,7 @@ package {
         }
 
         public function status() : Object {
-            var pos : Number = hls.position;
+            var pos : Number = this.pos;
             if (isNaN(pos) || pos < 0) {
                 pos = 0;
             }
@@ -155,6 +156,7 @@ package {
         };
 
         protected function _mediaTimeHandler(event : HLSEvent) : void {
+            this.pos = event.mediatime.live_sliding_main + event.mediatime.position;
             _checkVideoDimension();
         };
 
