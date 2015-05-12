@@ -1,3 +1,58 @@
+Version 6.0
+===========
+
+Enhancements
+------------
+
+ * HLS support for Flash Engine
+ * New JavaScript configuration syntax
+ * No jQuery dependency
+ * Video title element
+ * Multilingual subtitle support
+ * API for subtitles
+ * Subtitle control element
+ * API for cuepoints
+ * is-closeable does not exclude fullscreen anymore
+ * API for playlist handling
+ * UMD definition (RequireJS and commonJS support)
+ * Mixed engines support for playlists
+ * Playlist embedding
+ * iFrame based embedding
+ * Refreshed skins
+ * Vector icons
+
+ 
+Fixes
+-----
+
+ * Fix #702 - adaptiveRatio does not work on HLS with Android Chrome
+ * Fix #676 - embed code generator triggers video loading in Chrome
+ * Fix #671 - Flash engine on Chrome load file twice
+ * Fix #664 - playlist: api stays in finished stage after playthrough next switch
+ * Fix #663 - Embed always uses sources from initial video
+ * Fix #651 - embed: make player size configurable (re: hls)
+ * Fix #644 - Analytics plugin doesn't send heartbeat while playing
+ * Fix #639 - Add proper event listener cleanup
+ * Fix #613 - Flash + WebKit + Live: cuepoints unusable because of fullscreen toggle
+ * Fix #610 - Cuepoint misses on Android
+ * Fix #589 - rtmp: recovery from bad url does not work
+ * Fix #588 - adaptiveRatio: only has an effect on first load
+ * Fix #587 - playlist: click on first item has no effect in non-splash setups
+ * Fix #538 - When using Flash, no ready event in flowplayer 5.4.3 if jQuery not global
+ * Fix #485 - .fp-next and .fp-prev don't work if inserted after player initialization
+ * Fix #453 - error reports valid url instead of the bad one
+ * Fix #452 - Flowplayer flash doesn't abort image loading
+ * Fix #450 - window.onload doesn't work on iPad
+ * Fix #448 - "load" and "unload.pl" event handlers bound multiple times
+ * Fix #361 - play() / pause() / resume() commands don't work when player is disabled
+ * Fix #352 - api: stop() issues
+ * Fix #284 - ready event and load callback not caught
+ * Fix 257 - load() doesn't reset video.time
+ * Fix #244 - load/play restrictions
+ * Fix #162 - flash mode can't handle utf-8 media locations
+ * Fix #100 - issue with seeking on cuepoints and changing rate
+
+
 Version 5.5.2
 =============
 
