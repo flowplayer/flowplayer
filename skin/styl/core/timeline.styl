@@ -13,18 +13,24 @@
         margin-right right_margin + time_width +spacing
         .has-menu&
           margin-right time_width + spacing + right_margin + menu_width
+        .no-volume&
+          margin-right time_width + mute_width + spacing * 3
+        .no-mute&
+          margin-right time_width + right_margin + spacing - mute_width
+        .no-mute.no-volume&
+          margin-right time_width + spacing * 2
 
       .has-menu&
          margin-right time_width + spacing * 2 + right_margin + menu_width + brand_width
 
       .no-volume&
-         margin-right time_width + mute_width + spacing * 3
+         margin-right time_width + mute_width + spacing * 4 + brand_width
 
       .no-mute&
-         margin-right time_width + right_margin + spacing - mute_width
+         margin-right time_width + right_margin + spacing * 2 - mute_width + brand_width
 
       .no-mute.no-volume&
-         margin-right time_width + spacing * 2
+         margin-right time_width + spacing * 3 + brand_width
 
       .is-rtl&
          margin 0 (spacing + time_width + spacing) 0 (right_margin + time_width + spacing + brand_width + spacing)

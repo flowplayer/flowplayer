@@ -46,18 +46,24 @@
         right right_margin
         .has-menu&
           right right_margin + menu_width + spacing
+        .no-volume&
+          right mute_width + spacing * 2
+        .no-mute&
+          right spacing * 2 + volume_width
+        .no-mute.no-volume&
+          right spacing
 
       .has-menu&
          right right_margin + menu_width + spacing + brand_width
 
       .no-volume&
-         right mute_width + spacing * 2
+         right mute_width + spacing * 3 + brand_width
 
       .no-mute&
-         right spacing * 2 + volume_width
+         right spacing * 3 + volume_width + brand_width
 
       .no-mute.no-volume&
-         right spacing
+         right spacing * 2 + brand_width
 
       .is-rtl&
          right auto

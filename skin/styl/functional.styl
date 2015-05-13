@@ -79,7 +79,8 @@ control_border_radius = 3px
         right -(spacing + controls_height)
      .fp-timeline
        border-radius control_border_radius
-       margin-right right_margin + time_width + spacing + brand_width
+       .fp-progress, .fp-buffer
+         border-radius control_border_radius
      .fp-menu .fp-dropdown
        bottom spacing * 3 + 5
        left auto
