@@ -29,12 +29,14 @@
     "multistr": true
   },
   "devDependencies": {
-    "bean": "~1.0.14",
+    "bean": "^1.0.15",
     "beefy": "~2.1.1",
     "browserify": "~6.1.0",
     "class-list": "~0.1.1",
+    "computed-style": "^0.3.0",
     "es5-shim": "^4.1.1",
     "extend-object": "~1.0.0",
+    "ie8": "^0.2.3",
     "is-function": "~1.0.1",
     "is-object": "^1.0.1",
     "mocha": "~1.21.4",
