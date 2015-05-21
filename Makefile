@@ -36,8 +36,6 @@ raw:
 	# raw player
 	@ mkdir	-p $(DIST)
 	@ cat LICENSE.js | $(SET_VERSION) | $(SET_DATE) > $(JS)
-	@ cat node_modules/es5-shim/es5-shim.min.js >> $(JS)
-	@ echo >> $(JS)
 	@ cat node_modules/ie8/build/ie8.js >> $(JS)
 	@ echo >> $(JS)
 	@ uglifyjs lib/ext/support/embedcode.js --compress >> lib/ext/support/embedcode.min.js
