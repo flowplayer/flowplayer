@@ -229,11 +229,12 @@
       position absolute
       top 5px
       width 100px
-      bg controls
+      bg controls !important
       border-radius 3px
       box-sizing border-box
       -moz-box-sizing border-box
-      margin 0px
+      margin 0px !important
+      list-style-type none !important
       &:before
         content ''
         display block
@@ -246,11 +247,14 @@
         border-right 5px solid transparent
         border-bottom 5px solid rgba(#3, 0.9)
       li
-        padding 10px
-        color #f
+        padding spacing !important
+        margin 0 !important
+        color #f !important
+        font-size font_size !important
+        list-style-type none !important
         &.active
-          bg #00a7c8
-          cursor default
+          bg #00a7c8 !important
+          cursor default !important
       &.fp-dropup
         bottom 20px
         top auto
