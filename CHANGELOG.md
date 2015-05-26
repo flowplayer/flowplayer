@@ -1,3 +1,17 @@
+Version 6.0.1
+=============
+
+Fixes
+-----
+
+ * Fix #808 - functional + playful fixed-controls: disappear in fullscreen
+ * Fix #807 - IE11: time and timeline do not update
+ * Fix #806 - iphone: does not resume after return from native fullscreen
+ * Fix #802 - Simulated fullscreen - players pinned to top of window
+ * Fix #801 - ipad: native_fullscreen does not work
+ * Fix #803 - splash option: works only if no container background-color is given
+
+
 Version 6.0
 ===========
 
