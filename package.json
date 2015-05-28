@@ -43,12 +43,12 @@
     "mochify": "~1.1.2",
     "phantomjs": "^1.9.12",
     "stylus": "~0.40.3",
-    "uglify-js": "~2.4.3"
-  },
-  "dependencies": {
+    "uglify-js": "~2.4.3",
     "brfs": "^1.2.0",
     "browserify": "^8.1.1",
     "exorcist": "^0.1.6",
     "scriptjs": "^2.5.7"
+  },
+  "dependencies": {
   }
 }
