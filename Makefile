@@ -72,6 +72,7 @@ flash:
 	@ $(SET_VERSION) lib/as/Flowplayer.as > $(DIST)/Flowplayer.as
 	@ cp lib/logo/logo.swc $(DIST)
 	@ cp lib/as/*.as $(DIST)
+	@ cp deps/as3base64.swc $(DIST)
 	@ cd $(DIST) && $(FLASH_COMPILE) -define=CONFIG::HLS,false -output flowplayer.swf Flowplayer.as -source-path ./
 	@ cp deps/flashls.swc $(DIST)
 	@ cd $(DIST) && $(FLASH_COMPILE) -define=CONFIG::HLS,true -output flowplayerhls.swf Flowplayer.as -source-path ./ 

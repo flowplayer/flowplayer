@@ -28,6 +28,7 @@ package {
     import flash.external.ExternalInterface;
     import flash.media.Video;
     import flash.system.Security;
+    import com.dynamicflash.util.Base64;
 
     public class Flowplayer extends Sprite {
         // events
@@ -154,7 +155,6 @@ package {
             logo = new Logo();
             addLogo();
             arrange();
-
             conf.url = encodeURI(conf.url);
             debug("debug.url", conf.url);
 
@@ -229,6 +229,10 @@ package {
             addChild(logo);
         }
 
+        private function base64Decode(str : String) : String {
+          return Base64.decode(str);
+        }
+
         private function configure() : void {
             conf = this.loaderInfo.parameters;
 
@@ -253,6 +257,7 @@ package {
             decode("debug");
             decode("subscribe");
             decode("loop");
+            conf.url = base64Decode(conf.url);
             debug("configure()", conf);
         }
     }
