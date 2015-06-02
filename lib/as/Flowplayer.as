@@ -28,7 +28,7 @@ package {
     import flash.external.ExternalInterface;
     import flash.media.Video;
     import flash.system.Security;
-    import com.dynamicflash.util.Base64;
+    import com.sociodox.utils.Base64;
 
     public class Flowplayer extends Sprite {
         // events
@@ -228,9 +228,8 @@ package {
 
             addChild(logo);
         }
-
         private function base64Decode(str : String) : String {
-          return Base64.decode(str);
+          return Base64.decode(str).toString();
         }
 
         private function safeEncodeURI(url : String) : String {
