@@ -102,7 +102,7 @@ package {
         // switch url
         public function play(url : String, reconnect : Boolean) : void {
             debug("play(" + url + ", " + reconnect + ")");
-            conf.url = encodeURI(url);
+            conf.url = safeEncodeURI(url);
             if (reconnect || providerChangeNeeded(url)) {
               initProvider();
             } else {
@@ -155,7 +155,7 @@ package {
             logo = new Logo();
             addLogo();
             arrange();
-            conf.url = encodeURI(conf.url);
+            conf.url = safeEncodeURI(conf.url);
             debug("debug.url", conf.url);
 
             paused = !conf.autoplay;
@@ -231,6 +231,13 @@ package {
 
         private function base64Decode(str : String) : String {
           return Base64.decode(str);
+        }
+
+        private function safeEncodeURI(url : String) : String {
+          if (decodeURIComponent(url) !== url) { // Already encoded
+            return url;
+          }
+          return encodeURI(url);
         }
 
         private function configure() : void {
