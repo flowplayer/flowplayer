@@ -221,7 +221,12 @@ public class NetStreamProvider implements StreamProvider {
             player.debug("connect() subscribe? " + conf.subscribe + ", urls", urls);
             // connector = new SubscribingConnector(this, conf.rtmp, stream);
             connector = conf.subscribe ? new SubscribingConnector(player, urls[0], urls[1], conf.rtmpt, conf.proxy) : new ParallelConnector(player, urls[0], conf.rtmpt, conf.proxy);
-            connector.connect(onConnect, onDisconnect);
+            try { 
+              connector.connect(onConnect, onDisconnect);
+            } catch(e : TypeError) {
+              if (e.errorID === 1009) return; // Suppress
+              throw e;
+            }
         }
 
         private function onDisconnect() : void {

@@ -43,8 +43,9 @@ package {
         internal static const UNLOAD : String = "unload";
         internal static const ERROR : String = "error";
         internal static const SET : String = "set";
+        internal static const GET : String = "get";
         // external interface
-        private static const INTERFACE : Array = new Array(PLAY, PAUSE, RESUME, SEEK, VOLUME, UNLOAD, STATUS, SET);
+        private static const INTERFACE : Array = new Array(PLAY, PAUSE, RESUME, SEEK, VOLUME, UNLOAD, STATUS, SET, GET);
         // flashvars
         private var conf : Object;
         // state
@@ -89,12 +90,19 @@ package {
 
         public function set(key : String, value : String) : void {
             debug('set: ' + key + ':' + value);
-            conf[key] = value;
+            if (value === "false") conf[key] = false;
+            else if (value === "null") conf[key] = null;
+            else conf[key] = value;
             if (CONFIG::HLS) {
               if (key.indexOf("hls_") !== -1 && provider is HLSStreamProvider) {
                 provider.setProviderParam(key.substr(4), value);
               }
             }
+        }
+
+        public function get(key : String) : String {
+          debug('get: ' + key);
+          return conf[key];
         }
 
         /************ Public API ************/
