@@ -127,21 +127,27 @@ package {
             if (isNaN(pos) || pos < 0) {
                 pos = 0;
             }
-            return {time:pos, buffer:pos + hls.bufferLength};
+            return {time:pos, buffer:pos + hls.stream.bufferLength};
         }
 
         public function setProviderParam(key:String, value:Object) : void {
-            player.debug("HLSStreamProvider::setProviderParam: " + key + ": " + value);
-            Params2Settings.set(key, value);
+            var decode : Function = function(value : String) : Object {
+              if (value == "false") return false;
+              if (!isNaN(Number(value))) return Number(value);
+              if (value == "null") return null;
+              return value;
+            };
+            player.debug("HLSStreamProvider::setProviderParam: " + key, decode(value));
+            Params2Settings.set(key, decode(value));
         }
 
         /* private */
         private function _manifestHandler(event : HLSEvent) : void {
-            clip.bytes = clip.duration = event.levels[hls.startlevel].duration;
+            clip.bytes = clip.duration = event.levels[hls.startLevel].duration;
             clip.seekable = true;
             clip.src = clip.url = config.url;
-            clip.width = event.levels[hls.startlevel].width;
-            clip.height = event.levels[hls.startlevel].height;
+            clip.width = event.levels[hls.startLevel].width;
+            clip.height = event.levels[hls.startLevel].height;
             _checkVideoDimension();
             player.debug("manifest received " + clip);
             player.fire(Flowplayer.READY, clip);
