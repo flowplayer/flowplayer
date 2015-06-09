@@ -245,7 +245,6 @@ package {
                     conf[prop] = false;
                     return;
                 }
-                ;
                 conf[prop] = !!conf[prop];
             }
             if (conf.rtmpt == undefined) {
