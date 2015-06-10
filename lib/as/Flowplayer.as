@@ -261,6 +261,7 @@ package {
             decode("debug");
             decode("subscribe");
             decode("loop");
+            decode("autoplay");
             debug("configure()", conf);
         }
     }
