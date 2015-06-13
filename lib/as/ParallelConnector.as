@@ -52,6 +52,10 @@ public class ParallelConnector implements Connector {
 
             // RTMPT is attempted after 250 ms
             setTimeout(function ():void {
+                if (connected) {
+                    debug("already connected, will not try RTMPT");
+                    return;
+                }
                 var host:String;
                 if (url.indexOf("rtmps:") == 0) host = url.substr("rtmps://".length);
                 if (url.indexOf("rtmp:") == 0) host = url.substr("rtmp://".length);
