@@ -276,12 +276,7 @@ public class NetStreamProvider implements StreamProvider {
                 onPlayStatus:function(info : Object) : void {
                     player.debug("onPlayStatus", info);
                     if (info.code == "NetStream.Play.Complete") {
-                        if (!paused) {
-                            finished = true;
-                            paused = true;
-                            player.fire(Flowplayer.PAUSE, null);
-                            player.fire(Flowplayer.FINISH, null);
-                        }
+                        player.durationReached();
                     }
                 },
 
@@ -296,6 +291,7 @@ public class NetStreamProvider implements StreamProvider {
                     if (conf.debug) player.fire("debug.metadata", meta);
 
                     clip = {seekable:!!conf.rtmp, bytes:netStream.bytesTotal, duration:meta.duration, height:meta.height, width:meta.width, seekpoints:meta.seekpoints, src:conf.url, url:completeClipUrl};
+                    player.setDuration(clip.duration);
 
                     if (!ready) {
                         ready = true;
@@ -356,33 +352,6 @@ public class NetStreamProvider implements StreamProvider {
                         finished = true;
                         player.fire(Flowplayer.ERROR, {code:4});
                         break;
-                    case "NetStream.Play.Stop":
-                        var stopTracker : Timer = new Timer(100);
-                        var prevTime : Number = 0;
-                        if (stopTracker && stopTracker.running) return;
-                        stopTracker.addEventListener(TimerEvent.TIMER, function(e : TimerEvent) : void {
-                            // player.debug("checking end of clip: duration " + duration + ", time " + netStream.time + ", prevTime " + prevTime);
-                            if (duration == 0) return;
-                            if (prevTime < netStream.time) {
-                                prevTime = netStream.time;
-                                return;
-                            }
-                            if (duration - netStream.time > 3) return;
-
-                            prevTime = netStream.time;
-
-                            stopTracker.stop();
-
-                            if (!conf.rtmp && !paused) {
-                                finished = true;
-                                paused = true;
-                                netStream.pause();
-                                player.fire(Flowplayer.PAUSE, null);
-                                player.fire(Flowplayer.FINISH, null);
-                            }
-                        });
-                        stopTracker.start();
-                        break;
                 }
             });
         }
@@ -400,5 +369,6 @@ public class NetStreamProvider implements StreamProvider {
                 netStream.play(stream, 0, -1);
             }
         }
+
     }
 }

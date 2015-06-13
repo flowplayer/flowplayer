@@ -144,6 +144,8 @@ package {
         /* private */
         private function _manifestHandler(event : HLSEvent) : void {
             clip.bytes = clip.duration = event.levels[hls.startLevel].duration;
+            player.setDuration(clip.duration);
+
             clip.seekable = true;
             clip.src = clip.url = config.url;
             clip.width = event.levels[hls.startLevel].width;
@@ -206,5 +208,6 @@ package {
             player.debug("error (code/msg/url):" + hlsError.code + "/" + hlsError.msg + "/" + hlsError.url);
             player.fire(Flowplayer.ERROR, {code:4});
         };
+
     }
 }

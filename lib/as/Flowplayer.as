@@ -51,9 +51,11 @@ package {
         // state
         private var preloadComplete : Boolean;
         private var paused : Boolean;
+        private var finished : Boolean;
         private var video : Video;
         private var logo : DisplayObject;
         private var provider : StreamProvider;
+        private var playTimeTracker : PlayTimeTracker;
 
         /* constructor */
         public function Flowplayer() {
@@ -84,8 +86,8 @@ package {
                 ExternalInterface.addCallback("__" + INTERFACE[i], player[INTERFACE[i]]);
             }
             init();
-
-            initProvider(); 
+            initProvider();
+            playTimeTracker = new PlayTimeTracker(player);
         }
 
         public function set(key : String, value : String) : void {
@@ -115,41 +117,39 @@ package {
             } else {
               provider.play(conf.url);
             }
-            return;
+            finished = false;
         }
 
         public function pause() : void {
             debug("pause()");
             provider.pause();
-            return;
         }
 
         public function resume() : void {
             debug("resume()");
             provider.resume();
-            return;
+            finished = false;
         }
 
         public function seek(seconds : Number) : void {
             debug("seek(" + seconds + ")");
             provider.seek(seconds);
-            return;
+            finished = false;
         }
 
         public function volume(level : Number, fireEvent : Boolean = true) : void {
             debug("volume(" + level + ")");
             provider.volume(level, fireEvent);
-            return;
         }
 
         public function unload() : void {
             debug("unload()");
             provider.unload();
-            return;
         }
 
         public function status() : Object {
             // debug("status()");
+            if (!provider) return null;
             return provider.status();
         }
 
@@ -213,6 +213,20 @@ package {
                 } else {
                     ExternalInterface.call(conf.callback, type);
                 }
+            }
+        }
+
+        internal function setDuration(duration:int):void {
+            debug("Starting play time tracker for duration " + duration);
+            playTimeTracker.start(duration);
+        }
+
+        internal function durationReached():void {
+            debug("duration reached, finished? " + finished);
+            if (!finished) {
+                finished = true;
+                fire(Flowplayer.PAUSE, null);
+                fire(Flowplayer.FINISH, null);
             }
         }
 
