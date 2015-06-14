@@ -269,7 +269,7 @@ public class NetStreamProvider implements StreamProvider {
             player.debug("bufferTime == " + bufferTime);
             netStream.bufferTime = bufferTime;
             video.attachNetStream(netStream);
-            volume(volumeLevel || conf.initialVolume as Number, false);
+            volume(volumeLevel || Number(conf.initialVolume), false);
 
             // metadata
             netStream.client = {
