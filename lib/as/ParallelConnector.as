@@ -32,6 +32,7 @@ public class ParallelConnector implements Connector {
     private var firstAttemptFailed:Boolean;
     private var doRtmpt:Boolean;
     private var proxyType:String;
+    private var disconnected:Boolean;
 
     public function ParallelConnector(player:Flowplayer, url:String, doRtmpt:Boolean, proxyType:String) {
         this.player = player;
@@ -43,6 +44,7 @@ public class ParallelConnector implements Connector {
     public function connect(connectedCallback:Function, disconnectedCallback:Function):void {
         debug("ParallelConnector.connect() '" + url + "', proxyType '" + proxyType + "'");
         firstAttemptFailed = false;
+        disconnected = false;
         doConnect(connectedCallback, disconnectedCallback, url);
 
         if (url && url.indexOf("rtmp:") == 0 || url.indexOf("rtmps:") == 0) {
@@ -73,8 +75,8 @@ public class ParallelConnector implements Connector {
                 case "NetConnection.Connect.Success":
                     debug("connection succeeded with " + connection.uri + ", already connected? " + connected);
 
-                    if (connected) {
-                        debug("already connected, closing this 2nd connection");
+                    if (connected || disconnected) {
+                        debug("Already " + (disconnected ? "disconnected" : "connected") + ", closing this 2nd connection");
                         connection.close();
                         return;
                     }
@@ -129,6 +131,7 @@ public class ParallelConnector implements Connector {
     public function close():void {
         if (!connection) return;
         connection.close();
+        disconnected = true;
     }
 
     private function getConnection():NetConnection {
