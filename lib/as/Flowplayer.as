@@ -149,7 +149,7 @@ package {
         }
 
         public function status() : Object {
-            // debug("status()");
+            if (! provider) return null;
             return provider.status();
         }
 
