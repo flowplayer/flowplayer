@@ -76,8 +76,10 @@ public class ParallelConnector implements Connector {
                     debug("connection succeeded with " + connection.uri + ", already connected? " + connected);
 
                     if (connected || disconnected) {
-                        debug("Already " + (disconnected ? "disconnected" : "connected") + ", closing this 2nd connection");
-                        connection.close();
+                        setTimeout(function ():void {
+                            debug("Already " + (disconnected ? "disconnected" : "connected") + ", closing this 2nd connection");
+                            connection.close();
+                        }, 100);
                         return;
                     }
 
