@@ -1,3 +1,29 @@
+Version 6.0.2
+=============
+
+Enhancements
+------------
+
+ * Playlist outside of container div (#443)
+ * `flowplayer.set()` method for defining global configuration
+
+Fixes
+-----
+ * Fix #748 - Chrome PepperFlash immediately fails over to RTMPT
+ * Fix #775 - RTMP live stream autoplays and cannot be paused
+ * Fix #809 - Playful close button looks inconsistent
+ * Fix #811 - Muted option does not work
+ * Fix #812 - HLS: stream does not work on Android 4.1
+ * Fix #823 - clip options in playlists are sticky, triggering trouble with picking order
+ * Fix #824 - flashls: add debug option(s)
+ * Fix #827 - playlist embed: should embed _configured_ playlist
+ * Fix #829 - seeking broken in IE8
+ * Fix #837 - analytics: use clip.title?
+ * Fix #840 - jQuery plugin init - config precedence wrong
+ * Fix #847 - IE8: muted on start despite volume showing, chsanngin volume does not work
+ * Fix #848 - Optionally start with subtitles present, but disabled
+ * Fix #852 - analytics: use long hearbeat interval
+
 Version 6.0.1
 =============
 
