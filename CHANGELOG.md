@@ -23,6 +23,8 @@ Fixes
  * Fix #847 - IE8: muted on start despite volume showing, chsanngin volume does not work
  * Fix #848 - Optionally start with subtitles present, but disabled
  * Fix #852 - analytics: use long hearbeat interval
+ * Fix #821 - RTMP: breaks with special chars in URLS
+ * Fix #831 - iPhone playback crashes when you exit twice
 
 Version 6.0.1
 =============
