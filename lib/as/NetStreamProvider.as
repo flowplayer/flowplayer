@@ -393,11 +393,12 @@ public class NetStreamProvider implements StreamProvider {
         }
 
         private function netStreamPlay():void {
-            player.debug("netStreamPlay() " + stream);
+            var st : String = decodeURIComponent(stream)
+            player.debug("netStreamPlay() " + st);
             if (conf.live) {
-                netStream.play(stream, -1);
+                netStream.play(st, -1);
             } else {
-                netStream.play(stream, 0, -1);
+                netStream.play(st, 0, -1);
             }
         }
     }
