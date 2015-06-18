@@ -1,59 +1,104 @@
+
+<!doctype html>
+
+<html>
+
 <head>
+   <meta charset="utf-8">
 
-    <link rel="stylesheet" type="text/css" href="http://releases.flowplayer.org/5.4.1/commercial/skin/minimalist.css">
-    <link rel="stylesheet" href="http://demos.flowplayer.org/media/css/playlist.css"/>
+   <title>Basic playlist setup · Standalone demo · Flowplayer</title>
 
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-   <script src="../dist/flowplayer.js"></script>
+   <!-- optimize mobile versions -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+   <!-- The "minimalist" skin, "minimalist.css", "functional.css" and "playful.css" are available -->
+   <link rel="stylesheet" href="../dist/skin/minimalist.css">
+
+   <!-- Minimal styling for this standalone page (can be removed) -->
    <style>
-   body { font: 12px "Lucida Grande", sans-serif; }
-   .flowplayer { width: 480px; height: 270px; margin: auto; }
-   </style>
+   body {
+      font-family: "myriad pro", tahoma, verdana, arial, sans-serif;
+      font-size: 14px;
+      margin: 0;
+      padding: 0;
+   }
+   #content {
+      margin: 50px auto;
+      max-width: 982px;
+   }
+      </style>
 
-    <script type="text/javascript">
-        flowplayer.conf = {
-            engine: 'flash',
-            swf: '../dist/flowplayer.swf',
-            debug: true
-        };
+   <!-- CSS for this demo -->
+   <link rel="stylesheet" href="//flowplayer.org/media/css/demos/playlist/basic.css">
+   
+   <!-- Flowplayer depends on jquery -->
+   <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 
-        $(function () {
-            $("#player2").flowplayer({
-                rtmp: "rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st",
-                playlist: [
-                    [
-                        {webm: "http://stream.flowplayer.org/night3.webm"},
-                        {mp4: "http://stream.flowplayer.org/night3.mp4"},
-                        {ogg: "http://stream.flowplayer.org/night3.ogv"},
-                        {flash: "mp4:night3"}
-                    ],
-                    [
-                        {webm: "http://stream.flowplayer.org/night1.webm"},
-                        {mp4: "http://stream.flowplayer.org/night1.mp4"},
-                        {ogg: "http://stream.flowplayer.org/night1.ogv"},
-                        {flash: "mp4:night1"}
-                    ],
-                    [
-                        {webm: "http://stream.flowplayer.org/night5.webm"},
-                        {mp4: "http://stream.flowplayer.org/night5.mp4"},
-                        {ogg: "http://stream.flowplayer.org/night5.ogv"},
-                        {flash: "mp4:night5"}
-                    ],
-                    [
-                        {webm: "http://stream.flowplayer.org/night6.webm"},
-                        {mp4: "http://stream.flowplayer.org/night6.mp4"},
-                        {ogg: "http://stream.flowplayer.org/night6.ogv"},
-                        {flash: "mp4:night6"}
-                    ]]
-            });
-        });
-    </script>
+   <!-- Flowplayer-->
+   <script src="../dist/flowplayer.min.js"></script>
+
+   <script>
+
+flowplayer.conf = {
+  swf: "../dist/flowplayer.swf",
+  // blacktrash.org, flowplayer.dev, localhost
+  key: "$234140469777507, $238892071193566, $158769847315888",
+  debug: true,
+  rtmpt: false
+};
+   
+// listen to playlist events
+function log() {
+   $("#event-info").css("opacity", 1)
+      .append("<p>" + [].slice.call(arguments).join(", ") + "</p>");
+}
+
+flowplayer(function(api, root) {
+
+   api.bind("load", function(e, api, video) {
+      log("clip " + video.index, "is_last: " + video.is_last);
+
+   }).bind("cuepoint", function(e, api, cuepoint) {
+      log("clip " + api.video.index, "cuepoint " + cuepoint.time);
+   });
+
+});
+
+</script>
+
 </head>
 
-<div id="player2">
-    <a class="fp-prev">prev</a>
-    <a class="fp-next">next</a>
+<body>
+<div id="content">
+
+<div id="basic-playlist"
+   class="flowplayer is-splash is-closeable"
+   data-ratio="0.5625">
+
+   <video>
+   <source type="video/flash"
+           src="http://stream.flowplayer.org/night3.mp4">
+   </video>
+
+   <a class="fp-prev"></a>
+   <a class="fp-next"></a>
+
+   <div class="fp-playlist">
+      <a class="item1" href="http://stream.flowplayer.org/night3.mp4"
+         data-cuepoints="[0.5, 1]"></a>
+      <a class="item2" href="http://stream.flowplayer.org/night1.mp4"
+         data-cuepoints="[0.9, 1.5]"></a>
+      <a class="item3" href="http://stream.flowplayer.org/night5.mp4"></a>
+      <a class="item4" href="http://stream.flowplayer.org/night6.mp4"></a>
+   </div>
+
 </div>
 
+<div id="event-info"></div>
+
+
+</div><!--/end content -->
 </body>
+
+</html>
+
