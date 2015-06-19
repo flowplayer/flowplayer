@@ -45,17 +45,21 @@ public class NetStreamProvider implements StreamProvider {
         private var clip : Object;
         // player/video object
         private var player : Flowplayer;
-        private var video : Video;
+        private var _video : Video;
 
         public function NetStreamProvider(player : Flowplayer, video : Video) {
             this.player = player;
-            this.video = video;
+            this._video = video;
         }
 
         /************ Public API ************/
         public function load(config : Object) : void {
             conf = config;
             connect();
+        }
+
+        public function get video() : Video {
+          return this._video;
         }
 
         // switch url
@@ -289,6 +293,7 @@ public class NetStreamProvider implements StreamProvider {
                     if (conf.debug) player.fire("debug.metadata", meta);
 
                     clip = {seekable:!!conf.rtmp, bytes:netStream.bytesTotal, duration:meta.duration, height:meta.height, width:meta.width, seekpoints:meta.seekpoints, src:conf.url, url:completeClipUrl};
+                    player.resize();
 
                     if (!ready) {
                         ready = true;

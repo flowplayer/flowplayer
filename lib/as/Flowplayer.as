@@ -28,6 +28,7 @@ package {
     import flash.external.ExternalInterface;
     import flash.media.Video;
     import flash.system.Security;
+    import flash.geom.Rectangle;
 
     public class Flowplayer extends Sprite {
         // events
@@ -76,6 +77,7 @@ package {
             });
 
             stage.addEventListener(Event.RESIZE, arrange);
+            stage.addEventListener(Event.RESIZE, _onStageResize);
 
             var player : Flowplayer = this;
             // The API
@@ -117,6 +119,17 @@ package {
             }
             return;
         }
+
+        public function resize() : void {
+            debug('Flowplayer::resize()');
+            var video : Video = provider.video;
+            var rect : Rectangle = resizeRectangle();
+            video.width = rect.width;
+            video.height = rect.height;
+            video.x = rect.x;
+            video.y = rect.y;
+        }
+
 
         public function pause() : void {
             debug("pause()");
@@ -177,6 +190,29 @@ package {
                   (url.indexOf('.m3u') == -1 && !(provider is NetStreamProvider));
             }
         }
+        // Adapted from https://github.com/mangui/flashls/blob/dev/src/org/mangui/hls/utils/ScaleVideo.as
+        private function resizeRectangle() : Rectangle {
+          var video : Video = provider.video,
+              videoWidth : int = video.videoWidth,
+              videoHeight : int = video.videoHeight,
+              containerWidth : int = stage.stageWidth,
+              containerHeight : int = stage.stageHeight;
+          var rect : Rectangle = new Rectangle();
+          var xscale : Number = containerWidth / videoWidth;
+          var yscale : Number = containerHeight / videoHeight;
+          if (xscale >= yscale) {
+              rect.width = Math.min(videoWidth * yscale, containerWidth);
+              rect.height = videoHeight * yscale;
+          } else {
+              rect.width = Math.min(videoWidth * xscale, containerWidth);
+              rect.height = videoHeight * xscale;
+          }
+          rect.width = Math.ceil(rect.width);
+          rect.height = Math.ceil(rect.height);
+          rect.x = Math.round((containerWidth - rect.width) / 2);
+          rect.y = Math.round((containerHeight - rect.height) / 2);
+          return rect;
+        }
 
         private function initProvider() : void {
             if (provider) provider.unload();
@@ -222,6 +258,11 @@ package {
             video.width = stage.stageWidth;
             video.height = stage.stageHeight;
         };
+
+        private function _onStageResize(e: Event) : void {
+          debug('Stage resized');
+          resize();
+        }
 
         private function addLogo() : void {
             var url : String = (conf.rtmp) ? conf.rtmp : unescape(conf.url) ? unescape(conf.url) : '';
