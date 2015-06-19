@@ -27,6 +27,7 @@ Fixes
  * Fix #831 - iPhone playback crashes when you exit twice
  * Fix #864 - CSS issue on touch devices
  * Fix #863 - RTMP does not play until end
+ * Fix #866 - Flash: keep aspect ratio in the swf code, like swfHls does
 
 Version 6.0.1
 =============
