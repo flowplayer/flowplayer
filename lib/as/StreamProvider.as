@@ -21,6 +21,7 @@
  */
 package {
 
+    import flash.media.Video;
 public interface StreamProvider {
     function load(config:Object):void;
     
@@ -39,5 +40,7 @@ public interface StreamProvider {
     function status():Object;
 
     function setProviderParam(key:String, value:Object):void;
+
+    function get video() : Video;
   }
 }

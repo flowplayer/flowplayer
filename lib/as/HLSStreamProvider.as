@@ -21,12 +21,10 @@
  */
 package {
     import flash.events.Event;
-    import flash.geom.Rectangle;
     import flash.media.SoundTransform;
 
     import org.mangui.hls.event.HLSError;
     import org.mangui.hls.event.HLSEvent;
-    import org.mangui.hls.utils.ScaleVideo;
     import org.mangui.hls.constant.HLSPlayStates;
     import org.mangui.hls.constant.HLSSeekMode;
     import org.mangui.hls.HLSSettings;
@@ -38,7 +36,7 @@ package {
     public class HLSStreamProvider implements StreamProvider {
         // player/video object
         private var player : Flowplayer;
-        private var video : Video;
+        private var _video : Video;
         private var hls : HLS;
         private var config : Object;
         private var clip : Object;
@@ -46,12 +44,11 @@ package {
 
         public function HLSStreamProvider(player : Flowplayer, video : Video) {
             this.player = player;
-            this.video = video;
+            this._video = video;
             hls = new HLS();
             hls.stage = player.stage;
             /* force keyframe seek mode to avoid video glitches when seeking to a non-keyframe position */
             HLSSettings.seekMode = HLSSeekMode.KEYFRAME_SEEK;
-            player.stage.addEventListener(Event.RESIZE, _onStageResize);
             hls.addEventListener(HLSEvent.MANIFEST_LOADED, _manifestHandler);
             hls.addEventListener(HLSEvent.MEDIA_TIME, _mediaTimeHandler);
             hls.addEventListener(HLSEvent.PLAYBACK_COMPLETE, _completeHandler);
@@ -62,6 +59,10 @@ package {
             video.attachNetStream(hls.stream);
         }
 
+        public function get video() : Video {
+          return this._video;
+        }
+
         public function load(config : Object) : void {
             this.config = config;
             player.debug("loading URL " + config.url);
@@ -70,7 +71,6 @@ package {
         }
 
         public function unload() : void {
-            player.stage.removeEventListener(Event.RESIZE, _onStageResize);
             hls.removeEventListener(HLSEvent.MANIFEST_LOADED, _manifestHandler);
             hls.removeEventListener(HLSEvent.MEDIA_TIME, _mediaTimeHandler);
             hls.removeEventListener(HLSEvent.PLAYBACK_COMPLETE, _completeHandler);
@@ -166,11 +166,6 @@ package {
             _checkVideoDimension();
         };
 
-        protected function _onStageResize(event : Event) : void {
-            player.debug("player resized");
-            _resize();
-        };
-
         private function _checkVideoDimension() : void {
             var videoWidth : int = video.videoWidth;
             var videoHeight : int = video.videoHeight;
@@ -188,11 +183,7 @@ package {
             player.debug("video/player size : " + video.videoWidth + "," + video.videoHeight + "/" + player.stage.stageWidth + "," + player.stage.stageHeight);
             clip.width = video.videoWidth;
             clip.height = video.videoHeight;
-            var rect : Rectangle = ScaleVideo.resizeRectangle(video.videoWidth, video.videoHeight, player.stage.stageWidth, player.stage.stageHeight);
-            video.width = rect.width;
-            video.height = rect.height;
-            video.x = rect.x;
-            video.y = rect.y;
+            player.resize(); 
         }
 
         private function _completeHandler(event : HLSEvent) : void {
