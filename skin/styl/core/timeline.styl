@@ -108,12 +108,14 @@
 
    &.is-touch .fp-progress
       transition width 0.2s linear
+      box-sizing border-box
 
    &.is-touch .fp-timeline.is-dragging .fp-progress
       transition right 0.1s linear, border 0.1s linear, top 0.1s linear, left 0.1s linear
 
    &.is-touch.is-mouseover .fp-progress:after, &.is-touch.is-mouseover .fp-progress:before
       content ''
+      box-sizing border-box
       display block
       border-radius 10px
       position absolute
@@ -131,9 +133,9 @@
       height 10px
 
    &.is-touch.is-mouseover .fp-progress:after
-      height 10px
-      width 10px
-      top -5px
+      height 18px
+      width 18px
+      top -4px
       right -10px
       border 5px solid rgba(#fff, 0.65)
       box-shadow 1px 0px 4px rgba(#000, 0.5)
@@ -142,8 +144,8 @@
       border 10px solid #fff
       border-radius 20px
       transition inherit
-      top -10px
-      right -15px
+      top -5px
+      right -10px
 
    &.is-touch.is-rtl.is-mouseover .fp-timeline.is-dragging .fp-progress:after
       left -15px
