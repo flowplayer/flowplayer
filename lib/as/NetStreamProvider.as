@@ -60,6 +60,7 @@ public class NetStreamProvider implements StreamProvider {
 
         // switch url
         public function play(url : String) : void {
+            player.debug("play()")
             if (!ready) return;
             conf.url = url;
 
@@ -71,6 +72,7 @@ public class NetStreamProvider implements StreamProvider {
         }
 
         public function pause() : void {
+            player.debug("pause()");
             if (ready && !paused) {
                 pauseStream();
                 player.debug("firing pause");
@@ -90,6 +92,7 @@ public class NetStreamProvider implements StreamProvider {
         }
 
         public function resume() : void {
+            player.debug("resume()");
             if (preloadComplete && !paused) {
                 player.debug("preloadComplete? " + preloadComplete + ", paused? " + paused + ", ready= " + ready);
                 return;
@@ -118,18 +121,12 @@ public class NetStreamProvider implements StreamProvider {
                     if (preloadNone() && !preloadComplete) {
                         netStreamPlay();
                     } else {
-                        if (finished) {
-                            seek(0);
-                        }
                         player.debug("resuming stream");
-                        netStream.resume();
-                        // if (stream.time == 0 && !conf.rtmp) {
-                        // debug("starting play of stream '" + stream + "'");
-                        // stream.play(stream);
-                        // } else {
-                        // debug("resuming stream");
-                        // stream.resume();
-                        // }
+                        if (finished) {
+                            netStreamPlay();
+                        } else {
+                            netStream.resume();
+                        }
                     }
                 }
                 player.debug("firing RESUME");
@@ -151,6 +148,7 @@ public class NetStreamProvider implements StreamProvider {
 
         public function seek(seconds : Number) : void {
             if (ready) {
+                player.debug("seek() " + seconds);
                 seekTo = seconds;
                 netStream.seek(seconds);
             }
@@ -276,12 +274,7 @@ public class NetStreamProvider implements StreamProvider {
                 onPlayStatus:function(info : Object) : void {
                     player.debug("onPlayStatus", info);
                     if (info.code == "NetStream.Play.Complete") {
-                        if (!paused) {
-                            finished = true;
-                            paused = true;
-                            player.fire(Flowplayer.PAUSE, null);
-                            player.fire(Flowplayer.FINISH, null);
-                        }
+                        fireFinished();
                     }
                 },
 
@@ -370,16 +363,8 @@ public class NetStreamProvider implements StreamProvider {
                             if (duration - netStream.time > 3) return;
 
                             prevTime = netStream.time;
-
                             stopTracker.stop();
-
-                            if (!conf.rtmp && !paused) {
-                                finished = true;
-                                paused = true;
-                                netStream.pause();
-                                player.fire(Flowplayer.PAUSE, null);
-                                player.fire(Flowplayer.FINISH, null);
-                            }
+                            fireFinished();
                         });
                         stopTracker.start();
                         break;
@@ -387,19 +372,31 @@ public class NetStreamProvider implements StreamProvider {
             });
         }
 
-        private function get duration() : Number {
+    private function fireFinished():void {
+        if (! finished && ! paused) {
+            finished = true;
+            paused = true;
+            player.fire(Flowplayer.PAUSE, null);
+            player.fire(Flowplayer.FINISH, null);
+        }
+    }
+
+    private function get duration() : Number {
             if (!clip) return 0;
             return clip.duration;
         }
 
-        private function netStreamPlay():void {
-            var st : String = decodeURIComponent(stream)
-            player.debug("netStreamPlay() " + st);
-            if (conf.live) {
-                netStream.play(st, -1);
-            } else {
-                netStream.play(st, 0, -1);
-            }
+    private function netStreamPlay():void {
+        var st : String = decodeURIComponent(stream)
+        player.debug("netStreamPlay() " + st);
+        if (conf.live) {
+            netStream.play(st, -1);
+        } else {
+            netStream.play(st, 0, -1);
         }
     }
+
+}
+
+
 }
