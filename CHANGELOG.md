@@ -25,6 +25,8 @@ Fixes
  * Fix #852 - analytics: use long hearbeat interval
  * Fix #821 - RTMP: breaks with special chars in URLS
  * Fix #831 - iPhone playback crashes when you exit twice
+ * Fix #864 - CSS issue on touch devices
+ * Fix #863 - RTMP does not play until end
 
 Version 6.0.1
 =============
