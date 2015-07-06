@@ -244,7 +244,7 @@ package {
 
         internal function fire(type : String, data : Object = null) : void {
             if (conf.callback) {
-                if (data) {
+                if (data !== null) {
                     ExternalInterface.call(conf.callback, type, data);
                 } else {
                     ExternalInterface.call(conf.callback, type);
