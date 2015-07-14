@@ -52,13 +52,17 @@
       .is-long&
          margin 0 (right_margin + hour_time_width + spacing + spacing + brand_width) 0 (spacing + hour_time_width + spacing)
          .no-volume&
-            margin-right hour_time_width + mute_width + spacing * 3
+            margin-right hour_time_width + mute_width + spacing * 3 + brand_width
          .no-mute&
-            margin-right hour_time_width + spacing * 2
+            margin-right hour_time_width + spacing * 2 + brand_width
          .has-menu&
            margin-right right_margin + hour_time_width + spacing *3 + brand_width + menu_width
          .no-brand&
            margin-right right_margin + hour_time_width + spacing
+           .no-volume&
+             margin-right hour_time_width + mute_width + spacing * 3
+           .no-mute&
+             margin-right hour_time_width + spacing * 2
            .has-menu&
              margin-right right_margin + hour_time_width + spacing * 2 + menu_width
 
