@@ -99,7 +99,11 @@ package {
                     break;
                 case HLSPlayStates.PAUSED:
                 case HLSPlayStates.PAUSED_BUFFERING:
-                    hls.stream.resume();
+                    if (this.pos < 0) {
+                        hls.stream.play(null, -1);
+                    } else {
+                        hls.stream.resume();
+                    }
                     player.fire(Flowplayer.RESUME, null);
                     break;
                 // do nothing if already in play state
