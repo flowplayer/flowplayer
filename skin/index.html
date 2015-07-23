@@ -7,7 +7,7 @@
    <script src="../deps/jquery.min.js"></script>
    <script src="simulate.js"></script>
 
-   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css" />
+   <link rel="stylesheet" type="text/css" href="../dist/skin/functional.css" />
 
    <style>
    body {
@@ -46,7 +46,7 @@
    <div class="flowplayer -fixed-controls -is-loading is-ready -is-mouseover -is-splash -is-paused color-light -no-background -aside-time -fixed-controls">
 -->
 
-   <div class="flowplayer is-ready is-paused is-mouseover -no-toggle -aside-time -no-time -no-mute play-button no-embed">
+   <div class="flowplayer is-ready is-paused is-mouseover -no-toggle -aside-time -no-time -no-mute play-button is-touch no-time no-volume">
 
       <!-- http://ansciath.tumblr.com/post/7347495869/css-aspect-ratio -->
       <div class="fp-ratio" style="padding-top:41.7%"></div>
@@ -72,6 +72,11 @@
                <div class="fp-buffer" style="width: 70%;"></div>
                <div class="fp-progress" style="width: 35%;"><em></em></div>
             </div>
+            <div class="fp-tooltip fp-timeline-tooltip" style="left: calc(35% - 25px);">00:30</div>
+
+            <a class="fp-brand">
+              flowplayer
+            </a>
 
             <div class="fp-volume">
                <a class="fp-mute"></a>
@@ -79,6 +84,15 @@
                   <div class="fp-volumelevel" style="width: 50%;"><em></em></div>
                </div>
             </div>
+
+            <a class="fp-menu dropdown-open">
+              <ul class="fp-dropdown fp-dropup">
+                <li>No subtitles</li>
+                <li class="active">Default (en)</li>
+              </ul>
+            </a>
+
+
 
          </div>
 
