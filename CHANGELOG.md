@@ -4,7 +4,7 @@ Version 6.0.3
 Fixes
 -----
 
- * Fix #894 - Some lements not shown in fullscreen
+ * Fix #894 - Some elements not shown in fullscreen
  * Fix #883 - autoplay on player level not respected in html5 engine
  * Fix #882 - Flash engine reports invalid volume for zero
  * Fix #879 - flashls: make resume of live stream reliable
