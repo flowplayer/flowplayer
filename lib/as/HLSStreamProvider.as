@@ -41,10 +41,17 @@ package {
         private var config : Object;
         private var clip : Object;
         private var pos : Number;
+        private var offsetPos : Number;
+        private var backBuffer : Number;
+        private var suppressReady : Boolean;
 
         public function HLSStreamProvider(player : Flowplayer, video : Video) {
             this.player = player;
             this._video = video;
+            initHLS();
+        }
+
+        private function initHLS() : void {
             hls = new HLS();
             hls.stage = player.stage;
             /* force keyframe seek mode to avoid video glitches when seeking to a non-keyframe position */
@@ -56,7 +63,7 @@ package {
             /*
             hls.addEventListener(HLSEvent.PLAYBACK_STATE, _stateHandler);
              */
-            video.attachNetStream(hls.stream);
+            _video.attachNetStream(hls.stream);
         }
 
         public function get video() : Video {
@@ -91,6 +98,7 @@ package {
         }
 
         public function resume() : void {
+            player.debug('HLSStreamProvider::resume(), hls.playbackState=%s, this.pos=%s, this.offsetPos=%s, this.backBuffer=%s', [hls.playbackState, this.pos, this.offsetPos, this.backBuffer]);
             switch(hls.playbackState) {
                 case HLSPlayStates.IDLE:
                 // in IDLE state, restart playback
@@ -99,7 +107,17 @@ package {
                     break;
                 case HLSPlayStates.PAUSED:
                 case HLSPlayStates.PAUSED_BUFFERING:
-                    hls.stream.resume();
+                    if (this.offsetPos + this.backBuffer < -1) {
+                      player.debug('Stream idle for too long, restart stream');
+                      unload();
+                      suppressReady = true;
+                      initHLS();
+                      this.config.autoplay = true;
+                      load(this.config);
+                      break;
+                    } else {
+                      hls.stream.resume();
+                    }
                     player.fire(Flowplayer.RESUME, null);
                     break;
                 // do nothing if already in play state
@@ -150,7 +168,11 @@ package {
             clip.height = event.levels[hls.startLevel].height;
             _checkVideoDimension();
             player.debug("manifest received " + clip);
-            player.fire(Flowplayer.READY, clip);
+            if (suppressReady) {
+              suppressReady = false;
+            } else {
+              player.fire(Flowplayer.READY, clip);
+            }
 
             hls.stream.play();
             if (config.autoplay) {
@@ -163,6 +185,8 @@ package {
 
         protected function _mediaTimeHandler(event : HLSEvent) : void {
             this.pos = event.mediatime.live_sliding_main + event.mediatime.position;
+            this.offsetPos = event.mediatime.position;
+            this.backBuffer = event.mediatime.backbuffer;
             _checkVideoDimension();
         };
 
