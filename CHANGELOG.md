@@ -1,3 +1,19 @@
+Version 6.0.3
+=============
+
+Fixes
+-----
+
+ * Fix #894 - Some lements not shown in fullscreen
+ * Fix #883 - autoplay on player level not respected in html5 engine
+ * Fix #882 - Flash engine reports invalid volume for zero
+ * Fix #879 - flashls: make resume of live stream reliable
+ * Fix #878 - ipad: duration/remaining inside timeline for videos longer than 1hr
+ * Fix #877 - jQuery JS install triggers error (regression in 6.0.2)
+ * Fix #876 - playlist: is-active not applied to playlists outside container
+ * Fix #871 - Context-menu broken in fullscreen
+ * Fix #870 - IE: load(clip) and setPlaylist() not reliable
+
 Version 6.0.2
 =============
 
