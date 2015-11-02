@@ -112,6 +112,7 @@ package {
         public function play(url : String, reconnect : Boolean) : void {
             debug("play(" + url + ", " + reconnect + ")");
             conf.url = encodeURI(url);
+            debug("debug.url", conf.url);
             if (reconnect || providerChangeNeeded(url)) {
               initProvider();
             } else {
