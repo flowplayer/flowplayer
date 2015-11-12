@@ -60,9 +60,6 @@ package {
             hls.addEventListener(HLSEvent.MEDIA_TIME, _mediaTimeHandler);
             hls.addEventListener(HLSEvent.PLAYBACK_COMPLETE, _completeHandler);
             hls.addEventListener(HLSEvent.ERROR, _errorHandler);
-            /*
-            hls.addEventListener(HLSEvent.PLAYBACK_STATE, _stateHandler);
-             */
             _video.attachNetStream(hls.stream);
         }
 
@@ -171,12 +168,11 @@ package {
             if (suppressReady) {
               suppressReady = false;
             } else {
-              player.fire(Flowplayer.READY, clip);
+              hls.addEventListener(HLSEvent.PLAYBACK_STATE, _readyStateHandler);
             }
 
             hls.stream.play();
             if (config.autoplay) {
-                player.fire(Flowplayer.RESUME, null);
             } else {
                 player.debug("stopping on first frame");
                 hls.stream.pause();
@@ -214,6 +210,16 @@ package {
             player.debug("playback complete,fire pause and finish events");
             player.fire(Flowplayer.PAUSE, null);
             player.fire(Flowplayer.FINISH, null);
+        };
+
+        private function _readyStateHandler(event: HLSEvent) : void {
+          if (hls.playbackState == HLSPlayStates.PLAYING || hls.playbackState == HLSPlayStates.PAUSED) {
+            player.fire(Flowplayer.READY, clip);
+            if (config.autoplay) {
+                player.fire(Flowplayer.RESUME, null);
+            }
+            hls.removeEventListener(HLSEvent.PLAYBACK_STATE, _readyStateHandler);
+          }
         };
 
         private function _errorHandler(event : HLSEvent) : void {
