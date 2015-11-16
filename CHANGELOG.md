@@ -1,3 +1,36 @@
+Version 6.0.4
+=============
+
+Enhancements
+------------
+
+ * #944 - poster: add new api property when poster condition is met
+
+Fixes
+-----
+
+ * Fix #959 - Flash HLS: ready fired too early
+ * Fix #958 - generate_cuepoints: seeks to timeline postion, not cuepoint (regression from v5)
+ * Fix #955 - Prevented seek beyond cuepoint disables cuepoint once
+ * Fix #943 - shutdown() does not remove instance data-attribute
+ * Fix #942 - quality selector loses poster state with playlist
+ * Fix #941 - api undefined in stop callback argument in non-splash setups
+ * Fix #940 - autoplay: does not go into poster state on stop
+ * Fix #936 - IE8: no player displayed for splash setups if no height: for container
+ * Fix #928 - BeforeSeek Event does not working in IE11
+ * Fix #926 - Do not show context menu when trying to enable flash plugin
+ * Fix #924 - flash: play(index) and load(clip) load encoded url
+ * Fix #923 - Controlbar mouse over problem
+ * Fix #922 - Chrome: Flash object with less than 461px width does not work
+ * Fix #918 - Native subtitles shown when mixed native and flowplayer subtitles on same page
+ * Fix #912 - Crossorigin subtitles do not work on iPhone
+ * Fix #911 - flash hls: seeking beyond end of video causes undefined player state
+ * Fix #908 - ipad: tooltip appears empty, or is stuck at first position when scrubbing
+ * Fix #906 - bgcolor: does not override .flowplayer.is-splash background-color
+ * Fix #904 - flashdisabled message does not make sense when Flash is in fact enabled
+ * Fix #901 - RTMP: src location w/o prefix considered as HTTP
+ * Fix #898 - 6.0.3: live option not recognized on clip level with generic HLS
+
 Version 6.0.3
 =============
 
