@@ -1,6 +1,6 @@
 {
   "name": "flowplayer",
-  "version": "6.0.3",
+  "version": "6.0.4",
   "description": "The HTML5 video player for the web",
   "main": "dist/flowplayer.js",
   "directories": {
