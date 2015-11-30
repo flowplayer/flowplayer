@@ -3,7 +3,8 @@
 
    .fp-volume
       position absolute
-      top (controls_height / 2) - (volume_height / 2)
+      height volume_height
+      bottom (controls_height / 2) - (volume_height / 2)
       right spacing
 
       .has-menu&
@@ -20,7 +21,7 @@
       width mute_width
       height mute_height
       float left
-      top - (mute_height / 2) + (volume_height / 2)
+      top (volume_height / 2) - (mute_height / 2)
       cursor pointer
 
       .is-rtl&
