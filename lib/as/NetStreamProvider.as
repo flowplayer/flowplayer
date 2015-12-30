@@ -159,14 +159,15 @@ public class NetStreamProvider implements StreamProvider {
         }
 
         public function volume(level : Number, fireEvent : Boolean = true) : void {
-            if (netStream && volumeLevel != level) {
+            var changed : Boolean = level != volumeLevel;
+            if (netStream) {
                 player.debug("setting volume to " + level);
                 if (level > 1) level = 1;
                 else if (level < 0) level = 0;
 
                 netStream.soundTransform = new SoundTransform(level);
                 volumeLevel = level;
-                if (fireEvent) {
+                if (fireEvent && changed) {
                     player.fire(Flowplayer.VOLUME, level);
                 }
             }
