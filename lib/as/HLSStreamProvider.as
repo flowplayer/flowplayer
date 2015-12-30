@@ -167,6 +167,7 @@ package {
             player.debug("manifest received " + clip);
             if (suppressReady) {
               suppressReady = false;
+              hls.addEventListener(HLSEvent.PLAYBACK_STATE, _resumeStateHandler);
             } else {
               hls.addEventListener(HLSEvent.PLAYBACK_STATE, _readyStateHandler);
             }
@@ -221,6 +222,13 @@ package {
             hls.removeEventListener(HLSEvent.PLAYBACK_STATE, _readyStateHandler);
           }
         };
+
+        private function _resumeStateHandler(event: HLSEvent) : void {
+          if (hls.playbackState == HLSPlayStates.PLAYING) {
+            player.fire(Flowplayer.RESUME, null);
+            hls.removeEventListener(HLSEvent.PLAYBACK_STATE, _resumeStateHandler);
+          }
+        }
 
         private function _errorHandler(event : HLSEvent) : void {
             var hlsError : HLSError = event.error;
