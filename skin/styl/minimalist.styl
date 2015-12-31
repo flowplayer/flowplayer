@@ -18,8 +18,8 @@ controls = #0
      &:before
        display none
      .is-rtl&
-      right auto
-      left -(spacing)
+        right auto
+        left -(spacing)
    .fp-play
      width controls_height
    &.aside-time .fp-time
@@ -44,6 +44,13 @@ controls = #0
        right controls_height + 2
      .fp-embed
        right controls_height * 2 + 4
+     .is-rtl&
+       .fp-fullscreen
+         right auto
+         left controls_height + 2
+       .fp-embed
+         right auto
+         left controls_height * 2 + 4
 
 
    &.play-button
