@@ -1,6 +1,6 @@
 language: ruby
 before_script:
-- npm install -g stylus
+- npm install
 - npm install -g https://s3-us-west-2.amazonaws.com/nnarhinen.flowplayer/flex-sdk-4.8.0.tgz
 - git clone https://github.com/nexussays/playerglobal.git
 - make
