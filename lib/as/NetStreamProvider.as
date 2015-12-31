@@ -268,7 +268,7 @@ public class NetStreamProvider implements StreamProvider {
             player.debug("setupStream() ", {ready:ready, preloadCompete:preloadComplete, paused:paused, autoplay:conf.autoplay});
 
             netStream = new NetStream(conn);
-            var bufferTime : Number = conf.hasOwnProperty("bufferTime") ? conf.bufferTime : 3;
+            var bufferTime : Number = conf.hasOwnProperty("bufferTime") ? conf.bufferTime : conf.live ? 0 : 3;
             player.debug("bufferTime == " + bufferTime);
             netStream.bufferTime = bufferTime;
             video.attachNetStream(netStream);
