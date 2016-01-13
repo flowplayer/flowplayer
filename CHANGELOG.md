@@ -1,3 +1,24 @@
+Version 6.0.5
+=============
+
+Enhancements
+------------
+
+ * Allow specifying a playlist index to start from (#973)
+
+
+Fixes
+-----
+
+ * Fix #979 - shutdown disables fullscreen events
+ * Fix #969 - addCuepoint bug when using an object to define the cue.
+ * Fix #968 - flashls live: player does not change on resume state after longer pause (regression from 6.0.3)
+ * Fix #967 - RTMP live doesn't observe mute setting on pause/resume
+ * Fix #966 - rtmp: live:true doesn't set bufferTime:0
+ * Fix #961 - minimalist: wrong mouseout transitions for volume & mute (regression from 6.0.3)
+ * Fix #919 - rtl: various glitches
+ * Fix #957 - generate_cuepoints: seeks to timeline postion, not cuepoint (regression from v5)
+
 Version 6.0.4
 =============
 
