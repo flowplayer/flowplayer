@@ -1,8 +1,6 @@
 
 # Flowplayer
 
-![Screenshot](http://stream.flowplayer.org/player.png)
-
 [website](http://flowplayer.org) | [demos](http://flowplayer.org/demos/) | [docs](http://flowplayer.org/docs/)
 
 ## For the impatient
