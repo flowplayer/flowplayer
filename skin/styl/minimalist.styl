@@ -28,30 +28,12 @@ controls = #0
    .fp-remaining, .fp-duration
      .no-brand&
        right right_margin
-   .fp-fullscreen, .fp-unload, .fp-close, .fp-embed
+   .fp-buttons
      right 0
      top 0
      .is-rtl&
        right auto
        left 0
-   .fp-embed
-     right controls_height + 2
-     .is-rtl&
-       right auto
-       left controls_height + 2
-   &.is-closeable.is-ready
-     .fp-fullscreen
-       right controls_height + 2
-     .fp-embed
-       right controls_height * 2 + 4
-     .is-rtl&
-       .fp-fullscreen
-         right auto
-         left controls_height + 2
-       .fp-embed
-         right auto
-         left controls_height * 2 + 4
-
 
    &.play-button
      play-button()
