@@ -78,19 +78,19 @@
       .fixed-controls&
          bottom 15px
 
-
-   .fp-fullscreen, .fp-unload, .fp-close
+    .fp-buttons
       absolute spacing auto
       right spacing
-      block 30px 23px
+      .is-rtl&
+         right auto
+         left spacing
+
+   .fp-fullscreen, .fp-unload, .fp-close
+      display inline-block
       text-align center
       cursor pointer
       height controls_height
       width controls_height
-
-      .is-rtl&
-         right auto
-         left spacing
 
    .fp-unload, .fp-close
       display none
@@ -137,18 +137,7 @@
             display block
    &.is-ready.is-closeable
       .fp-unload
-         display block
-      .fp-embed
-          right (spacing * 3 + controls_height * 2)
-      .fp-fullscreen
-          right (spacing * 2 + controls_height)
-      &.is-rtl
-          .fp-embed
-            right auto
-            left (spacing * 3 + controls_height * 2)
-          .fp-fullscreen
-            right auto
-            left (spacing * 2 + controls_height)
+         display inline-block
    &.is-fullscreen
       .fp-fullscreen
          display block !important
