@@ -6,25 +6,25 @@ Version 3 (GPL).
 
 #### The GPL requires that you not remove the Flowplayer logo and copyright notices from the user interface. See section 5.d below.
 
-Commercial licenses [are available](http://flowplayer.org/download/). The commercial player version does not
-require any Flowplayer notices or texts and also provides some additional
-features.
+Commercial licenses [are available](https://flowplayer.org/pricing/player.html).
+The commercial player version does not require any Flowplayer notices or texts
+and also provides some additional features.
 
 
 ## ADDITIONAL TERM per GPL Section 7
 
 If you convey this program (or any modifications of it) and assume
 contractual liability for the program to recipients of it, you agree to
-indemnify Flowplayer, Ltd. for any liability that those contractual
-assumptions impose on Flowplayer, Ltd.
+indemnify Flowplayer Drive, Ltd. for any liability that those contractual
+assumptions impose on Flowplayer Drive, Ltd.
 
 Except as expressly provided herein, no trademark rights are granted in any
-trademarks of Flowplayer, Ltd. Licensees are granted a limited, non-exclusive
+trademarks of Flowplayer Drive, Ltd. Licensees are granted a limited, non-exclusive
 right to use the mark Flowplayer and the Flowplayer logos in connection with
 unmodified copies of the Program and the copyright notices required by section
 5.d of the GPL license. For the purposes of this limited trademark license
 grant, customizing the Flowplayer by skinning, scripting, or including plugins
-provided by Flowplayer, Ltd. is not considered modifying the Program.
+provided by Flowplayer Drive, Ltd. is not considered modifying the Program.
 
 Licensees that do modify the Program, taking advantage of the open-source
 license, may not use the Flowplayer mark or Flowplayer logos and must
