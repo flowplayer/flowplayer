@@ -1,3 +1,20 @@
+
+Version 6.1
+===========
+
+Enhancements
+------------
+
+  * Wrap fullscreen, ebmed and unload buttons in a container for fluid layout (#1049)
+  * Make iframe embed code responsive (#804)
+
+Fixes
+-----
+
+ * Fix #1036 - time format glitches
+ * Fix #1056 - Flowplayer zoom issue
+
+
 Version 6.0.5
 =============
 
