@@ -1,14 +1,9 @@
 
 .{root}
    .fp-embed
-      absolute spacing auto
-      right (spacing * 2 + controls_height)
       block controls_height controls_height
+      display inline-block
       text-align center
-
-      .is-rtl&
-         right auto
-         left (spacing * 2 + controls_height)
 
    .fp-embed-code
       position absolute
@@ -63,6 +58,8 @@
       .fp-embed, .fp-embed-code
          display block
          opacity 1
+      .fp-embed
+        display inline-block
 
    &.no-time .fp-embed
       left spacing !important
