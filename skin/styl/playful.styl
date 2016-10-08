@@ -16,16 +16,19 @@ controls = #0
 .{root}
 
    // default colors
-   .fp-controls, .fp-title, .fp-embed, .fp-play, .fp-fullscreen, .fp-close, &.aside-time .fp-time, .fp-unload
+   .fp-controls, .fp-title, .fp-embed, .fp-play, .fp-fullscreen, .fp-close, &.aside-time .fp-time, .fp-unload, .fp-airplay
      gradient rgba(#8, 0.85) rgba(#0, 0.85)
      color #e !important
      &:before
        color #e
+     &.fp-airplay
+       &:before
+         color transparent
    .fp-dropdown
      border-radius 5px
      li:last-child
        border-radius 0 0 5px 5px
-   .fp-fullscreen, .fp-unload, .fp-mute, .fp-embed, .fp-close, .fp-play, .fp-menu
+   .fp-fullscreen, .fp-unload, .fp-mute, .fp-embed, .fp-close, .fp-play, .fp-menu, .fp-airplay
      &:before
        vertical-align -2px
    .fp-controls .fp-menu

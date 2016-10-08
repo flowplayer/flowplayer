@@ -99,7 +99,7 @@
 
       .is-mouseover&
         bottom 0
-   .fp-controls, .fp-title, .fp-fullscreen, .fp-unload, .fp-close, .fp-embed, &.aside-time .fp-time
+   .fp-controls, .fp-title, .fp-fullscreen, .fp-unload, .fp-close, .fp-embed, &.aside-time .fp-time, .fp-airplay
       bg controls
       bg rgba(controls, .65)
       .no-background&
@@ -326,7 +326,7 @@
 
 
    // background image
-   .fp-fullscreen, .fp-unload, .fp-mute, .fp-embed, .fp-close, .fp-play, .fp-menu
+   .fp-fullscreen, .fp-unload, .fp-mute, .fp-embed, .fp-close, .fp-play, .fp-menu, .fp-airplay
      font-family 'fpicons' !important
      color #f !important
      font-size 15px !important
@@ -343,6 +343,9 @@
    .fp-unload:before
    .fp-close:before
      content "\e600"
+   .fp-airplay:before
+     content "\e600"
+     color transparent
    .fp-mute:before
      content "\e606"
    .fp-embed:before
