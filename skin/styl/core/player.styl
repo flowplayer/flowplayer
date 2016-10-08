@@ -1,0 +1,364 @@
+
+.{root}
+   position relative
+   width 100%
+
+   zoom 1 !important
+
+   counter-increment flowplayer
+
+   // mobile friendly background images
+   background-size contain
+   background-repeat no-repeat
+   background-position center center
+
+   // thanks: http://ansciath.tumblr.com/post/7347495869/css-aspect-ratio
+   display inline-block
+
+   // css reset
+   *
+      font-weight inherit
+      font-family inherit
+      font-style inherit
+      text-decoration inherit
+      font-size 100%
+      padding 0
+      border 0
+      margin 0
+      list-style-type none
+
+   a:focus
+      outline 0
+
+   video
+      width 100%
+
+   // http://blog.millermedeiros.com/2011/03/html5-video-issues-on-the-ipad-and-how-to-solve-them/
+   &.is-ipad video
+      -webkit-transform:translateX(-2048px)
+
+      .is-ready&
+         -webkit-transform:translateX(0)
+
+   .fp-player
+      absolute 0 0 0 0
+      width 100%
+      height 100%
+   .fp-engine, .fp-ui, .fp-message
+      absolute 0 0
+      width 100%
+      height 100%
+      cursor pointer
+      z-index 1
+   .fp-ui
+      z-index 11
+
+   .fp-message
+      display none
+      text-align center
+      padding-top 5%
+      cursor default
+
+      h2
+         font-size 120%
+         margin-bottom 1em
+
+      p
+         color #6
+         font-size 95%
+   .fp-title
+     line-height  controls_height
+     font-weight normal
+     font-family 'myriad pro', Helvetica, Arial, sans-serif;
+     font-size font_size
+     cursor default
+     color #fff
+     width auto
+     max-width 50%
+     white-space nowrap
+     text-overflow ellipsis
+     overflow hidden
+     float left
+     padding 0 (spacing * 2)
+     .is-rtl&
+       float right
+     .aside-time&
+       display none !important
+
+   .fp-controls
+      position absolute
+      bottom 0
+      width 100%
+
+      .no-background&
+         bg transparent !important
+         gradient transparent transparent !important
+
+      .is-fullscreen&
+         bottom 3px
+
+      .is-mouseover&
+        bottom 0
+   .fp-controls, .fp-title, .fp-fullscreen, .fp-unload, .fp-close, .fp-embed, &.aside-time .fp-time, .fp-airplay
+      bg controls
+      bg rgba(controls, .65)
+      .no-background&
+        bg transparent !important
+        gradient transparent transparent !important
+        text-shadow 0 0 1px #0
+
+    .fp-play, .fp-brand
+      .no-background&
+        bg transparent !important
+        gradient transparent transparent !important
+        text-shadow 0 0 1px #0
+
+
+   &.fixed-controls .fp-controls
+      bg controls
+
+   .fp-timeline
+      bg #a5
+
+   .fp-buffer
+      bg #e
+
+   .fp-progress
+      bg #00a7c8
+
+   .fp-volumeslider
+      bg #a5
+
+   .fp-volumelevel
+      bg #00a7c8
+
+   .fp-waiting
+      display none
+      margin 19% auto
+      text-align center
+
+      *
+         box-shadow 0 0 5px #3
+
+      em
+         width 1em
+         height @width
+         border-radius @width
+         bg rgba(#f, 0.8)
+         display inline-block
+         animation pulse .6s infinite
+         margin .3em
+         opacity 0
+
+         &:nth-child(1)
+            animation-delay .3s
+
+         &:nth-child(2)
+            animation-delay .45s
+
+         &:nth-child(3)
+            animation-delay .6s
+
+      // no animation support
+      p
+         color #c
+         font-weight bold
+
+   .fp-speed
+      font-size 30px
+      background-color #3
+      background-color rgba(#3, .8)
+      color #e
+      margin 0 auto
+      text-align center
+      width 120px
+      padding .1em 0 0
+      opacity 0
+      transition opacity .5s
+
+      &.fp-hilite
+         opacity 1
+
+   .fp-help
+      absolute -9999em 0
+      z-index 100
+      background-color #3
+      background-color rgba(#3, .9)
+      width 100%
+      height 100%
+      opacity 0
+      transition opacity .2s
+      text-align center
+
+      .is-help&
+         top 0
+         opacity 1
+
+      .fp-help-section
+         margin 3%
+         direction ltr
+
+      .fp-help-basics
+         margin-top 6%
+
+      p
+         color #e
+         margin .5em 0
+         font-size 14px
+         line-height 1.5
+         display inline-block
+         margin 1% 2%
+
+      em
+         background #e
+         border-radius .3em
+         margin-right .4em
+         padding .3em .6em
+         color #3
+
+      small
+         font-size 90%
+         color #a
+
+      .fp-close
+         display block
+
+      @media (max-width: 600px)
+         p
+            font-size 9px
+
+   .fp-dropdown
+      position absolute
+      top 5px
+      width 100px
+      bg controls !important
+      border-radius 3px
+      box-sizing border-box
+      -moz-box-sizing border-box
+      margin 0px !important
+      list-style-type none !important
+      &:before
+        content ''
+        display block
+        position absolute
+        top -5px
+        left calc(50% - 5px)
+        width 0
+        height 0
+        border-left 5px solid transparent
+        border-right 5px solid transparent
+        border-bottom 5px solid rgba(#3, 0.9)
+      li
+        padding spacing !important
+        margin 0 !important
+        color #f !important
+        font-size font_size !important
+        list-style-type none !important
+        &.active
+          bg #00a7c8 !important
+          cursor default !important
+      &.fp-dropup
+        bottom 20px
+        top auto
+        &:before
+          top auto
+          bottom -5px
+          border-bottom none
+          border-top 5px solid rgba(#3, 0.9)
+
+   .fp-tooltip
+     background-color #0
+     color #f
+     display none
+     position absolute
+     padding 5px
+     &:before
+       content ''
+       display block
+       position absolute
+       bottom -5px
+       width 0
+       height 0
+       left calc(50% - 5px)
+       border-left 5px solid transparent
+       border-right 5px solid transparent
+       border-top 5px solid #000
+   .fp-timeline-tooltip
+     bottom spacing * 3 + 5
+   .fp-timeline:hover+.fp-timeline-tooltip
+     display block
+     .is-touch&
+       display none
+
+
+   .fp-subtitle
+      absolute -9999em 0
+      z-index 10
+      text-align center
+      width 100%
+      opacity 0
+      transition opacity .3s
+
+      p
+         display inline
+         background-color #3
+         background-color rgba(#3, 0.9)
+         color #e
+         padding .1em .4em
+         font-size 16px
+         line-height 1.6
+
+         &:after
+            content ''
+            clear both
+
+         b
+           font-weight bold
+         i
+           font-style italic
+         u
+           text-decoration underline
+
+      &.fp-active
+         top auto
+         bottom 40px
+         opacity 1
+
+
+   // background image
+   .fp-fullscreen, .fp-unload, .fp-mute, .fp-embed, .fp-close, .fp-play, .fp-menu, .fp-airplay
+     font-family 'fpicons' !important
+     color #f !important
+     font-size 15px !important
+     text-align center !important
+     line-height 30px !important
+     text-decoration none !important
+     .is-rtl&
+       transform scale(-1,1)
+   .fp-menu
+     .is-rtl&
+      transform none
+   .fp-fullscreen:before
+     content "\e602"
+   .fp-unload:before
+   .fp-close:before
+     content "\e600"
+   .fp-airplay:before
+     content "\e600"
+     color transparent
+   .fp-mute:before
+     content "\e606"
+   .fp-embed:before
+     content "\e603"
+   .fp-play:before
+     content "\e608"
+   .fp-menu:before
+     content "\e604"
+
+   .fp-flash-disabled
+      background #333
+      width 390px
+      margin 0px auto
+      position absolute
+      bottom 0px
+      color #fff
