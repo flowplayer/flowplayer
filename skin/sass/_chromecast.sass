@@ -1,6 +1,7 @@
 .flowplayer
   .fp-chromecast-engine
     position: absolute
+    display: none
     top: 0
     bottom: 0
     right: 0
@@ -18,6 +19,8 @@
       width: 5em
   &.is-chromecast
     background-color: #333
+    .fp-chromecast-engine
+      display: block
     .fp-flash-disabled
       display: none !important
     .fp-engine
