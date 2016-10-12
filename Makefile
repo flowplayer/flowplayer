@@ -80,6 +80,7 @@ flash:
 
 zip: min concat skins flash
 	@ cp index.html $(DIST)
+	@ cp index.html $(DIST)/index.xhtml
 	@ cp LICENSE.md $(DIST)
 	@ cp deps/embed.min.js $(DIST)
 	@ rm -f $(DIST)/flowplayer.zip
