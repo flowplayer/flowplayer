@@ -1,13 +1,13 @@
 
 # Flowplayer
 
-![Screenshot](http://stream.flowplayer.org/player.png)
+![Screenshot](http://edge.flowplayer.org/player.png)
 
-[website](http://flowplayer.org) | [demos](http://flowplayer.org/demos/) | [docs](http://flowplayer.org/docs/)
+[website](https://flowplayer.org) | [demos](https://flowplayer.org/demos/) | [docs](https://flowplayer.org/docs/)
 
 ## For the impatient
 
-1. [Download Flowplayer](http://flowplayer.org/latest)
+1. [Download Flowplayer](https://flowplayer.org/latest)
 2. Unzip
 3. Drop the folder under your server
 
