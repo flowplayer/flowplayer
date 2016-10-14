@@ -20,14 +20,14 @@
    <script>
    $(function() {
       $("#str").click(function() {
-         flowplayer().play("http://stream.flowplayer.org/functional.mp4");
+         flowplayer().play("http://edge.flowplayer.org/functional.mp4");
       });
 
       $("#arr").click(function() {
          flowplayer().play([
-            {  mp4: "http://stream.flowplayer.org/functional.mp4" },
-            { webm: "http://stream.flowplayer.org/functional.webm" },
-            {  ogv: "http://stream.flowplayer.org/functional.ogv" }
+            {  mp4: "http://edge.flowplayer.org/functional.mp4" },
+            { webm: "http://edge.flowplayer.org/functional.webm" },
+            {  ogv: "http://edge.flowplayer.org/functional.ogv" }
 
          ], function(event, api, video) {
             console.info("playing", video.src);
@@ -42,9 +42,9 @@
    <!-- the player -->
    <div class="flowplayer" -data-engine="flash" data-swf="../dist/flowplayer.swf" data-ratio=".4167">
       <video>
-         <source type="video/webm" src="http://stream.flowplayer.org/bauhaus.webm">
-         <source type="video/mp4" src="http://stream.flowplayer.org/bauhaus.mp4">
-         <source type="video/ogv" src="http://stream.flowplayer.org/bauhaus.ogv">
+         <source type="video/webm" src="http://edge.flowplayer.org/bauhaus.webm">
+         <source type="video/mp4" src="http://edge.flowplayer.org/bauhaus.mp4">
+         <source type="video/ogv" src="http://edge.flowplayer.org/bauhaus.ogv">
       </video>
    </div>
 
