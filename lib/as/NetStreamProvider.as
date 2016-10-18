@@ -155,6 +155,7 @@ public class NetStreamProvider implements StreamProvider {
                 player.debug("seek() " + seconds);
                 seekTo = seconds;
                 netStream.seek(seconds);
+                if (paused) netStream.pause();
             }
         }
 
