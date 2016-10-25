@@ -43,6 +43,7 @@
     "is-function": "~1.0.1",
     "mocha": "~1.21.4",
     "mochify": "~1.1.2",
+    "node-sass": "^3.10.1",
     "phantomjs": "^1.9.12",
     "scriptjs": "^2.5.7",
     "stylus": "~0.40.3",

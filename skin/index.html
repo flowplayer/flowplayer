@@ -1,148 +1,168 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="../dist/skin/skin.css" id="style">
+  <title>Flowplayer 7.0</title>
 
-   <title>Flowplayer skin builder</title>
-
-   <script src="../deps/jquery.min.js"></script>
-   <script src="simulate.js"></script>
-
-   <link rel="stylesheet" type="text/css" href="../dist/skin/functional.css" />
-
-   <style>
-   body {
-      font: 12px "Lucida Grande", sans-serif;
-      text-align: center;
-   }
-
-   .flowplayer {
-      margin-top: 5%;
-      width: 70%;
-   }
-
-   .fp-engine {
-      background-image: url('https://flowplayer.org/media/img/demos/playlist/bakers.jpg');
-      background-size: cover;
-   }
-
-   .color-light .fp-engine {
-      background-color: #f9f9f9;
-   }
-   </style>
-
-
-
-   <!-- simulate Flowplayer -->
-   <script>
-
-   </script>
-
+  <style>
+    body { font-family: avenir, sans-serif; max-width: 1000px; margin: 0 auto; padding: .6em;}
+    .flow-color { _background: #ec6c4c; fill: #ec6c4c }
+    .is-hidden { display: none; }
+    #d { margin: 1em 0 3em 2em }
+    #d a { display: inline-block; color: #789; margin: .3em 1em .3em 0; text-transform: capitalize; cursor: pointer; }
+    #d section { max-width: 700px; }
+    #d label { margin-right: .6em; color: #789; cursor: pointer;}
+    h3 { margin: 1.2em 0 .2em; }
+    /* IE8
+    #player { height: 300px; width: 600px; background-color: #333;}
+    */
+  </style>
 </head>
-
 
 <body>
 
-   <!-- player root
-   <div class="flowplayer -fixed-controls -is-loading is-ready -is-mouseover -is-splash -is-paused color-light -no-background -aside-time -fixed-controls">
+<div id="player" class="flowplayer flow-ui-shown -flow-slim -sepia">
+
+  <video poster="hero.jpg"></video>
+
+  <div class="flow-ui">
+
+    <div class="flow-header">
+      <a class="flow-icon flow-chromecast"></a>
+      <a class="flow-icon flow-airplay"></a>
+      <a class="flow-icon flow-share"></a>
+      <a class="flow-icon flow-fullscreen"></a>
+    </div>
+
+    <!-- generic message -->
+    <div class="flow-message">The embed code is now on your clipboard.</div>
+
+
+    <!--
+      Master play & pause buttons (note: pause not in here)
+      Should behave the same as in YouTube (animated in/out)
+      Must be inlined so that the background color can be customized
+    -->
+
+    <svg class="flow-play flow-visible" version="1.1"- xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+      viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;" xml:space="preserve">
+
+      <!-- flow-color CSS class to the background element -->
+      <circle class="flow-color" cx="29" cy="29" r="29"/>
+
+      <g>
+        <polygon style="fill:#ffffff;" points="44,29 22,44 22,29.273 22,14  "/>
+        <path style="fill:#ffffff;" d="M22,45c-0.16,0-0.321-0.038-0.467-0.116C21.205,44.711,21,44.371,21,44V14
+          c0-0.371,0.205-0.711,0.533-0.884c0.328-0.174,0.724-0.15,1.031,0.058l22,15C44.836,28.36,45,28.669,45,29s-0.164,0.64-0.437,0.826
+          l-22,15C22.394,44.941,22.197,45,22,45z M23,15.893v26.215L42.225,29L23,15.893z"/>
+      </g>
+
+    </svg>
+
+    <div class="flow-captions">
+      <span>Daisy, Daisy, give me your answer do.</span><br>
+      <span>I'm half crazy all for the love of you.</span>
+    </div>
+
+    <div class="flow-controls">
+
+      <a class="flow-icon flow-playbtn"></a>
+
+      <span class="flow-elapsed">01:03</span>
+
+      <div class="flow-timeline flow-bar">
+        <div class="flow-buffer" style="width: 65%"></div>
+        <div class="flow-progress flow-color" style="width: 35%"></div>
+        <div class="flow-hover"></div>
+        <span class="flow-timestamp" style="left: 19%">0:45</span>
+
+        <span class="flow-cue" style="left: 25%"></span>
+        <span class="flow-cue" style="left: 39%"></span>
+        <span class="flow-cue" style="left: 55%"></span>
+        <span class="flow-cue" style="left: 85%"></span>
+      </div>
+
+      <span class="flow-duration">03:56</span>
+
+      <!--
+      -->
+      <div class="flow-volume">
+        <a class="flow-icon flow-volumebtn"></a>
+
+        <div class="flow-volumebar flow-bar">
+          <div class="flow-progress flow-color" style="width: 35%"></div>
+        </div>
+      </div>
+
+      <strong class="flow-speed">1&times;</strong>
+      <strong class="flow-cc">FI</strong>
+      <strong class="flow-hd">HD</strong>
+      <!--
+      <a class="flow-icon flow-fullscreen"></a>
+      -->
+    </div>
+
+    <div class="flow-menu" id="quality-menu">
+      <strong>Quality</strong>
+      <a>720 HD</a>
+      <a class="flow-icon flow-checked flow-color">480p</a>
+      <a>360p</a>
+      <a>144p</a>
+      <a>144p</a>
+      <a>Auto</a>
+    </div>
+
+    <div class="flow-menu -flow-active flow-embed-menu">
+      <strong>Share</strong>
+      <a class="flow-icon flow-twitter">Twitter</a>
+      <a class="flow-icon flow-facebook">Facebook</a>
+      <a class="flow-icon flow-email">Email</a>
+      <a class="flow-icon flow-embed">Embed</a>
+    </div>
+
+  </div>
+</div>
+
+
+<div id="d">
+
+  <h3>Controlbar background</h3>
+  <label><input type="radio" name="bg" value="transparent" checked>Transparent</label>
+  <label><input type="radio" name="bg" value="#016682">Brand color</label>
+  <label><input type="radio" name="bg" value="rgba(0,0,0,.5)">Black</label>
+
+  <h3>Layout</h3>
+  <section id="layout-options"></section>
+
+  <h3>Hide &amp; show</h3>
+  <section id="visibility-toggles"></section>
+
+  <h3>Options</h3>
+  <!--
+  <label>
+    <input id="iconset" type="checkbox" name="flow-edgy">
+    Outlined iconset (TBD)
+  </label>
+  -->
+  <label>
+    <input id="light" type="checkbox">
+    Light video preview
+  </label>
+
+  <label>
+    <input id="rounding" type="checkbox" name="flow-edgy">
+    Edgy (no rounding)
+  </label>
+
+
+
+</div>
+
+<script src="miniquery.js"></script>
+<script src="designer.js"></script>
+<!--
 -->
-
-   <div class="flowplayer is-ready is-paused is-mouseover -no-toggle -aside-time -no-time -no-mute play-button has-menu">
-
-      <!-- http://ansciath.tumblr.com/post/7347495869/css-aspect-ratio -->
-      <div class="fp-ratio" style="padding-top:41.7%"></div>
-
-      <!-- video or object tag -->
-      <div class="fp-engine"></div>
-
-      <div class="fp-ui">
-        <div class="fp-title">City Night Video City Night Video City Night Video City Night Video City Night Video City Night Video </div>
-
-         <!-- progress indicator -->
-         <div class="fp-waiting"><em></em><em></em><em></em></div>
-
-         <!-- actions -->
-         <a class="fp-fullscreen"></a>
-         <a class="fp-unload"></a>
-
-         <div class="fp-controls">
-
-            <a class="fp-play"></a>
-
-            <div class="fp-timeline">
-               <div class="fp-buffer" style="width: 70%;"></div>
-               <div class="fp-progress" style="width: 35%;"><em></em></div>
-            </div>
-            <div class="fp-tooltip fp-timeline-tooltip" style="left: calc(35% - 25px);">00:30</div>
-
-            <a class="fp-brand">
-              flowplayer
-            </a>
-
-            <div class="fp-volume">
-               <a class="fp-mute"></a>
-               <div class="fp-volumeslider">
-                  <div class="fp-volumelevel" style="width: 50%;"><em></em></div>
-               </div>
-            </div>
-
-            <a class="fp-menu dropdown-open">
-              <ul class="fp-dropdown fp-dropup">
-                <li>No subtitles</li>
-                <li class="active">Default (en)</li>
-              </ul>
-            </a>
-
-
-
-         </div>
-
-         <div class="fp-time">
-            <em class="fp-elapsed">00:12</em>
-            <em class="fp-remaining">-00:44</em>
-            <em class="fp-duration">01:44</em>
-         </div>
-
-         <!-- message -->
-         <div class="fp-message">
-            <h2>Invalid URL</h2>
-            <p>http://invalid.url/com/my-video.mp4</p>
-         </div>
-
-         <!-- embed -->
-         <a class="fp-embed" title="Copy to your site"></a>
-
-         <div class="fp-embed-code">
-            <label>Paste this HTML code to your site.</label>
-            <textarea>&lt;script src="http://cdn.flowplayer.org/5.0.0/embed.js"&gt;lt;/script&gt;</textarea>
-         </div>
-
-         <!-- logo on embedded players (commercial version)
-         <a class="fp-logo">
-            <img src="http://flowplayer.org/media/img/mylogo.png"/>
-         </a>
-         -->
-
-      </div>
-
-      <div class="fp-help">
-         <a class="fp-close"></a>
-         <div class="fp-help-section fp-help-basics">
-            <p><em>space</em>play / pause</p>
-            <p><em>esc</em>stop</p>
-            <p><em>f</em>fullscreen</p>
-            <p><em>shift</em> + <em>&#8592;</em><em>&#8594;</em>slower / faster</p>
-         </div>
-         <div class="fp-help-section">
-            <p><em>&#8593;</em><em>&#8595;</em>volume</p>
-            <p><em>m</em>mute</p>
-         </div>
-         <div class="fp-help-section">
-            <p><em>&#8592;</em><em>&#8594;</em>seek</p>
-            <p><em>&nbsp;. </em>seek to previous
-            </p><p><em>1</em><em>2</em>&hellip;<em>6</em> seek to 10%, 20%, &hellip;60% </p>
-         </div>
-      </div>
-
-   </div>
-
 </body>
+
