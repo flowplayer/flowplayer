@@ -1,0 +1,437 @@
+
+// used often
+%absolute
+  position: absolute
+  width: 100%
+
+// outermost container for video and UI
+.flowplayer
+  position: relative
+  max-height: 100%
+  max-height: 100vh
+  overflow: hidden
+  border-radius: .24em
+
+  *
+    box-sizing: border-box
+
+  video
+    // must be block with <!DOCTYPE html>
+    display: block
+    width: 100%
+
+// icons (4 different sets are coming soon)
+@font-face
+  font-family: icons
+  src: url("icons.eot?#iefix") format("embedded-opentype"), url("icons.woff2") format("woff2"), url("icons.woff") format("woff")
+
+.flow-icon
+  display: inline-block
+
+  &:before
+    font-family: icons
+    font-size: 1.4em
+
+.flow-airplay:before
+  content: "\e001"
+
+.flow-fullscreen:before
+  content: "\e002"
+
+.flow-checked:before
+  content: "\e003"
+
+.flow-embed:before
+  content: "\e004"
+
+.flow-chromecast:before
+  content: "\e005"
+
+.flow-email:before
+  content: "\e006"
+
+.flow-playbtn:before
+  content: "\e007"
+
+.flow-pause:before
+  content: "\e008"
+
+.flow-share:before
+  content: "\e009"
+
+.flow-share2:before
+  content: "\e00a"
+
+.flow-twitter:before
+  content: "\e00c"
+
+.flow-volumebtn:before
+  content: "\e00b"
+
+.flow-volume-off:before
+  content: "\e00d"
+
+
+
+// container for UI
+.flow-ui
+  @extend %absolute
+  transition: opacity .1s
+  height: 100%
+  opacity: 0
+  top: 0
+
+  // needs gradient so the white icons will show over light videos
+  background-image: linear-gradient(to top, rgba(#000, .25), transparent 15%)
+  text-align: center
+  cursor: pointer
+  color: #fff
+
+  .flow-ui-shown &, .is-paused &
+    opacity: 1
+
+// topmost elements and actions
+.flow-header
+  @extend %absolute
+  background-image: linear-gradient(to bottom, rgba(#000, .25), transparent)
+  text-align: left
+  height: 3.6em
+  padding-left: .9em
+
+  .flow-icon
+    margin: .9em .9em 0 0
+
+  // last item always on right
+  :last-child
+    float: right
+
+// generic message
+.flow-message
+  background-color: rgba(#000, .5)
+  font-size: 1.5em
+  padding: .4em
+  display: none
+
+
+// captions (can stay below the controlbar)
+.flow-captions
+  @extend %absolute
+  bottom: 1.2em
+  display: none
+
+  span
+    background-color: rgba(#000, .65)
+    border-radius: .2em
+    font-size: 110%
+    display: inline-block
+    padding: .1em .3em
+    margin: .1em
+
+
+// the big play button on center
+svg.flow-play
+  position: relative
+  top: 40%
+  top: calc(50% - 3em)
+  width: 6em
+  opacity: 0
+  transform: scale(.8)
+  transition: all .2s
+
+  &.flow-visible
+    transform: scale(1.5)
+    opacity: 1
+
+
+// bottom controls
+.flow-controls
+  @extend %absolute
+
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+
+  -ms-flex-pack: justify
+  -webkit-justify-content: space-around
+  justify-content: space-around
+
+  -ms-flex-align: center
+  -webkit-align-items: center
+  align-items: center
+
+  height: 2.4em
+  bottom: 0
+  z-index: 2
+
+  > *
+    margin: 0 .6em
+
+  > strong
+    letter-spacing: 1px
+
+  img
+    width: 1.2em
+
+  > :first-child
+    margin-left: .9em
+
+  > :last-child
+    margin-right: .9em
+
+
+
+// generic bar (timeline and volume)
+.flow-bar
+  background-color: #ccc
+  background-color: rgba(#fff, .5)
+  position: relative
+  cursor: col-resize
+  height: .9em
+  -ms-flex: 1
+  flex: 1
+
+  > *
+    background-color: rgba(#fff, .6)
+    position: absolute
+    height: 100%
+
+
+// timeline
+.flow-timeline
+  transition: height .2s
+
+// cuepoints
+.flow-cue
+  background-color: #000
+  position: absolute
+  height: 100%
+  width: 2px
+
+.flow-timestamp
+  background-color: rgba(#000, .65)
+  border-radius: .2em
+  padding: .1em .3em
+  font-size: 90%
+  bottom: 1.4em
+  height: auto
+
+// volume bar
+.flow-volumebar
+  background-color: rgba(#fff, .75)
+  display: inline-block
+  transition: width .2s
+  margin-left: .3em
+  width: 0
+
+
+
+// volume container (mute & bar)
+.flow-volume
+  display: -ms-flexbox
+  display: flex
+  height: 100%
+
+  -ms-flex-align: center
+  align-items: center
+
+  &:hover .flow-volumebar
+    width: 7em
+
+
+// IE8-9 mostly (.no-flex must be before skin options)
+.no-flex
+  .flow-controls
+    white-space: nowrap
+
+    > *
+      display: inline-block
+      vertical-align: center
+      margin: 0 .3em
+
+  .flow-timeline
+    width: 40%
+
+
+  &.flow-full .flow-timeline
+    margin-bottom: .6em
+    height: .9em
+
+  &.flow-fat .flow-bar
+    height: .9em !important
+
+
+
+// tall timeline
+.flow-fat
+  .flow-bar
+    height: 100%
+    border-radius: 0
+
+  .flow-timestamp
+    bottom: 3.2em
+
+// slim timeline
+.flow-slim
+  .flow-timeline
+    height: .2em
+
+  .flow-controls:hover .flow-timeline
+    height: .9em
+
+  .flow-cue
+    width: 4px
+
+
+
+// full timeline over the controls
+.flow-full
+
+  .flow-timeline
+    position: absolute
+    height: .3em
+    bottom: 2.8em
+    margin: 0
+    width: 100%
+    border-radius: 0
+    overflow: inherit
+    left: 0
+
+    // more space for mouseover
+    &:before
+      content: ""
+      width: 100%
+      height: 1.2em
+      position: absolute
+      top: -1.2em
+      left: 0
+
+  .flow-controls
+    height: 2.8em
+
+    &:hover .flow-timeline
+      height: 1em
+
+  .flow-volume
+    margin-right: auto
+
+  .flow-duration
+    margin-left: 0
+
+    &:before
+      position: relative
+      content: "/"
+      left: -.3em
+
+
+// minimal skin (only fullscreen button, progress and big play)
+.flow-minimal
+
+  .flow-controls
+    background-color: transparent !important
+
+    > *
+      display: none
+
+  .flow-header
+    > *
+      display: none
+
+    :last-child
+      display: inherit
+
+  .flow-timeline
+    height: .3em
+    max-width: 12em
+    display: block
+    margin: 0 auto
+
+
+// menu
+.flow-selected
+  text-decoration: underline
+
+.flow-menu
+  background-color: rgba(#000, .5)
+  border-radius: .24em
+  position: absolute
+  width: 8em
+  right: .5em
+  z-index: 2
+  font-size: 90%
+  transition: opacity .2s, transform .2s
+  transform: scale(.95)
+  bottom: -100%
+  opacity: 0
+
+  &.flow-active
+    transform: scale(1)
+    bottom: 3.2em
+    opacity: 1
+
+
+  > *
+    display: block
+    padding: .4em 1.2em
+    text-align: right
+
+  // title
+  strong
+    display: block
+    padding: .7em 1.2em
+    border-bottom: 1px solid rgba(#fff, .2)
+    background-color: rgba(#000, .3)
+    text-transform: uppercase
+    letter-spacing: 1px
+    cursor: default
+    font-size: 90%
+
+  a
+    color: rgba(#fff, .8)
+
+  a:hover:not(.flow-checked)
+    background-color: #000
+    color: #fff
+
+  .flow-icon
+    cursor: default
+
+    &:before
+      margin-right: .6em
+      font-size: 1em
+
+.flow-embed-menu
+  bottom: inherit
+
+  a, strong
+    text-align: left
+
+
+
+.flow-edgy
+  &, .flow-menu, .flow-captions span
+    border-radius: 0
+
+.flow-color
+  background-color: #ec6c4c
+  fill: rgba(#fff, .2)
+
+// RTL
+.is-rtl
+  direction: rtl
+
+  .flow-icon
+    transform: rotate(180deg)
+
+
+// effects
+.-grayscale video
+  -webkit-filter: grayscale(100%)
+  filter: grayscale(100%)
+
+.-sepia video
+  -webkit-filter: sepia(100%)
+  filter: sepia(100%)
+
+.-blur video
+  -webkit-filter: blur(5px)
+  filter: blur(5px)

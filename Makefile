@@ -48,24 +48,11 @@ min: concat
 	@ uglifyjs $(JS) --comments '/flowplayer.org\/license/' --mangle -c >> $(DIST)/flowplayer.min.js
 
 # make all skins
-skins:
+skin:
 	# skins
 	@ mkdir -p $(SKIN)
-	@ stylus --include-css -c -o $(SKIN) skin/styl/*.styl
-	@ sed 's/\.flowplayer/\.minimalist/g' $(SKIN)/minimalist.css >  $(SKIN)/all-skins.css
-	@ sed 's/\.flowplayer/\.functional/g' $(SKIN)/functional.css >> $(SKIN)/all-skins.css
-	@ sed 's/\.flowplayer/\.playful/g' 	$(SKIN)/playful.css >> 	 $(SKIN)/all-skins.css
-	@ cp -r skin/img $(SKIN)
+	@ node-sass skin/sass/skin.sass > $(SKIN)/skin.css
 	@ cp -r skin/icons/fonts $(SKIN)
-
-
-# work on a single skin (watches changes and processes on the background)
-skin:
-	stylus --include-css -c -w -o $(SKIN) skin/styl/$(MAKECMDGOALS).styl
-
-minimalist: skin
-functional: skin
-playful: skin
 
 flash:
 	# compile flash
