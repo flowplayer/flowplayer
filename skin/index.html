@@ -7,7 +7,7 @@
 
   <style>
     body { font-family: avenir, sans-serif; max-width: 1000px; margin: 0 auto; padding: .6em;}
-    .flow-color { _background: #ec6c4c; fill: #ec6c4c }
+    .fp-color { _background: #ec6c4c; fill: #ec6c4c }
     .is-hidden { display: none; }
     #d { margin: 1em 0 3em 2em }
     #d a { display: inline-block; color: #789; margin: .3em 1em .3em 0; text-transform: capitalize; cursor: pointer; }
@@ -22,21 +22,21 @@
 
 <body>
 
-<div id="player" class="flowplayer flow-ui-shown -flow-slim -sepia">
+<div id="player" class="flowplayer fp-ui-shown -fp-slim -sepia">
 
-  <video poster="hero.jpg"></video>
+  <video class="fp-engine" poster="hero.jpg"></video>
 
-  <div class="flow-ui">
+  <div class="fp-ui">
 
-    <div class="flow-header">
-      <a class="flow-icon flow-chromecast"></a>
-      <a class="flow-icon flow-airplay"></a>
-      <a class="flow-icon flow-share"></a>
-      <a class="flow-icon flow-fullscreen"></a>
+    <div class="fp-header">
+      <a class="fp-icon fp-chromecast"></a>
+      <a class="fp-icon fp-airplay"></a>
+      <a class="fp-icon fp-share"></a>
+      <a class="fp-icon fp-fullscreen"></a>
     </div>
 
     <!-- generic message -->
-    <div class="flow-message">The embed code is now on your clipboard.</div>
+    <div class="fp-message">The embed code is now on your clipboard.</div>
 
 
     <!--
@@ -45,12 +45,12 @@
       Must be inlined so that the background color can be customized
     -->
 
-    <svg class="flow-play flow-visible" version="1.1"- xmlns="http://www.w3.org/2000/svg"
+    <svg class="fp-play fp-visible" version="1.1"- xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
       viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;" xml:space="preserve">
 
-      <!-- flow-color CSS class to the background element -->
-      <circle class="flow-color" cx="29" cy="29" r="29"/>
+      <!-- fp-color CSS class to the background element -->
+      <circle class="fp-color" cx="29" cy="29" r="29"/>
 
       <g>
         <polygon style="fill:#ffffff;" points="44,29 22,44 22,29.273 22,14  "/>
@@ -61,65 +61,65 @@
 
     </svg>
 
-    <div class="flow-captions">
+    <div class="fp-captions">
       <span>Daisy, Daisy, give me your answer do.</span><br>
       <span>I'm half crazy all for the love of you.</span>
     </div>
 
-    <div class="flow-controls">
+    <div class="fp-controls">
 
-      <a class="flow-icon flow-playbtn"></a>
+      <a class="fp-icon fp-playbtn"></a>
 
-      <span class="flow-elapsed">01:03</span>
+      <span class="fp-elapsed">01:03</span>
 
-      <div class="flow-timeline flow-bar">
-        <div class="flow-buffer" style="width: 65%"></div>
-        <div class="flow-progress flow-color" style="width: 35%"></div>
-        <div class="flow-hover"></div>
-        <span class="flow-timestamp" style="left: 19%">0:45</span>
+      <div class="fp-timeline fp-bar">
+        <div class="fp-buffer" style="width: 65%"></div>
+        <div class="fp-progress fp-color" style="width: 35%"></div>
+        <div class="fp-hover"></div>
+        <span class="fp-timestamp" style="left: 19%">0:45</span>
 
-        <span class="flow-cue" style="left: 25%"></span>
-        <span class="flow-cue" style="left: 39%"></span>
-        <span class="flow-cue" style="left: 55%"></span>
-        <span class="flow-cue" style="left: 85%"></span>
+        <span class="fp-cue" style="left: 25%"></span>
+        <span class="fp-cue" style="left: 39%"></span>
+        <span class="fp-cue" style="left: 55%"></span>
+        <span class="fp-cue" style="left: 85%"></span>
       </div>
 
-      <span class="flow-duration">03:56</span>
+      <span class="fp-duration">03:56</span>
 
       <!--
       -->
-      <div class="flow-volume">
-        <a class="flow-icon flow-volumebtn"></a>
+      <div class="fp-volume">
+        <a class="fp-icon fp-volumebtn"></a>
 
-        <div class="flow-volumebar flow-bar">
-          <div class="flow-progress flow-color" style="width: 35%"></div>
+        <div class="fp-volumebar fp-bar">
+          <div class="fp-progress fp-color" style="width: 35%"></div>
         </div>
       </div>
 
-      <strong class="flow-speed">1&times;</strong>
-      <strong class="flow-cc">FI</strong>
-      <strong class="flow-hd">HD</strong>
+      <strong class="fp-speed">1&times;</strong>
+      <strong class="fp-cc">FI</strong>
+      <strong class="fp-hd">HD</strong>
       <!--
-      <a class="flow-icon flow-fullscreen"></a>
+      <a class="fp-icon fp-fullscreen"></a>
       -->
     </div>
 
-    <div class="flow-menu" id="quality-menu">
+    <div class="fp-menu" id="quality-menu">
       <strong>Quality</strong>
       <a>720 HD</a>
-      <a class="flow-icon flow-checked flow-color">480p</a>
+      <a class="fp-icon fp-checked fp-color">480p</a>
       <a>360p</a>
       <a>144p</a>
       <a>144p</a>
       <a>Auto</a>
     </div>
 
-    <div class="flow-menu -flow-active flow-embed-menu">
+    <div class="fp-menu -fp-active fp-embed-menu">
       <strong>Share</strong>
-      <a class="flow-icon flow-twitter">Twitter</a>
-      <a class="flow-icon flow-facebook">Facebook</a>
-      <a class="flow-icon flow-email">Email</a>
-      <a class="flow-icon flow-embed">Embed</a>
+      <a class="fp-icon fp-twitter">Twitter</a>
+      <a class="fp-icon fp-facebook">Facebook</a>
+      <a class="fp-icon fp-email">Email</a>
+      <a class="fp-icon fp-embed">Embed</a>
     </div>
 
   </div>
@@ -142,7 +142,7 @@
   <h3>Options</h3>
   <!--
   <label>
-    <input id="iconset" type="checkbox" name="flow-edgy">
+    <input id="iconset" type="checkbox" name="fp-edgy">
     Outlined iconset (TBD)
   </label>
   -->
@@ -152,7 +152,7 @@
   </label>
 
   <label>
-    <input id="rounding" type="checkbox" name="flow-edgy">
+    <input id="rounding" type="checkbox" name="fp-edgy">
     Edgy (no rounding)
   </label>
 
