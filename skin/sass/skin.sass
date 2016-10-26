@@ -15,7 +15,7 @@
   *
     box-sizing: border-box
 
-  video
+  .fp-engine
     // must be block with <!DOCTYPE html>
     display: block
     width: 100%
@@ -25,56 +25,59 @@
   font-family: icons
   src: url("icons/flowplayer.eot?#iefix") format("embedded-opentype"), url("icons/flowplayer.woff2") format("woff2"), url("icons/flowplayer.woff") format("woff")
 
-.flow-icon
+.fp-icon
   display: inline-block
 
   &:before
     font-family: icons
     font-size: 1.4em
 
-.flow-airplay:before
+.fp-airplay:before
   content: "\e001"
 
-.flow-fullscreen:before
+.fp-fullscreen:before
   content: "\e002"
 
-.flow-checked:before
+.fp-checked:before
   content: "\e003"
 
-.flow-embed:before
+.fp-embed:before
   content: "\e004"
 
-.flow-chromecast:before
+.fp-chromecast:before
   content: "\e005"
 
-.flow-email:before
+.fp-email:before
   content: "\e006"
 
-.flow-playbtn:before
+.fp-playbtn:before
   content: "\e007"
 
-.flow-pause:before
+.fp-pause:before
   content: "\e008"
 
-.flow-share:before
+.fp-share:before
   content: "\e009"
 
-.flow-share2:before
+.fp-share2:before
   content: "\e00a"
 
-.flow-twitter:before
+.fp-twitter:before
   content: "\e00c"
 
-.flow-volumebtn:before
+.fp-facebook:before
+  content: "\e00a"
+
+.fp-volumebtn:before
   content: "\e00b"
 
-.flow-volume-off:before
+.fp-volume-off:before
   content: "\e00d"
 
 
 
 // container for UI
-.flow-ui
+.fp-ui
   @extend %absolute
   transition: opacity .1s
   height: 100%
@@ -87,18 +90,18 @@
   cursor: pointer
   color: #fff
 
-  .flow-ui-shown &, .is-paused &
+  .fp-ui-shown &, .is-paused &
     opacity: 1
 
 // topmost elements and actions
-.flow-header
+.fp-header
   @extend %absolute
   background-image: linear-gradient(to bottom, rgba(#000, .25), transparent)
   text-align: left
   height: 3.6em
   padding-left: .9em
 
-  .flow-icon
+  .fp-icon
     margin: .9em .9em 0 0
 
   // last item always on right
@@ -106,7 +109,7 @@
     float: right
 
 // generic message
-.flow-message
+.fp-message
   background-color: rgba(#000, .5)
   font-size: 1.5em
   padding: .4em
@@ -114,7 +117,7 @@
 
 
 // captions (can stay below the controlbar)
-.flow-captions
+.fp-captions
   @extend %absolute
   bottom: 1.2em
   display: none
@@ -129,7 +132,7 @@
 
 
 // the big play button on center
-svg.flow-play
+svg.fp-play
   position: relative
   top: 40%
   top: calc(50% - 3em)
@@ -138,13 +141,13 @@ svg.flow-play
   transform: scale(.8)
   transition: all .2s
 
-  &.flow-visible
+  &.fp-visible
     transform: scale(1.5)
     opacity: 1
 
 
 // bottom controls
-.flow-controls
+.fp-controls
   @extend %absolute
 
   display: -ms-flexbox
@@ -181,7 +184,7 @@ svg.flow-play
 
 
 // generic bar (timeline and volume)
-.flow-bar
+.fp-bar
   background-color: #ccc
   background-color: rgba(#fff, .5)
   position: relative
@@ -197,17 +200,17 @@ svg.flow-play
 
 
 // timeline
-.flow-timeline
+.fp-timeline
   transition: height .2s
 
 // cuepoints
-.flow-cue
+.fp-cue
   background-color: #000
   position: absolute
   height: 100%
   width: 2px
 
-.flow-timestamp
+.fp-timestamp
   background-color: rgba(#000, .65)
   border-radius: .2em
   padding: .1em .3em
@@ -216,7 +219,7 @@ svg.flow-play
   height: auto
 
 // volume bar
-.flow-volumebar
+.fp-volumebar
   background-color: rgba(#fff, .75)
   display: inline-block
   transition: width .2s
@@ -226,7 +229,7 @@ svg.flow-play
 
 
 // volume container (mute & bar)
-.flow-volume
+.fp-volume
   display: -ms-flexbox
   display: flex
   height: 100%
@@ -234,13 +237,13 @@ svg.flow-play
   -ms-flex-align: center
   align-items: center
 
-  &:hover .flow-volumebar
+  &:hover .fp-volumebar
     width: 7em
 
 
 // IE8-9 mostly (.no-flex must be before skin options)
 .no-flex
-  .flow-controls
+  .fp-controls
     white-space: nowrap
 
     > *
@@ -248,45 +251,45 @@ svg.flow-play
       vertical-align: center
       margin: 0 .3em
 
-  .flow-timeline
+  .fp-timeline
     width: 40%
 
 
-  &.flow-full .flow-timeline
+  &.fp-full .fp-timeline
     margin-bottom: .6em
     height: .9em
 
-  &.flow-fat .flow-bar
+  &.fp-fat .fp-bar
     height: .9em !important
 
 
 
 // tall timeline
-.flow-fat
-  .flow-bar
+.fp-fat
+  .fp-bar
     height: 100%
     border-radius: 0
 
-  .flow-timestamp
+  .fp-timestamp
     bottom: 3.2em
 
 // slim timeline
-.flow-slim
-  .flow-timeline
+.fp-slim
+  .fp-timeline
     height: .2em
 
-  .flow-controls:hover .flow-timeline
+  .fp-controls:hover .fp-timeline
     height: .9em
 
-  .flow-cue
+  .fp-cue
     width: 4px
 
 
 
 // full timeline over the controls
-.flow-full
+.fp-full
 
-  .flow-timeline
+  .fp-timeline
     position: absolute
     height: .3em
     bottom: 2.8em
@@ -305,16 +308,16 @@ svg.flow-play
       top: -1.2em
       left: 0
 
-  .flow-controls
+  .fp-controls
     height: 2.8em
 
-    &:hover .flow-timeline
+    &:hover .fp-timeline
       height: 1em
 
-  .flow-volume
+  .fp-volume
     margin-right: auto
 
-  .flow-duration
+  .fp-duration
     margin-left: 0
 
     &:before
@@ -324,22 +327,22 @@ svg.flow-play
 
 
 // minimal skin (only fullscreen button, progress and big play)
-.flow-minimal
+.fp-minimal
 
-  .flow-controls
+  .fp-controls
     background-color: transparent !important
 
     > *
       display: none
 
-  .flow-header
+  .fp-header
     > *
       display: none
 
     :last-child
       display: inherit
 
-  .flow-timeline
+  .fp-timeline
     height: .3em
     max-width: 12em
     display: block
@@ -347,10 +350,10 @@ svg.flow-play
 
 
 // menu
-.flow-selected
+.fp-selected
   text-decoration: underline
 
-.flow-menu
+.fp-menu
   background-color: rgba(#000, .5)
   border-radius: .24em
   position: absolute
@@ -363,7 +366,7 @@ svg.flow-play
   bottom: -100%
   opacity: 0
 
-  &.flow-active
+  &.fp-active
     transform: scale(1)
     bottom: 3.2em
     opacity: 1
@@ -388,18 +391,18 @@ svg.flow-play
   a
     color: rgba(#fff, .8)
 
-  a:hover:not(.flow-checked)
+  a:hover:not(.fp-checked)
     background-color: #000
     color: #fff
 
-  .flow-icon
+  .fp-icon
     cursor: default
 
     &:before
       margin-right: .6em
       font-size: 1em
 
-.flow-embed-menu
+.fp-embed-menu
   bottom: inherit
 
   a, strong
@@ -407,11 +410,11 @@ svg.flow-play
 
 
 
-.flow-edgy
-  &, .flow-menu, .flow-captions span
+.fp-edgy
+  &, .fp-menu, .fp-captions span
     border-radius: 0
 
-.flow-color
+.fp-color
   background-color: #ec6c4c
   fill: rgba(#fff, .2)
 
@@ -419,19 +422,19 @@ svg.flow-play
 .is-rtl
   direction: rtl
 
-  .flow-icon
+  .fp-icon
     transform: rotate(180deg)
 
 
 // effects
-.-grayscale video
+.-grayscale video.fp-engine
   -webkit-filter: grayscale(100%)
   filter: grayscale(100%)
 
-.-sepia video
+.-sepia video.fp-engine
   -webkit-filter: sepia(100%)
   filter: sepia(100%)
 
-.-blur video
+.-blur video.fp-engine
   -webkit-filter: blur(5px)
   filter: blur(5px)

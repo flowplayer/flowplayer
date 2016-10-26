@@ -16,12 +16,12 @@ function each(query, root, fn) {
 }
 
 // open menu
-each('.flow-controls strong', player, function(el) {
+each('.fp-controls strong', player, function(el) {
   var menu = $('#share-menu')
 
   $(el).on('click', function() {
-    el.toggleClass('flow-selected')
-    menu.toggleClass('flow-active')
+    el.toggleClass('fp-selected')
+    menu.toggleClass('fp-active')
     menu.css({left: Math.min(el.offsetLeft - 50, player.offsetWidth  - 125) })
 
   })
@@ -29,18 +29,18 @@ each('.flow-controls strong', player, function(el) {
 
 
 false && player.on('mouseenter mouseleave', function(e) {
-  player.toggleClass('flow-ui-shown', e.type == 'mouseenter')
+  player.toggleClass('fp-ui-shown', e.type == 'mouseenter')
 })
 
 // play / pause click
-$('.flow-ui').on('click', function(e) {
+$('.fp-ui').on('click', function(e) {
   var cls = e.target.className
-  if (cls == 'flow-ui' || cls.indexOf('play') > 0) {
+  if (cls == 'fp-ui' || cls.indexOf('play') > 0) {
     player.toggleClass('is-paused')
-    var play = document.querySelector('.flow-play')
-    play.classList.add('flow-visible')
+    var play = document.querySelector('.fp-play')
+    play.classList.add('fp-visible')
     setTimeout(function() {
-      play.classList.remove('flow-visible')
+      play.classList.remove('fp-visible')
     }, 300)
 
   }
@@ -50,7 +50,7 @@ $('.flow-ui').on('click', function(e) {
 'chromecast airplay share fullscreen header playbtn duration volumebtn fullscreen speed cc hd'.split(' ').forEach(function(name) {
 
   var el = $('<a>').txt(name).on('click', function() {
-    $('.flow-' + name).toggleClass('is-hidden')
+    $('.fp-' + name).toggleClass('is-hidden')
   })
 
   $('#visibility-toggles').append(el)
@@ -61,7 +61,7 @@ $('.flow-ui').on('click', function(e) {
 'default minimal full fat'.split(' ').forEach(function(name) {
 
   var el = $('<a>').txt(name).on('click', function() {
-    player.className = 'flowplayer flow-ui-shown flow-' + name + (no_flex ? ' no-flex' : '')
+    player.className = 'flowplayer fp-ui-shown fp-' + name + (no_flex ? ' no-flex' : '')
 
     each('[name=bg]', function(el) {
       el.disabled = name == 'minimal'
@@ -74,7 +74,7 @@ $('.flow-ui').on('click', function(e) {
 })
 
 $('#rounding').on('change', function() {
-  player.toggleClass('flow-edgy', !this.checked)
+  player.toggleClass('fp-edgy', !this.checked)
 })
 
 $('#light').on('change', function() {
@@ -87,7 +87,7 @@ each('[name=bg]', function(el) {
   var bg = $(el).value
 
   el.on('change', function() {
-    $('.flow-controls').css({ backgroundColor: bg })
+    $('.fp-controls').css({ backgroundColor: bg })
   })
 
 })
