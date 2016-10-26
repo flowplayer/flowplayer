@@ -52,7 +52,7 @@ skin:
 	# skins
 	@ mkdir -p $(SKIN)
 	@ node-sass skin/sass/skin.sass > $(SKIN)/skin.css
-	@ cp -r skin/icons/fonts $(SKIN)
+	@ cp -r skin/icons $(SKIN)
 
 flash:
 	# compile flash
