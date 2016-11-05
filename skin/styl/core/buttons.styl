@@ -85,15 +85,31 @@
          right auto
          left spacing
 
-   .fp-fullscreen, .fp-unload, .fp-close
+   .fp-fullscreen, .fp-unload, .fp-close, .fp-airplay
       display inline-block
       text-align center
       cursor pointer
       height controls_height
       width controls_height
+      margin-left 0.3em
 
    .fp-unload, .fp-close
       display none
+
+   .fp-airplay
+     position relative
+     .fp-airplay-button
+       position absolute
+       top 20%
+       bottom 20%
+       right 20%
+       left 20%
+       -webkit-mask-image: -webkit-named-image(wireless-playback);
+       -webkit-mask-size: 100% 100%
+       background-color #fff
+     &.is-active
+       .fp-airplay-button
+         background-color #00a7c8
 
    .fp-play
       display none
