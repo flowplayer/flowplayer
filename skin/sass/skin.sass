@@ -92,9 +92,11 @@
 
   // the big play button on center
   svg.fp-play
-    position: relative
+    position: absolute
     top: 40%
     top: calc(50% - 3em)
+    left: 40%
+    left: calc(50% - 3em)
     width: 6em
     opacity: 0
     transform: scale(.8)
@@ -103,6 +105,10 @@
     &.fp-visible
       transform: scale(1.5)
       opacity: 1
+
+
+  .fp-remaining
+    display: none
 
 
   // bottom controls
@@ -276,7 +282,7 @@
     .fp-volume
       margin-right: auto
 
-    .fp-duration
+    .fp-duration, .fp-remaining
       margin-left: 0
 
       &:before
