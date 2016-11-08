@@ -44,7 +44,7 @@
     cursor: pointer
     color: #fff
 
-  &.fp-ui-shown, &.is-paused
+  &.fp-ui-shown, &.is-paused, &.is-mouseover
     .fp-ui
       opacity: 1
 
@@ -102,7 +102,7 @@
     transform: scale(.8)
     transition: all .2s
 
-    &.fp-visible
+    @at-root .is-paused#{&}, &.fp-visible
       transform: scale(1.5)
       opacity: 1
 
