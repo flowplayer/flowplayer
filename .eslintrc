@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "indent": "off",
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "no-console": "off"
+  },
+  "extends": "eslint:recommended",
+  "env": {
+    "node": true,
+    "browser": true
+  }
+}
