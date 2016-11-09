@@ -65,7 +65,7 @@ flash:
 	@ cd $(DIST) && rm *.as *.swc
 
 
-zip: min concat skins flash
+zip: min concat skin flash
 	@ cp index.html $(DIST)
 	@ cp LICENSE.md $(DIST)
 	@ cp deps/embed.min.js $(DIST)
