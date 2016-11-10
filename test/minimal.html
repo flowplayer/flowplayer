@@ -28,14 +28,12 @@
       -data-engine="flash"
       data-swf="../dist/flowplayer.swf"
       data-rtmp="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st"
+      data-splash="//drive.cdn.flowplayer.org/202777/84049-snap.jpg"
       data-ratio=".4167">
 
-      <video -autoplay -preload="none" >
-         <source type="video/mp4"   src="http://edge.flowplayer.org/bauhaus.mp4">
-         <source type="video/webm"  src="http://edge.flowplayer.org/bauhaus.webm">
-         <source type="video/ogg"   src="http://edge.flowplayer.org/bauhaus.ogv">
-           <track default kind="subtitles" srclang="en" label="English"
-                    src="//d12zt1n3pd4xhr.cloudfront.net/fp/subtitles-demo.vtt">
+      <video -autoplay -preload="none">
+        <source type="application/x-mpegurl" src="//cdn.flowplayer.org/202777/84049-bauhaus.m3u8">
+        <source type="video/mp4" src="//cdn.flowplayer.org/202777/84049-bauhaus.mp4">
       </video>
 
    </div>
