@@ -4,16 +4,13 @@
 <head>
 
    <!-- player skin -->
-   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css?f">
+   <link rel="stylesheet" type="text/css" href="../dist/skin/skin.css?f">
 
    <!-- site specific styling -->
    <style>
-   body {
-      font: 12px "Myriad Pro", "Lucida Grande", sans-serif;
-      text-align: center;
-      padding-top: 1%;
-   }
-   .flowplayer { width: 70%; }
+   body { font-family: avenir, sans-serif; max-width: 1000px; margin: 0 auto; padding: .6em;}
+   .flowplayer { width: 100%;  }
+
    </style>
 
    <!-- flowplayer depends on jQuery 1.7.1+ (for now) -->
@@ -33,10 +30,12 @@
       data-rtmp="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st"
       data-ratio=".4167">
 
-      <video -autoplay -preload="none">
+      <video -autoplay -preload="none" >
          <source type="video/mp4"   src="http://edge.flowplayer.org/bauhaus.mp4">
          <source type="video/webm"  src="http://edge.flowplayer.org/bauhaus.webm">
          <source type="video/ogg"   src="http://edge.flowplayer.org/bauhaus.ogv">
+           <track default kind="subtitles" srclang="en" label="English"
+                    src="//d12zt1n3pd4xhr.cloudfront.net/fp/subtitles-demo.vtt">
       </video>
 
    </div>
