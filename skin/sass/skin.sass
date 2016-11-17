@@ -125,7 +125,11 @@
     padding: .6em .9em
     text-align: left
     font-size: 1.2em
-    display: none
+    height: 0
+    overflow: hidden
+    transition: height .2s
+    &.fp-shown
+      height: 2.6em
 
 
   // captions (can stay below the controlbar)
