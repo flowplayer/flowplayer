@@ -102,9 +102,11 @@
   // topmost elements and actions
   .fp-header
     @extend %absolute
+    top: 0
     background-image: linear-gradient(to bottom, rgba(#000, .25), transparent)
     text-align: left
     height: 3.6em
+    transition: opacity 0.3s
     padding-left: .9em
 
     .fp-icon
@@ -122,14 +124,16 @@
   // generic message
   .fp-message
     background-color: rgba(#000, .5)
-    padding: .6em .9em
     text-align: left
     font-size: 1.2em
-    height: 0
     overflow: hidden
-    transition: height .2s
+    opacity: 0
+    padding: .6em .9em
+    transition: opacity 0.3s
     &.fp-shown
-      height: 2.6em
+      opacity: 1
+  .fp-message.fp-shown+.fp-header
+    opacity: 0
 
 
   // captions (can stay below the controlbar)
