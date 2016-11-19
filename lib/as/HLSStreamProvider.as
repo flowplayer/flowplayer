@@ -163,6 +163,15 @@ package {
             clip.src = clip.url = config.url;
             clip.width = event.levels[hls.startLevel].width;
             clip.height = event.levels[hls.startLevel].height;
+            clip.qualities = [{ value: -1, label: "Auto" }];
+            clip.quality = -1;
+            for (var i : Number = 0; i < event.levels.length; i++) {
+              var level : Object = event.levels[i];
+              clip.qualities.push({
+                value: i,
+                label: Math.min(level.width, level.height) + "p"
+              });
+            }
             _checkVideoDimension();
             player.debug("manifest received " + clip);
             if (suppressReady) {
