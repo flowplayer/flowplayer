@@ -94,6 +94,11 @@ package {
             player.fire(Flowplayer.PAUSE, null);
         }
 
+        public function setQuality(q : Number) : void {
+          player.debug('Next level will be', q);
+          hls.nextLevel = q;
+        }
+
         public function resume() : void {
             player.debug('HLSStreamProvider::resume(), hls.playbackState=%s, this.pos=%s, this.offsetPos=%s, this.backBuffer=%s', [hls.playbackState, this.pos, this.offsetPos, this.backBuffer]);
             switch(hls.playbackState) {
