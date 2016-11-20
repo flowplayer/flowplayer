@@ -190,6 +190,7 @@ public class NetStreamProvider implements StreamProvider {
         }
 
         public function setProviderParam(key:String, value:Object) : void { }
+        public function setQuality(q: Number) : void {}
 
         /************* Private API ***********/
         private function isRtmpUrl(url : String) : Boolean {

@@ -45,8 +45,9 @@ package {
         internal static const ERROR : String = "error";
         internal static const SET : String = "set";
         internal static const GET : String = "get";
+        internal static const QUALITY : String = "quality";
         // external interface
-        private static const INTERFACE : Array = new Array(PLAY, PAUSE, RESUME, SEEK, VOLUME, UNLOAD, STATUS, SET, GET);
+        private static const INTERFACE : Array = new Array(PLAY, PAUSE, RESUME, SEEK, VOLUME, UNLOAD, STATUS, SET, GET, QUALITY);
         // flashvars
         private var conf : Object;
         // state
@@ -129,6 +130,11 @@ package {
             video.height = rect.height;
             video.x = rect.x;
             video.y = rect.y;
+        }
+
+        public function quality(q : Number) : void {
+          debug("quality()", q);
+          provider.setQuality(q);
         }
 
 

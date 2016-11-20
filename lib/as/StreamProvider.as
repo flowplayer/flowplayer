@@ -42,5 +42,7 @@ public interface StreamProvider {
     function setProviderParam(key:String, value:Object):void;
 
     function get video() : Video;
+
+    function setQuality(q  : Number) : void;
   }
 }
