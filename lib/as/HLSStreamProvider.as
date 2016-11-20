@@ -167,10 +167,20 @@ package {
             clip.quality = -1;
             for (var i : Number = 0; i < event.levels.length; i++) {
               var level : Object = event.levels[i];
-              clip.qualities.push({
-                value: i,
-                label: Math.min(level.width, level.height) + "p"
-              });
+              var q : String = Math.min(level.width, level.height) + 'p';
+              var quality : Object = null;
+              for (var j : Number = 0; j < clip.qualities.length; j++) {
+                if (clip.qualities[j].label === q) quality = clip.qualities[j];
+              }
+              player.debug("after");
+              if (!quality) {
+                clip.qualities.push({
+                  value: i,
+                  label: q
+                });
+              } else {
+                quality.value = i;
+              }
             }
             _checkVideoDimension();
             player.debug("manifest received " + clip);
