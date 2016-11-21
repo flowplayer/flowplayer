@@ -18,6 +18,9 @@
 
    <!-- include flowplayer -->
    <script src="../dist/flowplayer.js?i"></script>
+   <script>
+   //flowplayer.conf.hlsQualities = [{ level: 0, label: 'Low quality' }, { level: 7, label: 'High quality' }];
+   </script>
 
 </head>
 
@@ -32,7 +35,7 @@
       -data-splash="//drive.cdn.flowplayer.org/202777/84049-snap.jpg"
       data-ratio=".4167">
 
-      <video -autoplay -preload="none" -data-title="Foo bar">
+     <video -autoplay -preload="none" -data-title="Foo bar">
         <source type="application/x-mpegurl" src="//cdn.flowplayer.org/202777/84049-bauhaus.m3u8">
         <source type="video/mp4" src="//cdn.flowplayer.org/202777/84049-bauhaus.mp4">
       </video>

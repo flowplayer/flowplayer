@@ -170,22 +170,24 @@ package {
             clip.height = event.levels[hls.startLevel].height;
             clip.qualities = [{ value: -1, label: "Auto" }];
             clip.quality = -1;
+            var confQualities : Array = [];
+            player.debug('config', config);
+            if (config.hlsQualities) {
+              if (config.hlsQualities is String) config.hlsQualities = JSON.parse(config.hlsQualities);
+
+              for (var ii: Number = 0; ii < config.hlsQualities.length; ii++) {
+                confQualities.push(config.hlsQualities[ii].level);
+              }
+            }
             for (var i : Number = 0; i < event.levels.length; i++) {
+              if (confQualities.length > 0 && confQualities.indexOf(i) === -1) continue;
               var level : Object = event.levels[i];
               var q : String = Math.min(level.width, level.height) + 'p';
-              var quality : Object = null;
-              for (var j : Number = 0; j < clip.qualities.length; j++) {
-                if (clip.qualities[j].label === q) quality = clip.qualities[j];
-              }
-              player.debug("after");
-              if (!quality) {
-                clip.qualities.push({
-                  value: i,
-                  label: q
-                });
-              } else {
-                quality.value = i;
-              }
+              if (level.bitrate) q = q + " (" + Math.round(level.bitrate / 1000) + "k)";
+              clip.qualities.push({
+                value: i,
+                label: q
+              });
             }
             _checkVideoDimension();
             player.debug("manifest received " + clip);
