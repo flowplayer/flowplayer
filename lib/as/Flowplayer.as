@@ -43,6 +43,7 @@ package {
         internal static const FINISH : String = "finish";
         internal static const UNLOAD : String = "unload";
         internal static const ERROR : String = "error";
+        internal static const METADATA : String = "metadata";
         internal static const SET : String = "set";
         internal static const GET : String = "get";
         internal static const QUALITY : String = "quality";
