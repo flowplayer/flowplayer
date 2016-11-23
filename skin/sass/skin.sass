@@ -242,11 +242,16 @@
       position: absolute
       height: 100%
       border-radius: 0.24em
+      transition: width 0.3s
+    &.no-animation
+      > *
+        transition: none
 
 
   // timeline
   .fp-timeline
     transition: height .2s
+
 
   // cuepoints
   .fp-cue
