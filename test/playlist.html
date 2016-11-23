@@ -12,7 +12,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
    <!-- The "minimalist" skin, "minimalist.css", "functional.css" and "playful.css" are available -->
-   <link rel="stylesheet" href="../dist/skin/minimalist.css">
+   <link rel="stylesheet" href="../dist/skin/skin.css">
 
    <!-- Minimal styling for this standalone page (can be removed) -->
    <style>
@@ -28,14 +28,11 @@
    }
       </style>
 
-   <!-- CSS for this demo -->
-   <link rel="stylesheet" href="//flowplayer.org/media/css/demos/playlist/basic.css">
-   
    <!-- Flowplayer depends on jquery -->
    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 
    <!-- Flowplayer-->
-   <script src="../dist/flowplayer.min.js"></script>
+   <script src="../dist/flowplayer.js"></script>
 
    <script>
 
@@ -43,27 +40,8 @@ flowplayer.conf = {
   swf: "../dist/flowplayer.swf",
   // blacktrash.org, flowplayer.dev, localhost
   key: "$234140469777507, $238892071193566, $158769847315888",
-  debug: true,
   rtmpt: false
 };
-   
-// listen to playlist events
-function log() {
-   $("#event-info").css("opacity", 1)
-      .append("<p>" + [].slice.call(arguments).join(", ") + "</p>");
-}
-
-flowplayer(function(api, root) {
-
-   api.bind("load", function(e, api, video) {
-      log("clip " + video.index, "is_last: " + video.is_last);
-
-   }).bind("cuepoint", function(e, api, cuepoint) {
-      log("clip " + api.video.index, "cuepoint " + cuepoint.time);
-   });
-
-});
-
 </script>
 
 </head>
@@ -72,7 +50,7 @@ flowplayer(function(api, root) {
 <div id="content">
 
 <div id="basic-playlist"
-   class="flowplayer is-splash is-closeable"
+   class="flowplayer"
    data-ratio="0.5625">
 
    <video>
@@ -84,10 +62,8 @@ flowplayer(function(api, root) {
    <a class="fp-next"></a>
 
    <div class="fp-playlist">
-      <a class="item1" href="http://edge.flowplayer.org/night3.mp4"
-         data-cuepoints="[0.5, 1]"></a>
-      <a class="item2" href="http://edge.flowplayer.org/night1.mp4"
-         data-cuepoints="[0.9, 1.5]"></a>
+      <a class="item1" href="http://edge.flowplayer.org/night3.mp4"></a>
+      <a class="item2" href="http://edge.flowplayer.org/night1.mp4"></a>
       <a class="item3" href="http://edge.flowplayer.org/night5.mp4"></a>
       <a class="item4" href="http://edge.flowplayer.org/night6.mp4"></a>
    </div>
