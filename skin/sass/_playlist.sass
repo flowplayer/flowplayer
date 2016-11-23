@@ -1,0 +1,35 @@
+.flowplayer
+  .fp-prev, .fp-next
+    position: absolute
+    top: 45%
+    opacity: 0.3
+    transition: opacity 0.2s
+    &:hover
+      opacity: 1
+    &:before
+      font-family: flowplayer
+      font-size: 2.8em
+      content: "\e007"
+  .fp-prev
+    left: 0.4em
+    transform: scale(-1, 1)
+  .fp-next
+    right: 0.4em
+  .fp-playlist
+    position: absolute
+    right: 0.4em
+    bottom: 3em
+    width: 100%
+    text-align: center
+    a
+      background-color: #fff
+      height: 0.8em
+      border-radius: 50%
+      width: 0.8em
+      opacity: 0.7
+      display: inline-block
+      transition: transform 0.2s
+      &:hover
+        transform: scale(1.2, 1.2)
+      &.is-active
+        opacity: 1
