@@ -243,7 +243,11 @@
       position: absolute
       height: 100%
       border-radius: 0.24em
-      transition: width 0.3s
+      &.fp-progress.animated
+        transition-timing-function: linear
+        transition-property: width, height
+      &.fp-buffer
+        transition: width .25s linear
     &.no-animation
       > *
         transition: none
