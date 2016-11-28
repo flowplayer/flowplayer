@@ -41,6 +41,7 @@ package {
         private var config : Object;
         private var clip : Object;
         private var pos : Number;
+        private var seekOffset : Number;
         private var offsetPos : Number;
         private var backBuffer : Number;
         private var suppressReady : Boolean;
@@ -149,7 +150,11 @@ package {
             if (isNaN(pos) || pos < 0) {
                 pos = 0;
             }
-            return {time:pos, buffer:pos + hls.stream.bufferLength};
+            return {
+                time:pos,
+                buffer:pos + hls.stream.bufferLength,
+                seekOffset: seekOffset
+            };
         }
 
         public function setProviderParam(key:String, value:Object) : void {
@@ -223,6 +228,7 @@ package {
             this.pos = event.mediatime.live_sliding_main + event.mediatime.position;
             this.offsetPos = event.mediatime.position;
             this.backBuffer = event.mediatime.backbuffer;
+            this.seekOffset = event.mediatime.live_sliding_main;
             _checkVideoDimension();
         };
 
