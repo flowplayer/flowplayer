@@ -175,27 +175,38 @@ package {
             clip.src = clip.url = config.url;
             clip.width = event.levels[hls.startLevel].width;
             clip.height = event.levels[hls.startLevel].height;
-            clip.qualities = [{ value: -1, label: "Auto" }];
-            clip.quality = -1;
             var confQualities : Array = [];
+            var confQualityLabels : Object = {};
             player.debug('config', config);
             if (config.hlsQualities) {
               if (config.hlsQualities is String) config.hlsQualities = JSON.parse(config.hlsQualities);
 
               for (var ii: Number = 0; ii < config.hlsQualities.length; ii++) {
                 confQualities.push(config.hlsQualities[ii].level);
+                confQualityLabels[config.hlsQualities[ii].level] = config.hlsQualities[ii].label;
               }
             }
+            if (!confQualities.length || config.hlsQualities[0].level === -1) {
+              clip.qualities = [{ value: -1, label: confQualityLabels[-1] || "Auto" }];
+            } else {
+              clip.qualities = [];
+            }
             for (var i : Number = 0; i < event.levels.length; i++) {
+              var label : String;
               if (confQualities.length > 0 && confQualities.indexOf(i) === -1) continue;
+              else label = confQualityLabels[i];
+
               var level : Object = event.levels[i];
               var q : String = Math.min(level.width, level.height) + 'p';
               if (level.bitrate) q = q + " (" + Math.round(level.bitrate / 1000) + "k)";
               clip.qualities.push({
                 value: i,
-                label: q
+                label: label || q
               });
             }
+            var initialLevel : Number = clip.qualities.length ? clip.qualities[0].value : -1;
+            clip.quality = initialLevel;
+            hls.currentLevel = initialLevel;
             _checkVideoDimension();
             player.debug("manifest received " + clip);
             if (suppressReady) {
