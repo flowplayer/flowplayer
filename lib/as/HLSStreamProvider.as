@@ -197,7 +197,10 @@ package {
               else label = confQualityLabels[i];
 
               var level : Object = event.levels[i];
-              var q : String = Math.min(level.width, level.height) + 'p';
+              var q : String = "Level " + i;
+              if (level.width || level.height) {
+                q = Math.min(level.width, level.height) + 'p';
+              }
               if (level.bitrate) q = q + " (" + Math.round(level.bitrate / 1000) + "k)";
               clip.qualities.push({
                 value: i,
