@@ -52,7 +52,7 @@ describe('lib/ext/events.js', function() {
         assert(dong === 'asdf');
         cb();
       });
-      dispatchEvent('CustomEvent', 'foo', {args: [5, 'asdf']});
+      obj.trigger('foo', [5 ,'asdf']);
     });
     it('should attach multiple handlers', function(cb) {
       var counter = 0;
@@ -69,14 +69,6 @@ describe('lib/ext/events.js', function() {
     it('should trigger events on the elem', function(cb) {
       elem.addEventListener('click', function() { cb(); });
       obj.trigger('click');
-    });
-    it('should pass args to the event', function(cb) {
-      elem.addEventListener('click', function(ev) {
-        assert(ev.detail.args[0] === 'foo');
-        assert(ev.detail.args[1] === 'bar');
-        cb();
-      });
-      obj.trigger('click', ['foo', 'bar']);
     });
     it('should pass args so that they are readable by on', function(cb) {
       obj.on('foo', function(ev, bar, baz) {
