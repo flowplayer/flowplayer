@@ -29,6 +29,7 @@ package {
     import org.mangui.hls.constant.HLSSeekMode;
     import org.mangui.hls.HLSSettings;
     import org.mangui.hls.HLS;
+    import org.mangui.hls.model.Level;
     import org.mangui.hls.utils.Params2Settings;
 
     import flash.media.Video;
@@ -182,12 +183,42 @@ package {
             player.debug('config', config);
             if (config.hlsQualities) {
 
-              for (var ii: Number = 0; ii < config.hlsQualities.length; ii++) {
-                confQualities.push(config.hlsQualities[ii].level);
-                confQualityLabels[config.hlsQualities[ii].level] = config.hlsQualities[ii].label;
+              if (config.hlsQualities === "drive") {
+                var levels : Vector.<Level> = event.levels;
+                player.debug('Drive qualities requested');
+                switch (levels.length) {
+                  case 4:
+                    confQualities = [1, 2, 3];
+                    break;
+                  case 5:
+                    confQualities = [1, 2, 3, 4];
+                    break;
+                  case 6:
+                    confQualities = [1, 3, 4, 5];
+                    break;
+                  case 7:
+                    confQualities = [1, 3, 5, 6];
+                    break;
+                  case 8:
+                    confQualities = [1, 3, 6, 7];
+                    break;
+                  default:
+                    if (levels.length < 3 || (levels[0].height && levels[2].height && levels[0].height === levels[2].height)) {
+                      confQualities = [];
+                    } else {
+                      confQualities = [1, 2];
+                    }
+                    break;
+                }
+                player.debug('Resolved drive qualities to ', confQualities);
+              } else {
+                for (var ii: Number = 0; ii < config.hlsQualities.length; ii++) {
+                  confQualities.push(config.hlsQualities[ii].level);
+                  confQualityLabels[config.hlsQualities[ii].level] = config.hlsQualities[ii].label;
+                }
               }
             }
-            if (!confQualities.length || config.hlsQualities[0].level === -1) {
+            if (!confQualities.length || config.hlsQualities === "drive" || config.hlsQualities[0].level === -1) {
               clip.qualities = [{ value: -1, label: confQualityLabels[-1] || "Auto" }];
             } else {
               clip.qualities = [];

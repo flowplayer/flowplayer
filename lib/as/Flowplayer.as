@@ -289,16 +289,15 @@ package {
         private function configure() : void {
             conf = this.loaderInfo.parameters;
 
-            function decode(prop : String, allowUndefined : Boolean = false) : void {
+            function decode(prop : String, parseAsJSON : Boolean = false) : void {
                 if (conf[prop] == "false") {
                     conf[prop] = false;
                     return;
                 }
-                if (conf[prop] is String && (conf[prop].charAt(0) == "{" || conf[prop].charAt(0) == "[")) {
-                  conf[prop] = JSON.parse(conf[prop]);
+                if (parseAsJSON) {
+                  if (conf[prop] is String) conf[prop] = JSON.parse(conf[prop]);
                   return;
                 }
-                if (allowUndefined && !conf[prop]) return;
                 conf[prop] = !!conf[prop];
             }
             if (conf.rtmpt == undefined) {
