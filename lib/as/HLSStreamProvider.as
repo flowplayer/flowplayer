@@ -181,7 +181,6 @@ package {
             var confQualityLabels : Object = {};
             player.debug('config', config);
             if (config.hlsQualities) {
-              if (config.hlsQualities is String) config.hlsQualities = JSON.parse(config.hlsQualities);
 
               for (var ii: Number = 0; ii < config.hlsQualities.length; ii++) {
                 confQualities.push(config.hlsQualities[ii].level);
@@ -214,8 +213,13 @@ package {
             if (initialLevel == -2) {
               initialLevel = clip.qualities.length ? clip.qualities[0].value : -1;
             }
-            clip.quality = initialLevel;
-            hls.currentLevel = initialLevel;
+            player.debug('config.hlsQualities', config.hlsQualities);
+            if (config.hlsQualities === false) {
+              clip.qualities = []
+            } else {
+              clip.quality = initialLevel;
+              hls.currentLevel = initialLevel;
+            }
             _checkVideoDimension();
             player.debug("manifest received " + clip);
             if (suppressReady) {
