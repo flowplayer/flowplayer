@@ -197,7 +197,7 @@ package {
               else label = confQualityLabels[i];
 
               var level : Object = event.levels[i];
-              var q : String = "Level " + i;
+              var q : String = "Level " + (i + 1);
               if (level.width || level.height) {
                 q = Math.min(level.width, level.height) + 'p';
               }
