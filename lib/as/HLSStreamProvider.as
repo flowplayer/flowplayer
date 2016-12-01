@@ -45,6 +45,7 @@ package {
         private var offsetPos : Number;
         private var backBuffer : Number;
         private var suppressReady : Boolean;
+        private var lastSelectedLevel : Number = -1;
 
         public function HLSStreamProvider(player : Flowplayer, video : Video) {
             this.player = player;
@@ -100,6 +101,7 @@ package {
         public function setQuality(q : Number) : void {
           player.debug('Next level will be', q);
           hls.nextLevel = q;
+          lastSelectedLevel = q;
         }
 
         public function resume() : void {
@@ -191,6 +193,7 @@ package {
             } else {
               clip.qualities = [];
             }
+            var initialLevel : Number = -2;
             for (var i : Number = 0; i < event.levels.length; i++) {
               var label : String;
               if (confQualities.length > 0 && confQualities.indexOf(i) === -1) continue;
@@ -206,8 +209,11 @@ package {
                 value: i,
                 label: label || q
               });
+              if (i == lastSelectedLevel) initialLevel = lastSelectedLevel;
             }
-            var initialLevel : Number = clip.qualities.length ? clip.qualities[0].value : -1;
+            if (initialLevel == -2) {
+              initialLevel = clip.qualities.length ? clip.qualities[0].value : -1;
+            }
             clip.quality = initialLevel;
             hls.currentLevel = initialLevel;
             _checkVideoDimension();
