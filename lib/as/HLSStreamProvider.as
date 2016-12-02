@@ -237,10 +237,11 @@ package {
                 if (level.width || level.height) {
                   q = Math.min(level.width, level.height) + 'p';
                 }
-                if (level.bitrate) q = q + " (" + Math.round(level.bitrate / 1000) + "k)";
+                if (level.bitrate && config.hlsQualities !== "drive") q = q + " (" + Math.round(level.bitrate / 1000) + "k)";
+                label = label || q;
                 clip.qualities.push({
                   value: i,
-                  label: label || q
+                  label: label
                 });
                 if (i == lastSelectedLevel) initialLevel = lastSelectedLevel;
               }
