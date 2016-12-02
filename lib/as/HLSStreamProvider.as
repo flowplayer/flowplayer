@@ -212,7 +212,7 @@ package {
                     break;
                 }
                 player.debug('Resolved drive qualities to ', confQualities);
-              } else {
+              } else if (config.hlsQualities is Array) {
                 for (var ii: Number = 0; ii < config.hlsQualities.length; ii++) {
                   if (config.hlsQualities[ii] is Number) confQualities.push(config.hlsQualities[ii]);
                   else {
