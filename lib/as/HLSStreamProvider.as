@@ -178,6 +178,7 @@ package {
             clip.src = clip.url = config.url;
             clip.width = event.levels[hls.startLevel].width;
             clip.height = event.levels[hls.startLevel].height;
+            clip.qualities = [];
             var confQualities : Array = [];
             var confQualityLabels : Object = {};
             player.debug('config', config);
@@ -213,41 +214,39 @@ package {
                 player.debug('Resolved drive qualities to ', confQualities);
               } else {
                 for (var ii: Number = 0; ii < config.hlsQualities.length; ii++) {
-                  confQualities.push(config.hlsQualities[ii].level);
-                  confQualityLabels[config.hlsQualities[ii].level] = config.hlsQualities[ii].label;
+                  if (config.hlsQualities[ii] is Number) confQualities.push(config.hlsQualities[ii]);
+                  else {
+                    confQualities.push(config.hlsQualities[ii].level);
+                    confQualityLabels[config.hlsQualities[ii].level] = config.hlsQualities[ii].label;
+                  }
                 }
               }
-            }
-            if (!confQualities.length || config.hlsQualities === "drive" || config.hlsQualities[0].level === -1) {
-              clip.qualities = [{ value: -1, label: confQualityLabels[-1] || "Auto" }];
-            } else {
-              clip.qualities = [];
-            }
-            var initialLevel : Number = -2;
-            for (var i : Number = 0; i < event.levels.length; i++) {
-              var label : String;
-              if (confQualities.length > 0 && confQualities.indexOf(i) === -1) continue;
-              else label = confQualityLabels[i];
-
-              var level : Object = event.levels[i];
-              var q : String = "Level " + (i + 1);
-              if (level.width || level.height) {
-                q = Math.min(level.width, level.height) + 'p';
+              if (!confQualities.length || config.hlsQualities === "drive" || confQualities[0] === -1) {
+                clip.qualities = [{ value: -1, label: confQualityLabels[-1] || "Auto" }];
+              } else {
+                clip.qualities = [];
               }
-              if (level.bitrate) q = q + " (" + Math.round(level.bitrate / 1000) + "k)";
-              clip.qualities.push({
-                value: i,
-                label: label || q
-              });
-              if (i == lastSelectedLevel) initialLevel = lastSelectedLevel;
-            }
-            if (initialLevel == -2) {
-              initialLevel = clip.qualities.length ? clip.qualities[0].value : -1;
-            }
-            player.debug('config.hlsQualities', config.hlsQualities);
-            if (config.hlsQualities === false) {
-              clip.qualities = []
-            } else {
+              var initialLevel : Number = -2;
+              for (var i : Number = 0; i < event.levels.length; i++) {
+                var label : String;
+                if (confQualities.length > 0 && confQualities.indexOf(i) === -1) continue;
+                else label = confQualityLabels[i];
+
+                var level : Object = event.levels[i];
+                var q : String = "Level " + (i + 1);
+                if (level.width || level.height) {
+                  q = Math.min(level.width, level.height) + 'p';
+                }
+                if (level.bitrate) q = q + " (" + Math.round(level.bitrate / 1000) + "k)";
+                clip.qualities.push({
+                  value: i,
+                  label: label || q
+                });
+                if (i == lastSelectedLevel) initialLevel = lastSelectedLevel;
+              }
+              if (initialLevel == -2) {
+                initialLevel = clip.qualities.length ? clip.qualities[0].value : -1;
+              }
               clip.quality = initialLevel;
               hls.currentLevel = initialLevel;
             }
