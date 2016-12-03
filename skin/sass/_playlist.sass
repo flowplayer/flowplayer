@@ -1,4 +1,4 @@
-.flowplayer
+.flowplayer:not(.custom-playlist)
   .fp-prev, .fp-next
     position: absolute
     top: 45%
@@ -9,12 +9,14 @@
     &:before
       font-family: flowplayer
       font-size: 2.8em
-      content: "\e007"
   .fp-prev
     left: 0.4em
-    transform: scale(-1, 1)
+    &:before
+      content: "\e011"
   .fp-next
     right: 0.4em
+    &:before
+      content: "\e012"
   .fp-playlist
     position: absolute
     right: 0.4em
@@ -33,3 +35,18 @@
         transform: scale(1.2, 1.2)
       &.is-active
         opacity: 1
+  &.fp-edgy
+    .fp-prev:before
+      content: "\e111"
+    .fp-next:before
+      content: "\e112"
+  &.fp-outlined
+    .fp-prev:before
+      content: "\e211"
+    .fp-next:before
+      content: "\e212"
+  &.fp-edgy.fp-outlined
+    .fp-prev:before
+      content: "\e311"
+    .fp-next:before
+      content: "\e312"
