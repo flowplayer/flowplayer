@@ -5,7 +5,7 @@
   &.is-poster
     .fp-engine
       opacity: 0
-  &.is-splash
+  &.is-splash, &.is-poster
     .fp-ui > *
       display: none
     .fp-ui > .fp-play
@@ -15,6 +15,10 @@
         display: none
       .fp-engine
         opacity: 0
+  &.is-poster
+    .fp-engine
+      left: -9999em
+      top: -9999em
   &.has-title
     .fp-header
       top: 0
