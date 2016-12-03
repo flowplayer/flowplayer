@@ -8,11 +8,13 @@
   &.is-splash
     .fp-ui > *
       display: none
-    .fp-ui > svg.fp-play
+    .fp-ui > .fp-play
       display: block
     &.is-loading
-      .fp-ui > svg.fp-play
+      .fp-ui > .fp-play
         display: none
+      .fp-engine
+        opacity: 0
   &.has-title
     .fp-header
       top: 0
