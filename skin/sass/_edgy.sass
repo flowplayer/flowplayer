@@ -1,0 +1,15 @@
+.flowplayer.fp-edgy
+  .fp-play, .fp-pause
+    svg.fp-play-rounded-fill, svg.fp-pause-rounded-fill, svg.fp-play-rounded-outline, svg.fp-pause-rounded-outline
+      display: none !important
+    svg.fp-play-sharp-fill, svg.fp-pause-sharp-fill
+      display: block
+  &.fp-outlined
+    .fp-play, .fp-pause
+      svg.fp-play-sharp-fill, svg.fp-pause-sharp-fill
+        display: none
+      svg.fp-play-sharp-outline, svg.fp-pause-sharp-outline
+        display: block
+
+  &, .fp-menu, .fp-captions span
+    border-radius: 0

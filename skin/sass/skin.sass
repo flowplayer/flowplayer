@@ -4,6 +4,7 @@
 @import 'animation'
 @import 'chromecast'
 @import 'playlist'
+@import 'edgy'
 
 // used often
 %absolute
@@ -176,21 +177,26 @@
 
 
   // the big play button on center
-  svg.fp-play
-    position: absolute
-    top: 40%
-    top: calc(50% - 3em)
-    left: 40%
-    left: calc(50% - 3em)
-    width: 6em
-    height: 6em
-    opacity: 0
-    transform: scale(.8)
-    transition: all .2s
+  .fp-play, .fp-pause
+    svg
+      position: absolute
+      top: 40%
+      top: calc(50% - 3em)
+      left: 40%
+      left: calc(50% - 3em)
+      width: 6em
+      height: 6em
+      opacity: 0
+      transform: scale(.8)
+      transition: all .2s
+      display: none
+      &.fp-play-rounded-fill, &.fp-pause-rounded-fill
+        display: block
 
-    @at-root .is-paused#{&}, &.fp-visible
-      transform: scale(1.5)
-      opacity: 1
+    &.fp-visible
+      svg
+        transform: scale(1.5)
+        opacity: 1
 
 
   .fp-remaining
@@ -482,11 +488,12 @@
     a, strong
       text-align: left
 
-
-
-  &.fp-edgy
-    &, .fp-menu, .fp-captions span
-      border-radius: 0
+  &.fp-outlined
+    .fp-play, .fp-pause
+      svg.fp-play-rounded-fill, svg.fp-pause-rounded-fill
+        display: none
+      svg.fp-play-rounded-outline, svg.fp-pause-rounded-outline
+        display: block
 
   .fp-color
     background-color: #ec6c4c
