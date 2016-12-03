@@ -20,7 +20,17 @@
   &.is-fullscreen
     .fp-player
       background-color: #333
-
+    .fp-fullscreen:before
+      content: "\e016"
+  &.is-fullscreen.fp-outlined
+    .fp-fullscreen:before
+      content: "\e216"
+  &.is-fullscreen.fp-edgy
+    .fp-fullscreen:before
+      content: "\e116"
+  &.is-fullscreen.fp-edgy.fp-outlined
+    .fp-fullscreen:before
+      content: "\e316"
   &.is-loading, &.is-seeking
     .fp-waiting
       display: block
@@ -30,11 +40,36 @@
     .fp-playbtn
       &:before
         content: "\e008"
+  &.is-playing.fp-outlined
+    .fp-playbtn:before
+      content: "\e208"
+  &.is-playing.fp-edgy
+    .fp-playbtn:before
+      content: "\e108"
+  &.is-playing.fp-edgy.fp-outlined
+    .fp-playbtn:before
+      content: "\e308"
+  &.is-muted
+    .fp-volumebtn:before
+      content: "\e00d"
+  &.is-muted.fp-outlined
+    .fp-volumebtn:before
+      content: "\e20d"
+  &.is-muted.fp-edgy
+    .fp-volumebtn:before
+      content: "\e10d"
+  &.is-muted.fp-edgy.fp-outlined
+    .fp-volumebtn:before
+      content: "\e30d"
   &.is-inverted
     .fp-duration
       display: none
     .fp-remaining
       display: block
+  &.is-closeable
+    .fp-header
+      .fp-unload
+        display: block
   &.is-error
     background-color: #aaa
     .fp-ui
