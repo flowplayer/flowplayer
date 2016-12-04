@@ -178,12 +178,11 @@ package {
             clip.src = clip.url = config.url;
             clip.width = event.levels[hls.startLevel].width;
             clip.height = event.levels[hls.startLevel].height;
-            clip.qualities = [];
             var confQualities : Array = [];
             var confQualityLabels : Object = {};
             player.debug('config', config);
             if (config.hlsQualities) {
-
+              clip.qualities = [];
               if (config.hlsQualities === "drive") {
                 var levels : Vector.<Level> = event.levels;
                 player.debug('Drive qualities requested');
