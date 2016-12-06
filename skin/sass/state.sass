@@ -8,11 +8,13 @@
   &.is-loading
     .fp-engine
       top: -9999em
+    .fp-header, .fp-controls
+      opacity: 0
   &.is-splash, &.is-poster
     .fp-ui > *
-      display: none
+      display: none !important
     .fp-ui > .fp-play
-      display: block
+      display: block !important
     &.is-loading
       .fp-ui > .fp-play
         display: none
