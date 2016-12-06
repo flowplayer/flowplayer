@@ -45,6 +45,7 @@ Fixes
  * Fix #1005 - page direction vs flowplayer direction: avoid horizontal scrollbars
  * Fix #1025 - unload in paused state: browser continues to buffer
  * Fix #1017 - disabled: volume slider not greyed out
+ * Fix #1000 - seek rounding error
 
 
 
