@@ -1,18 +1,52 @@
 
-Version 6.1
+Version 7.0
 ===========
 
 Enhancements
 ------------
 
-  * Wrap fullscreen, ebmed and unload buttons in a container for fluid layout (#1049)
+  * Complete UI rewrite
+  * Built-in UI for Quality selection (#1080)
+  * Airplay controls (#1059)
+  * Chromecast support (#1061)
+  * iPhone inline playback support (#1048)
+  * HLS DVR support (#950)
+  * HLS ID3 metadata support (#830)
   * Make iframe embed code responsive (#804)
+  * `no-buffer` modifier class (#805)
+  * `aspectRatio` option (#1029)
+
 
 Fixes
 -----
 
  * Fix #1036 - time format glitches
  * Fix #1056 - Flowplayer zoom issue
+ * Fix #1050 - looping hls does not work on iOS
+ * Fix #1024 - subtitle sticky when seeking out of initial first frame state
+ * Fix #1027 - Flash: narrow down scope of issue 922 hack
+ * Fix #1007 - off/unbind: splice inside forEach will prevent entire cycle
+ * Fix #1065 - iPad: webkit-media-controls may persist
+ * Fix #1077 - resume after seek on playlist finish starts first clip
+ * Fix #1073 - mute() may have no effect from within ready event
+ * Fix #985 - rtl: branding overlaps duration
+ * Fix #987 - rtl is-touch: no duration; branding on right instead of left side and overlays time
+ * Fix #1063 - [Chrome] playlist: error on resume when last clip is in finished state
+ * Fix #1047 - load() loses buffer
+ * Fix #992 - clip rtmp option still leads to src prefix requirement.
+ * Fix #1039 - first frame JS setups do not catch all errors
+ * Fix #1041 - Flash (not flash hls): no events after finish
+ * Fix #857 - splash setup does not unload while embed code is shown
+ * Fix #989 - On mobile resume still works when flowplayer is disabled.
+ * Fix #881 - Implement fullscreen events with native_fullscreen
+ * Fix #858 - fullscreen disabled leads to empty widget space
+ * Fix #1044 - native_fullscreen assumes non-flash engine
+ * Fix #997 - iframe embed code lacks px units in style directive
+ * Fix #1005 - page direction vs flowplayer direction: avoid horizontal scrollbars
+ * Fix #1025 - unload in paused state: browser continues to buffer
+ * Fix #1017 - disabled: volume slider not greyed out
+
+
 
 
 Version 6.0.5
