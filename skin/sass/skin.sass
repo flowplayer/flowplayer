@@ -92,22 +92,25 @@
   // container for UI
   .fp-ui
     @extend %absolute
-    transition: opacity .1s
     height: 100%
-    opacity: 0
     top: 0
-
+    background-image: none
+    transition: background-image .1s
     // needs gradient so the white icons will show over light videos
-    background-image: linear-gradient(to top, rgba(#000, .25), transparent 15%)
     text-align: center
     cursor: pointer
     color: #fff
     a, strong
       color: inherit
+    > *
+      transition: opacity .1s
+      opacity: 0
 
-  &.fp-ui-shown, &.is-paused, &.is-mouseover, &.is-loading
+  &.fp-ui-shown, &.is-paused, &.is-mouseover
     .fp-ui
-      opacity: 1
+      background-image: linear-gradient(to top, rgba(#000, .25), transparent 15%)
+      > *
+        opacity: 1
 
   // topmost elements and actions
   .fp-header

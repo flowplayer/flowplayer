@@ -8,13 +8,14 @@
   &.is-loading
     .fp-engine
       top: -9999em
-    .fp-header, .fp-controls
-      opacity: 0
+    .fp-ui
+      .fp-header, .fp-controls
+        opacity: 0
   &.is-splash, &.is-poster
     .fp-ui > *
-      display: none !important
+      display: none
     .fp-ui > .fp-play
-      display: block !important
+      display: block
     &.is-loading
       .fp-ui > .fp-play
         display: none
@@ -45,9 +46,10 @@
       content: "\e316"
   &.is-loading, &.is-seeking
     .fp-waiting
-      display: block !important
+      display: block
+      opacity: 1
     .fp-play
-      display: none !important
+      display: none
   &.is-playing
     .fp-playbtn
       &:before
