@@ -39,7 +39,7 @@ raw:
 	@ cat node_modules/ie8/build/ie8.js >> $(JS)
 	@ echo >> $(JS)
 	@ uglifyjs lib/ext/support/embedcode.js --compress >> lib/ext/support/embedcode.min.js
-	@ browserify -p browserify-derequire -s flowplayer lib/index.js | $(SET_VERSION) | sed "s|@EMBED|$(EMBED)|" | sed "s/@CDN/$(CDN)/" | sed "s/@CDN_PATH/$(CDN_PATH)/" >> $(JS)
+	@ browserify -t brfs -p browserify-derequire -s flowplayer lib/index.js | $(SET_VERSION) | sed "s|@EMBED|$(EMBED)|" | sed "s/@CDN/$(CDN)/" | sed "s/@CDN_PATH/$(CDN_PATH)/" >> $(JS)
 	@ rm lib/ext/support/embedcode.min.js
 
 
