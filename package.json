@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "bean": "^1.0.15",
+    "brfs": "^1.4.3",
     "browserify": "^13.1.1",
     "browserify-derequire": "^0.9.4",
     "class-list": "~0.1.1",
@@ -43,6 +44,5 @@
     "scriptjs": "^2.5.7",
     "uglify-js": "~2.4.3"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
