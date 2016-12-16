@@ -299,16 +299,6 @@
   .fp-timeline:hover .fp-timestamp
     display: inline
 
-  // volume bar
-  .fp-volumebar
-    background-color: rgba(#fff, .75)
-    display: inline-block
-    transition: width .2s
-    margin-left: .3em
-    width: 0
-
-
-
   // volume container (mute & bar)
   .fp-volume
     display: -ms-flexbox
@@ -317,10 +307,21 @@
 
     -ms-flex-align: center
     align-items: center
-
-    &:hover .fp-volumebar
-      width: 7em
-
+  .fp-bar-slider
+    @extend .fp-bar
+    background-color: transparent
+    em
+      border-radius: 2px
+      display: inline-block
+      width: 4px
+      height: 100%
+      position: relative
+      vertical-align: top
+      margin-left: 2px
+      &.fp-grey
+        background-color: rgba(#fff, 0.75)
+      &:first-child
+        margin-left: 0
 
   // IE8-9 mostly (.no-flex must be before skin options)
   &.no-flex
