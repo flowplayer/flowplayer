@@ -42,7 +42,6 @@
     "is-function": "~1.0.1",
     "mochify": "~1.1.2",
     "node-sass": "^3.10.1",
-    "oldie": "^1.3.0",
     "postcss-cli": "^2.6.0",
     "postcss-unopacity": "^1.0.1",
     "scriptjs": "^2.5.7",
