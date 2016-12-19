@@ -311,6 +311,7 @@
     @extend .fp-bar
     background-color: transparent
     user-select: none
+    transition: height .2s
     em
       border-radius: 2px
       display: inline-block
@@ -377,6 +378,11 @@
 
     .fp-cue
       width: 4px
+
+    .fp-bar-slider
+      height: .2em
+    .fp-controls:hover .fp-bar-slider
+      height: 0.9em
 
 
 
