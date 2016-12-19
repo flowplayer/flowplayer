@@ -90,6 +90,7 @@ package {
         }
 
         public function play(url : String) : void {
+            config.autoplay = true;
             hls.load(url);
             resume();
         }
