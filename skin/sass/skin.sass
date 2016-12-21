@@ -300,16 +300,6 @@
   .fp-timeline:hover .fp-timestamp
     display: inline
 
-  // volume bar
-  .fp-volumebar
-    background-color: rgba(#fff, .75)
-    display: inline-block
-    transition: width .2s
-    margin-left: .3em
-    width: 0
-
-
-
   // volume container (mute & bar)
   .fp-volume
     display: -ms-flexbox
@@ -318,10 +308,28 @@
 
     -ms-flex-align: center
     align-items: center
-
-    &:hover .fp-volumebar
-      width: 7em
-
+  .fp-bar-slider
+    @extend .fp-bar
+    background-color: transparent
+    user-select: none
+    transition: height .2s
+    em
+      border-radius: 2px
+      display: inline-block
+      width: 5px
+      height: 100%
+      position: relative
+      vertical-align: top
+      margin-left: 3px
+      transition: transform 0.4s
+      transform-origin: bottom
+      user-select: none
+      transform: scale(1.1)
+      &:hover
+        transform: scaleY(1.35)
+        transition: transform 0.2s
+      &.fp-grey
+        background-color: rgba(#fff, 0.75)
 
   // IE8-9 mostly (.no-flex must be before skin options)
   &.no-flex
@@ -356,6 +364,12 @@
 
     .fp-timestamp
       bottom: 3.2em
+    .fp-bar-slider
+      em
+        transform: scaleY(0.6)
+        transform-origin: center
+        &:hover
+          transform: scaleY(0.75)
 
   // slim timeline
   &.fp-slim
@@ -367,6 +381,11 @@
 
     .fp-cue
       width: 4px
+
+    .fp-bar-slider
+      height: .2em
+    .fp-controls:hover .fp-bar-slider
+      height: 0.9em
 
 
 
