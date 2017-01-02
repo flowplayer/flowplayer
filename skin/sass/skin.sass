@@ -62,35 +62,7 @@
     top: 0
 
   .fp-waiting
-    display: none
-    margin: 19% auto
-    text-align: center
-    @extend %absolute
-    top: 0
-
-    *
-      box-shadow: 0 0 5px #333
-
-    em
-      width: 1em
-      height: 1em
-      border-radius: 1em
-      background-color: rgba(#fff, 0.8)
-      display: inline-block
-      animation: pulse .6s infinite
-      margin: .3em
-      opacity: 0
-
-      &:nth-child(1)
-        animation-delay: .3s
-
-      &:nth-child(2)
-        animation-delay: .45s
-
-      &:nth-child(3)
-        animation-delay: .6s
-
-    // no animation support
+    // no svg support
     p
       color: #ccc
       font-weight: bold
@@ -116,7 +88,7 @@
       transition: opacity .1s
       opacity: 0
 
-  &.fp-ui-shown, &.is-paused, &.is-mouseover
+  &.fp-ui-shown, &.is-paused, &.is-mouseover, &.is-loading
     .fp-ui
       background-image: linear-gradient(to top, rgba(#000, .25), transparent 15%)
       > *
@@ -221,7 +193,7 @@
       transform: scale(1)
 
   // the big play button on center
-  .fp-play, .fp-pause
+  .fp-play, .fp-pause, .fp-waiting
     .fp-playbtn
       display: none
     svg
@@ -239,7 +211,7 @@
       transform: scale(.8)
       transition: all .2s
       display: none
-      &.fp-play-rounded-fill, &.fp-pause-rounded-fill
+      &.fp-play-rounded-fill, &.fp-pause-rounded-fill, &.fp-loading-rounded-fill
         display: block
 
     &.fp-visible
@@ -576,10 +548,10 @@
       text-align: left
 
   &.fp-outlined
-    .fp-play, .fp-pause
-      svg.fp-play-rounded-fill, svg.fp-pause-rounded-fill
+    .fp-play, .fp-pause, .fp-waiting
+      svg.fp-play-rounded-fill, svg.fp-pause-rounded-fill, svg.fp-loading-rounded-fill
         display: none
-      svg.fp-play-rounded-outline, svg.fp-pause-rounded-outline
+      svg.fp-play-rounded-outline, svg.fp-pause-rounded-outline, svg.fp-loading-rounded-outline
         display: block
 
     .fp-airplay:before
