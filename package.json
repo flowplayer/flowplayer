@@ -29,6 +29,7 @@
     "multistr": true
   },
   "devDependencies": {
+    "autoprefixer": "^6.5.4",
     "bean": "^1.0.15",
     "brfs": "^1.4.3",
     "browserify": "^13.1.1",
@@ -41,6 +42,8 @@
     "is-function": "~1.0.1",
     "mochify": "~1.1.2",
     "node-sass": "^3.10.1",
+    "postcss-cli": "^2.6.0",
+    "postcss-unopacity": "^1.0.1",
     "scriptjs": "^2.5.7",
     "uglify-js": "~2.4.3"
   },

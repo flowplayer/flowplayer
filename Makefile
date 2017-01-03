@@ -48,7 +48,7 @@ min: concat
 skin:
 	# skins
 	@ mkdir -p $(SKIN)
-	@ node-sass skin/sass/skin.sass > $(SKIN)/skin.css
+	@ node-sass skin/sass/skin.sass | postcss -c postcss.config.json > $(SKIN)/skin.css
 	@ cp -r skin/icons $(SKIN)
 
 flash:
