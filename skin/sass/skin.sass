@@ -5,6 +5,7 @@
 @import 'chromecast'
 @import 'playlist'
 @import 'edgy'
+@import 'no-svg'
 
 // used often
 %absolute
@@ -193,6 +194,8 @@
 
   // the big play button on center
   .fp-play, .fp-pause
+    .fp-playbtn
+      display: none
     svg
       position: absolute
       pointer-events: none
