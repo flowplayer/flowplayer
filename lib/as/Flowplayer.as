@@ -268,7 +268,7 @@ package {
         private function addLogo() : void {
             var url : String = (conf.rtmp) ? conf.rtmp : unescape(conf.url) ? unescape(conf.url) : '';
             var pos : Number;
-            var whitelist : Array = ['drive.flowplayer.org', 'drive.dev.flowplayer.org', 'my.flowplayer.org', 'rtmp.flowplayer.org'];
+            var whitelist : Array = ['cdn.flowplayer.org', 'cdn.dev.flowplayer.org', 'drive.flowplayer.org', 'drive.dev.flowplayer.org', 'my.flowplayer.org', 'rtmp.flowplayer.org'];
 
             for each (var wl : String in whitelist) {
                 pos = url.indexOf('://' + wl)

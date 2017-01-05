@@ -178,7 +178,7 @@
          opacity 1
 
    .fp-help
-      absolute 0 -9999em
+      absolute -9999em 0
       z-index 100
       background-color #3
       background-color rgba(#3, .9)
@@ -189,7 +189,7 @@
       text-align center
 
       .is-help&
-         left 0
+         top 0
          opacity 1
 
       .fp-help-section
@@ -290,9 +290,7 @@
 
 
    .fp-subtitle
-      position absolute
-      bottom 40px
-      left -99999em
+      absolute -9999em 0
       z-index 10
       text-align center
       width 100%
@@ -320,7 +318,8 @@
            text-decoration underline
 
       &.fp-active
-         left 0
+         top auto
+         bottom 40px
          opacity 1
 
 
