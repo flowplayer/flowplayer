@@ -1,0 +1,11 @@
+<svg class="fp-filters" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0">
+  <defs>
+    <filter id="f1" x="-20%" y="-20%" width="200%" height="200%">
+      <feOffset result="offOut" in="SourceAlpha" dx="0" dy="0" />
+      <feColorMatrix result="matrixOut" in="offOut" type="matrix"
+      values="0.3 0 0 0 0 0 0.3 0 0 0 0 0 0.3 0 0 0 0 0 0.4 0" />
+      <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="4" />
+      <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+    </filter>
+  </defs>
+</svg>
