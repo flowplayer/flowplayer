@@ -46,8 +46,8 @@ Fixes
  * Fix #1025 - unload in paused state: browser continues to buffer
  * Fix #1017 - disabled: volume slider not greyed out
  * Fix #1000 - seek rounding error
-
-
+ * Fix #986 - rtl: tooltip time is ltr
+ * Fix #996 - Flash object pausing workaround only works on splash setupsA
 
 
 Version 6.0.5
