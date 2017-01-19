@@ -198,6 +198,27 @@
       padding: .1em .3em
       margin: .1em
 
+  // Speed indicator
+  .fp-speed-flash
+    position: absolute
+    left: 0
+    right: 0
+    bottom: 0
+    top: 0
+    margin: auto
+    font-size: 4em
+    color: #fff
+    font-weight: bold
+    text-shadow: 0 0 10px rgba(#000, 0.3)
+    opacity: 0 !important
+    transform: scale(.8)
+    transition: all .2s
+    width: 4em
+    height: 2em
+    display: none
+    &.fp-hilite
+      opacity: 1 !important
+      transform: scale(1)
 
   // the big play button on center
   .fp-play, .fp-pause
