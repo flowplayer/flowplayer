@@ -43,6 +43,7 @@ package {
         private var clip : Object;
         private var pos : Number;
         private var seekOffset : Number;
+        private var duration : Number;
         private var offsetPos : Number;
         private var backBuffer : Number;
         private var suppressReady : Boolean;
@@ -157,7 +158,8 @@ package {
             return {
                 time:pos,
                 buffer:pos + hls.stream.bufferLength,
-                seekOffset: seekOffset
+                seekOffset: seekOffset,
+                duration: duration
             };
         }
 
@@ -273,6 +275,7 @@ package {
             this.offsetPos = event.mediatime.position;
             this.backBuffer = event.mediatime.backbuffer;
             this.seekOffset = event.mediatime.live_sliding_main;
+            this.duration = event.mediatime.duration;
             _checkVideoDimension();
         };
 

@@ -1,0 +1,47 @@
+
+<!doctype html>
+
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!-- player skin -->
+   <link rel="stylesheet" type="text/css" href="../dist/skin/skin.css?f">
+
+   <!-- site specific styling -->
+   <style>
+   body { font-family: avenir, sans-serif; max-width: 1000px; margin: 0 auto; padding: .6em;}
+   .flowplayer { width: 100%; }
+   </style>
+
+   <!-- flowplayer depends on jQuery 1.7.1+ (for now) -->
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+
+   <!-- include flowplayer -->
+   <script src="../dist/flowplayer.js?i"></script>
+
+</head>
+
+<body>
+
+   <!-- the player -->
+   <div class="flowplayer"
+      data-swf="../dist/flowplayer.swf"
+      data-swf-hls="../dist/flowplayerhls.swf"
+      data-dvr="true"
+      data-aspect-ratio="40:23">
+
+     <video>
+        <source type="application/x-mpegurl" src="http://stream.novascotiawebcams.com/live-origin/whitepointbeach/playlist.m3u8?DVR">
+        <source type="application/x-mpegurl" src="//wowza.jwplayer.com/live/jelly.stream/playlist.m3u8?DVR">
+      </video>
+
+   </div>
+
+   <script>
+   $(function() {
+   flowplayer().on('dvrwindow', function(ev, api, d) {
+     console.log('dvrwindow', d);
+   });
+   });
+   </script>
+</body>
+
