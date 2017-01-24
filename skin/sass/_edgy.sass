@@ -1,14 +1,14 @@
 .flowplayer.fp-edgy
-  .fp-play, .fp-pause
-    svg.fp-play-rounded-fill, svg.fp-pause-rounded-fill, svg.fp-play-rounded-outline, svg.fp-pause-rounded-outline
+  .fp-play, .fp-pause, .fp-waiting
+    svg.fp-play-rounded-fill, svg.fp-pause-rounded-fill, svg.fp-play-rounded-outline, svg.fp-pause-rounded-outline, svg.fp-loading-rounded-outline, svg.fp-loading-rounded-fill
       display: none !important
-    svg.fp-play-sharp-fill, svg.fp-pause-sharp-fill
+    svg.fp-play-sharp-fill, svg.fp-pause-sharp-fill, svg.fp-loading-sharp-fill
       display: block
   &.fp-outlined
-    .fp-play, .fp-pause
-      svg.fp-play-sharp-fill, svg.fp-pause-sharp-fill
+    .fp-play, .fp-pause, .fp-waiting
+      svg.fp-play-sharp-fill, svg.fp-pause-sharp-fill, svg.fp-loading-sharp-fill
         display: none
-      svg.fp-play-sharp-outline, svg.fp-pause-sharp-outline
+      svg.fp-play-sharp-outline, svg.fp-pause-sharp-outline, svg.fp-loading-sharp-outline
         display: block
 
   &, .fp-menu, .fp-captions p, .fp-textarea, .fp-bar, .fp-bar > *, .fp-timestamp
