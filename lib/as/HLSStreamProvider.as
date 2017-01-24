@@ -176,11 +176,11 @@ package {
 
         /* private */
         private function _manifestHandler(event : HLSEvent) : void {
-            clip.bytes = clip.duration = event.levels[hls.startLevel].duration;
+            clip.bytes = clip.duration = event.levels[hls.nextLevel].duration;
             clip.seekable = true;
             clip.src = clip.url = config.url;
-            clip.width = event.levels[hls.startLevel].width;
-            clip.height = event.levels[hls.startLevel].height;
+            clip.width = event.levels[hls.nextLevel].width;
+            clip.height = event.levels[hls.nextLevel].height;
             var confQualities : Array = [];
             var confQualityLabels : Object = {};
             player.debug('config', config);
