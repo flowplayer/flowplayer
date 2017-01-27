@@ -139,6 +139,7 @@ package {
         }
 
         public function seek(seconds : Number) : void {
+            player.debug('seek requested (seconds, seekOffset, duration) - (%d, %d, %d)', [seconds, seekOffset, duration]);
             hls.stream.seek(seconds);
             player.fire(Flowplayer.SEEK, seconds);
         }
