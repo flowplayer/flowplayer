@@ -42,7 +42,7 @@ package {
         private var config : Object;
         private var clip : Object;
         private var pos : Number;
-        private var seekOffset : Number;
+        private var seekOffset : Number = -1;
         private var duration : Number;
         private var offsetPos : Number;
         private var backBuffer : Number;
@@ -140,6 +140,7 @@ package {
 
         public function seek(seconds : Number) : void {
             player.debug('seek requested (seconds, seekOffset, duration) - (%d, %d, %d)', [seconds, seekOffset, duration]);
+            if (seekOffset !== -1) seconds = Math.max(seconds, seekOffset);
             hls.stream.seek(seconds);
             player.fire(Flowplayer.SEEK, seconds);
         }
