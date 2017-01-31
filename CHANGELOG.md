@@ -5,6 +5,7 @@ Enhancements
 ------------
 
  * DVR - back to live by clicking LIVE in timeline (#1105)
+ * New SVG loading animations to match skin modifiers
 
 Fixes
 -----
