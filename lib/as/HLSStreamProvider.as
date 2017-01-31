@@ -139,8 +139,8 @@ package {
         }
 
         public function seek(seconds : Number) : void {
-            player.debug('seek requested (seconds, seekOffset, duration) - (%d, %d, %d)', [seconds, seekOffset, duration]);
-            if (seekOffset !== -1) seconds = Math.max(seconds, seekOffset);
+            player.debug('seek requested (seconds, seekOffset, duration, position) - (%d, %d, %d, %d)', [seconds, seekOffset, duration, offsetPos]);
+            if (seekOffset !== -1) seconds = seconds - seekOffset;
             hls.stream.seek(seconds);
             player.fire(Flowplayer.SEEK, seconds);
         }
