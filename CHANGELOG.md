@@ -1,3 +1,30 @@
+Version 7.0.1
+=============
+
+Enhancements
+------------
+
+ * DVR - back to live by clicking LIVE in timeline (#1105)
+
+Fixes
+-----
+
+ * Fix #1102 - DVR window handling in flash engine
+ * Fix #1119 - flash hls quality selection in playlist: scrubber may be frozen
+ * Fix #1125 - SVG filters not working when base href set
+ * Fix #1123 - No video on iOS Chrome
+ * Fix #1098 - desktop Safari live: advances in paused state (regression)
+ * Fix #1121 - fp-edgy fp-outlined combo loses pause action indicator
+ * Fix #1099 - Chrome: embed code sometimes not copied to clipboard
+ * Fix #1104 - DVR seeking not possible with iOS
+ * Fix #1100 - FP7: no controls with native_fullscreen on Android
+ * Fix #1115 - FP7: minimal skin controlbar not aligned correctly in IE11
+ * Fix #1110 - iPad: fp-full timeline
+ * Fix #1107 - Android live/dvr: shows "dvr" duration instead of "Live" (hlsjs) or "Infinity" (native)
+ * Fix #1113 - FP7: no speed indicator
+ * Fix #1108 - embed: do not duplicate iframe dimension units if given 
+ * Fix #1128 - Remove duplicate border-radius css rule 
+ * Fix #1129 - bar-slider: bean.fire third argument must be array
 
 Version 7.0
 ===========
