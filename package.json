@@ -9,7 +9,7 @@
   "scripts": {
     "test": "mochify ./test/unit/*.js",
     "test-watch": "mochify -w ./test/unit/*.js",
-    "fixmeprepublish": "make clean && make skins && make min && make flash && make",
+    "fixmeprepublish": "make clean && make skin && make min && make flash && make",
     "testBundle": "browserify -o dist/test-bundle.js test/main.js"
   },
   "repository": {
