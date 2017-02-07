@@ -1,3 +1,14 @@
+Version 7.0.2
+=============
+
+Fixes
+-----
+
+ * Fix #1138 - Safari: javascript "first frame" installs stuck in loading state (regression)
+ * Fix #1135 - iPad Chrome - video does not load
+ * Fix #1125 - SVG filters not working when base href set
+ * Dot not indicate speed rate change when playback starts (#1136)
+
 Version 7.0.1
 =============
 
