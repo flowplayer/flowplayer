@@ -262,6 +262,7 @@ package {
               clip.quality = initialLevel;
               hls.currentLevel = initialLevel;
             }
+            _resize();
             _checkVideoDimension();
             player.debug("manifest received " + clip);
             if (suppressReady) {
