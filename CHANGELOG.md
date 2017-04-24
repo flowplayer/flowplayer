@@ -1,3 +1,28 @@
+Version 7.0.3
+=============
+
+Enhancements
+------------
+
+ * Add config option to disable Chromecast (#1141)
+ * Option to disable inline playback on iPhones (#1145)
+
+Fixes
+-----
+
+ * Fix #1168 - HLS (and DASH): no loading animation while first fragments buffer
+ * Fix #1167 - flash hls: video dimensions not honored when container ratio does not match video ratio
+ * Fix #1174 - Safari 10.1 fullscreen control stops working after minimising with escape
+ * Fix #1166 - playlist: clicking on last item when last clip has finished advances (regression)
+ * Fix #1152 - Android Fullscreen error with fp 7.0.2
+ * Fix #1164 - No subtitles on startscreen
+ * Fix #1117 - addPlaylistItem on last clip inconsistencies
+ * Fix #1154 - Hidden menus stay clickable
+ * Fix #1155 - Subtitle wrapper never removed
+ * Fix #1157 - IE9: html5 sources do not work (regression from fp6)
+
+
+
 Version 7.0.2
 =============
 
