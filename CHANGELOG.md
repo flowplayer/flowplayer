@@ -1,3 +1,14 @@
+Version 7.0.4
+=============
+
+Fixes
+-----
+
+ * Fix #1183 - Subtitle menu does not hide after select
+ * Fix #1182 - Captions control is duplicated when changing VOD quality
+ * Fix #1180 - Firefox does not show first subtitle with splash setups
+ * Fix #1181 - menus usable only once (regression from 7.0.2)
+
 Version 7.0.3
 =============
 
