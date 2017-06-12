@@ -6,7 +6,7 @@ Version 3 (GPL).
 
 #### The GPL requires that you not remove the Flowplayer logo and copyright notices from the user interface. See section 5.d below.
 
-Commercial licenses [are available](https://flowplayer.org/pricing/player.html).
+Commercial licenses [are available](https://flowplayer.com/pricing/player.html).
 The commercial player version does not require any Flowplayer notices or texts
 and also provides some additional features.
 

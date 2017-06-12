@@ -1,5 +1,5 @@
 /*!
 
-   Flowplayer v@VERSION (@DATE) | flowplayer.org/license
+   Flowplayer v@VERSION (@DATE) | flowplayer.com/license
 
 */

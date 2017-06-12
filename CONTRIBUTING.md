@@ -2,7 +2,7 @@
 
 Before you [report an issue](https://github.com/flowplayer/flowplayer/issues/) please make sure to
 
-1. verify it is not a usage issue by searching our [forum](http://flowplayer.org/forum/)
+1. verify it is not a usage issue by searching our [forum](https://flowplayer.com/forum/)
 2. search the bug tracker for the issue if it's already posted
 3. include a live example. please use as minimal HTML/CSS/JS as possible (or use http://jsfiddle.net/)
 4. tell us which browser, browser version and operating system you are using

@@ -2,7 +2,7 @@
  Flowplayer : The Video Player for Web
 
  Copyright (c) 2012 - 2014 Flowplayer Ltd
- http://flowplayer.org
+ https://flowplayer.com
 
  Author: Anssi Piirainen
 
@@ -10,14 +10,14 @@
 
  This GPL version includes Flowplayer branding
 
- http://flowplayer.org/GPL-license/#term-7
+ https://flowplayer.com/license/#additional-term-per-gpl-section-7
 
  Commercial versions are available
  * part of the upgrade cycle
  * support the player development
  * no Flowplayer trademark
 
- http://flowplayer.org/pricing/
+ https://flowplayer.com/pricing/
  */
 package {
 import flash.events.NetStatusEvent;
