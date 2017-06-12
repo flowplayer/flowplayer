@@ -1,11 +1,11 @@
 
 # Flowplayer
 
-[website](https://flowplayer.org) | [demos](https://flowplayer.org/demos/) | [docs](https://flowplayer.org/docs/)
+[website](https://flowplayer.com) | [demos](https://flowplayer.com/demos/) | [docs](https://flowplayer.com/docs/)
 
 ## For the impatient
 
-1. [Download Flowplayer](https://flowplayer.org/latest)
+1. [Download Flowplayer](https://flowplayer.com/download/)
 2. Unzip
 3. Drop the folder under your server
 
