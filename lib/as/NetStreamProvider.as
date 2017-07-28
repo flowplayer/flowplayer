@@ -268,7 +268,7 @@ public class NetStreamProvider implements StreamProvider {
 
         private function setupStream(conn : NetConnection) : void {
             player.debug("setupStream() ", {ready:ready, preloadCompete:preloadComplete, paused:paused, autoplay:conf.autoplay});
-
+            var stopTracker : Timer;
             netStream = new NetStream(conn);
             var bufferTime : Number = conf.hasOwnProperty("bufferTime") ? conf.bufferTime : conf.live ? 0 : 3;
             player.debug("bufferTime == " + bufferTime);
@@ -341,6 +341,10 @@ public class NetStreamProvider implements StreamProvider {
                                 paused = false;
                             }
                         }
+                        // Stop the stop timer and cancel
+                        if (stopTracker && stopTracker.running) {
+                            stopTracker.stop();
+                        }
                         break;
                     case "NetStream.Seek.Notify":
                         finished = false;
@@ -358,7 +362,7 @@ public class NetStreamProvider implements StreamProvider {
                         player.fire(Flowplayer.ERROR, {code:4});
                         break;
                     case "NetStream.Play.Stop":
-                        var stopTracker : Timer = new Timer(100);
+                        stopTracker = new Timer(100);
                         var prevTime : Number = 0;
                         if (stopTracker && stopTracker.running) return;
                         stopTracker.addEventListener(TimerEvent.TIMER, function(e : TimerEvent) : void {
