@@ -333,6 +333,9 @@ public class NetStreamProvider implements StreamProvider {
                 if (conf.debug) player.fire("NetStatusEvent: ", e.info.code);
 
                 switch (e.info.code) {
+                    case "NetStream.Video.DimensionChange":
+                        player.resize();
+                        break;
                     case "NetStream.Play.Start":
                         finished = false;
                         // RTMP fires start a lot
