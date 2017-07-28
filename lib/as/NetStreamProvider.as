@@ -341,7 +341,7 @@ public class NetStreamProvider implements StreamProvider {
                                 paused = false;
                             }
                         }
-                        // Stop the stop timer and cancel
+                        // Stop the stop timer if it's running
                         if (stopTracker && stopTracker.running) {
                             stopTracker.stop();
                         }
