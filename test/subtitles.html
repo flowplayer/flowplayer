@@ -1,0 +1,70 @@
+
+<!doctype html>
+<html>
+<head>
+
+   <!-- player skin -->
+   <link rel="stylesheet" type="text/css" href="../dist/skin/skin.css?f" />
+
+   <!-- site specific styling -->
+   <style>
+   body {
+      font: 12px "Myriad Pro", "Lucida Grande", sans-serif;
+      text-align: center;
+      padding-top: 1%;
+   }
+   .flowplayer { display: inline-block;  width: 30%; }
+   </style>
+
+   <!-- include flowplayer -->
+   <script src="../dist/flowplayer.js?i"></script>
+   </head>
+
+<body>
+
+   <!-- the player -->
+   <div id="player">
+    </div>
+    <div id="player2"></div>
+
+    <video class="flowplayer" controls crossorigin="anonymous">
+       <source type="video/mp4" src="//edge.flowplayer.org/bauhaus.mp4">
+       <track default label="English" src="//d12zt1n3pd4xhr.cloudfront.net/fp/subtitles-demo.vtt">
+    </video>
+
+
+    <script>
+    var el = document.getElementById('player');
+    var el2 = document.getElementById('player2');
+    var conf = {
+      splash: false,
+      ratio: 0.417,
+      clip: {
+        preload: "none",
+        title: 'Flowplayer subtitles',
+        subtitles: [{
+          label: 'English',
+          src: '//d12zt1n3pd4xhr.cloudfront.net/fp/subtitles-demo.vtt',
+          default: true
+        }],
+        sources: [
+          {
+            type: "video/webm",
+            src: "http://edge.flowplayer.org/bauhaus/624x260.webm"
+          },
+          {
+            type: "video/mp4",
+            src: "http://edge.flowplayer.org/bauhaus/624x260.mp4"
+          }
+        ]
+      }
+    };
+    flowplayer(el, conf);
+    var conf2 = flowplayer.extend({}, conf, { nativesubtitles: true });
+    conf2.clip.title = 'Native subtitles';
+    flowplayer(el2, conf2);
+    </script>
+
+
+</body>
+
