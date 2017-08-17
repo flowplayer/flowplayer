@@ -1,8 +1,35 @@
-Version 7.0.4
-=============
+Version 7.1
+===========
+
+Enhancements
+------------
+
+ * Removed forced splash setup from mobile devices (#1162, #1227)
+ * Muted autoplay on mobile devices (#1162, #1227)
+ * Subtitle menu for native subtitles (#1209)
+ * Responsive font sizes (#1176, #1143)
+ * Fullscreen: hide cursor on mouseout (#1223)
 
 Fixes
 -----
+
+ * Fix #1233 - displayed subtitles not removed on seek to position w/o subtitles
+ * Fix #1236 - Fix problem when video resolution changed. Handle the NetStream.Video.DimensionChange event
+ * Fix #1228 - Safari native HLS over https: video width and height are 0
+ * Fix #1231 - Attempt to seek to undefined time
+ * Fix #1189 - native hls live: seeking state on stop
+ * Fix #1178 - API Object not available on "fullscreen" event.
+ * Fix #1221 - Error message doesn't show up on Chrome 59
+ * Fix #1137 - dvr: consistent timestamp across engines
+ * Fix #1184 - native_fullscreen prevents subtitles from showing (regression from 7.0.2)
+ * Fix #1194 - nativesubtitles do not work
+ * Fix #1196 - iPad mute button doesn't work
+ * Fix #1218 - fp-waiting loading animation only visible on hover
+ * Fix #1226 - ffmpeg restart problem. The toolbar remains visible after ffmpeg restarts
+ * Fix #1215 - common.createElement: Win7 IE compatibility
+
+Version 7.0.4
+=============
 
  * Fix #1183 - Subtitle menu does not hide after select
  * Fix #1182 - Captions control is duplicated when changing VOD quality
