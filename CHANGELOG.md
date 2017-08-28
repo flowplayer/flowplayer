@@ -1,3 +1,13 @@
+Version 7.1.1
+=============
+
+Fixes
+-----
+
+ * Fix #1244 - Android 4.3 does not support mutedAutoplay
+ * Fix #1242 - iOS < 10: player unusable with autoplay etc.
+ * Fix #1241 - splash mobile throws TypeError on start
+
 Version 7.1
 ===========
 
