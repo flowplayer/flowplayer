@@ -1,3 +1,14 @@
+Version 7.1.2
+=============
+
+Fixes
+-----
+
+ * Fix #1252 - Android < 5 Samsung browser: splash broken since 7.1
+ * Fix #1256 - Responsive controlbar scaling does not react to fullscreen
+ * Fix #1249 - Samsung Internet browser: cannot handle firstframe and mutedAutoplay
+ * Fix #1248 - Android Chrome firstframe: errors become fatal with engine plugins
+
 Version 7.1.1
 =============
 
