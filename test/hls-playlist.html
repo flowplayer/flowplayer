@@ -1,0 +1,57 @@
+
+<!doctype html>
+<html>
+<head>
+
+   <!-- player skin -->
+   <link rel="stylesheet" type="text/css" href="../dist/skin/skin.css?f" />
+
+   <!-- site specific styling -->
+   <style>
+   body {
+      font: 12px "Myriad Pro", "Lucida Grande", sans-serif;
+      text-align: center;
+      padding-top: 1%;
+   }
+   .flowplayer { width: 70%; }
+   </style>
+   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+   <!-- include flowplayer -->
+   <script src="../dist/flowplayer.js?i"></script>
+   </head>
+
+<body>
+
+   <!-- the player -->
+   <div id="player">
+    </div>
+
+    <script>
+    var el = document.getElementById('player');
+    var api = flowplayer(el, {
+        ratio: 0.417,
+        nativesubtitles: true,
+        playlist: [{
+           sources: [{
+              type: 'application/x-mpegurl',
+              src: '//edge.flowplayer.org/night1.m3u8'
+           }]
+        },{
+            sources: [{
+              type: 'application/x-mpegurl',
+              src: '//edge.flowplayer.org/night2.m3u8'
+           }]
+        },{
+            sources: [{
+              type: 'application/x-mpegurl',
+              src: '//edge.flowplayer.org/night3.m3u8'
+            }]
+        }]
+      });
+    api.on('load', function(ev, player, video) {
+    });
+    </script>
+
+
+</body>
+
