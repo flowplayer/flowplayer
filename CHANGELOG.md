@@ -1,3 +1,26 @@
+Version 7.2
+===========
+
+Enhancements
+------------
+
+ * Rewritten HTML5 engine to gracefully handle browser behavior changes regarding autoplay
+ * Videos are no longer preloaded until video player enters viewport
+ * Experimental built-in HLS.js engine. Can be enabled by including the HLS.js library on your site
+
+Fixes
+-----
+
+ * Fix #1262 - mutedAutoplay iOS: does not work with poster setups
+ * Fix #1238 - Fix bug for non-ASCII characters in config
+ * Fix #1237 - subtitles: more lenient timecode regex for first field
+ * Fix #1260 - Safari 11 does not autoplay videos with sound or HLS
+ * Fix #1258 - mutedAutoplay: still more fine-grained client detection required
+ * Fix #1203 - Safari 10.1+ fullscreen mode not completed
+ * Fix #1198 - seek to 0 reports undefined target pos in 3rd seek event callback argument
+ * Fix #1191 - Fullscreen button doesn't do anything on Safari / Mac
+ * Fix #1164 - Safari, Chrome video tag based: videos downloaded before document ready
+
 Version 7.1.2
 =============
 
