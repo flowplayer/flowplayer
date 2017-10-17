@@ -20,6 +20,7 @@ Fixes
  * Fix #1198 - seek to 0 reports undefined target pos in 3rd seek event callback argument
  * Fix #1191 - Fullscreen button doesn't do anything on Safari / Mac
  * Fix #1164 - Safari, Chrome video tag based: videos downloaded before document ready
+ * Fix #1272 - conf.advance cannot be configured dynamically
 
 Version 7.1.2
 =============
