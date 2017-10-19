@@ -1,3 +1,13 @@
+Version 7.2.1
+=============
+
+Fixes
+-----
+
+ * Fix #1276 - Buffer handling is not backwards compatible
+ * Fix #1275 - Playlist does not advance by default
+ * Fix #1274 - Safari autoplay stalls
+
 Version 7.2
 ===========
 
