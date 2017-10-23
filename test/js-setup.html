@@ -31,23 +31,12 @@
     var api = flowplayer(el, {
         splash: false,
         ratio: 0.417,
-        nativesubtitles: true,
         clip: {
-          preload: "none",
           title: 'Example video',
-          subtitles: [{
-            label: 'English',
-            src: '/test/subtitles-demo.vtt',
-            default: true
-          }],
           sources: [
             {
-              type: "video/webm",
-              src: "http://edge.flowplayer.org/bauhaus/624x260.webm"
-            },
-            {
               type: "video/mp4",
-              src: "http://edge.flowplayer.org/bauhaus/624x260.mp4"
+              src: "http://edge.flowplayer.org/functional.mp4"
             }
           ]
         }
