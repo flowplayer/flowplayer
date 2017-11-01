@@ -78,7 +78,7 @@ Please read the [contributing guidelines](CONTRIBUTING.md) before reporting issu
 
 ## Running tests
 
-Our automated test suite is sponsored by [BrowserStack](http://browserstack.com). Thanks you!
+Our automated test suite is sponsored by [BrowserStack](http://browserstack.com). Thank you!
 
 ### Running locally
 
