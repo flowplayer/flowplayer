@@ -1,3 +1,38 @@
+Version 7.2.2
+=============
+
+Enhancements
+------------
+
+ * Global configuration option to disable localStorage (#1317)
+ * Custom arrow keys seeking time (#1313)
+ * Add option to disable muted autoplay fallback (#1283)
+
+Fixes
+-----
+
+ * Fix #1314 - keyboard shortcuts should always work when Flowplayer has focus
+ * Fix #1206 - RTL embed menu is head over heels, and on wrong side
+ * Fix #1280 - Live + JS-setup broken on iPhone 10.x
+ * Fix #1172 - default playlist on mobiles (touch?): prev/next sticky visibility after touch
+ * Fix #1278 - Getting an error in the console related to buffer
+ * Fix #1202 - IE8: Flash __quality broken with VOD/RTMP
+ * Fix #1319 - Fullscreen doesn't work on Safari 9.1 and lower
+ * Fix #1264 - volume(level, true) changes localStorage.volume when called from within event
+ * Fix #1304 - iOS + splash - player starts muted
+ * Fix #1288 - Manual seeking in control bar stopped workin until all video is loaded (7.2.1. Safari)
+ * Fix #1232 - Excessive network request upon page unload in IE 11
+ * Fix #1318 - Wrong duration on wowza streams
+ * Fix #1293 - Orientation change leads to error: ‘The index is not in the allowed range’
+ * Fix #1309 - Video is restarting on scroll iOS
+ * Fix #1282 - remove `support.mutedAutoplay`
+ * Fix #1307 - Autoplay mute-fallback persists muted state
+ * Fix #1290 - flowplayer is stalled if autoplay is completely disabled
+ * Fix #1299 - Some ui options are not accessible in live stream mode.
+ * Fix #1239 - bug in share extension when there is non ascii characters in configs
+ * Fix #1279 - Safari does not show first frame
+ * Fix #1323 - Splash setups need two clicks in flash engine
+
 Version 7.2.1
 =============
 
