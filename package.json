@@ -45,7 +45,7 @@
     "postcss-cli": "^2.6.0",
     "postcss-unopacity": "^1.0.1",
     "scriptjs": "^2.5.7",
-    "uglify-js": "~2.4.3"
+    "uglify-js": "^3.3.7"
   },
   "dependencies": {}
 }
