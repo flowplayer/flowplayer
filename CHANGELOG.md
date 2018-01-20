@@ -1,3 +1,14 @@
+Version 7.2.3
+=============
+
+Fixes
+-----
+
+ * Fix #1324 - v7.2.2: keyboard shortcuts work only in last instance (regression)
+ * Fix #1328 - Autoplay + live setups broken with internal HLS engine
+ * Fix #1325 - desktop Safari: still type error with empty cache
+
+
 Version 7.2.2
 =============
 
