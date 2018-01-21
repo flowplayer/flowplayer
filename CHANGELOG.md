@@ -1,3 +1,12 @@
+Version 7.2.4
+=============
+
+Fixes
+-----
+
+ * Fix #1330 - Autoplay broken on iPhone (regression)
+
+
 Version 7.2.3
 =============
 
