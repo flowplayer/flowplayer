@@ -41,7 +41,8 @@
           ]
         }
       });
-    api.on('load', function(ev, player, video) {
+    api.on('ready', function(ev, player, video) {
+      console.log('video.src', video.src);
     });
     </script>
 
