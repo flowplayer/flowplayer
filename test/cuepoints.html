@@ -31,7 +31,7 @@
     var el = document.getElementById('player');
     var api = flowplayer(el, {
         ratio: 0.417,
-        cuepoints: [5, 10, 20],
+        cuepoints: [5, 10, 28.701972],
         generate_cuepoints: true,
         clip: {
           hlsQualities: 'drive',
@@ -45,6 +45,9 @@
       });
     api.on('ready', function(ev, player, video) {
       console.log('video.src', video.src);
+    });
+    api.on('cuepoint', function(ev, player, cue) {
+       console.log('cuepoint', cue);
     });
     </script>
 
