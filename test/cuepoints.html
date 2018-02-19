@@ -1,71 +1,53 @@
 
+<!doctype html>
+<html>
 <head>
 
    <!-- player skin -->
-   <link rel="stylesheet" type="text/css" href="../dist/skin/minimalist.css" />
+   <link rel="stylesheet" type="text/css" href="../dist/skin/skin.css?f" />
 
+   <!-- site specific styling -->
    <style>
-   body { font: 12px "Lucida Grande",sans-serif; text-align:center;}
-   .flowplayer { width: 50%; background: #333;}
-
-   .roll {
-      position:absolute;
-      top: 50px;
-      left: 50px;
-      font-size: 50px;
-      z-index: 3;
-      color: #fff;
-      display: none;
+   body {
+      font: 12px "Myriad Pro", "Lucida Grande", sans-serif;
+      text-align: center;
+      padding-top: 1%;
    }
-
-   .cue0 #roll1, .cue1 #roll2, .cue2 #roll5, .cue3 #roll9 {
-      display: block;
-   }
-
-
-   .fp-cuepoint {
-      display: inline-block;
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      -webkit-border-radius: 4px;
-      background-color: #ccc;
-      margin-left: -5px;
-      top: 40px;
-   }
-
-   .is-mouseover .fp-cuepoint {
-      /*top: 4px*/
-   }
-
+   .flowplayer { width: 70%; }
    </style>
-
-   <!-- jquery -->
-   <script src="../deps/jquery.min.js"></script>
-
-   <!-- flowplayer -->
-   <script src="../dist/flowplayer.js?1"></script>
-
-</head>
+   <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+   <!-- include flowplayer -->
+   <script src="../dist/flowplayer.js?i"></script>
+   </head>
 
 <body>
 
-   <div id="player" class="aside-controls">
-      <video  src="http://edge.flowplayer.org/black/470x250.webm"></video>
-      <div class="roll" id="roll1">ROLL #1</div>
-      <div class="roll" id="roll2">ROLL #2</div>
-      <div class="roll" id="roll5">ROLL #5</div>
-      <div class="roll" id="roll9">ROLL #9</div>
-   </div>
+   <!-- the player -->
+   <div id="player">
+    </div>
 
-
-   <script>
-   $(function() {
-      $("#player").flowplayer({cuepoints: [1, 2, {time: 5}, 9, -2], generate_cuepoints: 1})
-      .bind("cuepoint", function(e, api, cuepoint) {
-         console.info(e.type, cuepoint.time);
+    <script>
+    var el = document.getElementById('player');
+    var api = flowplayer(el, {
+        ratio: 0.417,
+        cuepoints: [5, 10, 20],
+        generate_cuepoints: true,
+        clip: {
+          hlsQualities: 'drive',
+          sources: [
+            {
+              type: "application/x-mpegurl",
+              src: "http://edge.flowplayer.org/functional.m3u8"
+            }
+          ]
+        }
       });
-   });
-   </script>
+    api.on('ready', function(ev, player, video) {
+      console.log('video.src', video.src);
+    });
+    </script>
+
 
 </body>
+
