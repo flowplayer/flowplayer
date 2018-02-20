@@ -1,3 +1,30 @@
+Version 7.2.5
+=============
+
+Enhancements
+------------
+
+ * Make "Unmute by click" configurable (#1327)
+ * Listen to HLS.js errors internally (#1331)
+ * add recoverMediaError and recoverNetworkError config options (#1345)
+
+Fixes
+-----
+
+ * Fix #1351 - Player resumes on seek after finish on IE11
+ * Fix #1336 - 7.2.4 does not obey volume:
+ * Fix #1343 - autoplay: does not work with hlsjs-lite engine with video-tag-based setups
+ * Fix #1300 - cuepoints at end of video fire 'cuepoint' events inconsistently
+ * Fix #1348 - Cuepoints marker are not removed when deleting cuepoint
+ * Fix #1335 - Re-loading the same clip fails
+ * Fix #1329 - Autoplay + poster - poster can be sticky
+ * Fix #1337 - Flowplayer swallows all keys when focused.
+ * Fix #1338 - jQuery plugin tries to parse flowplayer-generated containers
+ * Fix #1333 - New engine extension API could be more future-proof
+ * Fix #1334 - `.fp-player` element should be removed on `shutdown`
+ * Fix #1332 - `video.src` should be always the full url instead of blob url
+
+
 Version 7.2.4
 =============
 
