@@ -26,9 +26,7 @@ package {
     import flash.net.NetConnection;
     import flash.net.NetStream;
     import flash.utils.Timer;
-
-    import flash.utils.setTimeout;
-    import flash.utils.setInterval;
+import flash.utils.setTimeout;
 
 public class NetStreamProvider implements StreamProvider {
         // flashvars
@@ -49,7 +47,6 @@ public class NetStreamProvider implements StreamProvider {
         private var player : Flowplayer;
         private var _video : Video;
 
-        private var intervalMonitorBufferLengthEverySecond:uint;
         public function NetStreamProvider(player : Flowplayer, video : Video) {
             this.player = player;
             this._video = video;
@@ -269,17 +266,10 @@ public class NetStreamProvider implements StreamProvider {
             }
         }
 
-        private function monPlayback():void {
-            player.debug("bufferLength: " + netStream.bufferLength);
-        }
-
         private function setupStream(conn : NetConnection) : void {
             player.debug("setupStream() ", {ready:ready, preloadCompete:preloadComplete, paused:paused, autoplay:conf.autoplay});
             var stopTracker : Timer;
             netStream = new NetStream(conn);
-
-            intervalMonitorBufferLengthEverySecond = setInterval(monPlayback, 1000);
-
             var bufferTime : Number = conf.hasOwnProperty("bufferTime") ? conf.bufferTime : conf.live ? 0 : 3;
             player.debug("bufferTime == " + bufferTime);
             netStream.bufferTime = bufferTime;
