@@ -362,10 +362,6 @@ public class NetStreamProvider implements StreamProvider {
                         if (stopTracker && stopTracker.running) {
                             stopTracker.stop();
                         }
-                        player.debug("workaround for missing metadata");
-                        ready = true;
-                        player.fire(Flowplayer.READY, {seekable:!!conf.rtmp, bytes:netStream.bytesTotal, src:stream, url:stream});
-                        player.fire(Flowplayer.RESUME, null);
                         break;
                     case "NetStream.Seek.Notify":
                         finished = false;
