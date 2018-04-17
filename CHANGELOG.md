@@ -1,3 +1,12 @@
+Version 7.2.6
+=============
+
+Fixes
+-----
+
+ * Fix #1373 - Autoplay broken on (some) mobile devices
+ * Fix #1361 - Impossible to mute player on iOS on autoplay
+
 Version 7.2.5
 =============
 
