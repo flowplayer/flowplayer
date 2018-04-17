@@ -273,6 +273,10 @@ public class NetStreamProvider implements StreamProvider {
             var bufferTime : Number = conf.hasOwnProperty("bufferTime") ? conf.bufferTime : conf.live ? 0 : 3;
             player.debug("bufferTime == " + bufferTime);
             netStream.bufferTime = bufferTime;
+            if (conf.hasOwnProperty("bufferTimeMax")) {
+                player.debug("bufferTimeMax == " + conf.bufferTimeMax);
+                netStream.bufferTimeMax = conf.bufferTimeMax;
+            }
             video.attachNetStream(netStream);
             volume(volumeLevel || Number(conf.initialVolume), false);
 
