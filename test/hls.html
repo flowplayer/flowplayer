@@ -31,8 +31,11 @@
     var api = flowplayer(el, {
         ratio: 0.417,
         nativesubtitles: true,
+        //splash: true,
         clip: {
-          hlsQualities: 'drive',
+          //hlsQualities: 'drive',
+          //hlsQualities: [{level: -1, label: 'ABR' }, { level: 0, label: 'Low quality' }, { level: 7, label: 'High quality' }],
+           hlsQualities: [{ level: 0, label: 'Low quality' }, { level: 7, label: 'High quality' }],
           sources: [
             {
               type: "application/x-mpegurl",
