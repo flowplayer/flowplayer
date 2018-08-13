@@ -1,3 +1,29 @@
+Version 7.2.7
+=============
+
+Enhancements
+------------
+
+ * add bufferWhilePaused: true/false option (#1388)
+
+Fixes
+-----
+
+ * Fix #1363 - Subtitle endtime not respected, remain on screen until next subtitle
+ * Fix #1376 - Android Chrome playlist DOM exception on playlist transition
+ * Fix #1404 - Android 9: Exception on plugin load due to issue with UA parsing
+ * Fix #1398 - DVR allows to seek to unsafe positions
+ * Fix #1375 - 7.2.6 splash Android Chrome DOM Exception
+ * Fix #1360 - Unnecessary DOM searches in loop
+ * Fix #1394 - Loading animation not visible when buffering in playing state
+ * Fix #1365 - Unloading the player does not stop manifest loading
+ * Fix #1389 - Unloading the player might result in a media error
+ * Fix #1393 - HLS.js instance is globally shared between all players in the page
+ * Fix #1395 - HLS instance not correctly cleared on load
+ * Fix #1385 - Bad playlist behavior on repeated playback when using splash setup
+ * Fix #1354 - hlsjs-lite does not honor hlsjs: false
+ * Fix #1383 - Configured ABR quality ignored
+
 Version 7.2.6
 =============
 
