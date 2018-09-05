@@ -1,6 +1,8 @@
 
 # Flowplayer
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/flowplayer/flowplayer.svg)](https://greenkeeper.io/)
+
 [website](https://flowplayer.com) | [demos](https://flowplayer.com/demos/) | [docs](https://flowplayer.com/docs/)
 
 ## For the impatient
