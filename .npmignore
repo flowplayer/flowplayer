@@ -1,7 +1,5 @@
 deps
 features
-lib
-/skin
 test
 Gemfile*
 Makefile

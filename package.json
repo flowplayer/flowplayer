@@ -1,6 +1,6 @@
 {
   "name": "flowplayer",
-  "version": "7.2.6",
+  "version": "7.2.7",
   "description": "The HTML5 video player for the web",
   "main": "dist/flowplayer.js",
   "directories": {
@@ -28,24 +28,25 @@
     "newcap": false,
     "multistr": true
   },
-  "devDependencies": {
-    "autoprefixer": "^6.5.4",
+  "dependencies": {
     "bean": "^1.0.15",
-    "brfs": "^1.4.3",
-    "browserify": "^13.1.1",
-    "browserify-derequire": "^0.9.4",
     "class-list": "~0.1.1",
     "computed-style": "^0.3.0",
     "es5-shim": "^4.1.1",
     "extend-object": "~1.0.0",
-    "ie8": "=0.2.3",
     "is-function": "~1.0.1",
+    "scriptjs": "^2.5.7"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.5.4",
+    "brfs": "^1.4.3",
+    "browserify": "^13.1.1",
+    "browserify-derequire": "^0.9.4",
+    "ie8": "=0.2.3",
     "mochify": "~1.1.2",
     "node-sass": "^3.10.1",
     "postcss-cli": "^2.6.0",
     "postcss-unopacity": "^1.0.1",
-    "scriptjs": "^2.5.7",
     "uglify-js": "^3.3.7"
-  },
-  "dependencies": {}
+  }
 }
