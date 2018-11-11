@@ -343,7 +343,7 @@ Fixes
  * Fix #966 - rtmp: live:true doesn't set bufferTime:0
  * Fix #961 - minimalist: wrong mouseout transitions for volume & mute (regression from 6.0.3)
  * Fix #919 - rtl: various glitches
- * Fix #957 - generate_cuepoints: seeks to timeline postion, not cuepoint (regression from v5)
+ * Fix #957 - generate_cuepoints: seeks to timeline position, not cuepoint (regression from v5)
 
 Version 6.0.4
 =============
@@ -357,7 +357,7 @@ Fixes
 -----
 
  * Fix #959 - Flash HLS: ready fired too early
- * Fix #958 - generate_cuepoints: seeks to timeline postion, not cuepoint (regression from v5)
+ * Fix #958 - generate_cuepoints: seeks to timeline position, not cuepoint (regression from v5)
  * Fix #955 - Prevented seek beyond cuepoint disables cuepoint once
  * Fix #943 - shutdown() does not remove instance data-attribute
  * Fix #942 - quality selector loses poster state with playlist
