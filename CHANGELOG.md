@@ -724,7 +724,7 @@ Fixes
  * For iPhone and other devices incapable of displaying videos inline - the video component is hidden to avoid UI bugs
  * data-volume -attribute is now always respected
  * Don't set incorrect aspect ratio when embedding
- * Timeline isn't accidentally enabled in ready event anymore if explicitely disabled
+ * Timeline isn't accidentally enabled in ready event anymore if explicitly disabled
  * Make sure load-event can be canceled via event.preventDefault()
  * Source urls can now contain query strings (signed AWS URLS etc)
  * Cuepoints are now cleaned for playlist items
