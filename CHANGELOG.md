@@ -418,7 +418,7 @@ Fixes
  * Fix #840 - jQuery plugin init - config precedence wrong
  * Fix #847 - IE8: muted on start despite volume showing, changing volume does not work
  * Fix #848 - Optionally start with subtitles present, but disabled
- * Fix #852 - analytics: use long hearbeat interval
+ * Fix #852 - analytics: use long heartbeat interval
  * Fix #821 - RTMP: breaks with special chars in URLS
  * Fix #831 - iPhone playback crashes when you exit twice
  * Fix #864 - CSS issue on touch devices
