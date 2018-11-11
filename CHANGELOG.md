@@ -561,7 +561,7 @@ Fixes
  * Fix #622 - preload="none" causes error in Internet Explorer 11
  * Fix #509 - live: always preload="none"
  * Fix #659 - speed help text outdated - show speed only if supported?
- * Fix #586 - Chrome + flash fullscreen bug - video is play from beginingA
+ * Fix #586 - Chrome + flash fullscreen bug - video is play from beginning
  * Fix #645 - Flash engine should allow bufferLength of zero
  * Fix #446 - Mute-state not restored from storage in splash setups
  * Fix #570 - Live Flash: stream cannot be resumed
