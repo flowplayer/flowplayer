@@ -543,7 +543,7 @@ Enhancements
 ------------
 
  * Full support for HLS on Android (on HLS-compatible browsers)
- * Added shadow to play icon to avoid dissapearing controls on light background
+ * Added shadow to play icon to avoid disappearing controls on light background
  * Added `data-subscribe` option for flash engine (FCSubsribe). Needed by some CDNs.
  * `preload` can now be given by config when initializing into empty container
  * Fullscreen support for Internet Explorer 11
