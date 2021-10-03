@@ -343,7 +343,7 @@ Fixes
  * Fix #966 - rtmp: live:true doesn't set bufferTime:0
  * Fix #961 - minimalist: wrong mouseout transitions for volume & mute (regression from 6.0.3)
  * Fix #919 - rtl: various glitches
- * Fix #957 - generate_cuepoints: seeks to timeline postion, not cuepoint (regression from v5)
+ * Fix #957 - generate_cuepoints: seeks to timeline position, not cuepoint (regression from v5)
 
 Version 6.0.4
 =============
@@ -357,7 +357,7 @@ Fixes
 -----
 
  * Fix #959 - Flash HLS: ready fired too early
- * Fix #958 - generate_cuepoints: seeks to timeline postion, not cuepoint (regression from v5)
+ * Fix #958 - generate_cuepoints: seeks to timeline position, not cuepoint (regression from v5)
  * Fix #955 - Prevented seek beyond cuepoint disables cuepoint once
  * Fix #943 - shutdown() does not remove instance data-attribute
  * Fix #942 - quality selector loses poster state with playlist
@@ -416,9 +416,9 @@ Fixes
  * Fix #829 - seeking broken in IE8
  * Fix #837 - analytics: use clip.title?
  * Fix #840 - jQuery plugin init - config precedence wrong
- * Fix #847 - IE8: muted on start despite volume showing, chsanngin volume does not work
+ * Fix #847 - IE8: muted on start despite volume showing, changing volume does not work
  * Fix #848 - Optionally start with subtitles present, but disabled
- * Fix #852 - analytics: use long hearbeat interval
+ * Fix #852 - analytics: use long heartbeat interval
  * Fix #821 - RTMP: breaks with special chars in URLS
  * Fix #831 - iPhone playback crashes when you exit twice
  * Fix #864 - CSS issue on touch devices
@@ -543,8 +543,8 @@ Enhancements
 ------------
 
  * Full support for HLS on Android (on HLS-compatible browsers)
- * Added shadow to play icon to avoid dissapearing controls on light background
- * Added `data-subscribe` option for flash engine (FCSubsribe). Needed by some CDNs.
+ * Added shadow to play icon to avoid disappearing controls on light background
+ * Added `data-subscribe` option for flash engine (FCSubscribe). Needed by some CDNs.
  * `preload` can now be given by config when initializing into empty container
  * Fullscreen support for Internet Explorer 11
 
@@ -561,7 +561,7 @@ Fixes
  * Fix #622 - preload="none" causes error in Internet Explorer 11
  * Fix #509 - live: always preload="none"
  * Fix #659 - speed help text outdated - show speed only if supported?
- * Fix #586 - Chrome + flash fullscreen bug - video is play from beginingA
+ * Fix #586 - Chrome + flash fullscreen bug - video is play from beginning
  * Fix #645 - Flash engine should allow bufferLength of zero
  * Fix #446 - Mute-state not restored from storage in splash setups
  * Fix #570 - Live Flash: stream cannot be resumed
@@ -724,7 +724,7 @@ Fixes
  * For iPhone and other devices incapable of displaying videos inline - the video component is hidden to avoid UI bugs
  * data-volume -attribute is now always respected
  * Don't set incorrect aspect ratio when embedding
- * Timeline isn't accidentally enabled in ready event anymore if explicitely disabled
+ * Timeline isn't accidentally enabled in ready event anymore if explicitly disabled
  * Make sure load-event can be canceled via event.preventDefault()
  * Source urls can now contain query strings (signed AWS URLS etc)
  * Cuepoints are now cleaned for playlist items
