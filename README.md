@@ -89,8 +89,8 @@ Our automated test suite is sponsored by [BrowserStack](http://browserstack.com)
 Tests are run on [BrowserStack](http://browserstack.com)
 
  * Install dependencies: `bundle install`
- * Setup broserstack tunnel: `java -jar features/support/BrowserStackTunnel.jar -f <your tunnel api key> /path/to/flowplayer/repo`
- * Run cucumber features: `rake username=<browserstack username> key=<broserstack automate api key> base_url=http://<something>.browserstack.com`
+ * Setup browserstack tunnel: `java -jar features/support/BrowserStackTunnel.jar -f <your tunnel api key> /path/to/flowplayer/repo`
+ * Run cucumber features: `rake username=<browserstack username> key=<browserstack automate api key> base_url=http://<something>.browserstack.com`
 
 ## License
 
