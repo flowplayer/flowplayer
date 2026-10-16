@@ -1,15 +1,27 @@
 
 # Flowplayer
 
-Note! This archived repository contains the old open-source player called Flowplayer 7. Merely for history purposes.
+> ## ⚠️ This is legacy Flowplayer 7 — archived and no longer maintained
+>
+> **Flowplayer is actively developed as [Wowza Flowplayer](https://developer.wowza.com/docs/wowza-flowplayer/).**
+> This repository is kept for history only; do not use it for new projects.
+>
+> | | |
+> |---|---|
+> | npm | [`@flowplayer/player`](https://www.npmjs.com/package/@flowplayer/player) — `npm install @flowplayer/player` |
+> | Docs | https://developer.wowza.com/docs/wowza-flowplayer/ |
+> | Website | https://www.wowza.com/video/player |
+> | Demos | https://www.wowza.com/developer/flowplayer-demos |
+>
+> The legacy `flowplayer` npm package (7.2.7, 2018) is this player and is no longer maintained. It is **not** the same product as `@flowplayer/player`; there is no in-place upgrade path.
 
-For more recent offerings consider visiting our website.
+---
 
-[website](https://flowplayer.com) | [demos](https://flowplayer.com/demos/) | [docs](https://flowplayer.com/docs/)
+**Everything below describes the legacy Flowplayer 7 and is kept unchanged for history.**
 
 ## For the impatient
 
-1. [Download Flowplayer](https://flowplayer.com/download/)
+1. Get the legacy build: `npm install flowplayer@7` or clone this repository (the old download page no longer exists)
 2. Unzip
 3. Drop the folder under your server
 
